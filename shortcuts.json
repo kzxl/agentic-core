@@ -123,5 +123,10 @@
     "name": "Universe Plugin Architecture",
     "target": "architecture/universe-plugin.md",
     "desc": "Micro-kernel and plugin modularity v4.0"
+  },
+  "MEM": {
+    "name": "Continuous Learning Protocol",
+    "target": "skills/agentic/continuous-learning-protocol.md",
+    "desc": "PRE-Fetch context and POST-Harvest lessons with SemanticBrain"
   }
 }

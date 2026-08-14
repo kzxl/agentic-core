@@ -40,7 +40,8 @@ E:\16. AgentOption/
 │   │   ├── brainstorming-and-spec.md        # Pre-coding Exploration, Ambiguity Resolution & Spec
 │   │   ├── test-driven-development.md       # Red-Green-Refactor Protocol for AI Coding Agents
 │   │   ├── adversarial-code-review.md       # Self-Critique & Security/Edge-Case Audit
-│   │   └── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
+│   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
+│   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
 │   ├── nodejs/                        # Node.js Enterprise Skills (inspired by ASK SDK v2)
 │   │   ├── handler-dispatcher-pattern.md    # canHandle/handle Dispatcher Architecture
 │   │   ├── interceptor-pipeline.md          # Request & Response Interceptors Pipeline
@@ -64,7 +65,8 @@ E:\16. AgentOption/
 ├── tools/                             # Layer 4: Automated Verification & Agent CLI Tools
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter & rule links
 │   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents
-│   └── doctor.js                      # Project Health-Check validating against .project-rule.md
+│   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
+│   └── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
 │
 └── templates/                         # Layer 5: Rapid Bootstrapping & Extension Templates
     ├── project-bootstrap-template.md  # Template to bind ANY project to AgentOption
