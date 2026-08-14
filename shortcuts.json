@@ -1,0 +1,127 @@
+{
+  "HND": {
+    "name": "Handler-Dispatcher Pattern",
+    "target": "skills/nodejs/handler-dispatcher-pattern.md",
+    "desc": "canHandle/handle Dispatcher Architecture"
+  },
+  "INT": {
+    "name": "Interceptor Pipeline",
+    "target": "skills/nodejs/interceptor-pipeline.md",
+    "desc": "Request and Response Interceptor Pipeline"
+  },
+  "ERR": {
+    "name": "Error Boundary Handler",
+    "target": "skills/nodejs/error-boundary-handler.md",
+    "desc": "Predicate-based centralized error boundary"
+  },
+  "ATTR": {
+    "name": "Scoped Attributes Manager",
+    "target": "skills/nodejs/scoped-attributes-manager.md",
+    "desc": "3-Tier Scoped State (Request, Session, Persistent)"
+  },
+  "RESP": {
+    "name": "Fluent Response Builder",
+    "target": "skills/nodejs/fluent-response-builder.md",
+    "desc": "Fluent API response payload builder"
+  },
+  "CLNT": {
+    "name": "Service Client Factory",
+    "target": "skills/nodejs/service-client-factory.md",
+    "desc": "Authenticated API client factory with token delegation"
+  },
+  "BLD": {
+    "name": "Module Fluent Builder",
+    "target": "skills/nodejs/skill-builder-pattern.md",
+    "desc": "Fluent builder for module assembly"
+  },
+  "DBS": {
+    "name": "Hybrid DbScope Pattern",
+    "target": "skills/csharp/hybrid-dbscope-pattern.md",
+    "desc": "Dual-scope service execution for Desktop and WebAPI"
+  },
+  "PART": {
+    "name": "1-to-1 Partial Partitioning",
+    "target": "skills/csharp/feature-partial-partitioning.md",
+    "desc": "Action/Query/Lookup 1-to-1 partial class partitioning"
+  },
+  "CTOK": {
+    "name": "CancellationToken Propagation",
+    "target": "skills/csharp/cancellation-token-propagation.md",
+    "desc": "End-to-end task cancellation flow"
+  },
+  "DAP": {
+    "name": "Dapper Bulk Data Access",
+    "target": "skills/csharp/dapper-bulk-data-access.md",
+    "desc": "Multi-mapping and bulk transaction data access"
+  },
+  "ABRT": {
+    "name": "Abortable Fetch Lifecycle",
+    "target": "skills/react/abortable-fetch-lifecycle.md",
+    "desc": "AbortController component and router integration"
+  },
+  "CMP": {
+    "name": "Compound Components Pattern",
+    "target": "skills/react/compound-components-pattern.md",
+    "desc": "Context-driven compound UI components"
+  },
+  "OPT": {
+    "name": "Optimistic UI Updates",
+    "target": "skills/react/optimistic-ui-updates.md",
+    "desc": "Instantaneous mutations with automated rollback"
+  },
+  "SPEC": {
+    "name": "Brainstorming & Specification",
+    "target": "skills/agentic/brainstorming-and-spec.md",
+    "desc": "Pre-coding exploration, ambiguity resolution & spec"
+  },
+  "TDD": {
+    "name": "Test-Driven Development",
+    "target": "skills/agentic/test-driven-development.md",
+    "desc": "Red-Green-Refactor agentic coding protocol"
+  },
+  "REV": {
+    "name": "Adversarial Code Review",
+    "target": "skills/agentic/adversarial-code-review.md",
+    "desc": "Self-critique and security/edge-case review"
+  },
+  "DBG": {
+    "name": "Systematic Debugging",
+    "target": "skills/agentic/systematic-debugging.md",
+    "desc": "5-step scientific hypothesis debugging"
+  },
+  "CLEAN": {
+    "name": "Clean Layered Architecture",
+    "target": "architecture/clean-layered-architecture.md",
+    "desc": "4-tier Domain, Application, Infra, Presentation"
+  },
+  "FEAT": {
+    "name": "Folder-per-Feature Architecture",
+    "target": "architecture/folder-per-feature.md",
+    "desc": "Folder-per-feature and DTO localization"
+  },
+  "EVT": {
+    "name": "Event-Driven Architecture",
+    "target": "architecture/event-driven-architecture.md",
+    "desc": "EventBus, Outbox Pattern and Saga orchestration"
+  },
+  "RES": {
+    "name": "System Resilience Patterns",
+    "target": "architecture/resilience-patterns.md",
+    "desc": "Circuit Breaker, Backoff, Fallback Cache"
+  },
+  "MFE": {
+    "name": "Micro-Frontend Architecture",
+    "target": "architecture/micro-frontends.md",
+    "desc": "Module Federation and runtime assembly"
+  },
+  "MT": {
+    "name": "Multi-Tenant Architecture",
+    "target": "architecture/multi-tenancy.md",
+    "desc": "RLS, schema-per-tenant, DB-per-tenant"
+  },
+  "UNIV": {
+    "name": "Universe Plugin Architecture",
+    "target": "architecture/universe-plugin.md",
+    "desc": "Micro-kernel and plugin modularity v4.0"
+  }
+}

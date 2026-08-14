@@ -1,0 +1,35 @@
+---
+title: Agent Meta Rules
+purpose: Strict standard for creating/updating any Rule, Skill, or Architecture document in the system.
+format_enforcement: strict_yaml_or_bullet
+---
+# RULES_FOR_RULES
+
+1. AI_COMPREHENSION_FIRST:
+   - NO formatting fluff or conversational prose.
+   - USE YAML, JSON, or terse bullet lists.
+   
+2. MAXIMUM_TOKEN_SAVINGS:
+   - Replace long sentences with concise technical keywords.
+   - Bad: "This skill helps you to create a controller."
+   - Good: "desc: Create controller."
+
+3. DRY (Rule ID Reference):
+   - Never copy-paste standard coding rules into a Skill/Arch file.
+   - Always reference the exact Rule ID from `[AgentOption]/rules.json`.
+   - Example: `rules: [R_CS, R_WPF]`
+
+4. UPDATING_SKILLS (Standard Pattern):
+   - Body must be structured Markdown with YAML frontmatter.
+   - Frontmatter Required:
+     ```yaml
+     ---
+     name: [skill_name]
+     desc: [action]
+     rules: [R_ID]
+     ---
+     ```
+
+5. ADDING_NEW_RULES:
+   - Must be registered in `[AgentOption]/rules.json` as a single Key-Value pair.
+   - Key format: `R_[DOMAIN]` (e.g. `R_SQL`).
