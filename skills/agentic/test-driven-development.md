@@ -1,7 +1,7 @@
 ---
 name: AgenticTestDrivenDevelopment
 desc: Rigorous Test-Driven Development (TDD) protocol for autonomous AI coding agents
-rules: [R_CORE]
+rules: [R_TDD, R_CORE]
 category: Agentic
 ---
 # 🧪 Agentic Test-Driven Development (TDD) Protocol

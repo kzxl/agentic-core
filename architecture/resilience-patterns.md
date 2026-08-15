@@ -1,7 +1,7 @@
 ---
 name: SystemResiliencePatterns
 desc: Universal fault-tolerance, circuit breaking, exponential backoff, and graceful degradation blueprints
-rules: [R_CORE]
+rules: [R_RES, R_CORE]
 category: Architecture
 ---
 # 🛡️ Universal System Resilience & Fault Tolerance Blueprint

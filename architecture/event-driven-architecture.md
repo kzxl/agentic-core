@@ -1,7 +1,7 @@
 ---
 name: EventDrivenArchitecture
 desc: Universal Event-Driven Architecture blueprint covering in-process EventBus, Distributed Pub/Sub, Outbox Pattern, and Saga Orchestration
-rules: [R_CORE, R_UNIVERSE]
+rules: [R_EVT, R_UNIVERSE, R_CORE]
 category: Architecture
 ---
 # ⚡ Universal Event-Driven Architecture Blueprint

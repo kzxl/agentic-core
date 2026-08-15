@@ -7,7 +7,11 @@
   "R_API": "Web API: Clean Architecture / Folder-per-feature, Autofac/Microsoft DI, Controller -> Service -> Repository layer separation, strict DTO localization.",
   "R_GO": "Go: Goroutines, Channels, GoFlow toolkit, errgroup, typed worker pools (PoolWithFunc), explicit error handling, interface segregation.",
   "R_PHP": "PHP 8+: strict_types=1, PSR-4 autoloading, PDO parameterized queries (LiteORM CLI), JWT/Crypto security, thin controllers.",
-  "R_DB": "Database: Parameterized queries ONLY. Always verify exact database column names against schema/entity mappings. Mandatory audit logging for write operations.",
+  "R_DB": "Database: Parameterized queries ONLY. Verify column mappings. Mandatory audit logging for writes. Schema modifications require isolated migration/rollback scripts.",
   "R_PUB": ".NET Publish: Support both Full (Self-contained, SingleFile) and Lite (Framework-dependent, SingleFile) configurations.",
-  "R_UNIVERSE": "Universe Plugin v4.0: Data sovereignty, indirect event communication (EventBus/MessageQueue), auto-registry, strict module isolation. Deleting a module folder must not break project build."
+  "R_UNIVERSE": "Universe Plugin v4.0: Data sovereignty, indirect event communication (EventBus/MessageQueue), auto-registry, strict module isolation. Deleting a module folder must not break project build.",
+  "R_EVT": "Event-Driven: Decoupled domain events, Transactional Outbox pattern for dual-write safety, Idempotent consumers, asynchronous messaging.",
+  "R_RES": "Resilience: Circuit Breaker, Exponential Backoff with Jitter, explicit timeouts, Fallback cache (Stale-While-Revalidate), graceful degradation.",
+  "R_TDD": "Test-Driven Development: Red-Green-Refactor cycle, reproduction test first, minimum production code, regression verification."
 }
+

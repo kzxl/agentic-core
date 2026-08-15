@@ -52,7 +52,7 @@ if (!brainRoot) {
   process.exit(1);
 }
 
-// 2. Resolve Project Name from local .project-rule.md if not passed
+// 2. Resolve Project Name from local .project-rule.md or command argument
 function resolveProjectName() {
   const projectArg = args.find(a => a.startsWith('--project='));
   if (projectArg) return projectArg.split('=')[1];
@@ -61,9 +61,13 @@ function resolveProjectName() {
   if (fs.existsSync(localRule)) {
     const content = fs.readFileSync(localRule, 'utf8');
     const match = content.match(/project_name:\s*(.*)/i);
-    if (match) return match[1].trim();
+    if (match && match[1].trim()) return match[1].trim();
   }
-  return 'default';
+
+  console.error('❌ Could not resolve project name!');
+  console.error('👉 Ensure .project-rule.md exists in project root or pass --project=<project_name>.');
+  console.error('👉 Use [AgentOption]/templates/project-bootstrap-template.md to create one.');
+  process.exit(1);
 }
 
 const projectName = resolveProjectName();
