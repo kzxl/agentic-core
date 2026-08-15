@@ -128,5 +128,35 @@
     "name": "Continuous Learning Protocol",
     "target": "skills/agentic/continuous-learning-protocol.md",
     "desc": "PRE-Fetch context and POST-Harvest lessons with SemanticBrain"
+  },
+  "BASE": {
+    "name": "BaseForm Lifecycle Orchestration",
+    "target": "skills/csharp/baseform-lifecycle-orchestration.md",
+    "desc": "RunAfterShown & explicit 1-way mapping without BindingSource"
+  },
+  "ADPT": {
+    "name": "Persistence Adapter Pattern",
+    "target": "skills/nodejs/persistence-adapter-pattern.md",
+    "desc": "Storage & state persistence adapter for database engines"
+  },
+  "NAME": {
+    "name": "Universal Naming Conventions",
+    "target": "standards/naming_conventions.md",
+    "desc": "Universal multi-language casing, DTO and UI naming rules"
+  },
+  "PERF": {
+    "name": "Performance & Data Access Guidelines",
+    "target": "standards/performance_guidelines.md",
+    "desc": "Anti-N+1, async queueing & UI non-blocking guidelines"
+  },
+  "CONF": {
+    "name": "Conformance Testing Standard",
+    "target": "standards/conformance-testing.md",
+    "desc": "Module isolation and behavioral parity verification"
+  },
+  "DARK": {
+    "name": "Desktop Dark Theme Styling",
+    "target": "standards/wpf-dark-theme.md",
+    "desc": "WPF/Desktop Dark Theme palettes and styling tokens"
   }
 }

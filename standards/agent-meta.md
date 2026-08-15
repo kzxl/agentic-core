@@ -33,3 +33,9 @@ format_enforcement: strict_yaml_or_bullet
 5. ADDING_NEW_RULES:
    - Must be registered in `[AgentOption]/rules.json` as a single Key-Value pair.
    - Key format: `R_[DOMAIN]` (e.g. `R_SQL`).
+
+6. SYMBOL_DECODING_PROTOCOL (Token-Optimized Attention):
+   - `R_*` (e.g. `R_CS`, `R_WPF`, `R_DB`) -> Hard constraints mapped to `rules.json`.
+   - `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`) -> Design patterns mapped to `shortcuts.json`.
+   - Agents MUST treat compact tag arrays (e.g. `apply: [R_CS, R_WPF, DBS, PERF]`) as fully expanded operational directives.
+   - Zero hallucination: If an unknown tag is encountered, resolve via `node [AgentOption]/tools/lookup.js <TAG>`.
