@@ -178,5 +178,10 @@
     "name": "Input Normalization Pipeline",
     "target": "skills/agentic/input-normalization-pipeline.md",
     "desc": "Pre-action input normalization & micro-payload parsing pipeline"
+  },
+  "SQL": {
+    "name": "Universal Database & SQL Standards",
+    "target": "standards/database-sql.md",
+    "desc": "Composite indexing, deadlock defense, optimistic concurrency & audit"
   }
 }

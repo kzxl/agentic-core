@@ -1,17 +1,48 @@
 ---
-desc: PHP 8+ Modern Standards (LiteORM / API)
-rules: [R_PHP, R_DB]
+desc: PHP 8.2+ Enterprise Standards — Modern OOP, Memory Generators & API Security
+rules: [R_PHP, R_DB, R_CORE]
 ---
-# 🐘 PHP 8+ Modern Standards
+# 🐘 PHP 8.2+ Enterprise Standards
 
-## 1. Core Language Rules
-- **Mandatory Strict Types:** `declare(strict_types=1);` as the first line of every `.php` file.
-- **PSR-4 Autoloading:** Strict namespace-to-directory mapping.
+## 1. Modern Syntax & Strict Typing
+- **Mandatory Strict Types:** `declare(strict_types=1);` as the 1st line of every `.php` file.
+- **PHP 8.2+ Features:** Use Constructor Property Promotion, `readonly` classes/properties, `match` expressions, and Backed Enums:
+  ```php
+  enum OrderStatus: string {
+      case Pending = 'PENDING';
+      case Completed = 'COMPLETED';
+  }
 
-## 2. Database & Data Access
-- **Parameterized Queries:** Always use PDO `prepare()` and `execute()`.
-- **Query Optimization:** Utilize `AsNoTracking` on read-only queries to minimize memory footprint.
+  public readonly class OrderService {
+      public function __construct(private PDO $db) {}
+  }
+  ```
 
-## 3. Architecture & Security
+## 2. Memory Optimization (Generators)
+- **Zero Memory Bloat:** Use `yield` generators for large batch exports or stream processing to cap memory < 32MB:
+  ```php
+  function streamRows(PDOStatement $stmt): Generator {
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          yield $row;
+      }
+  }
+  ```
+
+## 3. Database Transactions & PDO Security
+- **Prepared Statements ONLY:** Never concatenate variables into SQL strings.
+- **Transaction Scoping:** Explicitly wrap all mutation logic:
+  ```php
+  $this->db->beginTransaction();
+  try {
+      // mutations
+      $this->db->commit();
+  } catch (Throwable $e) {
+      $this->db->rollBack();
+      throw $e;
+  }
+  ```
+
+## 4. Architecture & Security Baseline
 - **Layer Separation:** Thin Controllers &rarr; Feature Services with Constructor Dependency Injection.
-- **Error Boundaries:** Never expose raw stack traces. Return structured JSON: `{"status": "error", "message": "..."}`.
+- **Security:** Use `PASSWORD_ARGON2ID` for hashing, mandatory CSRF validation on mutations, and unified JSON error output.
+

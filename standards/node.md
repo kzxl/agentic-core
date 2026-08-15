@@ -1,22 +1,36 @@
 ---
-desc: Node.js (Express) REST API Standards
-rules: [R_NODE]
+desc: Node.js (Express / TypeScript) Enterprise Standards — High-Throughput & Stream Pipelines
+rules: [R_NODE, R_RES, R_DB]
 ---
-# 🟢 Node.js (Express) REST API Standards
+# 🟢 Node.js Enterprise Standards
 
 ## 1. Architecture Layering
-- **Pipeline:** `Routes` -> `Controller` -> `Service` -> `Database (MongoDB / Mongoose / SQL)`.
-- **Controllers:** Thin layer responsible only for `req` parsing and `res` rendering. Catch errors and forward via `next(err)`.
+- **Pipeline:** `Routes` &rarr; `Validation (Zod/Joi)` &rarr; `Controller` &rarr; `Service` &rarr; `Data Access (Mongoose / SQL)`.
+- **Controllers:** Thin parsing & HTTP status mapping only. Forward errors via `next(err)`.
 - **Services:** Contain 100% of domain and business logic.
-- **Skills Reference:** For complex routing and event pipelines, implement the Handler-Dispatcher pattern from `[AgentOption]/skills/nodejs/`.
+- **Handler-Dispatcher:** For complex event/routing pipelines, implement `[AgentOption]/skills/nodejs/handler-dispatcher-pattern.md`.
 
-## 2. Middleware Pipeline
-- Aggregate cross-cutting concerns (JWT Authentication, RBAC Authorization, GZip Compression, Request Correlation IDs, Global Error Boundaries) into an execution pipeline.
-- Global Error Handler enforces unified JSON schema: `{ success: false, error: { code, message, details } }`.
+## 2. Event Loop Safety & Stream Processing
+- **Zero Sync I/O in Requests:** NEVER call `fs.readFileSync` or CPU-heavy loops inside request lifecycle.
+- **Stream Large Payloads:** Use Node.js Streams (`stream.pipeline`) for export/import files > 5MB to cap RSS memory footprint.
+- **CPU Offloading:** Offload heavy computations (Crypto hashing, image transformation) to `worker_threads`.
 
-## 3. Database Best Practices (MongoDB / SQL)
-- Prevent N+1 query bottlenecks: Utilize `.populate()`, aggregation pipelines, or explicit JOINs.
-- Always index frequently queried fields (`createdAt`, `status`, foreign keys).
+## 3. Middleware & Security Pipeline
+- **Security Baseline:** Mandatory `helmet()`, CORS whitelist, and body size limits (`express.json({ limit: '1mb' })`).
+- **NoSQL / SQL Injection Defense:** Sanitize query parameters (`mongo-sanitize`) and use parameterized ORM/ODM queries.
+- **Unified Error Boundary:** Global error middleware returning uniform payload:
+  `{ success: false, error: { code: string, message: string, details?: any } }`.
 
-## 4. Event-Driven Architecture
-- Emit Socket.IO events and domain events strictly from the **Service layer**, never directly inside Controllers.
+## 4. Graceful Shutdown & Lifecycle
+- **Signal Trapping:** Trap `SIGTERM` and `SIGINT` to gracefully drain active HTTP requests and close DB pools:
+  ```javascript
+  const shutdown = async () => {
+    server.close(() => process.exit(0));
+    await db.disconnect();
+  };
+  process.on('SIGTERM', shutdown);
+  ```
+
+## 5. Event-Driven Architecture
+- Emit Socket.IO and domain events strictly from the **Service layer**, never directly inside Controllers.
+
