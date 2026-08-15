@@ -36,6 +36,17 @@ format_enforcement: strict_yaml_or_bullet
 
 6. SYMBOL_DECODING_PROTOCOL (Token-Optimized Attention):
    - `R_*` (e.g. `R_CS`, `R_WPF`, `R_DB`) -> Hard constraints mapped to `rules.json`.
-   - `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`) -> Design patterns mapped to `shortcuts.json`.
+   - `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`, `PONY`, `CONS`, `BLAST`) -> Design patterns mapped to `shortcuts.json`.
    - Agents MUST treat compact tag arrays (e.g. `apply: [R_CS, R_WPF, DBS, PERF]`) as fully expanded operational directives.
    - Zero hallucination: If an unknown tag is encountered, resolve via `node [AgentOption]/tools/lookup.js <TAG>`.
+
+7. INVARIANT_COMMIT_GATE (5-Question Pre-Commit Check):
+   - 1. Zero forbidden patterns (`BindingSource`, `Form_Load`, sync `.Result` / `.Wait()`)?
+   - 2. Zero cross-module direct table queries (`R_UNIVERSE` Data Sovereignty)?
+   - 3. Zero unrequested abstractions (`PONY` YAGNI ladder satisfied)?
+   - 4. Blast-radius scanned if touching shared code (`BLAST`)?
+   - 5. Project built and verified with zero errors?
+
+8. BLAST_RADIUS_PRE_CHECK:
+   - Mandatory `rg "FunctionName\("` caller scan before editing non-private/shared symbols.
+

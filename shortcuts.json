@@ -168,5 +168,10 @@
     "name": "Ponytail Minimalist Protocol",
     "target": "skills/agentic/lazy-minimalism-protocol.md",
     "desc": "Decision Ladder, YAGNI, standard library first & shortest working diff"
+  },
+  "BLAST": {
+    "name": "Blast-Radius Analysis Protocol",
+    "target": "skills/agentic/blast-radius-analysis.md",
+    "desc": "Pre-edit caller scan & regression blast radius analysis"
   }
 }

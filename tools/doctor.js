@@ -27,9 +27,22 @@ console.log('✅ Found .project-rule.md');
 const nameMatch = ruleContent.match(/project_name:\s*(.*)/i);
 const langMatch = ruleContent.match(/primary_language:\s*(.*)/i);
 const archMatch = ruleContent.match(/architecture:\s*(.*)/i);
+const rulesMatch = ruleContent.match(/rules:\s*\[(.*?)\]/i);
+const shortcutsMatch = ruleContent.match(/shortcuts:\s*\[(.*?)\]/i);
 
 console.log(`📦 Project Name: ${nameMatch ? nameMatch[1].trim() : 'Unknown'}`);
 console.log(`💻 Primary Language: ${langMatch ? langMatch[1].trim() : 'Unknown'}`);
 console.log(`🏛️ Architecture: ${archMatch ? archMatch[1].trim() : 'Unknown'}`);
+if (rulesMatch) console.log(`📜 Active Rules: [${rulesMatch[1].trim()}]`);
+if (shortcutsMatch) console.log(`⚡ Active Shortcuts: [${shortcutsMatch[1].trim()}]`);
+
+// Extract key_paths
+const keyPathsBlock = ruleContent.match(/key_paths:([\s\S]*?)(?:---|$)/i);
+if (keyPathsBlock) {
+  console.log('\n🗺️ Key Paths Index:');
+  const lines = keyPathsBlock[1].split('\n').filter(l => l.includes(':'));
+  lines.forEach(l => console.log(`   ${l.trim()}`));
+}
 
 console.log('\n✨ Project is properly configured with AgentOption baseline!');
+

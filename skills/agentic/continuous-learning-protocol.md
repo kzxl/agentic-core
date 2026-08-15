@@ -41,10 +41,15 @@ node [AgentOption]/tools/brain.js pre "<task description>" --tags=<domain>
 ```
 
 ### B. POST-Harvest (Immediately After Successful Verification)
-After changes are built, verified, and committed, record the lesson:
+After changes are built, verified, and committed, record the lesson using the mandatory **3-field format**:
 
 ```bash
-node [AgentOption]/tools/brain.js post "<Technical Question>|<Concrete Solution / Gotcha>" --tags=<domain>,<type>
+node [AgentOption]/tools/brain.js post "[Symptom/Problem] | [Root Cause] | [Concrete Fix & Gotcha]" --tags=<domain>,<type>
+```
+
+**Example:**
+```bash
+node [AgentOption]/tools/brain.js post "GridControl freeze after RunAfterShown | Invoked sync void delegate instead of Task | Use RunAfterShown(async () => await LoadData()) with top-level try/catch" --tags=inventory,winforms
 ```
 
 **Tag Rules:**

@@ -32,15 +32,20 @@ primary_language: <language>              # e.g., nodejs, react, csharp, go, php
 architecture: <architecture_type>        # e.g., clean_architecture, universe_plugin, modular_monolith
 framework_references:
   agent_option_root: "[AgentOption]"      # Resolves portably across any workstation
-  rules: ["R_CORE", "R_NODE", "R_REACT"]
+  rules: ["R_CORE", "R_CS", "R_WPF"]     # Hard rules from rules.json
+  shortcuts: ["BASE", "PART", "PERF", "PONY", "CONS", "BLAST"] # Active skills & patterns
+key_paths:
+  features_root: "Features/"              # Root directory for vertical slice features
+  constants: "Shared/Constants.cs"       # Central permissions & rule codes
+  dbcontext: "Data/AppDataContext.cs"     # Primary database context
 ---
+```
 
 # Project Specific Directives
 - Follow language standards in `[AgentOption]/standards/<primary_language>.md`.
 - Reference architecture blueprints in `[AgentOption]/architecture/`.
 - Apply reusable skills in `[AgentOption]/skills/<primary_language>/`.
 - Validate against rules in `[AgentOption]/rules.json`.
-```
 
 ---
 
