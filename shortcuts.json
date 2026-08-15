@@ -141,22 +141,22 @@
   },
   "NAME": {
     "name": "Universal Naming Conventions",
-    "target": "standards/naming_conventions.md",
+    "target": "standards/universal/naming-conventions.md",
     "desc": "Universal multi-language casing, DTO and UI naming rules"
   },
   "PERF": {
     "name": "Performance & Data Access Guidelines",
-    "target": "standards/performance_guidelines.md",
+    "target": "standards/universal/performance-guidelines.md",
     "desc": "Anti-N+1, async queueing & UI non-blocking guidelines"
   },
   "CONF": {
     "name": "Conformance Testing Standard",
-    "target": "standards/conformance-testing.md",
+    "target": "standards/universal/conformance-testing.md",
     "desc": "Module isolation and behavioral parity verification"
   },
   "DARK": {
     "name": "Desktop Dark Theme Styling",
-    "target": "standards/wpf-dark-theme.md",
+    "target": "standards/csharp/wpf-dark-theme.md",
     "desc": "WPF/Desktop Dark Theme palettes and styling tokens"
   },
   "CONS": {
@@ -181,7 +181,7 @@
   },
   "SQL": {
     "name": "Universal Database & SQL Standards",
-    "target": "standards/database-sql.md",
+    "target": "standards/database/indexing-optimization.md",
     "desc": "Composite indexing, deadlock defense, optimistic concurrency & audit"
   },
   "SOLID": {

@@ -1,11 +1,10 @@
 ---
-desc: Universal naming conventions for variables, methods, classes, DTOs, and UI controls
+desc: Universal multi-language casing, DTO and UI control naming rules
 rules: [R_CORE]
 ---
 # 🏷️ Universal Naming Conventions
 
 ## 1. Symbol Casing Rules
-
 | Element | Convention | Example |
 | :--- | :--- | :--- |
 | **Classes / Structs / Records** | `PascalCase` | `InspectionService`, `ProductController` |
@@ -18,15 +17,13 @@ rules: [R_CORE]
 | **Constants** | `PascalCase` in static class | `Status.Pending`, `Status.Approved` |
 
 ## 2. DTO Naming Standards
-
 - **List / Table Grid:** `<Feature>GridItemDTO` or `<Feature>ListDTO`
 - **Detail View:** `<Feature>DetailDTO`
 - **Mutations (Insert / Update):** `<Feature>SaveRequest` or `<Feature>ActionDTO`
 - **Dropdown Lookup:** `<Feature>LookupDTO` (Key-Value pairs)
 - **Print / Report:** `<Feature>ReportDTO`
 
-## 3. UI Control Prefixes (Desktop WinForms / WPF)
-
+## 3. UI Control Prefixes (Desktop)
 - **Button:** `btnSave`, `btnApprove`, `btnCancel`
 - **TextBox / TextEdit:** `txtUsername`, `txtDocNo`
 - **GridControl / GridView:** `gcMain`, `gvMain`, `gcDetails`

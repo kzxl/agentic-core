@@ -21,19 +21,18 @@ E:\16. AgentOption/
 │   ├── micro-frontends.md             # Micro-Frontend Module Federation & Runtime Assembly
 │   └── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
 │
-├── standards/                         # Layer 2: Language & Framework Coding Standards
-│   ├── node.md                        # Node.js (Express) REST API & Service Layer Standards
-│   ├── react.md                       # React / Redux Toolkit / TypeScript Standards
-│   ├── csharp-webapi.md               # .NET Web API & Clean Architecture Standards
-│   ├── csharp-winforms.md             # C# WinForms Enterprise Desktop Standards
-│   ├── csharp-wpf.md                  # C# WPF Desktop MVVM Standards
-│   ├── go.md                          # Go Concurrency, Channels & Service Standards
-│   ├── php.md                         # PHP 8+ Strict OOP & LiteORM Conventions
-│   ├── naming_conventions.md          # Universal Multi-Language Naming Rules
-│   ├── performance_guidelines.md      # Memory, CPU, and Async Concurrency Guidelines
-│   ├── conformance-testing.md         # Module Isolation & Conformance Test Standards
-│   ├── agent-meta.md                  # Meta-Rules for AI Agents Editing Rules & Skills
-│   └── wpf-dark-theme.md              # Desktop Dark Theme Color Palettes & Styling
+├── standards/                         # Layer 2: Modular Language & Engineering Standards
+│   ├── universal/                     # Universal Engineering Standards
+│   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding, Commit Gate
+│   │   ├── naming-conventions.md      # Multi-Language Naming Rules
+│   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
+│   │   └── conformance-testing.md     # Module Isolation & Conformance Tests
+│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme)
+│   ├── nodejs/                        # Node.js Standards (Architecture, Streams, Security)
+│   ├── react/                         # React Standards (Lifecycle, State, Performance)
+│   ├── golang/                        # Go Standards (Concurrency, Memory, Slog)
+│   ├── php/                           # PHP 8.2+ Standards (Syntax, Transactions, Generators)
+│   └── database/                      # Universal SQL Standards (Indexing, Deadlocks, Audit)
 │
 ├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns
 │   ├── agentic/                       # Agentic Methodology Skills (inspired by obra/superpowers)
