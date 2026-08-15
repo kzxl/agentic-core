@@ -36,7 +36,7 @@ format_enforcement: strict_yaml_or_bullet
 
 6. SYMBOL_DECODING_PROTOCOL (Token-Optimized Attention):
    - `R_*` (e.g. `R_CS`, `R_WPF`, `R_DB`) -> Hard constraints mapped to `rules.json`.
-   - `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`, `PONY`, `CONS`, `BLAST`) -> Design patterns mapped to `shortcuts.json`.
+   - `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`, `PONY`, `CONS`, `BLAST`, `NORM`) -> Design patterns mapped to `shortcuts.json`.
    - Agents MUST treat compact tag arrays (e.g. `apply: [R_CS, R_WPF, DBS, PERF]`) as fully expanded operational directives.
    - Zero hallucination: If an unknown tag is encountered, resolve via `node [AgentOption]/tools/lookup.js <TAG>`.
 
@@ -49,4 +49,8 @@ format_enforcement: strict_yaml_or_bullet
 
 8. BLAST_RADIUS_PRE_CHECK:
    - Mandatory `rg "FunctionName\("` caller scan before editing non-private/shared symbols.
+
+9. PRE_ACTION_INPUT_NORMALIZATION:
+   - Pre-Action Step: Evaluate input prompt. If free-form prose, auto-normalize into canonical Micro-Payload `[Action] @[Feature] | [Intent] | [Tags]` before planning or reasoning (`NORM`).
+
 
