@@ -183,5 +183,10 @@
     "name": "Universal Database & SQL Standards",
     "target": "standards/database-sql.md",
     "desc": "Composite indexing, deadlock defense, optimistic concurrency & audit"
+  },
+  "SOLID": {
+    "name": "SOLID & Separation of Concerns",
+    "target": "architecture/solid-and-separation-of-concerns.md",
+    "desc": "Pragmatic SOLID matrix, layer boundaries & 1-to-1 feature partitioning"
   }
 }
