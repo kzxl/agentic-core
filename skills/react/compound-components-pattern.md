@@ -17,6 +17,14 @@ import React, { createContext, useContext, useState } from 'react';
 
 const TableContext = createContext(null);
 
+function useTableContext() {
+  const context = useContext(TableContext);
+  if (!context) {
+    throw new Error('DataTable compound components must be rendered within a <DataTable> provider.');
+  }
+  return context;
+}
+
 export function DataTable({ data, children, className = 'table' }) {
   const [selectedRow, setSelectedRow] = useState(null);
 
@@ -42,7 +50,7 @@ DataTable.Header = function TableHeader({ columns }) {
 };
 
 DataTable.Body = function TableBody({ renderRow }) {
-  const { data, selectedRow, setSelectedRow } = useContext(TableContext);
+  const { data, selectedRow, setSelectedRow } = useTableContext();
 
   return (
     <tbody>

@@ -53,6 +53,8 @@ public partial class frmStockReturnDetail : BaseForm
         {
             ShowLoading(true);
             var lookups = await _service.GetLookupsAsync();
+            if (IsDisposed) return; // Prevent ObjectDisposedException if user closes form early
+
             cboWarehouse.Properties.DataSource = lookups.Warehouses;
 
             if (_currentEntity != null)
@@ -66,7 +68,10 @@ public partial class frmStockReturnDetail : BaseForm
         }
         finally
         {
-            ShowLoading(false);
+            if (!IsDisposed)
+            {
+                ShowLoading(false);
+            }
         }
     }
 
@@ -84,7 +89,9 @@ public partial class frmStockReturnDetail : BaseForm
         {
             DocNo = txtDocNo.Text.Trim(),
             DocDate = dtDocDate.DateTime,
-            WarehouseId = (int?)cboWarehouse.EditValue
+            WarehouseId = cboWarehouse.EditValue == null || cboWarehouse.EditValue == DBNull.Value 
+                ? (int?)null 
+                : Convert.ToInt32(cboWarehouse.EditValue)
         };
     }
 }

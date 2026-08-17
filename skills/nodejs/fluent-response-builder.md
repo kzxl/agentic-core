@@ -43,17 +43,22 @@ export class ApiResponseBuilder {
   }
 
   withPagination({ page, pageSize, totalItems }) {
+    const size = Number(pageSize) || 1;
+    const total = Number(totalItems) || 0;
     this.pagination = {
-      currentPage: Number(page),
-      pageSize: Number(pageSize),
-      totalItems: Number(totalItems),
-      totalPages: Math.ceil(totalItems / pageSize)
+      currentPage: Number(page) || 1,
+      pageSize: size,
+      totalItems: total,
+      totalPages: Math.ceil(total / size)
     };
     return this;
   }
 
   withError(code, message, details = []) {
     this.success = false;
+    if (this.statusCode >= 200 && this.statusCode < 300) {
+      this.statusCode = 400; // Default to 400 Bad Request on error if still 2xx
+    }
     this.errors.push({ code, message, details });
     return this;
   }

@@ -2,6 +2,7 @@
 name: NodeJsSkillBuilderPattern
 desc: Fluent builder for composing handlers, interceptors, error boundaries and persistence adapters in Node.js
 rules: [R_NODE]
+category: NodeJs
 ---
 # 🏗️ Node.js Module Fluent Builder Pattern
 

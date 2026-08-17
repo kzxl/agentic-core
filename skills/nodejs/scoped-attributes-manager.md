@@ -65,8 +65,11 @@ export class AttributesManager {
     if (!this.persistenceAdapter) {
       throw new Error('No PersistenceAdapter configured.');
     }
+    if (!this.persistentKey) {
+      throw new Error('Cannot access persistent attributes: persistentKey (userId) is undefined.');
+    }
     if (!this.persistentAttributes) {
-      this.persistentAttributes = await this.persistenceAdapter.getAttributes(this.persistentKey);
+      this.persistentAttributes = (await this.persistenceAdapter.getAttributes(this.persistentKey)) || {};
     }
     return this.persistentAttributes;
   }
@@ -76,7 +79,10 @@ export class AttributesManager {
   }
 
   async savePersistentAttributes() {
-    if (this.persistenceAdapter && this.persistentAttributes) {
+    if (!this.persistenceAdapter || !this.persistentKey) {
+      throw new Error('Cannot save persistent attributes: missing adapter or persistentKey.');
+    }
+    if (this.persistentAttributes) {
       await this.persistenceAdapter.saveAttributes(this.persistentKey, this.persistentAttributes);
     }
   }

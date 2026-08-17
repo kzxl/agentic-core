@@ -61,13 +61,21 @@ E:\16. AgentOption/
 │       ├── cancellation-token-propagation.md   # End-to-End Task Cancellation Flow
 │       └── dapper-bulk-data-access.md          # Multi-Mapping & High-Throughput Bulk Operations
 │
-├── tools/                             # Layer 4: Automated Verification & Agent CLI Tools
+├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows
+│   ├── feature-implementation.md      # End-to-End Feature Development Workflow
+│   ├── bugfix-investigation.md        # 5-Step Scientific Bugfix & Regression Workflow
+│   ├── code-refactoring.md            # Zero-Regression 1-to-1 Refactoring Workflow
+│   ├── dotnet-publish-release.md      # .NET Dual Publish (Full Self-Contained vs Lite)
+│   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
+│   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop
+│
+├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter & rule links
 │   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents
 │   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
 │   └── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
 │
-└── templates/                         # Layer 5: Rapid Bootstrapping & Extension Templates
+└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates
     ├── project-bootstrap-template.md  # Template to bind ANY project to AgentOption
     ├── standard-template.md           # Template for authoring new Language Standards
     ├── skill-template.md              # Template for authoring new Actionable Skills

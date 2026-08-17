@@ -131,6 +131,7 @@ function searchDir(dir, typeName) {
 searchDir(path.join(ROOT_DIR, 'architecture'), 'architecture');
 searchDir(path.join(ROOT_DIR, 'standards'), 'standards');
 searchDir(path.join(ROOT_DIR, 'skills'), 'skills');
+searchDir(path.join(ROOT_DIR, 'workflows'), 'workflows');
 
 if (results.length === 0) {
   console.log('❌ No matching skills or blueprints found.');

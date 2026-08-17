@@ -10,10 +10,10 @@ category: CSharp
 
 ---
 
-## 1. DbScope Helper Struct
+## 1. DbScope Helper Struct (Readonly Ref Struct)
 
 ```csharp
-public struct DbScope : IDisposable
+public readonly ref struct DbScope
 {
     private readonly bool _ownsContext;
     public AppDbContext Db { get; }

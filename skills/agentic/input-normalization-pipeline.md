@@ -54,7 +54,7 @@ category: Agentic
 | User Free-Form Input | Pre-Action Auto-Normalized Payload |
 | :--- | :--- |
 | *"Màn hình xuất kho bị đơ khi double click vào bảng, xem giúp đừng làm lỗi chỗ khác nhé."* | `FIX @Inventory.StockOut \| Double-click grid freeze UI \| [BLAST, PERF, BASE, PONY]` |
-| *"Tạo API lưu phiếu đóng gói bên Sales, nhớ bọc transaction và chia partial."* | `ADD @Sales.Packing \| API save packing ticket \| in: PackingDTO \| [R_API, PART, PONY]` |
+| *"Tạo API lưu phiếu đóng gói bên Sales, nhớ bọc transaction và chia partial."* | `ADD @Sales.Packing \| API save packing ticket (in: PackingDTO) \| [R_API, PART, PONY]` |
 | *"Rà soát lại toàn bộ hàm trong MaterialService xem có bị thừa code không."* | `AUDIT @Inventory.MaterialService \| Review for over-engineering \| [PONY, BLAST]` |
 
 ---

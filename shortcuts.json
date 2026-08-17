@@ -188,5 +188,35 @@
     "name": "SOLID & Separation of Concerns",
     "target": "architecture/solid-and-separation-of-concerns.md",
     "desc": "Pragmatic SOLID matrix, layer boundaries & 1-to-1 feature partitioning"
+  },
+  "WF_FEAT": {
+    "name": "Feature Implementation Workflow",
+    "target": "workflows/feature-implementation.md",
+    "desc": "End-to-end automated feature development workflow"
+  },
+  "WF_BUG": {
+    "name": "Bugfix Investigation Workflow",
+    "target": "workflows/bugfix-investigation.md",
+    "desc": "5-step scientific bug reproduction and root-cause fix workflow"
+  },
+  "WF_REF": {
+    "name": "Code Refactoring Workflow",
+    "target": "workflows/code-refactoring.md",
+    "desc": "Zero-regression 1-to-1 partitioning and refactoring workflow"
+  },
+  "WF_PUB": {
+    "name": ".NET Publish Release Workflow",
+    "target": "workflows/dotnet-publish-release.md",
+    "desc": "Automated .NET dual publish Full (Self-contained) & Lite workflow"
+  },
+  "WF_DOC": {
+    "name": "Project Bootstrap Doctor Workflow",
+    "target": "workflows/project-bootstrap-doctor.md",
+    "desc": "Project onboarding, rule binding and compliance check workflow"
+  },
+  "WF_MEM": {
+    "name": "Continuous Learning Harvest Workflow",
+    "target": "workflows/continuous-learning-harvest.md",
+    "desc": "Automated Pre-Fetch and Post-Harvest semantic memory workflow"
   }
 }

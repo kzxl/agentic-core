@@ -2,6 +2,7 @@
 name: NodeJsInterceptorPipeline
 desc: Request & Response Interceptors pipeline for global pre/post-processing in Node.js
 rules: [R_NODE]
+category: NodeJs
 ---
 # ⚙️ Node.js Interceptor Pipeline Pattern
 
@@ -62,14 +63,21 @@ export async function executePipeline(ctx, handlers, reqInterceptors, resInterce
     await interceptor.process(ctx);
   }
 
-  // 2. Dispatch Handler
-  const matchedHandler = handlers.find(h => h.canHandle(ctx));
+  // 2. Dispatch Handler (Async predicate evaluation)
+  let matchedHandler = null;
+  for (const handler of handlers) {
+    if (await handler.canHandle(ctx)) {
+      matchedHandler = handler;
+      break;
+    }
+  }
+
   if (!matchedHandler) throw new Error("No handler found");
   let response = await matchedHandler.handle(ctx);
 
   // 3. Run Response Interceptors
   for (const interceptor of resInterceptors) {
-    response = await interceptor.process(ctx, response);
+    response = (await interceptor.process(ctx, response)) || response;
   }
 
   return response;

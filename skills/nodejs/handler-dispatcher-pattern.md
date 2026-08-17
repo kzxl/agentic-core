@@ -2,6 +2,7 @@
 name: NodeJsHandlerDispatcherPattern
 desc: Handler-based dispatcher architecture using canHandle and handle predicates (inspired by ASK SDK v2)
 rules: [R_NODE]
+category: NodeJs
 ---
 # 🧩 Node.js Handler-Dispatcher Architecture Pattern
 

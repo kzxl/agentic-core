@@ -2,6 +2,7 @@
 name: NodeJsPersistenceAdapterPattern
 desc: Pluggable storage adapter interface for state and session management in Node.js
 rules: [R_NODE, R_DB]
+category: NodeJs
 ---
 # 💾 Node.js Persistence Adapter Pattern
 

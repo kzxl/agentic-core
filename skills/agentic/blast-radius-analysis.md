@@ -15,14 +15,14 @@ category: Agentic
 Before modifying any non-private method, shared service, utility function, or contract, execute a mandatory caller scan:
 
 ```bash
-# C# Example
-rg "MethodName\(" --type cs
+# C# Example (Direct call, nameof, and string references)
+rg "(\bMethodName\(|nameof\(MethodName\)|'MethodName'|\"MethodName\")" --type cs
 
-# TypeScript / JavaScript Example
-rg "functionOrExportName" --type ts --type js
+# TypeScript / JavaScript Example (Direct import/call and string lookup)
+rg "(\bfunctionOrExportName\b|'functionOrExportName'|\"functionOrExportName\")" --type ts --type js
 
 # SQL Column / Table Example
-rg "column_or_table_name" --type sql --type cs
+rg "(\bcolumn_or_table_name\b)" --type sql --type cs --type ts --type js
 ```
 
 ---
