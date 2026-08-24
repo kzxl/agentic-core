@@ -19,7 +19,8 @@ E:\16. AgentOption/
 │   ├── event-driven-architecture.md   # Event-Driven Systems, Outbox Pattern, Saga Orchestration
 │   ├── resilience-patterns.md         # Circuit Breaker, Exponential Backoff, Fallback Cache
 │   ├── micro-frontends.md             # Micro-Frontend Module Federation & Runtime Assembly
-│   └── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
+│   ├── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
+│   └── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
 │
 ├── standards/                         # Layer 2: Modular Language & Engineering Standards
 │   ├── universal/                     # Universal Engineering Standards
@@ -27,7 +28,10 @@ E:\16. AgentOption/
 │   │   ├── naming-conventions.md      # Multi-Language Naming Rules
 │   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
 │   │   └── conformance-testing.md     # Module Isolation & Conformance Tests
-│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme)
+│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme, HighPerf)
+│   │   └── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
+│   ├── cpp/                           # C++ Standards (Native Interop, C-ABI Export, LibraryImport)
+│   │   └── native-interop.md          # C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP
 │   ├── nodejs/                        # Node.js Standards (Architecture, Streams, Security)
 │   ├── react/                         # React Standards (Lifecycle, State, Performance)
 │   ├── golang/                        # Go Standards (Concurrency, Memory, Slog)
@@ -59,7 +63,8 @@ E:\16. AgentOption/
 │       ├── hybrid-dbscope-pattern.md           # Hybrid DbScope for WinForms & WebAPI Execution
 │       ├── feature-partial-partitioning.md     # 1-to-1 Partial Class Partitioning (Action/Query/Lookup)
 │       ├── cancellation-token-propagation.md   # End-to-End Task Cancellation Flow
-│       └── dapper-bulk-data-access.md          # Multi-Mapping & High-Throughput Bulk Operations
+│       ├── dapper-bulk-data-access.md          # Multi-Mapping & High-Throughput Bulk Operations
+│       └── zero-copy-interop.md                # Zero-Copy C# & C++ Pointer Interoperability
 │
 ├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows
 │   ├── feature-implementation.md      # End-to-End Feature Development Workflow

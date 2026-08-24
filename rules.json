@@ -12,6 +12,9 @@
   "R_UNIVERSE": "Universe Plugin v4.0: Data sovereignty, indirect event communication (EventBus/MessageQueue), auto-registry, strict module isolation. Deleting a module folder must not break project build.",
   "R_EVT": "Event-Driven: Decoupled domain events, Transactional Outbox pattern for dual-write safety, Idempotent consumers, asynchronous messaging.",
   "R_RES": "Resilience: Circuit Breaker, Exponential Backoff with Jitter, explicit timeouts, Fallback cache (Stale-While-Revalidate), graceful degradation.",
-  "R_TDD": "Test-Driven Development: Red-Green-Refactor cycle, reproduction test first, minimum production code, regression verification."
+  "R_TDD": "Test-Driven Development: Red-Green-Refactor cycle, reproduction test first, minimum production code, regression verification.",
+  "R_PERF": "High-Performance Compute: Span<T>, Memory<T>, ArrayPool<T>, NativeMemory, SIMD Vector128/256/512, cache alignment, zero GC allocations in tight loops.",
+  "R_CPP": "Modern C++ & Native Interop: C++20 standard, C-ABI export boundaries, [LibraryImport] Source Generators, Pinned memory, zero-copy pointer exchanges.",
+  "R_PIPE": "Tiled Data Pipeline: Producer-Consumer Channels, Bounded queues, Ring Buffers, Tile Partitioning for data exceeding physical RAM."
 }
 
