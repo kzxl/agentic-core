@@ -16,6 +16,7 @@
   "R_PERF": "High-Performance Compute: Span<T>, Memory<T>, ArrayPool<T>, NativeMemory, SIMD Vector128/256/512, cache alignment, zero GC allocations in tight loops.",
   "R_CPP": "Modern C++ & Native Interop: C++20 standard, C-ABI export boundaries, [LibraryImport] Source Generators, Pinned memory, zero-copy pointer exchanges.",
   "R_PIPE": "Tiled Data Pipeline: Producer-Consumer Channels, Bounded queues, Ring Buffers, Tile Partitioning for data exceeding physical RAM.",
-  "R_STATE": "Execution State & Working Memory: Maintain explicit short-term state (Task goal, workspace delta/diff, diagnostic evidence, active hypotheses). Verify actual system feedback before/after actions. Prevent amnesia loops and repetitive failed fixes."
+  "R_STATE": "Execution State & Working Memory: Maintain explicit short-term state (Task goal, workspace delta/diff, diagnostic evidence, active hypotheses). Verify actual system feedback before/after actions. Prevent amnesia loops and repetitive failed fixes.",
+  "R_ENG_OS": "Engineering Operating System: 8-core engine (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance). All actions are transactional, evidence-driven, role-isolated, and verified by regression delta gates."
 }
 

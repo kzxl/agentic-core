@@ -12,6 +12,7 @@ E:\16. AgentOption/
 ├── rules.json                         # Universal Machine-Readable Rule Registry (R_*)
 │
 ├── architecture/                      # Layer 1: High-Level Architectural Blueprints
+│   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
 │   ├── folder-per-feature.md          # Folder-per-Feature Architecture & DTO Localization
 │   ├── hybrid-dual-scope-execution.md # Hybrid Desktop & WebAPI Dual-Scope Service Execution

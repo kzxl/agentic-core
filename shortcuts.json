@@ -89,6 +89,11 @@
     "target": "skills/agentic/systematic-debugging.md",
     "desc": "5-step scientific hypothesis debugging"
   },
+  "ENGOS": {
+    "name": "Engineering Operating System",
+    "target": "architecture/engineering-operating-system.md",
+    "desc": "8-core Engineering Operating System (Eng-OS) with L0-L4 memory and transactional regression gates"
+  },
   "CLEAN": {
     "name": "Clean Layered Architecture",
     "target": "architecture/clean-layered-architecture.md",
