@@ -1,35 +1,21 @@
-# PROPRIETARY SOFTWARE LICENSE & COPYRIGHT NOTICE
+MIT License
 
-**Copyright (c) 2026 Phong Vo. All Rights Reserved.**
+Copyright (c) 2026 Phong Vo
 
----
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### 1. OWNERSHIP & INTELLECTUAL PROPERTY
-The **AgentOption** framework, including but not limited to its architectural blueprints, engineering operating system (Eng-OS) specifications, universal rules (`rules.json`), design pattern skills, automated workflows, and associated tooling (collectively, the "Software"), is the proprietary and confidential property of **Phong Vo** ("Owner").
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-The Software is protected by applicable copyright, intellectual property, and trade secret laws worldwide.
-
----
-
-### 2. GRANT OF LICENSE & PERMITTED USE
-Subject to the terms of this License:
-- **Internal / Personal Use:** You are granted a limited, non-exclusive, non-transferable license to use, study, and reference the Software solely for internal engineering development, educational study, and integration within authorized personal or proprietary projects.
-
----
-
-### 3. RESTRICTIONS
-Unless expressly authorized in writing by the Owner, you **MAY NOT**:
-1. **Redistribute or Sub-license:** Copy, distribute, publish, sublicense, rent, lease, or resell the Software or any portion thereof to third parties.
-2. **Commercial Exploitation as a Competing Platform:** Package, brand, or deploy the Software, its architectural blueprints, or rule registries as a standalone commercial AI developer tool, SaaS platform, or agent orchestration service.
-3. **Removal of Notices:** Remove, alter, or obscure any copyright notices, trademarks, or proprietary markings present in any file of this Software.
-4. **Unauthorized Model Scraping:** Use the Software for unauthorized public scraping or mass-training of public foundational models without attribution and explicit written consent.
-
----
-
-### 4. DISCLAIMER OF WARRANTY
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE OWNER OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
----
-
-For licensing inquiries or commercial permissions, please contact:
-**Phong Vo** — `phong.vo@mylangroup.com`
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

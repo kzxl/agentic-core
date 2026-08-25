@@ -130,10 +130,8 @@ node [AgentOption]/tools/doctor.js <path-to-target-repo>
 node [AgentOption]/tools/validate-framework.js
 ```
 
----
+## 📄 License
 
-## 📄 License & Copyright
+This project is licensed under the terms of the [MIT License](LICENSE).
 
-Copyright © 2026 **Phong Vo**. All Rights Reserved.  
-Distributed under the terms of the [Proprietary Software License](LICENSE). Unauthorized commercial duplication, redistribution, or white-label reselling is strictly prohibited.
 
