@@ -129,3 +129,11 @@ node [AgentOption]/tools/doctor.js <path-to-target-repo>
 # 3. Validate integrity of AgentOption framework itself:
 node [AgentOption]/tools/validate-framework.js
 ```
+
+---
+
+## 📄 License & Copyright
+
+Copyright © 2026 **Phong Vo**. All Rights Reserved.  
+Distributed under the terms of the [Proprietary Software License](LICENSE). Unauthorized commercial duplication, redistribution, or white-label reselling is strictly prohibited.
+
