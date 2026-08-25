@@ -129,6 +129,11 @@
     "target": "skills/agentic/continuous-learning-protocol.md",
     "desc": "PRE-Fetch context and POST-Harvest lessons with SemanticBrain"
   },
+  "STATE": {
+    "name": "Execution State Tracking",
+    "target": "skills/agentic/execution-state-tracking.md",
+    "desc": "Dynamic working memory protocol (Task, Delta, Diagnostic Evidence, Hypothesis Log)"
+  },
   "BASE": {
     "name": "BaseForm Lifecycle Orchestration",
     "target": "skills/csharp/baseform-lifecycle-orchestration.md",

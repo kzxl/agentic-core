@@ -25,6 +25,7 @@ E:\16. AgentOption/
 ├── standards/                         # Layer 2: Modular Language & Engineering Standards
 │   ├── universal/                     # Universal Engineering Standards
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding, Commit Gate
+│   │   ├── working-memory-state.md    # Working Memory & Execution State Invariants
 │   │   ├── naming-conventions.md      # Multi-Language Naming Rules
 │   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
 │   │   └── conformance-testing.md     # Module Isolation & Conformance Tests
@@ -44,6 +45,7 @@ E:\16. AgentOption/
 │   │   ├── test-driven-development.md       # Red-Green-Refactor Protocol for AI Coding Agents
 │   │   ├── adversarial-code-review.md       # Self-Critique & Security/Edge-Case Audit
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
+│   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
 │   ├── nodejs/                        # Node.js Enterprise Skills (inspired by ASK SDK v2)
 │   │   ├── handler-dispatcher-pattern.md    # canHandle/handle Dispatcher Architecture
