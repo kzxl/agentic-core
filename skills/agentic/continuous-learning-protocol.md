@@ -4,9 +4,9 @@ desc: Pre-task semantic context retrieval and post-task knowledge harvesting pro
 rules: [R_CORE]
 category: Agentic
 ---
-# 🧠 Agentic Continuous Learning & Semantic Memory Protocol
+# 🧠 Agentic Continuous Learning & Episodic Memory Protocol
 
-**Goal:** Close the feedback loop for AI Coding Agents. Prevent repeating past mistakes by automatically querying past project lessons before coding (**PRE-Fetch**) and harvesting new engineering insights immediately upon task completion (**POST-Harvest**).
+**Goal:** Manage **Episodic Memory** for AI Coding Agents. Prevent repeating past mistakes by automatically querying past project lessons before coding (**PRE-Fetch**) and harvesting new engineering insights immediately upon task completion (**POST-Harvest**), completing the bridge between Working Memory and Long-Term Knowledge.
 
 ---
 

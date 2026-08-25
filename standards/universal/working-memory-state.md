@@ -5,7 +5,12 @@ rules: [R_CORE, R_STATE]
 ---
 # 📊 Universal Working Memory & Execution State Standard
 
-**Core Principle:** An AI Agent without execution state suffers from amnesia loops. Every action must operate on verified state (Workspace Delta + Diagnostic Evidence + Active Hypothesis) combined with Engineering Knowledge.
+**Core Principle:** An AI Agent operates across 3 distinct memory tiers:
+1. **① Knowledge Memory (Semantic):** Stable blueprints, standards, and rules (`R_*`).
+2. **② Episodic Memory (Experience):** Historical task logs and past root causes (`SemanticBrain`).
+3. **③ Working Memory (Execution State):** Ephemeral task scratchpad (Goal, touched files, diagnostic evidence, active hypotheses).
+
+An AI Agent without Working Memory suffers from amnesia loops. Every action must operate on verified state combined with Knowledge and Episodic Memory.
 
 ---
 

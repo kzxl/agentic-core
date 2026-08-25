@@ -1,53 +1,86 @@
 ---
 name: AgenticExecutionStateTracking
-desc: Dynamic working memory protocol (Task, Delta, Diagnostic Evidence, Hypothesis & Attempt Log) to eliminate agent amnesia loops
+desc: 3-tier memory protocol (Knowledge Memory, Episodic Memory, Working Memory) and execution state tracking to eliminate agent amnesia loops
 rules: [R_CORE, R_STATE]
 category: Agentic
 ---
-# 🧠 Agentic Execution State & Working Memory Protocol
+# 🧠 Agentic 3-Tier Memory Architecture & Execution State Protocol
 
-**Goal:** Bridge the gap between static **Knowledge** (Architecture, Standards, Skills) and dynamic **State** (Working Memory, Workspace Delta, Evidence). Eliminate the *Amnesia Loop* where agents forget previous failed attempts or touched files.
-
----
-
-## 1. Knowledge vs. State
-
-```
-                    AGENT
-                      │
-          ┌───────────┴───────────┐
-          ↓                       ↓
-      KNOWLEDGE                 STATE
-          │                       │
- • Architecture          • Current Task & Phase
- • Standards             • Current Changes (Diff)
- • Skills                • Current Errors & Evidence
- • Workflows             • Current Hypotheses & Attempt History
-          │                       │
-          └───────────┬───────────┘
-                      ↓
-                  DECISION
-                      ↓
-                  ACTION
-                      ↓
-                 EVIDENCE (Compiler / Test / Runtime logs)
-                      ↓
-           ┌──────────┴──────────┐
-           ↓ (Short-term)        ↓ (Long-term)
-      UPDATE STATE          POST-HARVEST
-     (Working Memory)      (SemanticBrain)
-```
-
-| Dimension | Knowledge (Static / Semi-Permanent) | State (Dynamic / Working Memory) |
-| :--- | :--- | :--- |
-| **Scope** | Global / Repository-wide rules & patterns | Local to current task & active turn |
-| **Examples** | `R_DB`: No cross-module query, `DBS`: DbScope | Current Module: `Inventory`, Modified: `MaterialService.cs` |
-| **Storage** | Rulesets, Standards, SemanticBrain DB | Session context, Plan checklist, Git diff, Test logs |
-| **Purpose** | Answers: *"HOW should things be built?"* | Answers: *"WHERE am I and WHAT just happened?"* |
+**Goal:** Provide AI Coding Agents with a complete cognitive memory architecture. Eliminate the *Amnesia Loop* by clearly separating stable **Knowledge Memory**, historical **Episodic Memory**, and ephemeral **Working Memory**.
 
 ---
 
-## 2. The 4-Quadrant Working Memory Architecture
+## 1. The 3-Tier Memory Architecture
+
+```
+                                  AGENT
+                                    │
+       ┌────────────────────────────┼────────────────────────────┐
+       ↓                            ↓                            ↓
+① KNOWLEDGE MEMORY           ② EPISODIC MEMORY           ③ WORKING MEMORY
+ (Semantic / Invariant)       (Historical Experience)     (Active Execution State)
+       │                            │                            │
+ • Architecture Blueprints   • Past Bugfixes & Events     • Current Goal & Scope
+ • Coding Standards          • Historical Root Causes     • Modified Files (Diff)
+ • Design Patterns           • Past Deadlock Solutions    • Active Hypotheses
+ • Business/Security Rules   • SemanticBrain Vector DB    • Compiler/Test Evidence
+       │                            │                            │
+       └────────────────────────────┼────────────────────────────┘
+                                    ↓
+                                DECISION
+                                    ↓
+                                 ACTION
+                                    ↓
+                                EVIDENCE (Compiler / Test / Logs)
+                                    ↓
+                      ┌─────────────┴─────────────┐
+                      ↓ (Short-Term Loop)         ↓ (Long-Term Loop)
+                 UPDATE STATE                POST-HARVEST
+               (Working Memory)             (Episodic Memory)
+```
+
+---
+
+## 2. Memory Tier Comparison
+
+| Dimension | ① Knowledge Memory (Semantic) | ② Episodic Memory (Experience) | ③ Working Memory (Execution State) |
+| :--- | :--- | :--- | :--- |
+| **Nature** | **Invariants & Blueprints** | **Historical Events & Lessons** | **Active Scratchpad & State** |
+| **Lifespan** | Permanent / Multi-year | Long-term (Append-only per task) | Short-term (Current session/turn) |
+| **Storage** | Git files (`standards/`, `architecture/`, `rules.json`) | Vector DB / JSONL (`SemanticBrain`) | Session Context, Plan, Git diff, Logs |
+| **Retrieval** | Injected System Prompt / Rule lookup | Semantic Vector Search (PRE-Fetch by tags) | Read workspace state, `git status`, log output |
+| **Core Question** | *"HOW should things be designed?"* | *"WHAT happened when we touched this before?"* | *"WHERE am I and WHAT just happened right now?"* |
+| **Concrete Example** | `R_DB`: No cross-module query; `BaseForm` lifecycle | `2026-08-20`: Inventory deadlock fixed by adding index to `TonKho` | Active: Step 2; Touched: `MaterialService.cs`; Test `CheckStock` failing L42 |
+
+---
+
+## 3. Memory Lifecycle & Transition Flow
+
+```
+[1. PRE-TASK INITIALIZATION]
+  ├── Load ① Knowledge Memory (Hard rules R_*, Standards)
+  ├── PRE-Fetch ② Episodic Memory (Query SemanticBrain for historical lessons)
+  └── Initialize ③ Working Memory (Set Goal, Plan, Target Module Scope)
+        │
+        ▼
+[2. DURING-TASK EXECUTION LOOP]
+  ├── DECISION: Formulate hypothesis using Knowledge + Episodic + Working Memory
+  ├── ACTION: Execute bounded edit, migration, or test command
+  ├── EVIDENCE: Capture compiler output, test assertions, or runtime logs
+  └── UPDATE: Immediately update ③ Working Memory (Touched files, pass/fail state, failed attempt log)
+        │
+        ▼
+[3. POST-TASK HARVEST]
+  └── POST-Harvest lesson from ③ Working Memory -> Commit to ② Episodic Memory (SemanticBrain)
+        │
+        ▼
+[4. KNOWLEDGE EVOLUTION]
+  └── When a pattern in ② Episodic Memory repeats >= 3 times -> Codify into ① Knowledge Memory (Rule / Standard)
+```
+
+---
+
+## 4. The 4-Quadrant Working Memory (Execution State)
 
 ```
                     WORKING MEMORY / EXECUTION STATE
@@ -61,21 +94,21 @@ category: Agentic
 ```
 
 ### 1. Task & Scope State (Phạm vi)
-- **Active Goal:** Feature/Bug being addressed.
-- **Current Phase:** e.g., `Phase 1: DTO Migration` | `Phase 2: Service Refactoring`.
-- **Module Boundary:** Exact folders and assemblies in scope (no bleeding into other modules).
+- **Active Goal:** Specific feature or bug under investigation.
+- **Current Phase:** e.g., `Phase 1: DTO Localization` | `Phase 2: Service Refactoring`.
+- **Module Boundary:** Exact assemblies and namespaces in scope.
 
 ### 2. Workspace Delta State (Biến đổi thực tế)
-- **Files Modified:** List of exact files touched in the current session.
-- **Git Status / Diff:** Uncommitted changes (`git status -s`).
-- **External State:** Applied SQL scripts, running background servers, active ports.
+- **Files Modified:** Exact list of touched files in current session.
+- **Git Status / Diff:** Uncommitted line changes (`git status -s`).
+- **External State:** Executed SQL migrations, running background dev servers.
 
 ### 3. Diagnostic & Evidence State (Bằng chứng phản hồi)
-- **Direct Output:** Raw compiler errors, linter output, test failure assertion logs.
-- **Verification Proof:** Success logs (`Build succeeded`, `Passed! 12/12`).
+- **Raw Diagnostic Output:** Exact compiler errors, failed assertions, stack traces.
+- **Verification Proof:** Success logs (`Build succeeded. 0 Error(s)`).
 
 ### 4. Hypothesis & Attempt History Log (Trí nhớ thử nghiệm)
-- **Current Hypothesis:** Clear statement of why the problem exists.
+- **Current Hypothesis:** Explicit, testable statement of root cause.
 - **Attempt History (Anti-Loop):**
   ```markdown
   - Attempt 1: Changed lock order to `A -> B` -> Failed (Deadlock on concurrent update).
@@ -84,28 +117,8 @@ category: Agentic
 
 ---
 
-## 3. Closed-Loop Execution Protocol
+## 5. Execution Directives
 
-```
-[Pre-Action State Check]
-        │  (Inspect git status, verify active step)
-        ▼
-[Decision Formulation]
-        │  (Combine Knowledge Rules + Working Memory State)
-        ▼
-[Bounded Action]
-        │  (Single focused edit or command execution)
-        ▼
-[Evidence Capture]
-        │  (Compile, run test, check server logs)
-        ▼
-[State & Memory Update]
-        │  (Update touched files, record failure/success, advance step)
-        ▼
-[Loop / Complete]
-```
-
-### Execution Directives:
-1. **Never Action Without State Inspection:** Before modifying files, confirm what has already been changed in previous turns (`git status -s`).
-2. **Never Repeat a Failed Attempt (Anti-Amnesia):** If an edit caused a build break or test failure, log *why* it failed before formulating the next hypothesis. Never re-apply the identical diff.
-3. **Bind Evidence to State:** Every decision must reference direct evidence (e.g., *"Error CS0246 at Line 42 proves DTO is missing from namespace"*), not intuition.
+1. **Pre-Action State Check:** Before modifying code, always verify workspace delta (`git status -s`).
+2. **Never Action Without Evidence:** Bind every fix to direct compiler, test, or log feedback.
+3. **Anti-Amnesia Gate:** If an attempt fails, log *why* in the Attempt History before creating a new hypothesis. Never retry the exact same code modification twice.
