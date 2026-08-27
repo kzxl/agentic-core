@@ -166,8 +166,13 @@
   },
   "DARK": {
     "name": "Desktop Dark Theme Styling",
-    "target": "standards/csharp/wpf-dark-theme.md",
+    "target": "standards/csharp/wpf-ui.md",
     "desc": "WPF/Desktop Dark Theme palettes and styling tokens"
+  },
+  "UI_WPF": {
+    "name": "WPF UI & Theming Standards",
+    "target": "standards/csharp/wpf-ui.md",
+    "desc": "Comprehensive WPF UI design tokens, compact density & ModernWpf patterns"
   },
   "CONS": {
     "name": "3-Pass Consensus Protocol",
