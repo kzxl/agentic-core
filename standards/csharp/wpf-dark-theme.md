@@ -5,6 +5,6 @@ rules: [R_WPF]
 # 🎨 Desktop WPF Dark Theme & UI Standards
 
 > [!NOTE]
-> Tài liệu này đã được chuẩn hóa và mở rộng toàn diện thành **[wpf-ui.md](wpf-ui.md)** bao gồm hệ thống Design Tokens (Dark & Light), tiêu chuẩn kích thước nhỏ gọn (Compact Density), TitleBar Chrome và các Modern Control Patterns.
+> This standard has been superseded and comprehensively expanded into **[wpf-ui.md](wpf-ui.md)**, encompassing full Dark/Light Design Tokens, Compact Density sizing, TitleBar Chrome integration, and Modern Control Patterns.
 > 
-> Vui lòng tham khảo chi tiết tại: **`standards/csharp/wpf-ui.md`**.
+> Please refer directly to: **`standards/csharp/wpf-ui.md`**.
