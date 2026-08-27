@@ -27,3 +27,8 @@ rules: [R_CORE]
 - 3. Zero unrequested abstractions (`PONY` YAGNI ladder satisfied)?
 - 4. Blast-radius scanned if touching shared code (`BLAST`)?
 - 5. Project built and verified with zero errors?
+
+## 6. Language & Authoring Invariant
+- All markdown documentation (`.md`), rules, standards, architectures, and skills MUST be authored in concise, standard, unambiguous Technical English.
+- Localized chat responses may be in user-selected language, but all persistent knowledge artifacts and framework files remain in standard English for deterministic AI reasoning.
+
