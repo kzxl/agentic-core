@@ -233,5 +233,25 @@
     "name": "Continuous Learning Harvest Workflow",
     "target": "workflows/continuous-learning-harvest.md",
     "desc": "Automated Pre-Fetch and Post-Harvest semantic memory workflow"
+  },
+  "ROUTE": {
+    "name": "Agent Skill Router Protocol",
+    "target": "skills/agentic/agent-skill-router-protocol.md",
+    "desc": "Deterministic Skill Routing, Tool-Index SSoT, and Self-Supervision"
+  },
+  "REVENG": {
+    "name": "Reverse Engineering Playbook",
+    "target": "skills/security/reverse-engineering-playbook.md",
+    "desc": "Artifact-driven reverse engineering for Android, Native binaries, .NET and Web"
+  },
+  "SCOPE": {
+    "name": "Security Scope & Evidence Contract",
+    "target": "skills/security/security-scope-and-evidence-contract.md",
+    "desc": "Precedent-auth hard gate, target isolation profiles, and evidence chain"
+  },
+  "ROUTEARC": {
+    "name": "Agent Skill Router Architecture",
+    "target": "architecture/agent-skill-router-architecture.md",
+    "desc": "Client-neutral skill dispatch and on-demand toolchain bootstrapping architecture"
   }
 }

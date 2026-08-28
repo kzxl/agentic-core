@@ -18,6 +18,8 @@
   "R_PIPE": "Tiled Data Pipeline: Producer-Consumer Channels, Bounded queues, Ring Buffers, Tile Partitioning for data exceeding physical RAM.",
   "R_STATE": "Execution State & Working Memory: Maintain explicit short-term state (Task goal, workspace delta/diff, diagnostic evidence, active hypotheses). Verify actual system feedback before/after actions. Prevent amnesia loops and repetitive failed fixes.",
   "R_ENG_OS": "Engineering Operating System: 8-core engine (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance). All actions are transactional, evidence-driven, role-isolated, and verified by regression delta gates.",
-  "R_ANDROID": "Android & Jetpack Compose: Unidirectional Data Flow (UDF), StateFlow UI state immutability, Material 3 design tokens, Camera2/CameraX manual sensor stepping, NDK zero-copy DirectByteBuffer, non-blocking coroutine dispatching."
+  "R_ANDROID": "Android & Jetpack Compose: Unidirectional Data Flow (UDF), StateFlow UI state immutability, Material 3 design tokens, Camera2/CameraX manual sensor stepping, NDK zero-copy DirectByteBuffer, non-blocking coroutine dispatching.",
+  "R_ROUTE": "Skill Routing & Toolchain: Deterministic router-first dispatch. Never guess tool paths; verify against local tool-index SSoT. Auto-bootstrap missing capabilities. Enforce self-supervision <self_review> every 5 calls or after 2 identical failures to prevent amnesia and infinite loops.",
+  "R_SEC": "Security & Reverse Engineering: Strict scope gate (auth.status=granted required before target ACT). Offline sample isolation. Immutable Evidence-Finding-Path chain with cryptographic hash verification."
 }
 
