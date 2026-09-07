@@ -253,5 +253,10 @@
     "name": "Agent Skill Router Architecture",
     "target": "architecture/agent-skill-router-architecture.md",
     "desc": "Client-neutral skill dispatch and on-demand toolchain bootstrapping architecture"
+  },
+  "GIT": {
+    "name": "Git Commit Discipline & Atomic Standards",
+    "target": "standards/universal/git-commit-standards.md",
+    "desc": "Atomic feature commits, Conventional Commits format, scope boundaries, and rollback safety"
   }
 }

@@ -20,6 +20,7 @@
   "R_ENG_OS": "Engineering Operating System: 8-core engine (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance). All actions are transactional, evidence-driven, role-isolated, and verified by regression delta gates.",
   "R_ANDROID": "Android & Jetpack Compose: Unidirectional Data Flow (UDF), StateFlow UI state immutability, Material 3 design tokens, Camera2/CameraX manual sensor stepping, NDK zero-copy DirectByteBuffer, non-blocking coroutine dispatching.",
   "R_ROUTE": "Skill Routing & Toolchain: Deterministic router-first dispatch. Never guess tool paths; verify against local tool-index SSoT. Auto-bootstrap missing capabilities. Enforce self-supervision <self_review> every 5 calls or after 2 identical failures to prevent amnesia and infinite loops.",
-  "R_SEC": "Security & Reverse Engineering: Strict scope gate (auth.status=granted required before target ACT). Offline sample isolation. Immutable Evidence-Finding-Path chain with cryptographic hash verification."
+  "R_SEC": "Security & Reverse Engineering: Strict scope gate (auth.status=granted required before target ACT). Offline sample isolation. Immutable Evidence-Finding-Path chain with cryptographic hash verification.",
+  "R_GIT": "Git & Commit Discipline: Atomic commits ONLY (1 feature/fix = 1 commit). Strictly follow Conventional Commits: <type>(<scope>): <subject>. Never bundle multiple independent controls/features into mega-commits. Keep documentation, refactoring, and releases isolated from functional feature commits."
 }
 
