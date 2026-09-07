@@ -146,6 +146,8 @@ if (command === 'pre') {
   }
   scriptName = path.join(brainRoot, 'tools', 'view-qa.js');
   scriptArgs = [idArg];
+  if (backendArg) scriptArgs.push(backendArg);
+  if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
 } else if (command === 'curate') {
   scriptName = path.join(brainRoot, 'tools', 'curate.js');
   scriptArgs = [];
