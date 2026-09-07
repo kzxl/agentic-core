@@ -86,13 +86,27 @@ const tagsArg = args.find(a => a.startsWith('--tags=')) || '--tags=general';
 if (command === 'status') {
   console.log(`✅ SemanticBrain Bridge Active`);
   console.log(`📁 Brain Root: ${brainRoot}`);
-  console.log(`📦 Resolved Project: ${projectName}\n`);
-  process.exit(0);
+  console.log(`📦 Resolved Project: ${projectName}`);
+  try {
+    const ame = require(path.join(brainRoot, 'core', 'storage-ame'));
+    ame.isAmeAvailable().then(res => {
+      console.log(`⚡ AME Cognitive Storage: ${res.available ? `ONLINE (${res.mode})` : 'OFFLINE'}\n`);
+      process.exit(0);
+    }).catch(() => {
+      console.log();
+      process.exit(0);
+    });
+    return;
+  } catch {
+    console.log();
+    process.exit(0);
+  }
 }
 
 // 3. Dispatch to Target Script
 let scriptName = '';
 let scriptArgs = [];
+const backendArg = args.find(a => a.startsWith('--backend='));
 
 if (command === 'pre') {
   if (!queryText) {
@@ -103,6 +117,7 @@ if (command === 'pre') {
   scriptArgs = [queryText, tagsArg];
   if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
   if (args.includes('--full')) scriptArgs.push('--full');
+  if (backendArg) scriptArgs.push(backendArg);
 } else if (command === 'post') {
   if (!queryText) {
     console.error('❌ Missing content for post-task harvest');
@@ -113,6 +128,7 @@ if (command === 'pre') {
   if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
   if (args.includes('--pinned')) scriptArgs.push('--pinned');
   if (args.includes('--force')) scriptArgs.push('--force');
+  if (backendArg) scriptArgs.push(backendArg);
 } else if (command === 'lookup') {
   if (!queryText) {
     console.error('❌ Missing query text for lookup');
@@ -121,6 +137,7 @@ if (command === 'pre') {
   scriptName = path.join(brainRoot, 'tools', 'find-qa.js');
   scriptArgs = [queryText, tagsArg];
   if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+  if (backendArg) scriptArgs.push(backendArg);
 } else if (command === 'view') {
   const idArg = args[1];
   if (!idArg) {
