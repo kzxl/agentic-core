@@ -17,10 +17,14 @@ const { spawnSync } = require('child_process');
 const args = process.argv.slice(2);
 const command = args[0]?.toLowerCase();
 
-if (!command || !['pre', 'post', 'lookup', 'status'].includes(command)) {
+const VALID_COMMANDS = ['pre', 'post', 'lookup', 'view', 'curate', 'status'];
+
+if (!command || !VALID_COMMANDS.includes(command)) {
   console.log('⚡ AgentOption SemanticBrain Bridge:');
-  console.log('  node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>]');
-  console.log('  node brain.js post "<question>|<answer>" [--tags=<domain,type>] [--project=<name>]');
+  console.log('  node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>] [--full]');
+  console.log('  node brain.js post "<question>|<answer>" [--tags=<domain,type>] [--project=<name>] [--pinned] [--force]');
+  console.log('  node brain.js view <id>');
+  console.log('  node brain.js curate [--project=<name>] [--dry-run] [--mark-stale]');
   console.log('  node brain.js lookup "<query>" [--tags=<domain>] [--project=<name>]');
   console.log('  node brain.js status\n');
   process.exit(0);
@@ -64,6 +68,11 @@ function resolveProjectName() {
     if (match && match[1].trim()) return match[1].trim();
   }
 
+  // Fallback for global commands (like curate or view)
+  if (['view', 'curate', 'status'].includes(command)) {
+    return 'global';
+  }
+
   console.error('❌ Could not resolve project name!');
   console.error('👉 Ensure .project-rule.md exists in project root or pass --project=<project_name>.');
   console.error('👉 Use [AgentOption]/templates/project-bootstrap-template.md to create one.');
@@ -81,24 +90,53 @@ if (command === 'status') {
   process.exit(0);
 }
 
-if (!queryText) {
-  console.error(`❌ Missing query/content text for command: "${command}"`);
-  process.exit(1);
-}
-
 // 3. Dispatch to Target Script
 let scriptName = '';
 let scriptArgs = [];
 
 if (command === 'pre') {
+  if (!queryText) {
+    console.error('❌ Missing query/content text for pre-fetch');
+    process.exit(1);
+  }
   scriptName = path.join(brainRoot, 'tools', 'find-qa-context.js');
-  scriptArgs = [queryText, tagsArg, `--project=${projectName}`];
+  scriptArgs = [queryText, tagsArg];
+  if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+  if (args.includes('--full')) scriptArgs.push('--full');
 } else if (command === 'post') {
+  if (!queryText) {
+    console.error('❌ Missing content for post-task harvest');
+    process.exit(1);
+  }
   scriptName = path.join(brainRoot, 'tools', 'post-task.js');
-  scriptArgs = [queryText, tagsArg, `--project=${projectName}`, '--direct'];
+  scriptArgs = [queryText, tagsArg, '--direct'];
+  if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+  if (args.includes('--pinned')) scriptArgs.push('--pinned');
+  if (args.includes('--force')) scriptArgs.push('--force');
 } else if (command === 'lookup') {
+  if (!queryText) {
+    console.error('❌ Missing query text for lookup');
+    process.exit(1);
+  }
   scriptName = path.join(brainRoot, 'tools', 'find-qa.js');
-  scriptArgs = [queryText, tagsArg, `--project=${projectName}`];
+  scriptArgs = [queryText, tagsArg];
+  if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+} else if (command === 'view') {
+  const idArg = args[1];
+  if (!idArg) {
+    console.error('❌ Missing QA ID: node brain.js view <id>');
+    process.exit(1);
+  }
+  scriptName = path.join(brainRoot, 'tools', 'view-qa.js');
+  scriptArgs = [idArg];
+} else if (command === 'curate') {
+  scriptName = path.join(brainRoot, 'tools', 'curate.js');
+  scriptArgs = [];
+  if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+  if (args.includes('--dry-run')) scriptArgs.push('--dry-run');
+  if (args.includes('--mark-stale')) scriptArgs.push('--mark-stale');
+  const staleDaysArg = args.find(a => a.startsWith('--stale-days='));
+  if (staleDaysArg) scriptArgs.push(staleDaysArg);
 }
 
 console.log(`🧠 [SemanticBrain Bridge] -> ${path.basename(scriptName)} (${projectName})`);

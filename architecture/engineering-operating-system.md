@@ -101,7 +101,7 @@ The Agent is simply the **execution runtime** that consumes and updates these 5 
 | **L0 Immediate** | Session Context / Plan | Read active context / `git status -s` | Step 2; Editing `MaterialService.cs`; Test fail L42 |
 | **L1 Project** | `.project-rule.md`, `rules.json` | Direct file read / system prompt | `R_DB`: No cross-module queries; use `BaseForm` |
 | **L2 Semantic** | AST index / Vector search | `lookup.js` / keyword / graph query | *"How does Inventory handle RefInId?"* |
-| **L3 Episodic** | `SemanticBrain` Structured DB | Tagged semantic lookup (`brain.js pre`) | Task #182: Fixed deadlock with composite index |
+| **L3 Episodic** | `SemanticBrain` Guarded DB | Progressive semantic lookup (`brain.js pre` L0/L1) | Task #182: Fixed deadlock with composite index |
 | **L4 Archive** | `<appDataDir>/brain/<id>/` | Deep transcript / log search | Raw debug output of session 3 weeks ago |
 
 ---
@@ -219,7 +219,7 @@ $$\Delta \text{Failures} = \text{CurrentFailures} - \text{BaselineFailures} \le 
 [3. CONTEXT HYDRATION]
   ├── L1 Project Memory (Rules & constraints)
   ├── L2 Semantic Search (Graph & AST Signatures)
-  ├── L3 Episodic Memory (PRE-Fetch past lessons from SemanticBrain)
+  ├── L3 Episodic Memory (Progressive PRE-Fetch: L0 Index + On-demand L1 from SemanticBrain)
   └── L0 Immediate Context (Initialize Working Memory & active hypothesis)
 
 [4. TRANSACTIONAL EXECUTION]
@@ -232,6 +232,6 @@ $$\Delta \text{Failures} = \text{CurrentFailures} - \text{BaselineFailures} \le 
   ├── If PASS -> Commit Transaction to repository
   └── If FAIL -> Abort & Rollback diffs; update Attempt History in L0 Working Memory
 
-[7. EPISODIC HARVEST]
-  └── Extract distilled lesson -> POST-Harvest to L3 Episodic Memory (SemanticBrain)
+[7. EPISODIC HARVEST & CURATION]
+  └── Extract distilled lesson -> Guarded POST-Harvest & Semantic Deduplication to L3 Episodic Memory (SemanticBrain)
 ```
