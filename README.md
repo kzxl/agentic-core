@@ -1,6 +1,8 @@
-# 🗂️ AgentOption — Universal Enterprise Framework for AI-Assisted Engineering
+# 🏛️ agentic-core — Universal Enterprise Operating System for AI Coding Agents
 
-**AgentOption** is a universal, language-agnostic engineering framework and knowledge baseline designed to be plugged into **ANY software project** (Web, Desktop, Mobile, Distributed Microservices). It provides AI agents and engineering teams with high-precision architectural blueprints, standardized coding rules, and advanced, reusable implementation skills.
+**agentic-core** (internally known as *AgentOption*) is a universal, language-agnostic engineering operating system and architectural baseline designed to be plugged into **ANY software project** (Web, Desktop, Mobile, Distributed Microservices). It equips autonomous AI coding agents and engineering teams with high-precision architectural blueprints, standardized coding rules, and advanced, reusable implementation skills.
+
+Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the episodic semantic memory engine), it forms a cohesive autonomous engineering ecosystem supporting progressive knowledge retrieval, harvest quality guards, and continuous lifecycle learning.
 
 ---
 
@@ -41,14 +43,14 @@ E:\16. AgentOption/
 │   └── database/                      # Universal SQL Standards (Indexing, Deadlocks, Audit)
 │
 ├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns
-│   ├── agentic/                       # Agentic Methodology Skills (inspired by obra/superpowers)
+│   ├── agentic/                       # Agentic Methodology & Autonomous Superpower Skills
 │   │   ├── brainstorming-and-spec.md        # Pre-coding Exploration, Ambiguity Resolution & Spec
 │   │   ├── test-driven-development.md       # Red-Green-Refactor Protocol for AI Coding Agents
 │   │   ├── adversarial-code-review.md       # Self-Critique & Security/Edge-Case Audit
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
 │   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
-│   ├── nodejs/                        # Node.js Enterprise Skills (inspired by ASK SDK v2)
+│   ├── nodejs/                        # Node.js Enterprise Skills & Patterns
 │   │   ├── handler-dispatcher-pattern.md    # canHandle/handle Dispatcher Architecture
 │   │   ├── interceptor-pipeline.md          # Request & Response Interceptors Pipeline
 │   │   ├── error-boundary-handler.md        # Predicate-based Centralized Error Handling
@@ -128,6 +130,12 @@ node [AgentOption]/tools/doctor.js <path-to-target-repo>
 
 # 3. Validate integrity of AgentOption framework itself:
 node [AgentOption]/tools/validate-framework.js
+
+# 4. Continuous Learning & Memory Loop (Bridged to agentic-brain):
+node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval
+node [AgentOption]/tools/brain.js view 42                       # L1 deep inspection
+node [AgentOption]/tools/brain.js post "problem | cause | fix"  # Quality-guarded harvest
+node [AgentOption]/tools/brain.js curate --dry-run              # Memory lifecycle audit
 ```
 
 ## 📄 License
