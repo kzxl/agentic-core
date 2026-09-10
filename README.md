@@ -23,7 +23,8 @@ E:\16. AgentOption/
 │   ├── resilience-patterns.md         # Circuit Breaker, Exponential Backoff, Fallback Cache
 │   ├── micro-frontends.md             # Micro-Frontend Module Federation & Runtime Assembly
 │   ├── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
-│   └── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
+│   ├── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
+│   └── game-engine-architecture.md    # Universal Game Engine & Authoritative Simulation Blueprint
 │
 ├── standards/                         # Layer 2: Modular Language & Engineering Standards
 │   ├── universal/                     # Universal Engineering Standards
@@ -32,8 +33,9 @@ E:\16. AgentOption/
 │   │   ├── naming-conventions.md      # Multi-Language Naming Rules
 │   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
 │   │   └── conformance-testing.md     # Module Isolation & Conformance Tests
-│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme, HighPerf)
-│   │   └── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
+│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme, HighPerf, Godot)
+│   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
+│   │   └── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
 │   ├── cpp/                           # C++ Standards (Native Interop, C-ABI Export, LibraryImport)
 │   │   └── native-interop.md          # C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP
 │   ├── nodejs/                        # Node.js Standards (Architecture, Streams, Security)
@@ -50,6 +52,13 @@ E:\16. AgentOption/
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
 │   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
+│   ├── game/                          # Game Development & ARPG Engine Skills
+│   │   ├── server-authoritative-bridge.md   # Unified Host-Client Bridge (Local vs Remote Server)
+│   │   ├── hierarchical-finite-state-machine.md # Zero-Alloc HFSM for Entity Combat & Input Buffering
+│   │   ├── spatial-object-pooling.md        # High-Throughput Node Object Pool (Zero-GC Spikes)
+│   │   ├── arpg-stat-formula-pipeline.md    # Multi-Stage ARPG Stat Pipeline (Flat, Inc, More, Caps)
+│   │   ├── game-input-action-buffer.md      # Input Action Buffer Window & 8-Direction Radial Wheel
+│   │   └── procedural-loot-and-economy.md   # Procedural Loot Roll Algorithm & Gold Sink Economy
 │   ├── nodejs/                        # Node.js Enterprise Skills & Patterns
 │   │   ├── handler-dispatcher-pattern.md    # canHandle/handle Dispatcher Architecture
 │   │   ├── interceptor-pipeline.md          # Request & Response Interceptors Pipeline

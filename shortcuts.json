@@ -263,5 +263,45 @@
     "name": "Action-First Cognitive UX Protocol",
     "target": "skills/agentic/action-first-cognitive-ux.md",
     "desc": "Action-first, zero-preamble, sub-2-minute next action, and cognitive load reduction protocol"
+  },
+  "GAME": {
+    "name": "Game Engine Architecture Blueprint",
+    "target": "architecture/game-engine-architecture.md",
+    "desc": "Universal game engine blueprint with Host-Client decoupling and fixed-timestep simulation"
+  },
+  "GODOT": {
+    "name": "Godot 4 & C# Game Standards",
+    "target": "standards/csharp/godot-game-standards.md",
+    "desc": "Godot 4 C# node lifecycle, zero-alloc hot loops, signal hygiene, and UI architecture"
+  },
+  "GBRDG": {
+    "name": "Server-Authoritative Bridge Pattern",
+    "target": "skills/game/server-authoritative-bridge.md",
+    "desc": "Unified Host-Client bridge separating presentation from simulation core"
+  },
+  "HFSM": {
+    "name": "Hierarchical Finite State Machine",
+    "target": "skills/game/hierarchical-finite-state-machine.md",
+    "desc": "Zero-alloc HFSM for combat, entity behaviors, and action buffering"
+  },
+  "GPOOL": {
+    "name": "Spatial Object Pooling Pattern",
+    "target": "skills/game/spatial-object-pooling.md",
+    "desc": "High-throughput object pool recycling projectiles and effects without GC spikes"
+  },
+  "GSTAT": {
+    "name": "ARPG Stat Calculation Pipeline",
+    "target": "skills/game/arpg-stat-formula-pipeline.md",
+    "desc": "Multi-stage ARPG stat calculation with Flat, Inc, More, and Hard Caps"
+  },
+  "GINP": {
+    "name": "Game Input Action Buffer & Radial",
+    "target": "skills/game/game-input-action-buffer.md",
+    "desc": "Action buffer window, coyote time, and 8-direction virtual radial wheel"
+  },
+  "GLOOT": {
+    "name": "Procedural Loot & Economy Sink",
+    "target": "skills/game/procedural-loot-and-economy.md",
+    "desc": "Weighted affix rolling loot generator with anti-inflation gold sinks"
   }
 }
