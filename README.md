@@ -55,7 +55,7 @@ E:\16. AgentOption/
 │   ├── php/                           # PHP 8.2+ Standards (Syntax, Transactions, Generators)
 │   └── database/                      # Universal SQL Standards (Indexing, Deadlocks, Audit)
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (37 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (38 Skills)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (12 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -95,10 +95,12 @@ E:\16. AgentOption/
 │   │   ├── fluent-response-builder.md       # Fluent API Response Payload Builder
 │   │   ├── service-client-factory.md        # Authenticated API Delegation Client Factory
 │   │   └── skill-builder-pattern.md         # Fluent Module/App Builder Composition
-│   └── react/                         # React Enterprise Skills (3 Skills)
-│       ├── abortable-fetch-lifecycle.md     # AbortController Lifecycle & Race Prevention
-│       ├── compound-components-pattern.md   # Context-Driven Compound Components
-│       └── optimistic-ui-updates.md         # Instantaneous Mutations & Automated Rollback
+│   ├── react/                         # React Enterprise Skills (3 Skills)
+│   │   ├── abortable-fetch-lifecycle.md     # AbortController Lifecycle & Race Prevention
+│   │   ├── compound-components-pattern.md   # Context-Driven Compound Components
+│   │   └── optimistic-ui-updates.md         # Instantaneous Mutations & Automated Rollback
+│   └── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
+│       └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo
 │
 ├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows
 │   ├── feature-implementation.md      # End-to-End Feature Development Workflow

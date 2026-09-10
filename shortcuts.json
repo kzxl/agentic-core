@@ -303,5 +303,10 @@
     "name": "Procedural Loot & Economy Sink",
     "target": "skills/game/procedural-loot-and-economy.md",
     "desc": "Weighted affix rolling loot generator with anti-inflation gold sinks"
+  },
+  "RTOS": {
+    "name": "Bare-Metal RTOS Hooking",
+    "target": "skills/embedded/bare-metal-rtos-hooking.md",
+    "desc": "Non-disruptive RTOS hooking, EDMAC DMA zero-copy, and modular embedded firmware architecture"
   }
 }

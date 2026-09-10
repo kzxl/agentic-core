@@ -24,6 +24,7 @@
   "R_GIT": "Git & Commit Discipline: Atomic commits ONLY (1 feature/fix = 1 commit). Strictly follow Conventional Commits: <type>(<scope>): <subject>. Never bundle multiple independent controls/features into mega-commits. Keep documentation, refactoring, and releases isolated from functional feature commits.",
   "R_ACT": "Action-First Cognitive UX: Zero preamble, lead with the immediate executable action on line 1, end each turn with ONE sub-2-minute micro-action, suppress non-blocking tangents, restate progress state on top, and format errors as Location -> Cause -> Fix.",
   "R_GAME": "Game Development & Engine Architecture: Server-authoritative logic, deterministic fixed-timestep simulation loop decoupled from rendering, object pooling, zero-allocation in hot tick paths, hierarchical state machines, spatial partitioning.",
-  "R_GODOT": "Godot Engine & .NET C#: Node composition over deep inheritance, typed [Export] properties, CanvasLayer UI separation, explicit signal unhooking on _ExitTree, PackedScene preloading, no GC allocations in _Process/_PhysicsProcess."
+  "R_GODOT": "Godot Engine & .NET C#: Node composition over deep inheritance, typed [Export] properties, CanvasLayer UI separation, explicit signal unhooking on _ExitTree, PackedScene preloading, no GC allocations in _Process/_PhysicsProcess.",
+  "R_EMBEDDED": "Embedded & Bare-Metal RTOS: Non-disruptive RTOS trampoline hooking, cache coherence synchronization (clean_d_cache/flush_i_cache), EDMAC DMA zero-copy streaming, relocatable .mo module loading, macro-gated array guards against C99 zero-length allocations."
 }
 
