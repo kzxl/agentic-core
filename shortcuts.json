@@ -258,5 +258,10 @@
     "name": "Git Commit Discipline & Atomic Standards",
     "target": "standards/universal/git-commit-standards.md",
     "desc": "Atomic feature commits, Conventional Commits format, scope boundaries, and rollback safety"
+  },
+  "ACT": {
+    "name": "Action-First Cognitive UX Protocol",
+    "target": "skills/agentic/action-first-cognitive-ux.md",
+    "desc": "Action-first, zero-preamble, sub-2-minute next action, and cognitive load reduction protocol"
   }
 }

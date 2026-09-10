@@ -21,6 +21,7 @@
   "R_ANDROID": "Android & Jetpack Compose: Unidirectional Data Flow (UDF), StateFlow UI state immutability, Material 3 design tokens, Camera2/CameraX manual sensor stepping, NDK zero-copy DirectByteBuffer, non-blocking coroutine dispatching.",
   "R_ROUTE": "Skill Routing & Toolchain: Deterministic router-first dispatch. Never guess tool paths; verify against local tool-index SSoT. Auto-bootstrap missing capabilities. Enforce self-supervision <self_review> every 5 calls or after 2 identical failures to prevent amnesia and infinite loops.",
   "R_SEC": "Security & Reverse Engineering: Strict scope gate (auth.status=granted required before target ACT). Offline sample isolation. Immutable Evidence-Finding-Path chain with cryptographic hash verification.",
-  "R_GIT": "Git & Commit Discipline: Atomic commits ONLY (1 feature/fix = 1 commit). Strictly follow Conventional Commits: <type>(<scope>): <subject>. Never bundle multiple independent controls/features into mega-commits. Keep documentation, refactoring, and releases isolated from functional feature commits."
+  "R_GIT": "Git & Commit Discipline: Atomic commits ONLY (1 feature/fix = 1 commit). Strictly follow Conventional Commits: <type>(<scope>): <subject>. Never bundle multiple independent controls/features into mega-commits. Keep documentation, refactoring, and releases isolated from functional feature commits.",
+  "R_ACT": "Action-First Cognitive UX: Zero preamble, lead with the immediate executable action on line 1, end each turn with ONE sub-2-minute micro-action, suppress non-blocking tangents, restate progress state on top, and format errors as Location -> Cause -> Fix."
 }
 
