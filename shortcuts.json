@@ -553,5 +553,15 @@
     "name": "Research Budget Governance Protocol",
     "target": "skills/research/multi-dimensional-budget-governance.md",
     "desc": "Working memory budget quotas, search clamps, amber alerts and 5-experiment stagnation pivots"
+  },
+  "EIG_ARC": {
+    "name": "Expected Information Gain Engine Architecture",
+    "target": "architecture/expected-information-gain-engine.md",
+    "desc": "Bayesian optimal experimental design, epistemic entropy reduction and redundant trial pruning"
+  },
+  "EIG_RES": {
+    "name": "Expected Information Gain Protocol",
+    "target": "skills/research/expected-information-gain-protocol.md",
+    "desc": "Pre-flight epistemic gate, candidate ranking by eROI and zero-gain experiment pruning"
   }
 }
