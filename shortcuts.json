@@ -308,5 +308,10 @@
     "name": "Bare-Metal RTOS Hooking",
     "target": "skills/embedded/bare-metal-rtos-hooking.md",
     "desc": "Non-disruptive RTOS hooking, EDMAC DMA zero-copy, and modular embedded firmware architecture"
+  },
+  "CLEAN": {
+    "name": "Clean-Room IP & Governance",
+    "target": "skills/agentic/clean-room-ip-and-governance.md",
+    "desc": "Clean-Room IP protocol, GNU copyright compliance, and LLM contribution transparency"
   }
 }

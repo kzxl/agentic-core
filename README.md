@@ -37,7 +37,8 @@ E:\16. AgentOption/
 │   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
 │   │   ├── conformance-testing.md     # Module Isolation & Conformance Tests
 │   │   ├── test-logic.md              # Test Logic & Algorithmic Verification (Invariants, AAA, BVA)
-│   │   └── git-commit-standards.md    # Git Commit Discipline & Atomic Conventional Commits Standard
+│   │   ├── git-commit-standards.md    # Git Commit Discipline & Atomic Conventional Commits Standard
+│   │   └── llm-contribution-and-governance.md # LLM Policy, GNU <15-Line IP Compliance & Embedded Safety
 │   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme, HighPerf, Godot)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
 │   │   └── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
@@ -55,11 +56,12 @@ E:\16. AgentOption/
 │   ├── php/                           # PHP 8.2+ Standards (Syntax, Transactions, Generators)
 │   └── database/                      # Universal SQL Standards (Indexing, Deadlocks, Audit)
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (38 Skills)
-│   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (12 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (39 Skills)
+│   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
 │   │   ├── blast-radius-analysis.md         # Pre-Edit Blast-Radius Grep Analysis for Shared Classes & APIs
+│   │   ├── clean-room-ip-and-governance.md  # Clean-Room IP Protocol, GNU Compliance & Hardware Verification
 │   │   ├── input-normalization-pipeline.md  # Ingestion Pipeline & Structured Micro-Payload Normalization
 │   │   ├── lazy-minimalism-protocol.md      # Ponytail Decision Ladder (YAGNI, Shortest Working Diff, Stdlib First)
 │   │   ├── self-consistency-consensus.md    # 3-Pass Consensus with Early Stopping & Divergence Detection
@@ -127,13 +129,14 @@ E:\16. AgentOption/
 
 ## 🧩 Comprehensive Skill Clusters & Capabilities Catalog
 
-The framework organizes its **37 reusable skills** across 6 specialized engineering clusters:
+The framework organizes its **38 reusable skills** across 6 specialized engineering clusters:
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/`)
 Designed to govern the AI agent's internal reasoning loop, cognitive UX with humans, and defensive coding habits:
 - **`action-first-cognitive-ux`**: Action-first communication protocol reducing human cognitive load (ADHD-aware, zero pleasantry preamble, micro-actions $< 2$ min, visual progress proofs).
 - **`agent-skill-router-protocol`**: Deterministic router-first skill dispatch, Machine-Local Tool-Index Single Source of Truth (SSoT), and self-supervision.
 - **`blast-radius-analysis`**: Pre-edit grep scanner for shared classes, database columns, and API contracts to prevent cascading regressions.
+- **`clean-room-ip-and-governance`**: Clean-Room IP protocol, GNU <15-line compliance, MMIO hardware safety, and LLM contribution transparency.
 - **`input-normalization-pipeline`**: Multi-stage noise filtering that converts raw free-form prompts into structured micro-payloads.
 - **`lazy-minimalism-protocol`**: 7-rung Ponytail Decision Ladder enforcing YAGNI, standard library first, zero unrequested abstractions, and shortest working diffs.
 - **`self-consistency-consensus`**: 3-pass reasoning protocol with early stopping on convergence and deep-dive verification on divergence.
