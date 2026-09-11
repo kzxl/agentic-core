@@ -154,7 +154,10 @@ void feature_menu_init(void)
 ## 3. Checklist for Embedded AI Agents
 
 - [ ] **Memory Invariants**: Never overwrite hardware bootloader addresses, vector tables, or MMU mappings without verified memory dumps.
+- [ ] **Zero Dynamic Allocation in Hot Loops**: Strictly prohibit `malloc` / `fio_malloc` inside frame rendering loops ($\ge 30\text{ fps}$) or ISR callbacks. Use static buffers (`display_filter_buffers`).
 - [ ] **Cache Coherence**: Always flush data cache (`clean_d_cache`) and invalidate instruction cache after self-modifying code or trampolines.
+- [ ] **Mandatory Nullity Audits**: Validate all pointers from memory allocators, OS stubs, and hardware structures for `NULL` before dereferencing.
 - [ ] **Cooperative Scheduling**: Ensure all extension loops yield CPU time back to the vendor RTOS via explicit sleep/semaphore calls.
 - [ ] **Feature Gating**: Guard static menu/data arrays with `#ifdef HAS_*` macros to avoid ISO C99 zero-length array compilation failures when features are stripped.
+- [ ] **Compiler Hygiene**: Build with `-Wall -Werror` zero-warning discipline to catch pointer truncation, missing prototypes, and stack corruption early.
 - [ ] **RAM Sovereignty**: Free high-bandwidth DMA buffers when subsystems (e.g. video) are unused to maximize RAM for target workloads (e.g. burst capture, RAW caching).

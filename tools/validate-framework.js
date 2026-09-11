@@ -26,7 +26,42 @@ const rulesData = JSON.parse(fs.readFileSync(RULES_FILE, 'utf8'));
 const validRuleKeys = new Set(Object.keys(rulesData));
 console.log(`✅ Loaded ${validRuleKeys.size} valid rules from rules.json`);
 
-// 2. Recursive Markdown Validator
+// 2. Validate shortcuts.json
+const SHORTCUTS_FILE = path.join(ROOT_DIR, 'shortcuts.json');
+if (!fs.existsSync(SHORTCUTS_FILE)) {
+  console.error('❌ Missing shortcuts.json at root!');
+  process.exit(1);
+}
+
+const shortcutsRaw = fs.readFileSync(SHORTCUTS_FILE, 'utf8');
+const shortcutKeyRegex = /^\s*"([A-Za-z0-9_]+)":\s*\{/gm;
+const seenShortcutKeys = new Set();
+let sm;
+while ((sm = shortcutKeyRegex.exec(shortcutsRaw)) !== null) {
+  const sk = sm[1];
+  if (seenShortcutKeys.has(sk)) {
+    console.error(`❌ Duplicate shortcut key detected in shortcuts.json: "${sk}"`);
+    errorCount++;
+  }
+  seenShortcutKeys.add(sk);
+}
+
+const shortcutsData = JSON.parse(shortcutsRaw);
+for (const [sKey, sVal] of Object.entries(shortcutsData)) {
+  if (!sVal.target) {
+    console.error(`❌ Shortcut "${sKey}" missing target path`);
+    errorCount++;
+  } else {
+    const absTarget = path.join(ROOT_DIR, sVal.target);
+    if (!fs.existsSync(absTarget)) {
+      console.error(`❌ Shortcut "${sKey}" points to non-existent target: "${sVal.target}"`);
+      errorCount++;
+    }
+  }
+}
+console.log(`✅ Validated ${seenShortcutKeys.size} shortcuts with zero broken targets`);
+
+// 3. Recursive Markdown Validator
 function validateMarkdownFiles(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {

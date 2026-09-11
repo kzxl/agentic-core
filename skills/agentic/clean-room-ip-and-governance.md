@@ -1,7 +1,7 @@
 ---
 name: AgenticCleanRoomGovernance
 desc: Clean-Room IP protocol, GNU copyright compliance, MMIO hardware verification, and LLM contribution transparency
-rules: [R_CORE, R_LLM_GOV, R_EMBEDDED, R_GIT]
+rules: [R_CORE, R_LLM_GOV, R_EMBEDDED, R_GIT, R_ENG_OS]
 category: Agentic
 ---
 # 🛡️ Clean-Room IP & Governance Protocol
@@ -63,3 +63,30 @@ Before submitting a PR or pushing a public commit, generate an authentic complia
 | **New module / full feature (>100 lines)** | Clean-room synthesis ONLY | Full independent rewrite & transparency note |
 | **Targeting hardware MMIO registers** | Empirical verification ONLY | Reject AI guesses without ROM dump proof |
 | **Tight rendering/DMA loop** | Zero dynamic heap allocation | Pre-allocated static display buffers |
+
+---
+
+## 3. Evidence-First Pre-Commit Checklist (`R_ENG_OS`, `R_EMBEDDED`, `R_LLM_GOV`)
+
+Before executing any commit or submitting a pull request involving AI-assisted code:
+
+- [ ] **1. GNU Copyright Limit (<15 Lines)**:
+  - Did the LLM output > 15 lines of code?
+  - If YES: Has the code been clean-room synthesized into an original implementation adhering to repository conventions?
+  - Verify zero verbatim chunks copied directly from AI prompt outputs.
+- [ ] **2. Hardware & MMIO SSoT Verification (`R_EMBEDDED`)**:
+  - Does the change reference any hardware addresses, MMIO registers, or RTOS functions?
+  - If YES: Cite the exact header file and line number (e.g. `consts.h`, `internals.h`) or firmware ROM disassembly address.
+  - Reject any speculative hex addresses (`0xC0...`) generated without SSoT citations.
+- [ ] **3. Hot-Path Zero-Allocation Audit (`R_EMBEDDED`)**:
+  - Are there any dynamic heap allocations (`malloc`, `fio_malloc`, `new`) in loops running at $\ge 30\text{ fps}$ or inside ISR callbacks?
+  - Ensure all display buffers and scratch memory are statically pre-allocated.
+- [ ] **4. Mandatory NULL & Error Checks**:
+  - Do all pointer dereferences and external resource acquisitions check for NULL/failure before access?
+  - Does the code compile with `-Werror` zero-warning discipline?
+- [ ] **5. Empirical Exit Code Verification (`R_ENG_OS`)**:
+  - Has the code been built locally via shell?
+  - Verify `Exit Code 0` on native compiler / build tool before claiming completion.
+- [ ] **6. Provenance Disclosure Statement (`R_LLM_GOV`)**:
+  - Is the commit message formatted per Conventional Commits (`R_GIT`)?
+  - Is the AI contribution scope disclosed (algorithmic derivation vs original synthesis)?

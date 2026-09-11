@@ -129,7 +129,7 @@ E:\16. AgentOption/
 
 ## 🧩 Comprehensive Skill Clusters & Capabilities Catalog
 
-The framework organizes its **38 reusable skills** across 6 specialized engineering clusters:
+The framework organizes its **39 reusable skills** across 7 specialized engineering clusters:
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/`)
 Designed to govern the AI agent's internal reasoning loop, cognitive UX with humans, and defensive coding habits:
@@ -186,6 +186,10 @@ Modern React patterns ensuring leak-free component lifecycles and fluid UX:
 - **`abortable-fetch-lifecycle`**: Automatic request cleanup using `AbortController` preventing race conditions and unmounted state updates.
 - **`compound-components-pattern`**: Context-driven component composition providing expressive and flexible JSX APIs.
 - **`optimistic-ui-updates`**: Instantaneous UI state mutation with automatic rollback on network failure.
+
+### 7. 🔌 Embedded & Bare-Metal RTOS (`skills/embedded/`)
+Firmware-level instrumentation, non-disruptive RTOS hooking, and direct hardware memory access:
+- **`bare-metal-rtos-hooking`**: Non-disruptive RTOS trampoline hooking, EDMAC DMA zero-copy transfers, relocatable `.mo` module loading, and cache-coherent frame buffer processing.
 
 ---
 
