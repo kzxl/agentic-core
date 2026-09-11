@@ -14,7 +14,7 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 | **Language & Universal Standards** | **40** | 100% Rule-Linked | `standards/` |
 | **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
 | **Automated Agentic Workflows** | **6** | 100% Step-Verified | `workflows/` |
-| **Rapid Extension Templates** | **5** | Reusable Baselines | `templates/` |
+| **Rapid Extension Templates** | **6** | Reusable Baselines | `templates/` |
 | **Universal Machine Rules** | **38** | 100% Active Enforced | `rules.json` (`R_*`) |
 | **Agent Quick-Routing Shortcuts** | **129** | 100% Zero-Broken Targets | `shortcuts.json` |
 
@@ -114,8 +114,8 @@ The framework is organized into 7 clean architectural tiers:
 | **Layer 2: Standards** | [`standards/`](standards/) | 40 | Universal rules & multi-language coding standards (9 stacks) | [Catalog](#-universal--language-standards-catalog-40-standards) |
 | **Layer 3: Skills** | [`skills/`](skills/) | 63 | Actionable implementation patterns & empirical research skills (10 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-63-skills) |
 | **Layer 4: Workflows** | [`workflows/`](workflows/) | 6 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
-| **Layer 5: Tools** | [`tools/`](tools/) | 4 | Framework linter, CLI lookup, repository doctor, brain bridge | [Toolchain](#-developer--ai-agent-toolchain-cli) |
-| **Layer 6: Templates** | [`templates/`](templates/) | 5 | Rapid bootstrapping templates for projects, standards & skills | [`templates/`](templates/) |
+| **Layer 5: Tools** | [`tools/`](tools/) | 7 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS & scope guard | [Toolchain](#-developer--ai-agent-toolchain-cli) |
+| **Layer 6: Templates** | [`templates/`](templates/) | 6 | Rapid bootstrapping templates for projects, standards, skills & scope | [`templates/`](templates/) |
 | **Layer 7: Docs** | [`docs/`](docs/) | — | Exhaustive system maps, hierarchies & architectural specifications | [Hierarchy](docs/framework-hierarchy.md) |
 
 > [!TIP]
@@ -280,11 +280,12 @@ framework_references:
 ## 🛠️ Developer & AI Agent Toolchain CLI
 
 ```bash
-# 1. Fast Lookup across all 115 shortcuts and 114 documents:
+# 1. Fast Lookup across all 129 shortcuts and 128 documents:
 node [AgentOption]/tools/lookup.js "circuit breaker"
 node [AgentOption]/tools/lookup.js "cancellation" --lang=csharp
-node [AgentOption]/tools/lookup.js "stagnation"
-node [AgentOption]/tools/lookup.js QGEN_RES
+node [AgentOption]/tools/lookup.js REV_FRIDA
+node [AgentOption]/tools/lookup.js SEC_API
+node [AgentOption]/tools/lookup.js "race condition"
 
 # 2. Check health and compliance of a target repository:
 node [AgentOption]/tools/doctor.js <path-to-target-repo>
@@ -297,6 +298,20 @@ node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0
 node [AgentOption]/tools/brain.js view 42                       # L1 deep inspection
 node [AgentOption]/tools/brain.js post "problem | cause | fix"  # Quality-guarded harvest
 node [AgentOption]/tools/brain.js curate --dry-run              # Memory lifecycle audit
+
+# 5. Binary Static Triage & Shannon Entropy Scanner:
+node [AgentOption]/tools/bin-triage.js <target_binary>          # Header, hashes, entropy
+node [AgentOption]/tools/bin-triage.js <target_binary> --blocks # 4KB block entropy map
+node [AgentOption]/tools/bin-triage.js <target_binary> --strings --min-len=8 # Extract strings
+
+# 6. Deterministic CVSS v3.1 Calculator & CWE Taxonomy Lookup:
+node [AgentOption]/tools/cvss.js "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+node [AgentOption]/tools/cvss.js "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N" --markdown
+node [AgentOption]/tools/cvss.js --lookup IDOR                  # Search CWE & suggested vector
+
+# 7. Pre-Flight Scope Authorization Guard:
+node [AgentOption]/tools/scope-guard.js --init                  # Bootstrap .scope-contract.json
+node [AgentOption]/tools/scope-guard.js check "https://api-staging.example.com"
 ```
 
 ---

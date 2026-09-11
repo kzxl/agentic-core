@@ -1,0 +1,38 @@
+{
+  "contract_version": "1.0",
+  "authorization": {
+    "client_name": "Example Organization Inc.",
+    "authorized_by": "Security Operations Officer",
+    "status": "granted",
+    "effective_start": "2026-09-11",
+    "effective_end": "2026-10-11"
+  },
+  "in_scope": {
+    "domains": [
+      "*.test.example.com",
+      "api-staging.example.com"
+    ],
+    "ip_ranges": [
+      "192.168.100.0/24",
+      "10.10.10.50"
+    ],
+    "allowed_ports": [
+      80,
+      443,
+      8080,
+      8443
+    ]
+  },
+  "out_of_scope": {
+    "forbidden_targets": [
+      "prod.example.com",
+      "database.example.com",
+      "192.168.100.1"
+    ],
+    "prohibited_actions": [
+      "Denial of Service (DDoS/Stress Testing)",
+      "Destructive Database Modifications (DROP/TRUNCATE)",
+      "Social Engineering / Phishing Internal Personnel"
+    ]
+  }
+}

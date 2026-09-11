@@ -189,18 +189,22 @@ E:\16. AgentOption/
 │   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
 │   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop
 │
-├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (4 Tools)
+├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (7 Tools)
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules & shortcuts
 │   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents
 │   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
-│   └── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
+│   ├── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
+│   ├── bin-triage.js                  # Binary Static Profiling, Shannon Entropy & Magic Byte Detection
+│   ├── cvss.js                        # Deterministic CVSS v3.1 Calculator & CWE Taxonomy Mapping
+│   └── scope-guard.js                 # Pre-Flight Scope Authorization Gate & Contract Validator
 │
-└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (5 Templates)
+└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (6 Templates)
     ├── project-bootstrap-template.md  # Template to bind ANY external project to AgentOption
     ├── standard-template.md           # Template for authoring new Language Standards
     ├── skill-template.md              # Template for authoring new Actionable Skills
     ├── workflow-template.md           # Template for multi-step automated workflows
-    └── research-memory-template.json  # Starter JSON Schema for .research-memory.json
+    ├── research-memory-template.json  # Starter JSON Schema for .research-memory.json
+    └── scope-contract-template.json   # Template for Pre-Flight Security Scope Authorization Contract
 ```
 
 ---
@@ -211,7 +215,7 @@ E:\16. AgentOption/
 | :--- | :--- | :--- |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs. Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
 | **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain. Every standard must link to at least one machine rule in `rules.json` and declare explicit verification criteria. |
-| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 8 specialized clusters with zero-boilerplate guidelines and executable test logic. |
+| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 10 specialized clusters with zero-boilerplate guidelines and executable test logic. |
 | **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests). |
 | **Layer 5: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools ensuring framework integrity, fast retrieval, and compliance auditing. |
 | **Layer 6: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, and workflows without starting from scratch. |
