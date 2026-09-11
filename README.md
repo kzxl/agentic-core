@@ -11,11 +11,11 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Central Documentation & Framework Index
-├── rules.json                         # Universal Machine-Readable Rule Registry (35 Rules: R_*)
-├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (113 Shortcuts)
+├── rules.json                         # Universal Machine-Readable Rule Registry (36 Rules: R_*)
+├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (115 Shortcuts)
 ├── .project-rule.md                   # Sovereign Self-Hosting Project Rule & Doctor Baseline
 │
-├── architecture/                      # Layer 1: High-Level Architectural Blueprints (18 Blueprints)
+├── architecture/                      # Layer 1: High-Level Architectural Blueprints (19 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
 │   ├── folder-per-feature.md          # Folder-per-Feature Architecture & DTO Localization
@@ -33,7 +33,8 @@ E:\16. AgentOption/
 │   ├── research-memory-schema.md      # 8-Entity Cognitive Research Graph & Dual-Substrate Storage
 │   ├── dead-loop-and-stagnation-detector.md # Dual-Mode Graph Cycle & Semantic Stagnation Detector
 │   ├── multi-dimensional-research-budget.md # Tensor Resource Allocation & Stagnation-Driven Pivots
-│   └── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
+│   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
+│   └── autonomous-question-generator.md # Socratic Problem Decomposition & Question Dependency DAG
 │
 ├── standards/                         # Layer 2: Modular Language & Engineering Standards (40 Standards)
 │   ├── universal/                     # Universal Engineering Standards (13 Standards)
@@ -86,7 +87,7 @@ E:\16. AgentOption/
 │       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI
 │       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Logging
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (48 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (49 Skills)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -101,7 +102,7 @@ E:\16. AgentOption/
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
 │   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
-│   ├── research/                      # Scientific Research & Experimental Skills (9 Skills)
+│   ├── research/                      # Scientific Research & Experimental Skills (10 Skills)
 │   │   ├── research-manager-protocol.md     # Research Manager 5-Way Decision Gate & Graveyard Playbook
 │   │   ├── hypothesis-driven-experimentation.md # Hypothesis Cycle, Counter-Factual Tests & Falsification
 │   │   ├── ablation-study-protocol.md       # Drop-One-Out & Add-One-In Marginal Contribution Harness
@@ -110,7 +111,8 @@ E:\16. AgentOption/
 │   │   ├── failed-approach-negative-memory.md # Anti-Repetition Pattern Matching & Graveyard Protocol
 │   │   ├── dead-loop-stagnation-detection.md # Graph Cycle & Semantic Stagnation Circuit Breakers
 │   │   ├── multi-dimensional-budget-governance.md # Multi-Vector Resource Quotas & Forced Pivot Protocol
-│   │   └── expected-information-gain-protocol.md # Pre-Flight Epistemic Gate & Zero-Gain Trial Pruning
+│   │   ├── expected-information-gain-protocol.md # Pre-Flight Epistemic Gate & Zero-Gain Trial Pruning
+│   │   └── autonomous-question-generation.md # 6-Axis Socratic Inquiry & Dependency Graph Ranking
 │   ├── game/                          # Game Development & ARPG Engine Skills (6 Skills)
 │   │   ├── server-authoritative-bridge.md   # Unified Host-Client Bridge (Local vs Remote Server)
 │   │   ├── hierarchical-finite-state-machine.md # Zero-Alloc HFSM for Entity Combat & Input Buffering
@@ -170,7 +172,7 @@ E:\16. AgentOption/
 
 ## 🧩 Comprehensive Skill Clusters & Capabilities Catalog
 
-The framework organizes its **48 reusable skills** across 8 specialized engineering clusters:
+The framework organizes its **49 reusable skills** across 8 specialized engineering clusters:
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/`)
 Designed to govern the AI agent's internal reasoning loop, cognitive UX with humans, and defensive coding habits:
@@ -243,6 +245,7 @@ Empirical research protocol, statistical benchmarking, and hypothesis-driven eng
 - **`dead-loop-stagnation-detection`**: Structural graph cycle interception ($A \to B \to C \to A$), semantic similarity matrices, epistemic entropy tracking, and research stagnation circuit breakers.
 - **`multi-dimensional-budget-governance`**: Multi-vector budget ledger, token/time burn telemetry, search quota clamps, and 5-experiment zero-gain stagnation forced pivots.
 - **`expected-information-gain-protocol`**: Pre-flight epistemic gate ("Thử nghiệm này giúp tôi biết thêm điều gì mới?"), candidate ranking by eROI, and zero-gain experiment pruning.
+- **`autonomous-question-generation`**: 6-axis Socratic problem decomposition, question dependency DAGs, epistemic priority sorting, and question-to-hypothesis transformation.
 
 ---
 

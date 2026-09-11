@@ -563,5 +563,15 @@
     "name": "Expected Information Gain Protocol",
     "target": "skills/research/expected-information-gain-protocol.md",
     "desc": "Pre-flight epistemic gate, candidate ranking by eROI and zero-gain experiment pruning"
+  },
+  "QGEN_ARC": {
+    "name": "Autonomous Question Generator Architecture",
+    "target": "architecture/autonomous-question-generator.md",
+    "desc": "Socratic problem decomposition, 6-axis epistemic divergence and dependency graph ranking"
+  },
+  "QGEN_RES": {
+    "name": "Autonomous Question Generation Protocol",
+    "target": "skills/research/autonomous-question-generation.md",
+    "desc": "Socratic inquiry playbook, dependency pruning, epistemic ranking and question-to-hypothesis mapping"
   }
 }
