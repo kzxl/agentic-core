@@ -42,7 +42,7 @@ key_paths:
 ```
 
 # Project Specific Directives
-- Follow language standards in `[AgentOption]/standards/<primary_language>.md`.
+- Follow language standards in `[AgentOption]/standards/<primary_language>/`.
 - Reference architecture blueprints in `[AgentOption]/architecture/`.
 - Apply reusable skills in `[AgentOption]/skills/<primary_language>/`.
 - Validate against rules in `[AgentOption]/rules.json`.

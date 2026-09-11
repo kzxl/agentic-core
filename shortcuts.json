@@ -313,5 +313,170 @@
     "name": "Clean-Room IP & Governance",
     "target": "skills/agentic/clean-room-ip-and-governance.md",
     "desc": "Clean-Room IP protocol, GNU copyright compliance, and LLM contribution transparency"
+  },
+  "BENCH": {
+    "name": "Empirical Benchmarking & Hardware Provenance",
+    "target": "standards/universal/benchmark-and-hardware-provenance.md",
+    "desc": "Mandatory standard for host hardware specs, clock rates, toolchains and benchmark evidence"
+  },
+  "LICENSE": {
+    "name": "License Governance & IP Compliance",
+    "target": "standards/universal/license-governance-and-ip-compliance.md",
+    "desc": "Software license taxonomy, mandatory LICENSE init, and clean-room GPL defense"
+  },
+  "LLMGOV": {
+    "name": "LLM Contribution & Governance Standard",
+    "target": "standards/universal/llm-contribution-and-governance.md",
+    "desc": "AI code attribution, GNU <15-line compliance, MMIO hardware safety, and clean-room protocol"
+  },
+  "TESTLOGIC": {
+    "name": "Test Logic & Algorithmic Verification",
+    "target": "standards/universal/test-logic.md",
+    "desc": "Mathematical invariants, AAA structure, boundary value analysis (BVA), and property testing"
+  },
+  "WKMEM": {
+    "name": "Working Memory & State Protocol",
+    "target": "standards/universal/working-memory-state.md",
+    "desc": "Task goal, workspace delta/diff, diagnostic evidence, and hypothesis tracking"
+  },
+  "META": {
+    "name": "Agent Meta-Rules & Execution Gates",
+    "target": "standards/universal/agent-meta.md",
+    "desc": "Agent meta-rules, symbol decoding, and pre-commit verification gates"
+  },
+  "HPC": {
+    "name": "High-Performance C# Compute Standard",
+    "target": "standards/csharp/high-performance-compute.md",
+    "desc": "Span<T>, Memory<T>, ArrayPool<T>, NativeMemory, and SIMD Vector256/512 zero-alloc compute"
+  },
+  "API": {
+    "name": "C# Web API Architecture Standard",
+    "target": "standards/csharp/webapi.md",
+    "desc": "Clean Architecture, Folder-per-feature, Microsoft DI, and strict DTO localization"
+  },
+  "WINFORMS": {
+    "name": "WinForms Enterprise Desktop Standard",
+    "target": "standards/csharp/winforms.md",
+    "desc": "BaseForm lifecycle, RunAfterShown, strictly NO BindingSource, and explicit 1-way mapping"
+  },
+  "WPF": {
+    "name": "WPF Desktop MVVM Standards",
+    "target": "standards/csharp/wpf.md",
+    "desc": "Pure XAML MVVM separation, ICommand data binding, and Dispatcher thread safety"
+  },
+  "CPP": {
+    "name": "Modern C++ & Native Interop Standard",
+    "target": "standards/cpp/native-interop.md",
+    "desc": "C++20 standards, C-ABI export boundaries, [LibraryImport], and pinned memory zero-copy"
+  },
+  "ANDR_STATE": {
+    "name": "Android UDF & State Architecture",
+    "target": "standards/android/state-architecture.md",
+    "desc": "Unidirectional Data Flow (UDF), StateFlow UI immutability, and ViewModel lifecycle"
+  },
+  "ANDR_UI": {
+    "name": "Android Jetpack Compose UI/UX",
+    "target": "standards/android/compose-ui-ux.md",
+    "desc": "Material 3 design tokens, recomposition boundaries, and stable modifier pipelines"
+  },
+  "ANDR_CAM": {
+    "name": "Android Computational Vision Pipeline",
+    "target": "standards/android/camera-computational.md",
+    "desc": "CameraX / Camera2 manual sensor stepping, preview streams, and ImageReader buffers"
+  },
+  "ANDR_NDK": {
+    "name": "Android NDK Native Bridge",
+    "target": "standards/android/ndk-native-bridge.md",
+    "desc": "JNI / NDK memory safety, zero-copy DirectByteBuffer, and SIMD NEON acceleration"
+  },
+  "ANDR_PERF": {
+    "name": "Android Performance Optimization",
+    "target": "standards/android/performance-optimization.md",
+    "desc": "Baseline Profiles, R8 ProGuard shrinking, startup latency, and memory leak defense"
+  },
+  "GO_CONC": {
+    "name": "Go Concurrency & Goroutine Safety",
+    "target": "standards/golang/concurrency.md",
+    "desc": "Goroutines, channels, context cancellation, errgroup, and typed worker pools"
+  },
+  "GO_ERR": {
+    "name": "Go Error Handling & Observability",
+    "target": "standards/golang/error-observability.md",
+    "desc": "Explicit error wrapping with %w, custom domain errors, and structured slog logging"
+  },
+  "GO_MEM": {
+    "name": "Go Memory Allocation & Zero-Alloc",
+    "target": "standards/golang/memory-allocation.md",
+    "desc": "Stack vs heap escape analysis, sync.Pool buffer recycling, and preallocated slices"
+  },
+  "NODE_ARC": {
+    "name": "Node.js REST API Architecture",
+    "target": "standards/nodejs/architecture.md",
+    "desc": "Layered Controller-Service-Repository separation, Express middleware, and async hygiene"
+  },
+  "NODE_STRM": {
+    "name": "Node.js Event Loop & Streams",
+    "target": "standards/nodejs/event-loop-streams.md",
+    "desc": "Event loop non-blocking hygiene, stream pipelines, and chunked buffer processing"
+  },
+  "NODE_SEC": {
+    "name": "Node.js Security & Middleware Defense",
+    "target": "standards/nodejs/security-middleware.md",
+    "desc": "Helmet HTTP headers, CORS whitelisting, rate limiting, and input sanitization"
+  },
+  "PHP_TX": {
+    "name": "PHP Database Transactions & Concurrency",
+    "target": "standards/php/database-transactions.md",
+    "desc": "PDO transactions, isolation levels, row-locking defense, and atomic rollback"
+  },
+  "PHP_GEN": {
+    "name": "PHP Memory Hygiene & Generators",
+    "target": "standards/php/memory-generators.md",
+    "desc": "Yield generators for large dataset streaming and memory-bounded batch processing"
+  },
+  "PHP_MOD": {
+    "name": "Modern PHP 8+ Syntax & Type Safety",
+    "target": "standards/php/modern-syntax.md",
+    "desc": "strict_types=1, constructor property promotion, match expressions, and readonly classes"
+  },
+  "REACT_LIFE": {
+    "name": "React Component Lifecycle & Hooks",
+    "target": "standards/react/component-lifecycle.md",
+    "desc": "Pure functional components, dependency array hygiene, and cleanup in useEffect"
+  },
+  "REACT_PERF": {
+    "name": "React Rendering Performance",
+    "target": "standards/react/performance.md",
+    "desc": "React.memo boundaries, useMemo/useCallback optimization, and code-splitting"
+  },
+  "REACT_STAT": {
+    "name": "React State Management Architecture",
+    "target": "standards/react/state-management.md",
+    "desc": "State colocation, Zustand/Redux Toolkit unidirectional flow, and atomic selector hygiene"
+  },
+  "DB_AUDIT": {
+    "name": "Database Bulk Processing & Audit Logging",
+    "target": "standards/database/bulk-audit.md",
+    "desc": "Chunked batch processing (500-1000 records) and mandatory mutation audit logging"
+  },
+  "DB_LOCK": {
+    "name": "Database Concurrency & Deadlock Defense",
+    "target": "standards/database/concurrency-deadlocks.md",
+    "desc": "Consistent lock ordering, RCSI/MVCC isolation, and version-based optimistic concurrency"
+  },
+  "DUAL": {
+    "name": "Hybrid Dual-Scope Execution Architecture",
+    "target": "architecture/hybrid-dual-scope-execution.md",
+    "desc": "Hybrid DbScope pattern sharing service layer across Desktop WinForms and Web API"
+  },
+  "PIPE": {
+    "name": "High-Throughput Tiled Data Pipeline",
+    "target": "architecture/tiled-data-pipeline.md",
+    "desc": "Producer-Consumer Channels, bounded memory pools, and spatial tile partitioning"
+  },
+  "ZCOPY": {
+    "name": "Zero-Copy C# & C++ Interop Skill",
+    "target": "skills/csharp/zero-copy-interop.md",
+    "desc": "Direct pointer P/Invoke with LibraryImport, NativeMemory allocation, and pinned delegates"
   }
 }

@@ -39,7 +39,7 @@ if (showDense) {
   console.log('--- RULES (Hard Constraints) ---');
   Object.entries(rulesMap).forEach(([k, v]) => console.log(`${k}: ${v}`));
   console.log('--- ACRONYMS (Design Patterns & Skills) ---');
-  Object.entries(shortcutsMap).forEach(([k, v]) => console.log(`${k}: ${v.desc} -> [AgentOption]/${v.target}`));
+  Object.entries(shortcutsMap).forEach(([k, v]) => console.log(`${k}: ${v.desc} -> [AgentOption]/${v.target.replace(/\\/g, '/')}`));
   process.exit(0);
 }
 
@@ -87,7 +87,7 @@ if (rulesMap[upperQuery]) {
 if (shortcutsMap[upperQuery]) {
   const item = shortcutsMap[upperQuery];
   console.log(`⚡ [Shortcut Match: ${upperQuery}] ${item.name}`);
-  console.log(`    📁 File: [AgentOption]/${item.target}`);
+  console.log(`    📁 File: [AgentOption]/${item.target.replace(/\\/g, '/')}`);
   console.log(`    📝 Summary: ${item.desc}\n`);
   process.exit(0);
 }
@@ -118,7 +118,7 @@ function searchDir(dir, typeName) {
         const titleMatch = content.match(/^#\s*(.*)/m);
 
         results.push({
-          file: path.relative(ROOT_DIR, fullPath),
+          file: path.relative(ROOT_DIR, fullPath).replace(/\\/g, '/'),
           title: titleMatch ? titleMatch[1] : entry.name,
           desc: descMatch ? descMatch[1] : 'No description',
           fullPath

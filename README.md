@@ -11,8 +11,9 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Central Documentation & Framework Index
-├── rules.json                         # Universal Machine-Readable Rule Registry (R_*)
-├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry
+├── rules.json                         # Universal Machine-Readable Rule Registry (30 Rules: R_*)
+├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (96 Shortcuts)
+├── .project-rule.md                   # Sovereign Self-Hosting Project Rule & Doctor Baseline
 │
 ├── architecture/                      # Layer 1: High-Level Architectural Blueprints (13 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory
@@ -29,8 +30,8 @@ E:\16. AgentOption/
 │   ├── game-engine-architecture.md    # Universal Game Engine & Authoritative Simulation Blueprint
 │   └── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Capability Bootstrapping
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards
-│   ├── universal/                     # Universal Engineering Standards
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (37 Standards)
+│   ├── universal/                     # Universal Engineering Standards (10 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding, Commit Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Invariants
 │   │   ├── naming-conventions.md      # Multi-Language Naming Rules
@@ -38,23 +39,44 @@ E:\16. AgentOption/
 │   │   ├── conformance-testing.md     # Module Isolation & Conformance Tests
 │   │   ├── test-logic.md              # Test Logic & Algorithmic Verification (Invariants, AAA, BVA)
 │   │   ├── git-commit-standards.md    # Git Commit Discipline & Atomic Conventional Commits Standard
-│   │   └── llm-contribution-and-governance.md # LLM Policy, GNU <15-Line IP Compliance & Embedded Safety
-│   ├── csharp/                        # C# .NET Standards (WinForms, WebAPI, WPF, DarkTheme, HighPerf, Godot)
+│   │   ├── llm-contribution-and-governance.md # LLM Policy, GNU <15-Line IP Compliance & Embedded Safety
+│   │   ├── license-governance-and-ip-compliance.md # License Governance, Compatibility Matrix & IP Compliance
+│   │   └── benchmark-and-hardware-provenance.md # Empirical Benchmarking & Host Hardware Provenance
+│   ├── csharp/                        # C# .NET Standards (6 Standards)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
-│   │   └── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
-│   ├── android/                       # Android & Mobile Engineering Standards
+│   │   ├── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
+│   │   ├── webapi.md                  # Web API Standards (Clean Architecture, DI, DTO Localization)
+│   │   ├── winforms.md                # WinForms Standards (BaseForm, RunAfterShown, No BindingSource)
+│   │   ├── wpf-ui.md                  # WPF UI & Fluent Design Tokens (Dark/Light Themes, Compact Density)
+│   │   └── wpf.md                     # WPF Desktop MVVM Standards (Pure XAML, Dispatcher Safety)
+│   ├── android/                       # Android & Mobile Engineering Standards (5 Standards)
 │   │   ├── state-architecture.md      # Unidirectional Data Flow (UDF) & MVI State Architecture
 │   │   ├── compose-ui-ux.md           # Jetpack Compose Performance & Recomposition Boundaries
 │   │   ├── camera-computational.md    # CameraX / Camera2 Computational Vision Pipeline
 │   │   ├── ndk-native-bridge.md       # JNI / NDK Memory Safety & Zero-Copy ByteBuffers
 │   │   └── performance-optimization.md # Baseline Profiles, R8 ProGuard & Startup Latency
-│   ├── cpp/                           # C++ Standards (Native Interop, C-ABI Export, LibraryImport)
+│   ├── cpp/                           # C++ Standards (1 Standard)
 │   │   └── native-interop.md          # C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP
-│   ├── nodejs/                        # Node.js Standards (Architecture, Streams, Security)
-│   ├── react/                         # React Standards (Lifecycle, State, Performance)
-│   ├── golang/                        # Go Standards (Concurrency, Memory, Slog)
-│   ├── php/                           # PHP 8.2+ Standards (Syntax, Transactions, Generators)
-│   └── database/                      # Universal SQL Standards (Indexing, Deadlocks, Audit)
+│   ├── nodejs/                        # Node.js Standards (3 Standards: Architecture, Streams, Security)
+│   │   ├── architecture.md            # Controller-Service-Repository Layer Separation
+│   │   ├── event-loop-streams.md      # Non-blocking Event Loop & Stream Pipelines
+│   │   └── security-middleware.md     # Helmet, Rate Limiting & Input Sanitization
+│   ├── react/                         # React Standards (3 Standards: Lifecycle, State, Performance)
+│   │   ├── component-lifecycle.md     # Pure Functional Components & Hook Cleanup
+│   │   ├── performance.md             # React.memo, useMemo/useCallback & Code Splitting
+│   │   └── state-management.md        # State Colocation & Redux/Zustand Unidirectional Flow
+│   ├── golang/                        # Go Standards (3 Standards: Concurrency, Memory, Observability)
+│   │   ├── concurrency.md             # Goroutines, Context Cancellation & Worker Pools
+│   │   ├── error-observability.md     # Error Wrapping (%w) & Structured slog Logging
+│   │   └── memory-allocation.md       # Escape Analysis, sync.Pool & Zero-Alloc Slices
+│   ├── php/                           # PHP 8.2+ Standards (3 Standards: Syntax, Transactions, Generators)
+│   │   ├── database-transactions.md   # PDO Transactions, Row Locking & Concurrency
+│   │   ├── memory-generators.md       # Yield Generators for Large Data Streaming
+│   │   └── modern-syntax.md           # strict_types=1, Match Expressions & Readonly Classes
+│   └── database/                      # Universal SQL Standards (3 Standards)
+│       ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Queries
+│       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI
+│       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Logging
 │
 ├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (39 Skills)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)

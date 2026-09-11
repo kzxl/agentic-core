@@ -1,3 +1,7 @@
+---
+desc: Deterministic Skill Routing, Machine-Local Toolchain SSoT & Capability Bootstrapping Architecture
+rules: [R_ROUTE, R_CORE]
+---
 # 🧭 Agent Skill Router & Toolchain Architecture
 
 ## 1. Architectural Vision
