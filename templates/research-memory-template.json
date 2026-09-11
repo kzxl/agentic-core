@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project": "sample-project",
+  "version": "1.0.0",
+  "last_updated": "2026-09-11T10:00:00Z",
+  "hypotheses": [
+    {
+      "id": "H-001",
+      "claim": "Rust FFI boundary has negligible invocation overhead (< 5ns per call)",
+      "status": "partially_verified",
+      "causal_mechanism": "Direct extern C ABI pointer passing compiles to standard assembly call instruction without marshalling penalty.",
+      "evidence_refs": ["EVD-001", "EVD-002"],
+      "limitations": ["Not yet benchmarked on Cortex-M bare-metal"]
+    }
+  ],
+  "failed_approaches": [
+    {
+      "id": "FAIL-001",
+      "approach_name": "Dynamic Marshalling via JSON-RPC String Passing over FFI",
+      "tested_in_experiment": "EXP-003",
+      "cause_of_death": "JSON serialization and heap string allocation overhead (1.8µs) completely dominated the 40ns native execution payload.",
+      "forbidden_pattern": "json_serialize(FFI_boundary)",
+      "scope_condition": "High-frequency in-process C-ABI / FFI calls (>= 10,000 calls/sec)"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "ASM-001",
+      "statement": "Host CPU supports AVX2 SIMD instructions natively without emulation",
+      "status": "validated"
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Lockless SPSC queue achieved 20M ops/s on x86_64, but suffered memory ordering race on ARM64 Cortex-A72 without explicit acquire-release fence",
+      "divergent_environments": ["x86_64 TSO memory model", "ARM64 Weak memory model"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "decision": "Pivot",
+      "rationale": "Direct string passing over FFI failed due to allocation overhead; pivot to zero-copy pinned Memory<T> / Span<T> pointer sharing.",
+      "timestamp": "2026-09-11T10:00:00Z"
+    }
+  ]
+}

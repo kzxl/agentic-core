@@ -518,5 +518,20 @@
     "name": "Research Manager Architecture Blueprint",
     "target": "architecture/research-manager-orchestration.md",
     "desc": "Triad separation (Explorer, Verifier, Historian), 5-way decision gate and anti-dead-loop protocol"
+  },
+  "RES_MEM": {
+    "name": "Research Memory Standard",
+    "target": "standards/universal/research-memory-standard.md",
+    "desc": "Research memory schema, Query-Before-Action invariant and negative knowledge lifecycle"
+  },
+  "RES_FAIL": {
+    "name": "Failed Approach Negative Memory",
+    "target": "skills/research/failed-approach-negative-memory.md",
+    "desc": "Failed approach extraction, anti-repetition pattern matching and graveyard registry"
+  },
+  "RES_SCHEMA": {
+    "name": "Research Memory Schema Architecture",
+    "target": "architecture/research-memory-schema.md",
+    "desc": "8-entity cognitive research knowledge graph and dual-substrate storage architecture"
   }
 }
