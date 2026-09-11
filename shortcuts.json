@@ -478,5 +478,35 @@
     "name": "Zero-Copy C# & C++ Interop Skill",
     "target": "skills/csharp/zero-copy-interop.md",
     "desc": "Direct pointer P/Invoke with LibraryImport, NativeMemory allocation, and pinned delegates"
+  },
+  "RES_STD": {
+    "name": "Scientific Research Methodology Standard",
+    "target": "standards/universal/scientific-research-methodology.md",
+    "desc": "Empirical scientific method, 6-phase research cycle, statistical significance and falsification"
+  },
+  "RES_LIT": {
+    "name": "Literature Synthesis & Prior-Art Standard",
+    "target": "standards/universal/literature-synthesis-and-prior-art.md",
+    "desc": "Systematic literature review, taxonomy comparative matrix, citation and research gap analysis"
+  },
+  "RES_HYP": {
+    "name": "Hypothesis-Driven Engineering Playbook",
+    "target": "skills/research/hypothesis-driven-experimentation.md",
+    "desc": "Pre-execution hypothesis formulation, falsification gates, counter-factual tests and logs"
+  },
+  "RES_ABLT": {
+    "name": "Ablation Study Execution Protocol",
+    "target": "skills/research/ablation-study-protocol.md",
+    "desc": "Drop-one-out and add-one-in component isolation, marginal delta and architectural pruning"
+  },
+  "RES_STAT": {
+    "name": "Statistical Benchmark Analysis",
+    "target": "skills/research/statistical-benchmark-analysis.md",
+    "desc": "Warm-up exclusion, IQR outlier trimming, p90/p99 tail latency and significance testing"
+  },
+  "RES_GAP": {
+    "name": "Prior-Art Gap Analysis & Pareto Mapping",
+    "target": "skills/research/prior-art-gap-analysis.md",
+    "desc": "Competitive architectural taxonomy, Pareto frontier trade-offs and niche definition"
   }
 }

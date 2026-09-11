@@ -11,8 +11,8 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Central Documentation & Framework Index
-├── rules.json                         # Universal Machine-Readable Rule Registry (30 Rules: R_*)
-├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (96 Shortcuts)
+├── rules.json                         # Universal Machine-Readable Rule Registry (31 Rules: R_*)
+├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (102 Shortcuts)
 ├── .project-rule.md                   # Sovereign Self-Hosting Project Rule & Doctor Baseline
 │
 ├── architecture/                      # Layer 1: High-Level Architectural Blueprints (13 Blueprints)
@@ -30,8 +30,8 @@ E:\16. AgentOption/
 │   ├── game-engine-architecture.md    # Universal Game Engine & Authoritative Simulation Blueprint
 │   └── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Capability Bootstrapping
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (37 Standards)
-│   ├── universal/                     # Universal Engineering Standards (10 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (39 Standards)
+│   ├── universal/                     # Universal Engineering Standards (12 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding, Commit Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Invariants
 │   │   ├── naming-conventions.md      # Multi-Language Naming Rules
@@ -41,7 +41,9 @@ E:\16. AgentOption/
 │   │   ├── git-commit-standards.md    # Git Commit Discipline & Atomic Conventional Commits Standard
 │   │   ├── llm-contribution-and-governance.md # LLM Policy, GNU <15-Line IP Compliance & Embedded Safety
 │   │   ├── license-governance-and-ip-compliance.md # License Governance, Compatibility Matrix & IP Compliance
-│   │   └── benchmark-and-hardware-provenance.md # Empirical Benchmarking & Host Hardware Provenance
+│   │   ├── benchmark-and-hardware-provenance.md # Empirical Benchmarking & Host Hardware Provenance
+│   │   ├── scientific-research-methodology.md # Empirical Scientific Research, Hypotheses & Falsifiability
+│   │   └── literature-synthesis-and-prior-art.md # Literature Synthesis, Comparative Taxonomy & Gap Analysis
 │   ├── csharp/                        # C# .NET Standards (6 Standards)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
 │   │   ├── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
@@ -78,7 +80,7 @@ E:\16. AgentOption/
 │       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI
 │       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Logging
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (39 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (43 Skills)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -93,6 +95,11 @@ E:\16. AgentOption/
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
 │   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
+│   ├── research/                      # Scientific Research & Experimental Skills (4 Skills)
+│   │   ├── hypothesis-driven-experimentation.md # Hypothesis Cycle, Counter-Factual Tests & Falsification
+│   │   ├── ablation-study-protocol.md       # Drop-One-Out & Add-One-In Marginal Contribution Harness
+│   │   ├── statistical-benchmark-analysis.md # Non-Parametric Statistics, Tail Latency & Noise Filtering
+│   │   └── prior-art-gap-analysis.md        # Competitive Architectural Taxonomy & Pareto Frontier Mapping
 │   ├── game/                          # Game Development & ARPG Engine Skills (6 Skills)
 │   │   ├── server-authoritative-bridge.md   # Unified Host-Client Bridge (Local vs Remote Server)
 │   │   ├── hierarchical-finite-state-machine.md # Zero-Alloc HFSM for Entity Combat & Input Buffering
@@ -151,7 +158,7 @@ E:\16. AgentOption/
 
 ## 🧩 Comprehensive Skill Clusters & Capabilities Catalog
 
-The framework organizes its **39 reusable skills** across 7 specialized engineering clusters:
+The framework organizes its **43 reusable skills** across 8 specialized engineering clusters:
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/`)
 Designed to govern the AI agent's internal reasoning loop, cognitive UX with humans, and defensive coding habits:
@@ -212,6 +219,13 @@ Modern React patterns ensuring leak-free component lifecycles and fluid UX:
 ### 7. 🔌 Embedded & Bare-Metal RTOS (`skills/embedded/`)
 Firmware-level instrumentation, non-disruptive RTOS hooking, and direct hardware memory access:
 - **`bare-metal-rtos-hooking`**: Non-disruptive RTOS trampoline hooking, EDMAC DMA zero-copy transfers, relocatable `.mo` module loading, and cache-coherent frame buffer processing.
+
+### 8. 🔬 Scientific Research & Experimental Methodology (`skills/research/`)
+Empirical research protocol, statistical benchmarking, and hypothesis-driven engineering:
+- **`hypothesis-driven-experimentation`**: Formal hypothesis cycles ($H_0$ vs $H_1$), pre-declared falsification gates, counter-factual scenario stress-testing, and working memory hypothesis logs.
+- **`ablation-study-protocol`**: Drop-one-out and add-one-in ablation study harnesses, component contribution scoring ($C_i$), and architectural complexity pruning.
+- **`statistical-benchmark-analysis`**: Robust non-parametric benchmarking, warm-up run exclusion, IQR outlier filtering, p90/p99 tail latency analysis, and Mann-Whitney U / Welch significance tests.
+- **`prior-art-gap-analysis`**: Multi-dimensional competitive matrix, Pareto frontier trade-off evaluation, and explicit architectural niche definition.
 
 ---
 
