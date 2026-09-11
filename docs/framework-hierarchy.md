@@ -97,7 +97,7 @@ E:\16. AgentOption/
 │       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI Isolation
 │       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Trail Logging
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (49 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (63 Skills across 10 Clusters)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -159,6 +159,24 @@ E:\16. AgentOption/
 │   │   ├── abortable-fetch-lifecycle.md     # AbortController Lifecycle & Race Prevention
 │   │   ├── compound-components-pattern.md   # Context-Driven Compound Components
 │   │   └── optimistic-ui-updates.md         # Instantaneous Mutations & Automated Rollback
+│   │
+│   ├── reversing/                     # Deep Reverse Engineering & Binary Analysis (7 Skills)
+│   │   ├── dynamic-instrumentation-analysis.md # Frida Runtime Hooking, API Monitoring, SSL Pinning & JNI
+│   │   ├── binary-deobfuscation-and-recovery.md # OLLVM De-flattening, Symbolic Execution (angr) & String Recovery
+│   │   ├── malware-triage-and-unpacking.md # Defensive Sandbox Triage, OEP Detection & Scylla IAT Rebuilding
+│   │   ├── cryptographic-primitive-reversing.md # Magic Constant & S-Box Detection, Runtime Key/IV Extraction
+│   │   ├── protocol-and-wire-format-analysis.md # Proprietary Binary Frame Reversing & Wireshark Lua Dissectors
+│   │   ├── il2cpp-and-managed-runtime-recovery.md # Unity IL2CPP Metadata Dumps & C# Dummy Assembly Synthesis
+│   │   └── firmware-extraction-and-hardware-audit.md # Binwalk Filesystem Extraction, Base Mapping & U-Boot Audit
+│   │
+│   ├── pentest/                       # Application Security & Defensive Penetration Testing (7 Skills)
+│   │   ├── attack-surface-mapping-and-recon.md # Passive/Active Perimeter Discovery & Secret Leak Auditing
+│   │   ├── api-security-and-auth-auditing.md # OWASP API Top 10: BOLA/IDOR, BFLA & JWT Algorithm Verification
+│   │   ├── injection-defense-and-input-fuzzing.md # Non-Destructive SQLi/SSRF/SSTI/Command Injection Verification
+│   │   ├── concurrency-and-race-condition-audit.md # TOCTOU Flaws, HTTP/2 Single-Packet Burst & Row Locking
+│   │   ├── cloud-container-hardening-audit.md # Docker Socket Breakouts, Capabilities & Kubernetes RBAC Auditing
+│   │   ├── fuzzing-harness-and-asan-triage.md # LibFuzzer/AFL++ In-Memory Harnesses & ASAN Memory Crash Triage
+│   │   └── vulnerability-triaging-and-remediation.md # CVSS v3.1/v4.0 Scoring, CWE Mapping & Code Remediation Diffs
 │   │
 │   └── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
 │       └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo

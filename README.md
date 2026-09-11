@@ -12,11 +12,11 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 | :--- | :---: | :---: | :--- |
 | **Architectural Blueprints** | **19** | 100% Documented | `architecture/` |
 | **Language & Universal Standards** | **40** | 100% Rule-Linked | `standards/` |
-| **Actionable Autonomous Skills** | **49** | 100% Frontmatter Validated | `skills/` (8 Clusters) |
+| **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
 | **Automated Agentic Workflows** | **6** | 100% Step-Verified | `workflows/` |
 | **Rapid Extension Templates** | **5** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **36** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **115** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **38** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **129** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -112,14 +112,14 @@ The framework is organized into 7 clean architectural tiers:
 | :--- | :--- | :---: | :--- | :--- |
 | **Layer 1: Blueprints** | [`architecture/`](architecture/) | 19 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-19-blueprints) |
 | **Layer 2: Standards** | [`standards/`](standards/) | 40 | Universal rules & multi-language coding standards (9 stacks) | [Catalog](#-universal--language-standards-catalog-40-standards) |
-| **Layer 3: Skills** | [`skills/`](skills/) | 49 | Actionable implementation patterns & empirical research skills (8 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-49-skills) |
+| **Layer 3: Skills** | [`skills/`](skills/) | 63 | Actionable implementation patterns & empirical research skills (10 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-63-skills) |
 | **Layer 4: Workflows** | [`workflows/`](workflows/) | 6 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
 | **Layer 5: Tools** | [`tools/`](tools/) | 4 | Framework linter, CLI lookup, repository doctor, brain bridge | [Toolchain](#-developer--ai-agent-toolchain-cli) |
 | **Layer 6: Templates** | [`templates/`](templates/) | 5 | Rapid bootstrapping templates for projects, standards & skills | [`templates/`](templates/) |
 | **Layer 7: Docs** | [`docs/`](docs/) | — | Exhaustive system maps, hierarchies & architectural specifications | [Hierarchy](docs/framework-hierarchy.md) |
 
 > [!TIP]
-> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 114+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
+> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 128+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
 
 ---
 
@@ -149,7 +149,7 @@ The framework is organized into 7 clean architectural tiers:
 
 ---
 
-## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (49 Skills)
+## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (63 Skills)
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/` — 13 Skills)
 - **`action-first-cognitive-ux`**: Action-first communication protocol reducing human cognitive load (ADHD-aware, zero pleasantry preamble, micro-actions $< 2$ min, visual progress proofs).
@@ -186,7 +186,7 @@ The framework is organized into 7 clean architectural tiers:
 - **`game-input-action-buffer`**: Buffered input timing windows and responsive 8-direction radial action selection.
 - **`procedural-loot-and-economy`**: Tiered loot drop tables, item affixes rolling, and balanced gold sink sinks.
 
-### 4. 🛡️ Reverse Engineering & Defensive Security (`skills/security/` — 2 Skills)
+### 4. 🛡️ Security Governance & Assessment Contracts (`skills/security/` — 2 Skills)
 - **`reverse-engineering-playbook`**: Multi-target reverse engineering workflows across Android APK/AAR, native PE/ELF/Mach-O binaries, .NET assemblies, and obfuscated Web JS.
 - **`security-scope-and-evidence-contract`**: Operations gate enforcing cryptographic chain-of-custody evidence and verified legal authorization scopes.
 
@@ -215,6 +215,24 @@ The framework is organized into 7 clean architectural tiers:
 
 ### 8. 🔌 Embedded Systems & Bare-Metal RTOS (`skills/embedded/` — 1 Skill)
 - **`bare-metal-rtos-hooking`**: Non-disruptive RTOS trampoline hooking, EDMAC DMA zero-copy transfers, relocatable `.mo` module loading, and cache-coherent frame buffer processing.
+
+### 9. 🔍 Deep Reverse Engineering & Binary Analysis (`skills/reversing/` — 7 Skills)
+- **`dynamic-instrumentation-analysis`**: Frida runtime hooking, API monitoring, SSL pinning bypass, JNI interception, and memory scanning.
+- **`binary-deobfuscation-and-recovery`**: Control flow de-flattening (OLLVM), symbolic execution with angr/Triton, opaque predicate removal, and string decryption.
+- **`malware-triage-and-unpacking`**: Defensive sandbox triage, packer detection, OEP discovery via ESP trick, memory dumping with Scylla, and IAT reconstruction.
+- **`cryptographic-primitive-reversing`**: Crypto constant and S-box signature detection, entropy analysis, and in-memory key/IV extraction.
+- **`protocol-and-wire-format-analysis`**: Reversing proprietary binary network protocols, TLV frames, Wireshark Lua dissectors, and Protobuf schema recovery.
+- **`il2cpp-and-managed-runtime-recovery`**: Unity IL2CPP metadata extraction, C# dummy assembly generation, method RVA lookup, and runtime hooking.
+- **`firmware-extraction-and-hardware-audit`**: Binwalk filesystem extraction, bare-metal base address calculation, Vector Table mapping, and U-Boot audit.
+
+### 10. 🎯 Application Security & Defensive Penetration Testing (`skills/pentest/` — 7 Skills)
+- **`attack-surface-mapping-and-recon`**: Passive and active perimeter discovery, subdomain enumeration, exposed documentation, and secret leak auditing.
+- **`api-security-and-auth-auditing`**: OWASP API Top 10 auditing: BOLA/IDOR, BFLA, JWT algorithm none, and token replay verification.
+- **`injection-defense-and-input-fuzzing`**: Non-destructive verification for SQLi, SSRF, SSTI, command injection, and parameterized defense checks.
+- **`concurrency-and-race-condition-audit`**: TOCTOU flaws, HTTP/2 single-packet synchronization attacks, coupon double-spend, and database locking.
+- **`cloud-container-hardening-audit`**: Docker socket breakouts, dangerous capabilities, Kubernetes RBAC misconfigurations, and IMDSv1 audit.
+- **`fuzzing-harness-and-asan-triage`**: In-memory LibFuzzer/AFL++ harnesses, AddressSanitizer compilation, and memory safety crash root-cause triage.
+- **`vulnerability-triaging-and-remediation`**: Standardized CVSS v3.1/v4.0 scoring, CWE taxonomy mapping, non-destructive PoC, and code remediation diffs.
 
 ---
 
