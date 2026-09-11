@@ -12,10 +12,10 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 E:\16. AgentOption/
 ├── README.md                          # Central Documentation & Framework Index
 ├── rules.json                         # Universal Machine-Readable Rule Registry (31 Rules: R_*)
-├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (102 Shortcuts)
+├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (104 Shortcuts)
 ├── .project-rule.md                   # Sovereign Self-Hosting Project Rule & Doctor Baseline
 │
-├── architecture/                      # Layer 1: High-Level Architectural Blueprints (13 Blueprints)
+├── architecture/                      # Layer 1: High-Level Architectural Blueprints (14 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
 │   ├── folder-per-feature.md          # Folder-per-Feature Architecture & DTO Localization
@@ -28,7 +28,8 @@ E:\16. AgentOption/
 │   ├── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
 │   ├── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
 │   ├── game-engine-architecture.md    # Universal Game Engine & Authoritative Simulation Blueprint
-│   └── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Capability Bootstrapping
+│   ├── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Capability Bootstrapping
+│   └── research-manager-orchestration.md # Research Manager Triad (Explorer, Verifier, Historian) & 5-Way Decision Gate
 │
 ├── standards/                         # Layer 2: Modular Language & Engineering Standards (39 Standards)
 │   ├── universal/                     # Universal Engineering Standards (12 Standards)
@@ -80,7 +81,7 @@ E:\16. AgentOption/
 │       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI
 │       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Logging
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (43 Skills)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (44 Skills)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -95,7 +96,8 @@ E:\16. AgentOption/
 │   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Debugging
 │   │   ├── execution-state-tracking.md      # Working Memory & Execution State Protocol
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch Context & POST-Harvest Semantic Memory
-│   ├── research/                      # Scientific Research & Experimental Skills (4 Skills)
+│   ├── research/                      # Scientific Research & Experimental Skills (5 Skills)
+│   │   ├── research-manager-protocol.md     # Research Manager 5-Way Decision Gate & Graveyard Playbook
 │   │   ├── hypothesis-driven-experimentation.md # Hypothesis Cycle, Counter-Factual Tests & Falsification
 │   │   ├── ablation-study-protocol.md       # Drop-One-Out & Add-One-In Marginal Contribution Harness
 │   │   ├── statistical-benchmark-analysis.md # Non-Parametric Statistics, Tail Latency & Noise Filtering
@@ -158,7 +160,7 @@ E:\16. AgentOption/
 
 ## 🧩 Comprehensive Skill Clusters & Capabilities Catalog
 
-The framework organizes its **43 reusable skills** across 8 specialized engineering clusters:
+The framework organizes its **44 reusable skills** across 8 specialized engineering clusters:
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/`)
 Designed to govern the AI agent's internal reasoning loop, cognitive UX with humans, and defensive coding habits:
@@ -222,6 +224,7 @@ Firmware-level instrumentation, non-disruptive RTOS hooking, and direct hardware
 
 ### 8. 🔬 Scientific Research & Experimental Methodology (`skills/research/`)
 Empirical research protocol, statistical benchmarking, and hypothesis-driven engineering:
+- **`research-manager-protocol`**: Executive meta-cognitive governor, Triad orchestration (Explorer, Verifier, Historian), 5-way decision gate (Continue, Pivot, Merge, Discard, Stop), and dead hypothesis graveyard preventing infinite dead loops.
 - **`hypothesis-driven-experimentation`**: Formal hypothesis cycles ($H_0$ vs $H_1$), pre-declared falsification gates, counter-factual scenario stress-testing, and working memory hypothesis logs.
 - **`ablation-study-protocol`**: Drop-one-out and add-one-in ablation study harnesses, component contribution scoring ($C_i$), and architectural complexity pruning.
 - **`statistical-benchmark-analysis`**: Robust non-parametric benchmarking, warm-up run exclusion, IQR outlier filtering, p90/p99 tail latency analysis, and Mann-Whitney U / Welch significance tests.

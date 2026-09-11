@@ -508,5 +508,15 @@
     "name": "Prior-Art Gap Analysis & Pareto Mapping",
     "target": "skills/research/prior-art-gap-analysis.md",
     "desc": "Competitive architectural taxonomy, Pareto frontier trade-offs and niche definition"
+  },
+  "RES_MGR": {
+    "name": "Research Manager Protocol",
+    "target": "skills/research/research-manager-protocol.md",
+    "desc": "Research Manager 5-way decision gate (Continue, Pivot, Merge, Discard, Stop) & Dead Hypothesis Graveyard"
+  },
+  "RES_ARC": {
+    "name": "Research Manager Architecture Blueprint",
+    "target": "architecture/research-manager-orchestration.md",
+    "desc": "Triad separation (Explorer, Verifier, Historian), 5-way decision gate and anti-dead-loop protocol"
   }
 }
