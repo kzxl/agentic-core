@@ -89,8 +89,8 @@ function validateMarkdownFiles(dir) {
 
 function validateFile(filePath) {
   const relativePath = path.relative(ROOT_DIR, filePath).replace(/\\/g, '/');
-  if (relativePath === 'README.md' || relativePath.startsWith('templates/') || relativePath === '.project-rule.md') {
-    return; // Root metadata, README and templates have distinct formats
+  if (relativePath === 'README.md' || relativePath.startsWith('templates/') || relativePath === '.project-rule.md' || relativePath.startsWith('docs/')) {
+    return; // Root metadata, README, templates, and docs have distinct formats
   }
 
   // Files in architecture/, skills/, standards/, workflows/ are core content

@@ -104,118 +104,22 @@ The crowning capability of **agentic-core** is its **Autonomous Scientific Resea
 
 ---
 
-## 🏛️ Framework Hierarchy
+## 📁 Framework Structure & Layering
 
-```text
-E:\16. AgentOption/
-├── README.md                          # Central Documentation & Framework Index
-├── rules.json                         # Universal Machine-Readable Rule Registry (36 Rules: R_*)
-├── shortcuts.json                     # Quick Slash Command & Prompt Routing Registry (115 Shortcuts)
-├── .project-rule.md                   # Sovereign Self-Hosting Project Rule & Doctor Baseline
-│
-├── architecture/                      # Layer 1: High-Level Architectural Blueprints (19 Blueprints)
-│   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory
-│   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
-│   ├── folder-per-feature.md          # Folder-per-Feature Architecture & DTO Localization
-│   ├── hybrid-dual-scope-execution.md # Hybrid Desktop & WebAPI Dual-Scope Service Execution
-│   ├── universe-plugin.md             # Universe Plugin Architecture v4.0 (Micro-kernel, Data Sovereignty)
-│   ├── solid-and-separation-of-concerns.md # Pragmatic SOLID Principles & Layer Boundary Matrix
-│   ├── event-driven-architecture.md   # Event-Driven Systems, Outbox Pattern, Saga Orchestration
-│   ├── resilience-patterns.md         # Circuit Breaker, Exponential Backoff, Fallback Cache
-│   ├── micro-frontends.md             # Micro-Frontend Module Federation & Runtime Assembly
-│   ├── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
-│   ├── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
-│   ├── game-engine-architecture.md    # Universal Game Engine & Authoritative Simulation Blueprint
-│   ├── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Capability Bootstrapping
-│   ├── research-manager-orchestration.md # Research Manager Triad (Explorer, Verifier, Historian) & 5-Way Gate
-│   ├── research-memory-schema.md      # 8-Entity Cognitive Research Graph & Dual-Substrate Storage
-│   ├── dead-loop-and-stagnation-detector.md # Dual-Mode Graph Cycle & Semantic Stagnation Detector
-│   ├── multi-dimensional-research-budget.md # Tensor Resource Allocation & Stagnation-Driven Pivots
-│   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
-│   └── autonomous-question-generator.md # Socratic Problem Decomposition & Question Dependency DAG
-│
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (40 Standards)
-│   ├── universal/                     # Universal Engineering Standards (13 Standards)
-│   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding, Commit Gate
-│   │   ├── working-memory-state.md    # Working Memory & Execution State Invariants
-│   │   ├── naming-conventions.md      # Multi-Language Naming Rules
-│   │   ├── performance-guidelines.md  # Memory, Anti-N+1 & Async Concurrency
-│   │   ├── conformance-testing.md     # Module Isolation & Conformance Tests
-│   │   ├── test-logic.md              # Test Logic & Algorithmic Verification (Invariants, AAA, BVA)
-│   │   ├── git-commit-standards.md    # Git Commit Discipline & Atomic Conventional Commits Standard
-│   │   ├── llm-contribution-and-governance.md # LLM Policy, GNU <15-Line IP Compliance & Embedded Safety
-│   │   ├── license-governance-and-ip-compliance.md # License Governance, Compatibility Matrix & IP Compliance
-│   │   ├── benchmark-and-hardware-provenance.md # Empirical Benchmarking & Host Hardware Provenance
-│   │   ├── scientific-research-methodology.md # Empirical Scientific Research, Hypotheses & Falsifiability
-│   │   ├── literature-synthesis-and-prior-art.md # Literature Synthesis, Comparative Taxonomy & Gap Analysis
-│   │   └── research-memory-standard.md # Research Memory Schema, Query-Before-Action & Negative Knowledge
-│   ├── csharp/                        # C# .NET Standards (6 Standards)
-│   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512, Zero-Alloc
-│   │   ├── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
-│   │   ├── webapi.md                  # Web API Standards (Clean Architecture, DI, DTO Localization)
-│   │   ├── winforms.md                # WinForms Standards (BaseForm, RunAfterShown, No BindingSource)
-│   │   ├── wpf-ui.md                  # WPF UI & Fluent Design Tokens (Dark/Light Themes, Compact Density)
-│   │   └── wpf.md                     # WPF Desktop MVVM Standards (Pure XAML, Dispatcher Safety)
-│   ├── android/                       # Android & Mobile Engineering Standards (5 Standards)
-│   │   ├── state-architecture.md      # Unidirectional Data Flow (UDF) & MVI State Architecture
-│   │   ├── compose-ui-ux.md           # Jetpack Compose Performance & Recomposition Boundaries
-│   │   ├── camera-computational.md    # CameraX / Camera2 Computational Vision Pipeline
-│   │   ├── ndk-native-bridge.md       # JNI / NDK Memory Safety & Zero-Copy ByteBuffers
-│   │   └── performance-optimization.md # Baseline Profiles, R8 ProGuard & Startup Latency
-│   ├── cpp/                           # C++ Standards (1 Standard)
-│   │   └── native-interop.md          # C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP
-│   ├── nodejs/                        # Node.js Standards (3 Standards)
-│   │   ├── architecture.md            # Controller-Service-Repository Layer Separation
-│   │   ├── event-loop-streams.md      # Non-blocking Event Loop & Stream Pipelines
-│   │   └── security-middleware.md     # Helmet, Rate Limiting & Input Sanitization
-│   ├── react/                         # React Standards (3 Standards)
-│   │   ├── component-lifecycle.md     # Pure Functional Components & Hook Cleanup
-│   │   ├── performance.md             # React.memo, useMemo/useCallback & Code Splitting
-│   │   └── state-management.md        # State Colocation & Redux/Zustand Unidirectional Flow
-│   ├── golang/                        # Go Standards (3 Standards)
-│   │   ├── concurrency.md             # Goroutines, Context Cancellation & Worker Pools
-│   │   ├── error-observability.md     # Error Wrapping (%w) & Structured slog Logging
-│   │   └── memory-allocation.md       # Escape Analysis, sync.Pool & Zero-Alloc Slices
-│   ├── php/                           # PHP 8.2+ Standards (3 Standards)
-│   │   ├── database-transactions.md   # PDO Transactions, Row Locking & Concurrency
-│   │   ├── memory-generators.md       # Yield Generators for Large Data Streaming
-│   │   └── modern-syntax.md           # strict_types=1, Match Expressions & Readonly Classes
-│   └── database/                      # Universal SQL Standards (3 Standards)
-│       ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Queries
-│       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI
-│       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Logging
-│
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (49 Skills)
-│   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
-│   ├── research/                      # Scientific Research & Experimental Skills (10 Skills)
-│   ├── game/                          # Game Development & ARPG Engine Skills (6 Skills)
-│   ├── security/                      # Reverse Engineering & Security Analysis (2 Skills)
-│   ├── csharp/                        # C# .NET Enterprise Skills (6 Skills)
-│   ├── nodejs/                        # Node.js Enterprise Skills & Patterns (8 Skills)
-│   ├── react/                         # React Enterprise Skills (3 Skills)
-│   └── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
-│
-├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (6 Workflows)
-│   ├── feature-implementation.md      # End-to-End Feature Development Workflow
-│   ├── bugfix-investigation.md        # 5-Step Scientific Bugfix & Regression Workflow
-│   ├── code-refactoring.md            # Zero-Regression 1-to-1 Refactoring Workflow
-│   ├── dotnet-publish-release.md      # .NET Dual Publish (Full Self-Contained vs Lite)
-│   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
-│   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop
-│
-├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (4 Tools)
-│   ├── validate-framework.js          # Self-Linter validating YAML frontmatter & rule links
-│   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents
-│   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
-│   └── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
-│
-└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (5 Templates)
-    ├── project-bootstrap-template.md  # Template to bind ANY project to AgentOption
-    ├── standard-template.md           # Template for authoring new Language Standards
-    ├── skill-template.md              # Template for authoring new Actionable Skills
-    ├── workflow-template.md           # Template for multi-step automated workflows
-    └── research-memory-template.json  # Template for .research-memory.json Schema
-```
+The framework is organized into 7 clean architectural tiers:
+
+| Layer | Directory | Items | Core Purpose | Deep Dive |
+| :--- | :--- | :---: | :--- | :--- |
+| **Layer 1: Blueprints** | [`architecture/`](architecture/) | 19 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-19-blueprints) |
+| **Layer 2: Standards** | [`standards/`](standards/) | 40 | Universal rules & multi-language coding standards (9 stacks) | [Catalog](#-universal--language-standards-catalog-40-standards) |
+| **Layer 3: Skills** | [`skills/`](skills/) | 49 | Actionable implementation patterns & empirical research skills (8 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-49-skills) |
+| **Layer 4: Workflows** | [`workflows/`](workflows/) | 6 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
+| **Layer 5: Tools** | [`tools/`](tools/) | 4 | Framework linter, CLI lookup, repository doctor, brain bridge | [Toolchain](#-developer--ai-agent-toolchain-cli) |
+| **Layer 6: Templates** | [`templates/`](templates/) | 5 | Rapid bootstrapping templates for projects, standards & skills | [`templates/`](templates/) |
+| **Layer 7: Docs** | [`docs/`](docs/) | — | Exhaustive system maps, hierarchies & architectural specifications | [Hierarchy](docs/framework-hierarchy.md) |
+
+> [!TIP]
+> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 114+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
 
 ---
 
