@@ -26,6 +26,8 @@
   "R_GAME": "Game Development & Engine Architecture: Server-authoritative logic, deterministic fixed-timestep simulation loop decoupled from rendering, object pooling, zero-allocation in hot tick paths, hierarchical state machines, spatial partitioning.",
   "R_GODOT": "Godot Engine & .NET C#: Node composition over deep inheritance, typed [Export] properties, CanvasLayer UI separation, explicit signal unhooking on _ExitTree, PackedScene preloading, no GC allocations in _Process/_PhysicsProcess.",
   "R_EMBEDDED": "Embedded & Bare-Metal RTOS: Non-disruptive RTOS trampoline hooking, cache coherence synchronization (clean_d_cache/flush_i_cache), EDMAC DMA zero-copy streaming, zero dynamic heap allocations in frame loops (>=30 fps) and ISR callbacks, mandatory NULL checks on heap returns, compile with -Werror zero-warning discipline.",
-  "R_LLM_GOV": "LLM Governance & Clean-Room IP: Strict transparency in AI contributions, Clean-Room protocol (learn & interpret, never blindly copy >15 lines per GNU copyright threshold), zero unverified MMIO/hardware registers without ROM/SSoT proof, human-in-the-loop architectural verification, mandatory provenance disclosure."
+  "R_LLM_GOV": "LLM Governance & Clean-Room IP: Strict transparency in AI contributions, Clean-Room protocol (learn & interpret, never blindly copy >15 lines per GNU copyright threshold), zero unverified MMIO/hardware registers without ROM/SSoT proof, human-in-the-loop architectural verification, mandatory provenance disclosure.",
+  "R_LICENSE": "License Governance & IP Compliance: Mandatory LICENSE initialization (MIT by default). Strict license recognition & compatibility matrix (Permissive vs Copyleft/Viral GPL/AGPL). Absolute prohibition on copy-pasting proprietary/GPL code into sovereign/permissive codebases. Clean-room reimplementation only with zero-line verbatim contamination."
 }
+
 
