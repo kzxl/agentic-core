@@ -573,5 +573,75 @@
     "name": "Autonomous Question Generation Protocol",
     "target": "skills/research/autonomous-question-generation.md",
     "desc": "Socratic inquiry playbook, dependency pruning, epistemic ranking and question-to-hypothesis mapping"
+  },
+  "REV_FRIDA": {
+    "name": "Dynamic Instrumentation Analysis",
+    "target": "skills/reversing/dynamic-instrumentation-analysis.md",
+    "desc": "Frida runtime hooking, API monitoring, SSL pinning bypass, JNI interception and memory scanning"
+  },
+  "REV_DEOBF": {
+    "name": "Binary Deobfuscation & Recovery",
+    "target": "skills/reversing/binary-deobfuscation-and-recovery.md",
+    "desc": "Control flow de-flattening, symbolic execution with angr/Triton, opaque predicate removal and string decryption"
+  },
+  "REV_UNPACK": {
+    "name": "Malware Triage & Unpacking",
+    "target": "skills/reversing/malware-triage-and-unpacking.md",
+    "desc": "Packer detection, OEP discovery via ESP trick, memory dumping with Scylla and IAT reconstruction"
+  },
+  "REV_CRYPTO": {
+    "name": "Cryptographic Primitive Reversing",
+    "target": "skills/reversing/cryptographic-primitive-reversing.md",
+    "desc": "Crypto constant/S-box signature detection, entropy analysis and in-memory key/IV extraction"
+  },
+  "REV_PROTO": {
+    "name": "Protocol & Wire Format Analysis",
+    "target": "skills/reversing/protocol-and-wire-format-analysis.md",
+    "desc": "Reversing proprietary binary network protocols, TLV frames, Wireshark Lua dissectors and Protobuf recovery"
+  },
+  "REV_IL2CPP": {
+    "name": "IL2CPP & Managed Runtime Recovery",
+    "target": "skills/reversing/il2cpp-and-managed-runtime-recovery.md",
+    "desc": "Unity IL2CPP metadata extraction, C# dummy assembly generation, method RVA lookup and runtime hooking"
+  },
+  "REV_FIRMWARE": {
+    "name": "Firmware Extraction & Hardware Audit",
+    "target": "skills/reversing/firmware-extraction-and-hardware-audit.md",
+    "desc": "Binwalk filesystem extraction, bare-metal base address calculation, Vector Table mapping and U-Boot audit"
+  },
+  "SEC_RECON": {
+    "name": "Attack Surface Mapping & Recon",
+    "target": "skills/pentest/attack-surface-mapping-and-recon.md",
+    "desc": "Passive/active perimeter discovery, subdomain enumeration, exposed documentation and secret leak audit"
+  },
+  "SEC_API": {
+    "name": "API Security & Auth Auditing",
+    "target": "skills/pentest/api-security-and-auth-auditing.md",
+    "desc": "OWASP API Top 10 auditing: BOLA/IDOR, BFLA, JWT algorithm none, and token replay verification"
+  },
+  "SEC_INJECT": {
+    "name": "Injection Auditing & Input Fuzzing",
+    "target": "skills/pentest/injection-defense-and-input-fuzzing.md",
+    "desc": "Non-destructive verification for SQLi, SSRF, SSTI, command injection and parameterized defense checks"
+  },
+  "SEC_RACE": {
+    "name": "Concurrency & Race Condition Audit",
+    "target": "skills/pentest/concurrency-and-race-condition-audit.md",
+    "desc": "TOCTOU flaws, HTTP/2 single-packet synchronization attacks, coupon double-spend and database locking"
+  },
+  "SEC_CLOUD": {
+    "name": "Cloud & Container Hardening Audit",
+    "target": "skills/pentest/cloud-container-hardening-audit.md",
+    "desc": "Docker socket breakouts, dangerous capabilities, Kubernetes RBAC misconfigurations and IMDSv1 audit"
+  },
+  "SEC_FUZZ": {
+    "name": "Fuzzing Harness & ASAN Triage",
+    "target": "skills/pentest/fuzzing-harness-and-asan-triage.md",
+    "desc": "In-memory LibFuzzer/AFL++ harnesses, AddressSanitizer compilation, and memory safety crash root-cause triage"
+  },
+  "SEC_REPORT": {
+    "name": "Vulnerability Triaging & Remediation",
+    "target": "skills/pentest/vulnerability-triaging-and-remediation.md",
+    "desc": "Standardized CVSS v3.1/v4.0 scoring, CWE taxonomy mapping, non-destructive PoC and code remediation diffs"
   }
 }
