@@ -543,5 +543,15 @@
     "name": "Dead-Loop & Stagnation Detection Protocol",
     "target": "skills/research/dead-loop-stagnation-detection.md",
     "desc": "Sliding window query tracking, graph cycle interception, semantic similarity checks and circuit breakers"
+  },
+  "BUDGET_ARC": {
+    "name": "Multi-Dimensional Research Budget Architecture",
+    "target": "architecture/multi-dimensional-research-budget.md",
+    "desc": "6-dimensional tensor resource allocation, burn-rate telemetry and stagnation-driven pivots"
+  },
+  "BUDGET_RES": {
+    "name": "Research Budget Governance Protocol",
+    "target": "skills/research/multi-dimensional-budget-governance.md",
+    "desc": "Working memory budget quotas, search clamps, amber alerts and 5-experiment stagnation pivots"
   }
 }
