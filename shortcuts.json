@@ -533,5 +533,15 @@
     "name": "Research Memory Schema Architecture",
     "target": "architecture/research-memory-schema.md",
     "desc": "8-entity cognitive research knowledge graph and dual-substrate storage architecture"
+  },
+  "LOOP_ARC": {
+    "name": "Dead-Loop & Stagnation Detector Architecture",
+    "target": "architecture/dead-loop-and-stagnation-detector.md",
+    "desc": "Dual-mode dead-loop detector with structural graph cycle and semantic similarity stagnation engine"
+  },
+  "LOOP_DET": {
+    "name": "Dead-Loop & Stagnation Detection Protocol",
+    "target": "skills/research/dead-loop-stagnation-detection.md",
+    "desc": "Sliding window query tracking, graph cycle interception, semantic similarity checks and circuit breakers"
   }
 }
