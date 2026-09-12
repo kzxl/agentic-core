@@ -643,5 +643,10 @@
     "name": "Vulnerability Triaging & Remediation",
     "target": "skills/pentest/vulnerability-triaging-and-remediation.md",
     "desc": "Standardized CVSS v3.1/v4.0 scoring, CWE taxonomy mapping, non-destructive PoC and code remediation diffs"
+  },
+  "RTOS": {
+    "name": "Embedded & RTOS Firmware Engineering",
+    "target": "standards/embedded/firmware-engineering.md",
+    "desc": "Linker auto-init, multi-tier memory hub, priority hooks, 2D DMA, stack canary profiling, and boot-loop protection"
   }
 }
