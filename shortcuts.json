@@ -648,5 +648,10 @@
     "name": "Embedded & RTOS Firmware Engineering",
     "target": "standards/embedded/firmware-engineering.md",
     "desc": "Linker auto-init, multi-tier memory hub, priority hooks, 2D DMA, stack canary profiling, and boot-loop protection"
+  },
+  "PKG_PORT": {
+    "name": "Package and Dependency Portability Standard",
+    "target": "standards/universal/package-and-dependency-portability.md",
+    "desc": "Prohibition of hardcoded local machine paths, nuget.org precedence, and portable dependency resolution"
   }
 }
