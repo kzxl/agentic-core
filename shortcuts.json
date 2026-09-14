@@ -673,5 +673,15 @@
     "name": "UI Layout & Color Theory Mastery",
     "target": "standards/universal/ui-layout-and-color-mastery.md",
     "desc": "Mathematical color formulas, Living Slate palette, 8pt spatial rhythm, and responsive multi-pane layouts"
+  },
+  "COG_LOOP": {
+    "name": "Empirical Cognitive Loop Architecture",
+    "target": "architecture/empirical-cognitive-loop.md",
+    "desc": "5-phase closed loop, active sensing, pre-mortem simulation, epistemic uncertainty gate and sleep protocol"
+  },
+  "WF_COG": {
+    "name": "Empirical Cognitive Experiment Workflow",
+    "target": "workflows/cognitive-experiment-loop.md",
+    "desc": "Sensory sweep, Socratic inquiry, baseline inscription, pre-mortem, grounded stress, and comparative delta evaluation"
   }
 }

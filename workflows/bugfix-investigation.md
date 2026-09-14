@@ -1,7 +1,7 @@
 ---
 name: BugfixInvestigationWorkflow
 desc: 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow
-rules: [R_CORE, R_TDD]
+rules: [R_CORE, R_TDD, R_EPISTEMIC]
 category: Workflows
 ---
 # 🔬 Systematic Bugfix & Root-Cause Investigation Workflow
@@ -25,8 +25,9 @@ node [AgentOption]/tools/brain.js pre "<Error Message or Symptom>" --tags=<domai
 ```
 
 ### Step 3: Reproduce & Isolate (Scientific Proof)
-1. **Reproduce:** Create an automated failing test, script, or browser session proving the bug exists.
-2. **Isolate:** Trace call stack and inspect variable types (`typeof`, `null`, `undefined`, `DBNull`).
+1. **Epistemic Gate (`R_EPISTEMIC`):** If codebase uncertainty is high ($U > 0.6$), forbid refactoring; only write read-only diagnostic probes or logging.
+2. **Reproduce:** Create an automated failing test, script, or browser session proving the bug exists.
+3. **Isolate:** Trace call stack and inspect variable types (`typeof`, `null`, `undefined`, `DBNull`).
 
 ### Step 4: Formulate & Verify Hypothesis
 State explicit hypothesis before editing any code:

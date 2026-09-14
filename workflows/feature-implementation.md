@@ -1,7 +1,7 @@
 ---
 name: FeatureImplementationWorkflow
 desc: End-to-end automated workflow for new feature implementation (Normalization -> Pre-Fetch -> Spec -> TDD -> Blast-Radius -> Commit -> Post-Harvest)
-rules: [R_CORE, R_TDD]
+rules: [R_CORE, R_TDD, R_PRE_MORTEM]
 category: Workflows
 ---
 # 🚀 End-to-End Feature Implementation Workflow
@@ -28,6 +28,7 @@ node [AgentOption]/tools/brain.js pre "<Feature Name> <Domain>" --tags=<domain>
 Draft implementation plan with explicit Given-When-Then acceptance criteria:
 - Map touched contracts, routes, tables, and DTO boundaries.
 - Define trade-offs and single-responsibility partition.
+- Run Pre-Mortem simulation (`R_PRE_MORTEM`): identify 3 worst-case failure modes and operator ergonomics.
 
 ### Step 4: Test-Driven Development (TDD)
 Write failing test suite before writing production implementation:
