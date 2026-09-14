@@ -1,6 +1,8 @@
 ---
+title: Multi-Objective Refactoring & Net Engineering Value Standard
 desc: Multi-objective refactoring standard enforcing zero performance regression, abstraction tax ceilings, and Net Engineering Value (NEV)
 rules: [R_CORE, R_PERF, R_BENCH, R_NEV]
+category: Standards
 ---
 # 📐 Multi-Objective Refactoring & Net Engineering Value Standard
 

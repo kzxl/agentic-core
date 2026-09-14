@@ -1,6 +1,9 @@
 ---
+name: EmpiricalCognitiveLoopArchitecture
+title: Empirical Cognitive Loop & Cognitive Scaffolding Architecture
 desc: Empirical Cognitive Loop & Cognitive Scaffolding Architecture — 5-Phase Closed Loop, Active Sensing, Pre-Mortem Persona Simulation, and Epistemic Calibration
 rules: [R_CORE, R_ENG_OS, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC]
+category: Architecture
 ---
 # 🧠 Empirical Cognitive Loop & Cognitive Scaffolding Architecture
 

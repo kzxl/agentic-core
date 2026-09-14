@@ -1,6 +1,6 @@
-# 🏛️ agentic-core (AgentOption) — Universal Enterprise Operating System for AI Coding Agents
+# 🏛️ agentic-core (AgentOption) — Enterprise Cognitive Operating System for AI Coding Agents
 
-**agentic-core** (internally designated as **AgentOption**) is an enterprise-grade, language-agnostic engineering operating system and cognitive architecture designed to be plugged into **ANY software project** (Web, Cloud Microservices, Desktop WinForms/WPF, Android Mobile, Real-Time Game Engines, Bare-Metal RTOS). It equips autonomous AI coding agents and engineering teams with high-precision architectural blueprints, standardized coding rules, empirical research faculties, and reusable production skills.
+**agentic-core** (internally designated as **AgentOption**) is an enterprise-grade, language-agnostic cognitive operating system and empirical engineering architecture designed to be plugged into **ANY software project** (Web, Cloud Microservices, Desktop WinForms/WPF, Android Mobile, Real-Time Game Engines, Bare-Metal RTOS). It equips autonomous AI coding agents and engineering teams with high-precision architectural blueprints, standardized coding rules, closed-loop empirical reasoning, and reusable production skills.
 
 Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the episodic semantic memory engine), it forms an autonomous pair-programming and scientific discovery ecosystem supporting progressive context disclosure, harvest quality guards, and continuous lifecycle learning.
 

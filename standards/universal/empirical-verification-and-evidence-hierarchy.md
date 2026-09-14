@@ -1,6 +1,8 @@
 ---
+title: Empirical Verification & Evidence Hierarchy Standard
 desc: Zero-trust empirical proof hierarchy, adjective ban, and adversarial cross-examination standard eliminating LLM self-aggrandizement and unverified assertions
 rules: [R_CORE, R_ENG_OS, R_PROOF]
+category: Standards
 ---
 # 🛡️ Empirical Verification & Evidence Hierarchy Standard
 
