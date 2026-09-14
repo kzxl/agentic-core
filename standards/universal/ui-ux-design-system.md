@@ -32,12 +32,29 @@ This standard establishes the universal foundation for user interface (UI) and u
 
 ## 2. Color Theory & Design Token Architecture
 
-### ① The 60-30-10 Spatial Balance Rule
+### ① The 5-Tier Token & State Architecture
+A raw color palette is NOT a design system. Enterprise interfaces require a 5-tier abstraction pipeline translating raw colors into functional, stateful, and business-safe workflows:
+
+```
+[ Tier 1: Primitive Palette ] -> Raw hex values (#2563EB, #16A34A, #DC2626)
+            ↓
+[ Tier 2: Semantic Tokens   ] -> Purpose-mapped tokens (BgCanvas, PrimaryAccent, Danger)
+            ↓
+[ Tier 3: Component Tokens  ] -> Scoped control variables (Button.Primary.Bg, Input.Border)
+            ↓
+[ Tier 4: Component States  ] -> Interactive lifecycle (Normal, Hover, Pressed, Focus, Disabled, Loading)
+            ↓
+[ Tier 5: Business UX Rules ] -> Mission-critical rules (Permission gating, ledger delete defense, batch limits)
+```
+
+Without Tiers 4 & 5, visual mockups look modern but break catastrophically in enterprise production.
+
+### ② The 60-30-10 Spatial Balance Rule
 * **60% Dominant Canvas (Neutral Background):** Low-contrast foundation providing visual rest.
 * **30% Structural Surfaces (Cards, Panels, Text):** Container surfaces, dividers, primary data labels.
 * **10% Intentional Accent (Focal Points):** Reserved exclusively for Primary Call-to-Action (CTA) buttons, active tabs, status pips, and key focus rings.
 
-### ② Surface Elevation & Layering (Dark vs Light)
+### ③ Surface Elevation & Layering (Dark vs Light)
 * **Dark Mode Canvas:** Avoid pure black (`#000000`), which causes eye fatigue and extreme contrast halation against white text. Use layered Obsidian tones with subtle blue/slate undertones:
   * *Base Canvas:* `#0F111A` (Deep canvas)
   * *Card / Surface:* `#181A26` (Elevated content container)
@@ -208,3 +225,74 @@ When extending this universal design system into specific client platforms, foll
   * Integrate spring physics for animated reveals and sheet dismissals (`Spring.DampingRatioMediumBouncy`).
   * Subtle haptic feedback (`HapticFeedbackType.LongPress` / `HapticFeedbackType.TextHandleMove`) on primary status toggles.
 * **System Edge-to-Edge:** Respect OS navigation bars and camera cutouts using `WindowInsets.safeDrawing`.
+
+---
+
+## 8. Enterprise Business UX & Data Integrity Standards (ERP & Mission-Critical Systems)
+
+Enterprise Resource Planning (ERP), inventory, financial, and manufacturing software require strict adherence to business-logic UX rules that supersede mere visual styling:
+
+### ① Lifecycle Safety: "Deactivate / Discontinue" vs "Hard Delete"
+* **Foreign Key & Transaction Ledger Protection:**
+  * If a record (Customer, Item, Warehouse, Account) is referenced by any historical transaction, journal, or audit log, **HARD DELETION IS STRICTLY FORBIDDEN**.
+  * The UI **MUST NOT** render a destructive `[ Delete ]` button. Instead, provide `[ Deactivate ]` (`Ngừng sử dụng`) or `[ Archive ]`.
+  * The record state must transition to `Inactive` / `Archived`, preventing selection in new transactions while preserving historical audit trail integrity.
+* **Blast-Radius Batch Confirmation:**
+  * If the user selects multiple rows for deletion or batch processing, the confirmation dialog **MUST** explicitly state the count and blast radius:
+    > *"Are you sure you want to delete **1,253** selected items? This action cannot be undone."*
+  * Destructive action buttons in confirmation dialogs must be labeled with the specific action verb (`[ Delete 1,253 Items ]`), never a vague `[ OK ]`.
+
+### ② Data Grid Interaction Grammar (The Enterprise Workhorse)
+Enterprise data grids (`GridControl`, `DataGrid`, `Table`) are high-density, keyboard-first environments. Applications **MUST** implement standard interaction grammar:
+
+| Key / Gesture | Required Interaction Behavior |
+| :--- | :--- |
+| **`Single Click`** | Selects the active row or cell without triggering edits or navigation. |
+| **`Double Click`** | Opens detail view / edit form, or drills down into transaction hierarchy. |
+| **`Enter`** | Commits the active cell editor and advances focus to the next editable cell (or opens row detail if not editing). |
+| **`F2`** | Enters in-place cell editing mode for the focused column. |
+| **`Esc`** | Cancels in-place cell editing and reverts changes to original value. If not editing, clears row selection. |
+| **`Ctrl + C`** | If a cell is focused: copies raw cell text. If full rows are selected: copies rows formatted as TSV/CSV. |
+| **`Ctrl + F`** | Immediately moves keyboard focus to the grid's filter row or quick-search bar. |
+| **`Arrow Keys`** | Seamlessly navigates focus between cells and rows across virtualization boundaries. |
+
+* **Data Virtualization Mandate:** For datasets with $>1,000$ potential records, grids **MUST** employ windowed UI virtualization or server-side paging. Never load 40,000 records into memory or render un-virtualized visual trees.
+* **In-Flight Mutation Defense:** If a user clicks Refresh, navigates away, or switches tabs while rows contain uncommitted edits, the system **MUST** present an unsaved changes prompt: *"You have unsaved changes. Discard changes or Save before proceeding?"*.
+
+### ③ Form Field State Ergonomics
+Form controls must cleanly reflect 6 distinct states through visual cues without relying solely on color:
+
+```
+[ Normal   ] -> Subtle border, standard placeholder.
+[ Focused  ] -> 2px PrimaryAccent glow/outline, clear cursor indication.
+[ Required ] -> Subtle red asterisk (*) adjacent to label + aria-required indicator.
+[ ReadOnly ] -> Crisp readable text, copyable, tab-skipped, neutral surface (NOT dimmed).
+[ Disabled ] -> Dimmed (40% opacity), non-focusable, non-interactive, cursor not-allowed.
+[ Error    ] -> 1.5px Danger border + inline error icon and message positioned directly beneath the input.
+```
+
+* **ReadOnly vs Disabled Distinction:**
+  * `ReadOnly`: The user is permitted to read and copy data, but not modify it (e.g. Doc Number, Approved Date). Content remains high contrast.
+  * `Disabled`: The control is currently inapplicable or forbidden by state. Content is low contrast.
+
+### ④ Permission-Driven UI Degradation (RBAC UX)
+* **Preserve Spatial Muscle Memory:** If a user lacks edit permission for a document or record, the form controls **MUST degrade to `ReadOnly`**, NOT disappear entirely. Hiding controls breaks spatial memory and causes jarring visual jumps when switching accounts.
+* **Complete Hiding:** Only hide navigation menus or top-level tabs if the user has zero read/view permission for that entire module.
+* **Action Button Disabling:** Buttons for unauthorized actions (e.g. `[ Approve ]`, `[ Post Ledger ]`) should either be disabled with an informative permission tooltip (*"Requires Manager approval rights"*) or cleanly omitted from the action bar.
+
+### ⑤ Numeric, Currency & Temporal Formatting Standards
+* **Numeric Right-Alignment:** All numeric values (Quantities, Rates, Prices, Amounts) **MUST** be right-aligned in grids and inputs to facilitate rapid visual column scanning.
+* **Tabular Figures (`tnum`):** Numbers must render in monospace or tabular figure fonts where all digits have identical character width.
+* **Thousand Separators:** Always format numbers $>999$ with standard separators (e.g., `1,250,000.00`).
+* **Negative Value Visibility:** Negative balances must be prominently distinguished using a bold minus sign or accounting parentheses in red (e.g., `(15,000.00)`).
+* **Decimal Clamping:**
+  * Quantity: 0 to 3 decimals based on unit of measure (e.g. `10 pcs`, `12.500 kg`).
+  * Unit Price: 2 to 4 decimals for precision costing.
+  * Total / Amount: Clamped to currency standard (e.g. 0 decimals for VND, 2 decimals for USD).
+* **Temporal Precision:** Explicit datetime formatting based on cultural context (`dd/MM/yyyy` for VN, `yyyy-MM-dd` for ISO), displaying timezone offsets for multi-region systems.
+
+### ⑥ Network Resilience & Optimistic UI Rollback
+* **In-Flight Action Lock:** Disable action buttons and display a localized spinner during async network calls to prevent double-submission (e.g., creating duplicate invoices).
+* **Optimistic UI Rollback:** If an action optimistically updates UI state before API response, the system must automatically revert to the exact previous snapshot and display a non-modal Error Toast if the request fails.
+* **Offline Indication:** If API connectivity drops, display a non-blocking top banner (*"Offline — Reconnecting..."*) while preserving user inputs in local memory/cache. Never wipe form inputs on network dropouts.
+
