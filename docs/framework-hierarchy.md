@@ -9,16 +9,17 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (36 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (115 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (46 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (139 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
 ├── docs/                              # Framework Documentation & System Maps
 │   └── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
 │
-├── architecture/                      # Layer 1: High-Level System Blueprints (19 Blueprints)
+├── architecture/                      # Layer 1: High-Level System Blueprints (21 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory Tiers
+│   ├── empirical-cognitive-loop.md    # 5-Phase Closed Cognitive Loop, Active Sensing, Pre-Mortem & Epistemic Gate
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
 │   ├── folder-per-feature.md          # Vertical Slice Architecture & Feature-Local DTO Isolation
 │   ├── hybrid-dual-scope-execution.md # Desktop WinForms & Stateless WebAPI Dual-Scope Service Engine
@@ -30,6 +31,7 @@ E:\16. AgentOption/
 │   ├── multi-tenancy.md               # Multi-Tenant Data Isolation (RLS, Schema-per-tenant, DB-per-tenant)
 │   ├── tiled-data-pipeline.md         # High-Throughput Tiled Data Pipeline & Bounded Memory Pools
 │   ├── game-engine-architecture.md    # Server-Authoritative Simulation & Fixed-Timestep Physics Loop
+│   ├── real-time-embedded-architecture.md # Real-Time RTOS Firmware Invariants, Linker Auto-Init & Memory Governance
 │   ├── agent-skill-router-architecture.md # Deterministic Skill Router, Tool-Index SSoT & Auto-Bootstrapping
 │   ├── research-manager-orchestration.md # Research Manager Triad (Explorer, Verifier, Historian) & 5-Way Gate
 │   ├── research-memory-schema.md      # 8-Entity Cognitive Research Graph & Dual-Substrate Persistence
@@ -38,8 +40,8 @@ E:\16. AgentOption/
 │   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
 │   └── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (40 Standards)
-│   ├── universal/                     # Universal Engineering Standards (13 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (47 Standards)
+│   ├── universal/                     # Universal Engineering Standards (19 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
 │   │   ├── naming-conventions.md      # Universal Multi-Language Naming & Symbol Standards
@@ -52,7 +54,13 @@ E:\16. AgentOption/
 │   │   ├── benchmark-and-hardware-provenance.md # Empirical Benchmarking, Hardware Telemetry & Variance Isolation
 │   │   ├── scientific-research-methodology.md # Scientific Method, Formal Hypotheses & Falsifiability Gates
 │   │   ├── literature-synthesis-and-prior-art.md # Prior Art Gap Analysis, Comparative Taxonomy & Citation Standard
-│   │   └── research-memory-standard.md # Research Memory Schema, Query-Before-Action & Negative Knowledge
+│   │   ├── research-memory-standard.md # Research Memory Schema, Query-Before-Action & Negative Knowledge
+│   │   ├── package-and-dependency-portability.md # Elimination of Machine-Specific Absolute Paths & NuGet Governance
+│   │   ├── security-standards.md      # Zero-Leakage Credential Protection, Test Isolation & Data Minimization
+│   │   ├── ui-ux-design-system.md     # 5-Tier Design Tokens, 60-30-10 Color Balance, Living Slate & ERP Immutability
+│   │   ├── ui-layout-and-color-mastery.md # Mathematical Color Formulas, 8pt Spatial Rhythm & Responsive Multi-Pane
+│   │   ├── multi-objective-refactoring.md # Pareto Refactoring, Zero Performance Regression & Net Engineering Value
+│   │   └── empirical-verification-and-evidence-hierarchy.md # 5-Level Proof Hierarchy, Adjective Ban & Adversarial Audit
 │   │
 │   ├── csharp/                        # C# .NET Standards (6 Standards)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512 & Zero-Alloc Allocations
@@ -71,6 +79,9 @@ E:\16. AgentOption/
 │   │
 │   ├── cpp/                           # C++ Standards (1 Standard)
 │   │   └── native-interop.md          # C-ABI DLL Export, Zero-Copy Shared Memory & OpenMP Concurrency
+│   │
+│   ├── embedded/                      # Embedded & RTOS Firmware Standards (1 Standard)
+│   │   └── firmware-engineering.md    # Linker Auto-Init, Multi-Tier Memory Hub, Priority Hooks & Stack Canaries
 │   │
 │   ├── nodejs/                        # Node.js Standards (3 Standards)
 │   │   ├── architecture.md            # Controller-Service-Repository Layer Separation
@@ -181,10 +192,11 @@ E:\16. AgentOption/
 │   └── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
 │       └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo
 │
-├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (6 Workflows)
+├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (7 Workflows)
 │   ├── feature-implementation.md      # End-to-End Feature Development Workflow
 │   ├── bugfix-investigation.md        # 5-Step Scientific Bugfix & Regression Workflow
-│   ├── code-refactoring.md            # Zero-Regression 1-to-1 Refactoring Workflow
+│   ├── code-refactoring.md            # Zero-Regression Multi-Objective Refactoring Workflow
+│   ├── cognitive-experiment-loop.md   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation
 │   ├── dotnet-publish-release.md      # .NET Dual Publish (Full Self-Contained vs Lite)
 │   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
 │   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop

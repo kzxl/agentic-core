@@ -10,13 +10,13 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
-| **Architectural Blueprints** | **19** | 100% Documented | `architecture/` |
-| **Language & Universal Standards** | **40** | 100% Rule-Linked | `standards/` |
+| **Architectural Blueprints** | **21** | 100% Documented | `architecture/` |
+| **Language & Universal Standards** | **47** | 100% Rule-Linked | `standards/` |
 | **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
-| **Automated Agentic Workflows** | **6** | 100% Step-Verified | `workflows/` |
+| **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
 | **Rapid Extension Templates** | **6** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **38** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **129** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **46** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **139** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -35,11 +35,11 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 │ SYSTEM & GOVERNANCE   │   │  RESEARCH SUBSYSTEM   │   │ DISTRIBUTED ARCH.     │   │ BARE-METAL REAL-TIME  │
 ├───────────────────────┤   ├───────────────────────┤   ├───────────────────────┤   ├───────────────────────┤
 │ • 8-Core Eng-OS       │   │ • Socratic Q-Gen      │   │ • 4-Tier Clean Arch.  │   │ • Tiled Data Pipeline │
-│ • L0-L4 Memory Tiers  │   │ • Expected Info Gain  │   │ • Folder-per-Feature  │   │ • Server-Auth Engine  │
-│ • Deterministic Router│   │ • 6D Research Budget  │   │ • Universe Plugin v4  │   │ • Zero-Alloc HFSM     │
-│ • Tool-Index SSoT     │   │ • Dead-Loop Detector  │   │ • Event-Driven Outbox │   │ • Bare-Metal Hooking  │
-│ • Clean-Room IP Guard │   │ • Research Manager    │   │ • Resilience Patterns │   │ • DMA Zero-Copy       │
-│ • License Compliance  │   │ • Research Memory SSoT│   │ • Multi-Tenancy RLS   │   │ • SIMD Vector256/512  │
+│ • 5-Phase Cog. Loop   │   │ • Expected Info Gain  │   │ • Folder-per-Feature  │   │ • Server-Auth Engine  │
+│ • Pre-Mortem Sandbox  │   │ • 6D Research Budget  │   │ • Universe Plugin v4  │   │ • Zero-Alloc HFSM     │
+│ • Epistemic Gate      │   │ • Dead-Loop Detector  │   │ • Event-Driven Outbox │   │ • Bare-Metal Hooking  │
+│ • Zero-Trust Proof    │   │ • Research Manager    │   │ • Resilience Patterns │   │ • DMA Zero-Copy       │
+│ • Multi-Objective NEV │   │ • Research Memory SSoT│   │ • Multi-Tenancy RLS   │   │ • SIMD Vector256/512  │
 └───────────────────────┘   └───────────────────────┘   └───────────────────────┘   └───────────────────────┘
 ```
 
@@ -110,24 +110,25 @@ The framework is organized into 7 clean architectural tiers:
 
 | Layer | Directory | Items | Core Purpose | Deep Dive |
 | :--- | :--- | :---: | :--- | :--- |
-| **Layer 1: Blueprints** | [`architecture/`](architecture/) | 19 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-19-blueprints) |
-| **Layer 2: Standards** | [`standards/`](standards/) | 40 | Universal rules & multi-language coding standards (9 stacks) | [Catalog](#-universal--language-standards-catalog-40-standards) |
+| **Layer 1: Blueprints** | [`architecture/`](architecture/) | 21 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-21-blueprints) |
+| **Layer 2: Standards** | [`standards/`](standards/) | 47 | Universal rules & multi-language coding standards (10 stacks) | [Catalog](#-universal--language-standards-catalog-47-standards) |
 | **Layer 3: Skills** | [`skills/`](skills/) | 63 | Actionable implementation patterns & empirical research skills (10 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-63-skills) |
-| **Layer 4: Workflows** | [`workflows/`](workflows/) | 6 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
+| **Layer 4: Workflows** | [`workflows/`](workflows/) | 7 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
 | **Layer 5: Tools** | [`tools/`](tools/) | 7 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS & scope guard | [Toolchain](#-developer--ai-agent-toolchain-cli) |
 | **Layer 6: Templates** | [`templates/`](templates/) | 6 | Rapid bootstrapping templates for projects, standards, skills & scope | [`templates/`](templates/) |
 | **Layer 7: Docs** | [`docs/`](docs/) | — | Exhaustive system maps, hierarchies & architectural specifications | [Hierarchy](docs/framework-hierarchy.md) |
 
 > [!TIP]
-> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 128+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
+> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 145+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
 
 ---
 
-## 🏛️ Architectural Blueprints Catalog (19 Blueprints)
+## 🏛️ Architectural Blueprints Catalog (21 Blueprints)
 
 | Blueprint | Shortcut | Core Responsibility & Architectural Invariant |
 | :--- | :---: | :--- |
-| **[`engineering-operating-system.md`](architecture/engineering-operating-system.md)** | `ENGOS` | 8-core cognitive OS (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance) enforcing evidence-first execution. |
+| **[`engineering-operating-system.md`](architecture/engineering-operating-system.md)** | `ENGOS` | 8-core cognitive OS (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance) governing the LLM as a Reasoning Core. |
+| **[`empirical-cognitive-loop.md`](architecture/empirical-cognitive-loop.md)** | `COG_LOOP` | 5-phase closed cognitive loop, active sensing, pre-mortem simulation, epistemic uncertainty gate, and memory consolidation. |
 | **[`clean-layered-architecture.md`](architecture/clean-layered-architecture.md)** | `CLEAN` | 4-tier separation: Domain (Entities, Invariants) $\to$ Application (Use Cases, DTOs) $\to$ Infrastructure $\to$ Presentation. |
 | **[`folder-per-feature.md`](architecture/folder-per-feature.md)** | `FEAT` | Vertical slice architecture with feature-local DTOs, controllers, and services eliminating cross-module leakage. |
 | **[`hybrid-dual-scope-execution.md`](architecture/hybrid-dual-scope-execution.md)** | `HYBRID` | Bridges Desktop WinForms apps and stateless WebAPI microservices over shared transactional business engines. |
@@ -139,6 +140,7 @@ The framework is organized into 7 clean architectural tiers:
 | **[`multi-tenancy.md`](architecture/multi-tenancy.md)** | `TENANT` | Multi-tenant data segregation models: Row-Level Security (RLS), Schema-per-tenant, and DB-per-tenant. |
 | **[`tiled-data-pipeline.md`](architecture/tiled-data-pipeline.md)** | `TILED` | High-throughput tiled pipeline using ring buffers, bounded channels, and tile partitioning for big data. |
 | **[`game-engine-architecture.md`](architecture/game-engine-architecture.md)** | `GAME_ARC` | Server-authoritative simulation, fixed-timestep physics loop decoupled from rendering, and zero-allocation entity pools. |
+| **[`real-time-embedded-architecture.md`](architecture/real-time-embedded-architecture.md)** | `EMBED_ARCH` | Real-time RTOS firmware invariants, linker auto-init, multi-tier memory governance, and priority hooking. |
 | **[`agent-skill-router-architecture.md`](architecture/agent-skill-router-architecture.md)** | `ROUTE_ARC` | Deterministic router-first dispatch, Machine-Local Tool-Index SSoT, and capability auto-bootstrapping. |
 | **[`research-manager-orchestration.md`](architecture/research-manager-orchestration.md)** | `RES_ARC` | Triad separation (Explorer, Verifier, Historian), 5-way decision gate, and $K \le 2$ anti-dead-loop rollback. |
 | **[`research-memory-schema.md`](architecture/research-memory-schema.md)** | `RES_SCHEMA` | 8-entity cognitive research knowledge graph (H, E, X, R, F, A, C, D) and Dual-Substrate persistence. |
@@ -236,11 +238,12 @@ The framework is organized into 7 clean architectural tiers:
 
 ---
 
-## 📜 Universal & Language Standards Catalog (40 Standards)
+## 📜 Universal & Language Standards Catalog (47 Standards)
 
 | Domain | Count | Key Standards & Technical Guidelines |
 | :--- | :---: | :--- |
-| **Universal Engineering** | **13** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`. |
+| **Universal Engineering** | **19** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`. |
+| **Embedded & RTOS** | **1** | `firmware-engineering.md` (Linker Auto-Init, Multi-Tier Memory Hub, Priority Event Hooks, 2D DMA, Stack Canary). |
 | **C# .NET & Godot** | **6** | `high-performance-compute.md` (SIMD/Span), `godot-game-standards.md` (C# 4.x), `webapi.md` (Clean DI), `winforms.md` (No BindingSource), `wpf-ui.md` (Fluent Tokens), `wpf.md` (Pure XAML). |
 | **Android & Mobile** | **5** | `state-architecture.md` (UDF/MVI), `compose-ui-ux.md` (Recomposition), `camera-computational.md` (Camera2/X), `ndk-native-bridge.md` (Zero-Copy JNI), `performance-optimization.md` (R8/Baseline). |
 | **C++ Modern** | **1** | `native-interop.md` (C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP). |
@@ -264,8 +267,8 @@ primary_language: <nodejs | react | csharp | go | php | cpp | android>
 architecture: <clean_architecture | universe_plugin | winforms_erp | game_engine | research_lab>
 framework_references:
   agent_option_root: "[AgentOption]"      # Resolved automatically by AI Agents
-  rules: ["R_CORE", "R_ENG_OS", "R_ROUTE", "R_GIT", "R_ACT", "R_RESEARCH", "R_BUDGET"]
-  shortcuts: ["ENGOS", "ROUTE", "GIT", "ACT", "RES_STD", "RES_MEM", "QGEN_RES"]
+  rules: ["R_CORE", "R_ENG_OS", "R_ROUTE", "R_GIT", "R_ACT", "R_RESEARCH", "R_BUDGET", "R_COG_LOOP", "R_PROOF", "R_NEV"]
+  shortcuts: ["ENGOS", "ROUTE", "GIT", "ACT", "RES_STD", "RES_MEM", "COG_LOOP", "WF_COG", "REF_GATE", "PROOF_STD"]
 ---
 ```
 
@@ -280,7 +283,7 @@ framework_references:
 ## 🛠️ Developer & AI Agent Toolchain CLI
 
 ```bash
-# 1. Fast Lookup across all 129 shortcuts and 128 documents:
+# 1. Fast Lookup across all 139 shortcuts and 138 core documents:
 node [AgentOption]/tools/lookup.js "circuit breaker"
 node [AgentOption]/tools/lookup.js "cancellation" --lang=csharp
 node [AgentOption]/tools/lookup.js REV_FRIDA
