@@ -4,6 +4,8 @@ rules: [R_WPF, R_CORE]
 ---
 # 🎨 C# WPF Desktop UI & Theming Standards
 
+This standard specializes the [Universal Software UI/UX Design System](file:///E:/16.%20AgentOption/standards/universal/ui-ux-design-system.md) for C# WPF Desktop applications. All core ergonomics, color theory, density modes, and action verb naming rules apply directly.
+
 ## 1. Visual Hierarchy & Color Palette Tokens (Design Tokens)
 
 All colors and brushes must strictly adhere to the layered token hierarchy. Hardcoded ad-hoc hex values and unmapped `SystemColors` are strictly prohibited.
