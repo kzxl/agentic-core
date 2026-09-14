@@ -688,5 +688,10 @@
     "name": "Multi-Objective Refactoring Standard",
     "target": "standards/universal/multi-objective-refactoring.md",
     "desc": "Pareto improvement, zero performance regression, abstraction tax limit, and Net Engineering Value"
+  },
+  "PROOF_STD": {
+    "name": "Empirical Verification & Evidence Hierarchy",
+    "target": "standards/universal/empirical-verification-and-evidence-hierarchy.md",
+    "desc": "Zero-trust 5-level proof hierarchy, adjective ban, adversarial inquisitor check, and surrogate verification"
   }
 }
