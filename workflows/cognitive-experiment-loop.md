@@ -1,7 +1,7 @@
 ---
 name: CognitiveExperimentLoopWorkflow
 desc: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep -> Socratic Inquiry & Baseline -> Pre-Mortem -> Targeted Action -> Grounded Stress -> Comparative Delta -> Dual Memory)
-rules: [R_CORE, R_ENG_OS, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC]
+rules: [R_CORE, R_ENG_OS, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC, R_REUSE]
 category: Workflows
 ---
 # 🔬 Empirical Cognitive Experiment Workflow
@@ -55,8 +55,9 @@ Adjust the technical design to preempt the identified failure modes before code 
 
 ---
 
-### Step 5: Minimal Targeted Implementation
+### Step 5: Minimal Targeted Implementation & Asset Survey
 Implement the minimum code delta necessary to validate $H_1$:
+- **Asset-First Invariant (`R_REUSE`):** Survey project helpers, extension methods, and common utilities first (`rg "class .*Extensions"`). Never write hand-rolled utilities when existing project assets solve the problem.
 - Keep modifications strictly isolated to target boundaries.
 - Preserve backward compatibility with existing callers.
 

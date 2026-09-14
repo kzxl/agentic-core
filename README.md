@@ -11,12 +11,12 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
 | **Architectural Blueprints** | **21** | 100% Documented | `architecture/` |
-| **Language & Universal Standards** | **47** | 100% Rule-Linked | `standards/` |
+| **Language & Universal Standards** | **48** | 100% Rule-Linked | `standards/` |
 | **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
 | **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
 | **Rapid Extension Templates** | **6** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **46** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **139** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **47** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **140** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -238,11 +238,11 @@ The framework is organized into 7 clean architectural tiers:
 
 ---
 
-## 📜 Universal & Language Standards Catalog (47 Standards)
+## 📜 Universal & Language Standards Catalog (48 Standards)
 
 | Domain | Count | Key Standards & Technical Guidelines |
 | :--- | :---: | :--- |
-| **Universal Engineering** | **19** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`. |
+| **Universal Engineering** | **20** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`, `existing-asset-discovery-and-reuse.md`. |
 | **Embedded & RTOS** | **1** | `firmware-engineering.md` (Linker Auto-Init, Multi-Tier Memory Hub, Priority Event Hooks, 2D DMA, Stack Canary). |
 | **C# .NET & Godot** | **6** | `high-performance-compute.md` (SIMD/Span), `godot-game-standards.md` (C# 4.x), `webapi.md` (Clean DI), `winforms.md` (No BindingSource), `wpf-ui.md` (Fluent Tokens), `wpf.md` (Pure XAML). |
 | **Android & Mobile** | **5** | `state-architecture.md` (UDF/MVI), `compose-ui-ux.md` (Recomposition), `camera-computational.md` (Camera2/X), `ndk-native-bridge.md` (Zero-Copy JNI), `performance-optimization.md` (R8/Baseline). |
@@ -283,7 +283,7 @@ framework_references:
 ## 🛠️ Developer & AI Agent Toolchain CLI
 
 ```bash
-# 1. Fast Lookup across all 139 shortcuts and 138 core documents:
+# 1. Fast Lookup across all 140 shortcuts and 139 core documents:
 node [AgentOption]/tools/lookup.js "circuit breaker"
 node [AgentOption]/tools/lookup.js "cancellation" --lang=csharp
 node [AgentOption]/tools/lookup.js REV_FRIDA

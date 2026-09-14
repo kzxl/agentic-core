@@ -9,8 +9,8 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (46 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (139 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (47 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (140 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
@@ -40,8 +40,8 @@ E:\16. AgentOption/
 │   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
 │   └── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (47 Standards)
-│   ├── universal/                     # Universal Engineering Standards (19 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (48 Standards)
+│   ├── universal/                     # Universal Engineering Standards (20 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
 │   │   ├── naming-conventions.md      # Universal Multi-Language Naming & Symbol Standards
@@ -60,7 +60,8 @@ E:\16. AgentOption/
 │   │   ├── ui-ux-design-system.md     # 5-Tier Design Tokens, 60-30-10 Color Balance, Living Slate & ERP Immutability
 │   │   ├── ui-layout-and-color-mastery.md # Mathematical Color Formulas, 8pt Spatial Rhythm & Responsive Multi-Pane
 │   │   ├── multi-objective-refactoring.md # Pareto Refactoring, Zero Performance Regression & Net Engineering Value
-│   │   └── empirical-verification-and-evidence-hierarchy.md # 5-Level Proof Hierarchy, Adjective Ban & Adversarial Audit
+│   │   ├── empirical-verification-and-evidence-hierarchy.md # 5-Level Proof Hierarchy, Adjective Ban & Adversarial Audit
+│   │   └── existing-asset-discovery-and-reuse.md # 4-Tier Discovery Hierarchy, Zero-Redundancy & Grep Patterns
 │   │
 │   ├── csharp/                        # C# .NET Standards (6 Standards)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512 & Zero-Alloc Allocations

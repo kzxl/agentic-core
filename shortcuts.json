@@ -693,5 +693,10 @@
     "name": "Empirical Verification & Evidence Hierarchy",
     "target": "standards/universal/empirical-verification-and-evidence-hierarchy.md",
     "desc": "Zero-trust 5-level proof hierarchy, adjective ban, adversarial inquisitor check, and surrogate verification"
+  },
+  "ASSET_REUSE": {
+    "name": "Existing Asset Discovery & Zero-Redundancy Reuse",
+    "target": "standards/universal/existing-asset-discovery-and-reuse.md",
+    "desc": "4-tier asset discovery hierarchy, grep survey recipes, and anti-patterns preventing redundant helpers and reinvented wheels"
   }
 }
