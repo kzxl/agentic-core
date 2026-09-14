@@ -1,3 +1,7 @@
+---
+desc: Embedded Firmware Engineering Standards & Coding Directives — Zero Dynamic Allocation, Pools/Arenas, Cache Coherency, Stack Canary Profiling & Deterministic Initialization
+rules: [R_CORE, R_EMBEDDED]
+---
 # Embedded Firmware Engineering Standards & Coding Directives
 
 ## 1. Scope & Objective

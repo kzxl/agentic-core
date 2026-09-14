@@ -644,7 +644,7 @@
     "target": "skills/pentest/vulnerability-triaging-and-remediation.md",
     "desc": "Standardized CVSS v3.1/v4.0 scoring, CWE taxonomy mapping, non-destructive PoC and code remediation diffs"
   },
-  "RTOS": {
+  "FW_ENG": {
     "name": "Embedded & RTOS Firmware Engineering",
     "target": "standards/embedded/firmware-engineering.md",
     "desc": "Linker auto-init, multi-tier memory hub, priority hooks, 2D DMA, stack canary profiling, and boot-loop protection"
@@ -653,5 +653,25 @@
     "name": "Package and Dependency Portability Standard",
     "target": "standards/universal/package-and-dependency-portability.md",
     "desc": "Prohibition of hardcoded local machine paths, nuget.org precedence, and portable dependency resolution"
+  },
+  "EMBED_ARCH": {
+    "name": "Real-Time Embedded Architecture",
+    "target": "architecture/real-time-embedded-architecture.md",
+    "desc": "Architectural invariants, linker auto-registration, multi-tier memory governance, and priority hooking"
+  },
+  "SEC_STD": {
+    "name": "Universal Security Standards",
+    "target": "standards/universal/security-standards.md",
+    "desc": "Mandatory security invariants, secret governance, parameterized queries, and test isolation"
+  },
+  "UI_UX": {
+    "name": "Universal Software UI/UX Design System",
+    "target": "standards/universal/ui-ux-design-system.md",
+    "desc": "5-tier design tokens, 60-30-10 color rule, Living Slate tinted neutrals, and enterprise ERP UX"
+  },
+  "UI_LAYOUT": {
+    "name": "UI Layout & Color Theory Mastery",
+    "target": "standards/universal/ui-layout-and-color-mastery.md",
+    "desc": "Mathematical color formulas, Living Slate palette, 8pt spatial rhythm, and responsive multi-pane layouts"
   }
 }

@@ -1,3 +1,7 @@
+---
+desc: Real-Time Embedded Architecture & Resilient Firmware Patterns — Linker Tables, Multi-Tier Memory, Priority Hooking, DMA Coprocessing, Stack Watermarking & Boot Loop Resilience
+rules: [R_CORE, R_EMBEDDED]
+---
 # Real-Time Embedded Architecture & Resilient Firmware Patterns
 
 ## 1. Executive Summary

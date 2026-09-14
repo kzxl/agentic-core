@@ -1,3 +1,7 @@
+---
+desc: Universal Security Standards & Zero-Leakage Invariants — Secret Governance, Parameterized Queries, Least Privilege & Air-Gapped Test Isolation
+rules: [R_CORE, R_SEC_STD, R_DB, R_PKG, R_LICENSE]
+---
 # Universal Security Standards & Zero-Leakage Invariants
 
 ## 1. Core Principle: Zero-Leakage & Defense-in-Depth
