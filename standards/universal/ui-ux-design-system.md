@@ -161,3 +161,50 @@ Framework-specific standards inherit tokens directly from this universal design 
 | **`TextSecondary`** | `{DynamicResource BrushTextSecondary}` | `SkinColor.TextMuted` | `colorScheme.onSurfaceVariant` | `var(--text-secondary)`|
 | **`Success`** | `{DynamicResource BrushSuccessAccent}` | `SkinColor.Success` | `CustomGreen` | `var(--success)` |
 | **`Danger`** | `{DynamicResource BrushDangerAccent}` | `SkinColor.Danger` | `colorScheme.error` | `var(--danger)` |
+
+---
+
+## 7. Multi-Platform Expansion Architecture
+
+When extending this universal design system into specific client platforms, follow these platform-native architectural patterns:
+
+### ① WinForms Subsystem (Enterprise Desktop & ERP)
+* **Design Token Implementation:** Map universal tokens to DevExpress SVG Palettes (`SvgPalette`) or a central `ThemeColors` static class.
+* **Layout Structure:**
+  * Top Ribbon or ToolBar (`barManager`): Action verbs only (`Lưu`, `Duyệt`, `Xuất Excel`), avoiding redundant labels.
+  * Main Data Grid (`GridControl` / `GridView`): Compact density (`RowHeight = 26–28px`), alternate row background using `BgElevated`, cell typography `12px Segoe UI`.
+  * Bottom Status Bar: In-window progress display (`barEditItemProgressBar`, `barStaticItem`) for long-running I/O tasks instead of blocking UI message boxes.
+* **Modal Dialog Policy:** Standard Form save operations must use in-form status alerts; never spawn `XtraMessageBox.Show("Saved successfully")` that steals user focus.
+
+### ② Web Subsystem (Responsive SPA / PWA / Dashboards)
+* **Design Token Implementation:** Export universal tokens to CSS Custom Properties under `:root` and `[data-theme="dark"]`:
+  ```css
+  :root {
+    --bg-canvas: #0F111A;
+    --bg-surface: #181A26;
+    --bg-elevated: #1F2233;
+    --primary-accent: #818CF8;
+    --text-primary: #F1F5F9;
+    --radius-control: 6px;
+  }
+  ```
+* **Responsive Breakpoints & Layout Adapters:**
+  * **Desktop ($\ge 1024\text{px}$):** Persistent sidebar navigation, multi-column card grids, compact data tables.
+  * **Tablet ($768\text{px} - 1023\text{px}$):** Collapsible drawer navigation, flexible 2-column form layouts.
+  * **Mobile ($< 768\text{px}$):** Single-column stacked layout, bottom sticky CTA bar, full-bleed cards.
+* **Accessibility (WCAG 2.1 AA):**
+  * Semantic HTML landmarks (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`).
+  * Visible focus indicators: `:focus-visible { outline: 2px solid var(--primary-accent); outline-offset: 2px; }`.
+  * Support system color scheme preference: `@media (prefers-color-scheme: dark)` with manual user override persisted in `localStorage`.
+
+### ③ Mobile Subsystem (Android Jetpack Compose & iOS / Flutter)
+* **Thumb Zone Ergonomics:**
+  * Place primary action buttons (Floating Action Button, Sticky Bottom Bar) within the lower 33% "Natural Thumb Reach Zone".
+  * Avoid placing primary interactive targets in upper corners where single-handed reach fails on modern large screens.
+* **Touch Target Standards:**
+  * Minimum touch target size: **$48 \times 48\text{dp}$** (even if visual icon is $24\text{dp}$, add touch padding).
+  * Minimum interactive element spacing: **$8\text{dp}$** between adjacent targets to eliminate accidental misclicks.
+* **Gesture & Physics Feedback:**
+  * Integrate spring physics for animated reveals and sheet dismissals (`Spring.DampingRatioMediumBouncy`).
+  * Subtle haptic feedback (`HapticFeedbackType.LongPress` / `HapticFeedbackType.TextHandleMove`) on primary status toggles.
+* **System Edge-to-Edge:** Respect OS navigation bars and camera cutouts using `WindowInsets.safeDrawing`.

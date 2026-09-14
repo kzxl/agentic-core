@@ -4,6 +4,8 @@ rules: [R_ANDROID, R_CORE]
 ---
 # 🎨 Jetpack Compose UI/UX Standards
 
+This standard specializes the [Universal Software UI/UX Design System](file:///E:/16.%20AgentOption/standards/universal/ui-ux-design-system.md) for Android Jetpack Compose applications. All core ergonomics, 4/8px spatial rules, color theories, and action verb principles apply directly.
+
 ## 1. Material 3 Design System & Theming
 - **Token Centralization:** Define all color palettes, typography scales, shapes, and elevation in a dedicated `ui/theme/` package (`Color.kt`, `Theme.kt`, `Type.kt`).
 - **Dark Mode First:** Implement high-contrast dark schemes (e.g. `0xFF07090E` background, `0xFF0F172A` panel, neon accents for active indicators).
