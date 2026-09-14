@@ -4,7 +4,7 @@ rules: [R_CORE, R_UI]
 ---
 # 🎨 Universal Software UI/UX Design System
 
-This standard establishes the universal foundation for user interface (UI) and user experience (UX) engineering across all software applications in the AgentOption ecosystem (Desktop WPF/WinForms, Web, and Mobile). Subsystems specialize and map these core tenets to framework-specific controls.
+This standard establishes the universal foundation for user interface (UI) and user experience (UX) engineering across all software applications in the AgentOption ecosystem (Desktop WPF/WinForms, Web, and Mobile). Subsystems specialize and map these core tenets to framework-specific controls. For mathematical color formulas, spatial geometry, and layout topologies, see the companion guide [UI Layout & Color Theory Mastery Guide](file:///E:/16.%20AgentOption/standards/universal/ui-layout-and-color-mastery.md).
 
 ---
 
