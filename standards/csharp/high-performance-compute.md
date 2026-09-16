@@ -4,11 +4,16 @@ rules: [R_PERF, R_CS]
 ---
 # ⚡ C# High-Performance Compute & Memory Standards
 
-## 1. Zero Garbage Collection Allocation in Hot Paths
-- **Unmanaged Memory:** Allocate large arrays or persistent matrix buffers using `NativeMemory.Alloc()` / `NativeMemory.AllocZeroed()` wrapped in `IDisposable`. Avoid large object heap (LOH) fragmentation.
-- **Buffer Pooling:** For transient buffers, use `ArrayPool<T>.Shared.Rent(minSize)` and return in a `finally` block via `ArrayPool<T>.Shared.Return(buffer)`.
-- **Stack Allocation:** Use `stackalloc T[size]` for small buffers (<1KB) with `Span<T>`.
-- **Zero Struct Boxing:** Use `ref struct`, `in`, `readonly ref`, and generic constraints instead of interfaces or objects.
+## 1. Pragmatic Dual-Tier Allocation Standard
+- **Core Philosophy:** "Zero-allocation on Hot-Paths, Minimal Allocation & Buffer Pooling on Application-Paths, Maximum Performance & Ergonomics Everywhere."
+- **Tier 1 — Hot Paths (Strict Zero-Allocation):**
+  - **Stack Allocation:** Use `stackalloc T[size]` for small transient buffers (<1KB) with `Span<T>` and `ReadOnlySpan<T>`.
+  - **Zero Struct Boxing:** Use `ref struct`, `in`, `readonly ref`, and generic constraints instead of interfaces or boxing objects.
+  - **Unmanaged Memory:** Allocate persistent large buffers using `NativeMemory.Alloc()` / `NativeMemory.AllocZeroed()` wrapped in `IDisposable` to avoid Large Object Heap (LOH) fragmentation.
+- **Tier 2 — Application & Warm Paths (Minimal Allocation & Pooling):**
+  - **Buffer Pooling:** For medium/large transient buffers, use `ArrayPool<T>.Shared.Rent(minSize)` (or `ArrayPoolBufferWriter<T>`) and guarantee return via `IDisposable` or `finally`.
+  - **Exact Single Allocation:** Avoid intermediate string/buffer allocations (e.g., `StringBuilder` churn or chained `.Replace()`). Allocate exact destination size once (e.g., `string.Create`, `FastHex.ToString`).
+  - **Async/Await Compatibility:** Use `Memory<T>` / `ReadOnlyMemory<T>` across `await` boundaries where `ref struct` cannot be captured by the compiler state machine.
 
 ## 2. Contiguous Memory & Fast Access
 - **`Span<T>` & `ReadOnlySpan<T>`:** Mandatory abstraction for slicing arrays, strings, and unmanaged pointers without copying.
