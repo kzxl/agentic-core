@@ -17,6 +17,7 @@ const args = process.argv.slice(2);
 
 const showShortcuts = args.includes('--list-shortcuts') || args.includes('--shortcuts');
 const showRules = args.includes('--rules') || args.includes('--list-rules');
+const showAgents = args.includes('--agents') || args.includes('--list-agents');
 const showDense = args.includes('--dense') || args.includes('--compact');
 const query = args.find(a => !a.startsWith('--')) || '';
 const langFilter = args.find(a => a.startsWith('--lang='))?.split('=')[1]?.toLowerCase();
@@ -54,6 +55,20 @@ if (showRules) {
   process.exit(0);
 }
 
+if (showAgents) {
+  console.log('🎭 AgentOption Agent Personas Index (agents/):\n');
+  const agentEntries = Object.entries(shortcutsMap).filter(([_, item]) => item.target.startsWith('agents/'));
+  console.table(
+    agentEntries.map(([code, item]) => ({
+      Code: code,
+      Name: item.name,
+      Target: item.target,
+      Description: item.desc
+    }))
+  );
+  process.exit(0);
+}
+
 if (showShortcuts) {
   console.log('⚡ AgentOption Acronym & Shortcut Index:\n');
   console.table(
@@ -69,8 +84,9 @@ if (showShortcuts) {
 
 if (!query) {
   console.log('Usage:');
-  console.log('  node lookup.js "<query>" [--lang=nodejs|react|csharp] [--type=skills|architecture|standards]');
-  console.log('  node lookup.js <code>       (e.g., node lookup.js DBS / HND / TDD / RES / MFE / R_CS)');
+  console.log('  node lookup.js "<query>" [--lang=nodejs|react|csharp] [--type=skills|architecture|standards|agents]');
+  console.log('  node lookup.js <code>       (e.g., node lookup.js DBS / HND / TDD / RES / MFE / AGT_CS_ARC / ERP_INV)');
+  console.log('  node lookup.js --agents     (List all registered Agent Personas)');
   console.log('  node lookup.js --dense      (Output dense RAM registry for subagents / system context)');
   console.log('  node lookup.js --rules      (List all R_* hard rules)');
   console.log('  node lookup.js --shortcuts  (List all acronym shortcuts)\n');

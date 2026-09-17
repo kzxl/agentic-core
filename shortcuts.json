@@ -698,5 +698,65 @@
     "name": "Existing Asset Discovery & Zero-Redundancy Reuse",
     "target": "standards/universal/existing-asset-discovery-and-reuse.md",
     "desc": "4-tier asset discovery hierarchy, grep survey recipes, and anti-patterns preventing redundant helpers and reinvented wheels"
+  },
+  "ERP_INV": {
+    "name": "Enterprise Inventory Invariants",
+    "target": "standards/erp/inventory-invariants.md",
+    "desc": "Warehouse ledger double-entry immutability, pessimistic row locks, zero negative stock"
+  },
+  "ERP_PROD": {
+    "name": "Production Lot Traceability",
+    "target": "standards/erp/production-lot-traceability.md",
+    "desc": "End-to-end Lot/Serial lifecycle, BOM consumption, stage transitions, and scrap governance"
+  },
+  "ERP_SALES": {
+    "name": "Sales Packing Journal Standards",
+    "target": "standards/erp/sales-packing-journal.md",
+    "desc": "Order pricing engine decoupling, approval gates, selective packing log (NKDG), and journal transitions"
+  },
+  "ERP_AUTH": {
+    "name": "RBAC & Tenant Data Sovereignty",
+    "target": "standards/erp/rbac-permission-matrix.md",
+    "desc": "Two-tier permission: Feature-Action bitmask and Row-Level Security (RLS) data filtering"
+  },
+  "AGT_CS_ARC": {
+    "name": "C# Core Architect Agent",
+    "target": "agents/engineering/csharp-core-architect.md",
+    "desc": "Principal C# authority on clean architecture, universe plugins, async safety, and high-performance compute"
+  },
+  "AGT_WIN_MOD": {
+    "name": "WinForms Modernizer Agent",
+    "target": "agents/engineering/winforms-modernizer.md",
+    "desc": "Desktop ERP migration, BaseForm lifecycle, RunAfterShown, eliminating BindingSource, and partial services"
+  },
+  "AGT_API_DEV": {
+    "name": "WebAPI Feature Dev Agent",
+    "target": "agents/engineering/webapi-feature-dev.md",
+    "desc": "Vertical slice Folder-per-Feature development, RESTful APIs, localized DTOs, and Autofac DI"
+  },
+  "AGT_PERF_SP": {
+    "name": "High-Perf Compute Specialist Agent",
+    "target": "agents/engineering/high-perf-compute-specialist.md",
+    "desc": "Zero-allocation data processing, Span<T>, NativeMemory, SIMD Vector256/512, and BenchmarkDotNet"
+  },
+  "AGT_ADV_REV": {
+    "name": "Adversarial Code Reviewer Agent",
+    "target": "agents/governance/adversarial-code-reviewer.md",
+    "desc": "Independent auditor hunting regressions, calculating Net Engineering Value (NEV), and checking invariants"
+  },
+  "AGT_SEC_AUD": {
+    "name": "Security Pentest Auditor Agent",
+    "target": "agents/governance/security-pentest-auditor.md",
+    "desc": "Defensive security auditor, CVSS scoring, secret leak detection, OWASP API Top 10, and remediation diffs"
+  },
+  "AGT_INV_SP": {
+    "name": "Inventory Domain Specialist Agent",
+    "target": "agents/erp/inventory-domain-specialist.md",
+    "desc": "Warehouse stock balance guardian, double-entry ledger immutability, and pessimistic row locking"
+  },
+  "AGT_PROD_SP": {
+    "name": "Production Lot Specialist Agent",
+    "target": "agents/erp/production-lot-specialist.md",
+    "desc": "Manufacturing execution authority, bidirectional lot traceability, BOM consumption, and stage sign-offs"
   }
 }

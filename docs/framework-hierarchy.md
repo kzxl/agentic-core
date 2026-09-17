@@ -9,13 +9,26 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (47 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (140 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (51 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (152 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
 ├── docs/                              # Framework Documentation & System Maps
 │   └── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
+│
+├── agents/                            # Layer 0: Agent Persona & Role Registry (8 Agents across 3 Divisions)
+│   ├── engineering/                   # Technical Implementation Specialists (4 Agents)
+│   │   ├── csharp-core-architect.md   # Principal C# Architect (Clean Arch, Plugins, High-Perf)
+│   │   ├── winforms-modernizer.md     # Desktop WinForms Modernization (BaseForm, RunAfterShown)
+│   │   ├── webapi-feature-dev.md      # Vertical Slice Folder-per-Feature WebAPI & Localized DTOs
+│   │   └── high-perf-compute-specialist.md # Zero-Alloc, Span<T>, NativeMemory, SIMD Vector256/512
+│   ├── governance/                    # Quality, Security & Audit Authorities (2 Agents)
+│   │   ├── adversarial-code-reviewer.md # Independent Auditor (Regression Hunting, NEV Gate)
+│   │   └── security-pentest-auditor.md  # Defensive Security Auditor (CVSS, Scope Contracts, OWASP)
+│   └── erp/                           # Business Domain Functional Authorities (2 Agents)
+│       ├── inventory-domain-specialist.md # Warehouse Ledger Immutability & Pessimistic Row Locking
+│       └── production-lot-specialist.md   # Manufacturing Lineage, Bidirectional Lot Traceability
 │
 ├── architecture/                      # Layer 1: High-Level System Blueprints (21 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory Tiers
@@ -40,7 +53,7 @@ E:\16. AgentOption/
 │   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
 │   └── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (48 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (52 Standards)
 │   ├── universal/                     # Universal Engineering Standards (20 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
@@ -104,10 +117,16 @@ E:\16. AgentOption/
 │   │   ├── memory-generators.md       # Streaming Yield Generators for High-Volume Data Processing
 │   │   └── modern-syntax.md           # strict_types=1, Match Expressions & Readonly Classes
 │   │
-│   └── database/                      # Universal SQL Standards (3 Standards)
-│       ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Query Discipline
-│       ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI Isolation
-│       └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Trail Logging
+│   ├── database/                      # Universal SQL Standards (3 Standards)
+│   │   ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Query Discipline
+│   │   ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI Isolation
+│   │   └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Trail Logging
+│   │
+│   └── erp/                           # Enterprise ERP Domain Standards (4 Standards)
+│       ├── inventory-invariants.md    # Warehouse Ledger Immutability, Row Locking & Zero Negative Stock
+│       ├── production-lot-traceability.md # Bidirectional Lot/Serial Traceability & Stage Transition Gates
+│       ├── sales-packing-journal.md   # Price Calculation Engine Decoupling, Packing Log (NKDG) & Journaling
+│       └── rbac-permission-matrix.md  # Two-Tier Permission: Feature-Action Flags & Row-Level Security (RLS)
 │
 ├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (63 Skills across 10 Clusters)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
@@ -202,20 +221,22 @@ E:\16. AgentOption/
 │   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
 │   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop
 │
-├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (7 Tools)
+├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (8 Tools)
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules & shortcuts
-│   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents
+│   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents & Personas
 │   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
 │   ├── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
 │   ├── bin-triage.js                  # Binary Static Profiling, Shannon Entropy & Magic Byte Detection
 │   ├── cvss.js                        # Deterministic CVSS v3.1 Calculator & CWE Taxonomy Mapping
-│   └── scope-guard.js                 # Pre-Flight Scope Authorization Gate & Contract Validator
+│   ├── scope-guard.js                 # Pre-Flight Scope Authorization Gate & Contract Validator
+│   └── export-agents.js               # Multi-Tool Agent Exporter (Claude Code, Cursor, Antigravity, Prompt)
 │
-└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (6 Templates)
+└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (7 Templates)
     ├── project-bootstrap-template.md  # Template to bind ANY external project to AgentOption
     ├── standard-template.md           # Template for authoring new Language Standards
     ├── skill-template.md              # Template for authoring new Actionable Skills
     ├── workflow-template.md           # Template for multi-step automated workflows
+    ├── agent-template.md              # Template for authoring structured Agent Personas
     ├── research-memory-template.json  # Starter JSON Schema for .research-memory.json
     └── scope-contract-template.json   # Template for Pre-Flight Security Scope Authorization Contract
 ```
@@ -226,8 +247,9 @@ E:\16. AgentOption/
 
 | Layer | Directory | Invariant & Governance |
 | :--- | :--- | :--- |
+| **Layer 0: Agents** | `agents/` | Specialized AI personas bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json`. |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs. Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
-| **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain. Every standard must link to at least one machine rule in `rules.json` and declare explicit verification criteria. |
+| **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain (including ERP). Every standard must link to at least one machine rule in `rules.json`. |
 | **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 10 specialized clusters with zero-boilerplate guidelines and executable test logic. |
 | **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests). |
 | **Layer 5: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools ensuring framework integrity, fast retrieval, and compliance auditing. |

@@ -10,13 +10,14 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
+| **Agent Personas & Specialist Roles** | **8** | 100% Validated (3 Divisions) | `agents/` |
 | **Architectural Blueprints** | **21** | 100% Documented | `architecture/` |
-| **Language & Universal Standards** | **48** | 100% Rule-Linked | `standards/` |
+| **Language & Enterprise Standards** | **52** | 100% Rule-Linked | `standards/` (11 Stacks/Domains) |
 | **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
 | **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
-| **Rapid Extension Templates** | **6** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **47** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **140** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
+| **Universal Machine Rules** | **51** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **152** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -106,20 +107,21 @@ The crowning capability of **agentic-core** is its **Autonomous Scientific Resea
 
 ## 📁 Framework Structure & Layering
 
-The framework is organized into 7 clean architectural tiers:
+The framework is organized into 8 clean architectural tiers:
 
 | Layer | Directory | Items | Core Purpose | Deep Dive |
 | :--- | :--- | :---: | :--- | :--- |
+| **Layer 0: Agents** | [`agents/`](agents/) | 8 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
 | **Layer 1: Blueprints** | [`architecture/`](architecture/) | 21 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-21-blueprints) |
-| **Layer 2: Standards** | [`standards/`](standards/) | 47 | Universal rules & multi-language coding standards (10 stacks) | [Catalog](#-universal--language-standards-catalog-47-standards) |
+| **Layer 2: Standards** | [`standards/`](standards/) | 52 | Universal rules, multi-language coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-47-standards) |
 | **Layer 3: Skills** | [`skills/`](skills/) | 63 | Actionable implementation patterns & empirical research skills (10 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-63-skills) |
 | **Layer 4: Workflows** | [`workflows/`](workflows/) | 7 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
-| **Layer 5: Tools** | [`tools/`](tools/) | 7 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS & scope guard | [Toolchain](#-developer--ai-agent-toolchain-cli) |
-| **Layer 6: Templates** | [`templates/`](templates/) | 6 | Rapid bootstrapping templates for projects, standards, skills & scope | [`templates/`](templates/) |
+| **Layer 5: Tools** | [`tools/`](tools/) | 8 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard & agent exporter | [Toolchain](#-developer--ai-agent-toolchain-cli) |
+| **Layer 6: Templates** | [`templates/`](templates/) | 7 | Rapid bootstrapping templates for agents, projects, standards, skills & scope | [`templates/`](templates/) |
 | **Layer 7: Docs** | [`docs/`](docs/) | — | Exhaustive system maps, hierarchies & architectural specifications | [Hierarchy](docs/framework-hierarchy.md) |
 
 > [!TIP]
-> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 145+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
+> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 165+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
 
 ---
 

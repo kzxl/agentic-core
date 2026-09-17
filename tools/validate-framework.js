@@ -77,7 +77,7 @@ function validateMarkdownFiles(dir) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name !== 'node_modules' && entry.name !== '.git') {
+      if (entry.name !== 'node_modules' && entry.name !== '.git' && entry.name !== 'integrations') {
         validateMarkdownFiles(fullPath);
       }
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
@@ -93,8 +93,8 @@ function validateFile(filePath) {
     return; // Root metadata, README, templates, and docs have distinct formats
   }
 
-  // Files in architecture/, skills/, standards/, workflows/ are core content
-  const isCoreContent = ['architecture/', 'skills/', 'standards/', 'workflows/'].some(prefix =>
+  // Files in architecture/, skills/, standards/, workflows/, agents/ are core content
+  const isCoreContent = ['architecture/', 'skills/', 'standards/', 'workflows/', 'agents/'].some(prefix =>
     relativePath.startsWith(prefix)
   );
 
