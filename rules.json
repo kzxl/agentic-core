@@ -8,7 +8,7 @@
   "R_GO": "Go: Goroutines, Channels, GoFlow toolkit, errgroup, typed worker pools (PoolWithFunc), explicit error handling, interface segregation.",
   "R_PHP": "PHP 8+: strict_types=1, PSR-4 autoloading, PDO parameterized queries (LiteORM CLI), JWT/Crypto security, thin controllers.",
   "R_DB": "Database: Parameterized queries ONLY. Verify column mappings. Mandatory audit logging for writes. Schema modifications require isolated migration/rollback scripts.",
-  "R_PUB": ".NET Publish: Support both Full (Self-contained, SingleFile) and Lite (Framework-dependent, SingleFile) configurations.",
+  "R_PUB": ".NET Publish: Lite configuration only (Framework-dependent, SingleFile, --self-contained false). Users install .NET Runtime on host machines to ensure fast builds and lightweight release packages.",
   "R_UNIVERSE": "Universe Plugin v4.0: Data sovereignty, indirect event communication (EventBus/MessageQueue), auto-registry, strict module isolation. Deleting a module folder must not break project build.",
   "R_EVT": "Event-Driven: Decoupled domain events, Transactional Outbox pattern for dual-write safety, Idempotent consumers, asynchronous messaging.",
   "R_RES": "Resilience: Circuit Breaker, Exponential Backoff with Jitter, explicit timeouts, Fallback cache (Stale-While-Revalidate), graceful degradation.",
