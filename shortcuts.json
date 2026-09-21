@@ -758,5 +758,10 @@
     "name": "Production Lot Specialist Agent",
     "target": "agents/erp/production-lot-specialist.md",
     "desc": "Manufacturing execution authority, bidirectional lot traceability, BOM consumption, and stage sign-offs"
+  },
+  "VER": {
+    "name": "Semantic Versioning & Release Governance",
+    "target": "standards/universal/versioning-and-release-standards.md",
+    "desc": "SemVer 2.0.0, 4-part revisions, SSoT version props, git tags, and forward-only rollback protocol"
   }
 }

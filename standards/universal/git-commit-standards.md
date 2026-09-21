@@ -73,7 +73,7 @@ Distinct categories of changes MUST NOT be mixed within the same commit:
    - Updating `docs/proposals.md`, `docs/roadmap.md`, or architecture blueprints belongs in a separate `docs:` commit.
 2. **Feature vs Release Separation:**
    - Implementing a feature belongs in `feat(<scope>)`.
-   - Version bump (`Directory.Build.props`), release notes, and NuGet packaging belongs in `chore(release): bump version to x.y.z`.
+   - Version bump (`Directory.Build.props`), release notes, and NuGet packaging belongs in `chore(release): bump version to x.y.z`. Refer to [Versioning & Release Governance](versioning-and-release-standards.md) for full SemVer, revision mapping, and rollback protocols.
 3. **Refactoring vs Bug Fixing Separation:**
    - Restructuring an existing class hierarchy must be committed as `refactor(<scope>)`.
    - Fixing a logic bug must be committed as `fix(<scope>)` to allow clear `git bisect` tracking.

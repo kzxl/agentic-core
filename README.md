@@ -12,12 +12,12 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 | :--- | :---: | :---: | :--- |
 | **Agent Personas & Specialist Roles** | **8** | 100% Validated (3 Divisions) | `agents/` |
 | **Architectural Blueprints** | **21** | 100% Documented | `architecture/` |
-| **Language & Enterprise Standards** | **52** | 100% Rule-Linked | `standards/` (11 Stacks/Domains) |
+| **Language & Enterprise Standards** | **53** | 100% Rule-Linked | `standards/` (11 Stacks/Domains) |
 | **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
 | **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
 | **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **51** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **152** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **52** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **153** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -244,7 +244,7 @@ The framework is organized into 8 clean architectural tiers:
 
 | Domain | Count | Key Standards & Technical Guidelines |
 | :--- | :---: | :--- |
-| **Universal Engineering** | **20** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`, `existing-asset-discovery-and-reuse.md`. |
+| **Universal Engineering** | **21** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `versioning-and-release-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`, `existing-asset-discovery-and-reuse.md`. |
 | **Embedded & RTOS** | **1** | `firmware-engineering.md` (Linker Auto-Init, Multi-Tier Memory Hub, Priority Event Hooks, 2D DMA, Stack Canary). |
 | **C# .NET & Godot** | **6** | `high-performance-compute.md` (SIMD/Span), `godot-game-standards.md` (C# 4.x), `webapi.md` (Clean DI), `winforms.md` (No BindingSource), `wpf-ui.md` (Fluent Tokens), `wpf.md` (Pure XAML). |
 | **Android & Mobile** | **5** | `state-architecture.md` (UDF/MVI), `compose-ui-ux.md` (Recomposition), `camera-computational.md` (Camera2/X), `ndk-native-bridge.md` (Zero-Copy JNI), `performance-optimization.md` (R8/Baseline). |

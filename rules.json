@@ -49,7 +49,8 @@
   "R_DOMAIN_INV": "Inventory & Warehouse Invariants: Strict physical vs ledger reconciliation, transactional row-level stock locks (UPDLOCK, ROWLOCK), FIFO/LIFO ledger immutability, zero negative inventory unless explicit backorder configuration, atomic lot reservations.",
   "R_DOMAIN_PROD": "Production & Lot Traceability: End-to-end Lot/Serial traceability across BOM stages, immutable process sign-offs, ticket-to-journal stage transitions, zero unverified scrap or material substitution, continuous defect logging.",
   "R_DOMAIN_SALES": "Sales & Packaging Flow: Deterministic price and discount calculation decoupled from UI, mandatory approval gate before warehouse stock-out, selective packing log (NKDG) generation, immutable audit journaling.",
-  "R_DOMAIN_AUTH": "Enterprise RBAC & Data Sovereignty: 2-tier authorization matrix (Feature-Action CRUD/Export/Approve + Row-Level Security tenancy filters), client UI signal delegation vs backend hard authorization filters, least-privilege service delegation."
+  "R_DOMAIN_AUTH": "Enterprise RBAC & Data Sovereignty: 2-tier authorization matrix (Feature-Action CRUD/Export/Approve + Row-Level Security tenancy filters), client UI signal delegation vs backend hard authorization filters, least-privilege service delegation.",
+  "R_VER": "Semantic Versioning & Release Governance: Strict SemVer 2.0.0 (MAJOR.MINOR.PATCH.REVISION). SSoT in Directory.Build.props / package.json. Git tag format 'vX.Y.Z'. Atomic 'chore(release): bump version to x.y.z' commits. Non-destructive forward-only rollback protocol (never reuse released version numbers, yank/deprecate poisoned artifacts, increment patch/minor for revert commits). Refer to standards/universal/versioning-and-release-standards.md."
 }
 
 
