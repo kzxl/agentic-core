@@ -54,6 +54,21 @@
     "target": "skills/csharp/dapper-bulk-data-access.md",
     "desc": "Multi-mapping and bulk transaction data access"
   },
+  "SQLTUNE": {
+    "name": "SQL Server Query Tuning",
+    "target": "skills/database/sqlserver-query-tuning.md",
+    "desc": "SARGability, parameter sniffing fix & T-SQL query rewriting"
+  },
+  "SQLIDX": {
+    "name": "SQL Server Index Advisor",
+    "target": "skills/database/sqlserver-index-advisor.md",
+    "desc": "Covering index design, filtered indexes & DMV health queries"
+  },
+  "SQLPLAN": {
+    "name": "SQL Server Plan Inspection",
+    "target": "skills/database/sqlserver-plan-inspection.md",
+    "desc": "Execution plan diagnosis, XML plan analysis & regression compare"
+  },
   "ABRT": {
     "name": "Abortable Fetch Lifecycle",
     "target": "skills/react/abortable-fetch-lifecycle.md",
