@@ -9,8 +9,8 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (51 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (152 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (52 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (158 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
@@ -53,7 +53,7 @@ E:\16. AgentOption/
 │   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
 │   └── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (52 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (55 Standards)
 │   ├── universal/                     # Universal Engineering Standards (20 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
@@ -117,7 +117,9 @@ E:\16. AgentOption/
 │   │   ├── memory-generators.md       # Streaming Yield Generators for High-Volume Data Processing
 │   │   └── modern-syntax.md           # strict_types=1, Match Expressions & Readonly Classes
 │   │
-│   ├── database/                      # Universal SQL Standards (3 Standards)
+│   ├── database/                      # Universal & SQL Server Standards (5 Standards)
+│   │   ├── sqlserver-2012-optimization.md # SARGability, Type Alignment, #Temp vs @Table & Parameter Sniffing
+│   │   ├── execution-plan-diagnosis.md # Plan Inspection, Red Flags, Key Lookups, Spills & Join Analysis
 │   │   ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Query Discipline
 │   │   ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI Isolation
 │   │   └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Trail Logging
@@ -128,7 +130,7 @@ E:\16. AgentOption/
 │       ├── sales-packing-journal.md   # Price Calculation Engine Decoupling, Packing Log (NKDG) & Journaling
 │       └── rbac-permission-matrix.md  # Two-Tier Permission: Feature-Action Flags & Row-Level Security (RLS)
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (63 Skills across 10 Clusters)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (66 Skills across 11 Clusters)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -209,8 +211,13 @@ E:\16. AgentOption/
 │   │   ├── fuzzing-harness-and-asan-triage.md # LibFuzzer/AFL++ In-Memory Harnesses & ASAN Memory Crash Triage
 │   │   └── vulnerability-triaging-and-remediation.md # CVSS v3.1/v4.0 Scoring, CWE Mapping & Code Remediation Diffs
 │   │
-│   └── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
-│       └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo
+│   ├── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
+│   │   └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo
+│   │
+│   └── database/                      # Database & SQL Server Optimization (3 Skills)
+│       ├── sqlserver-query-tuning.md  # 5-Step Query Diagnosis, SARGability, Parameter Sniffing & Rewriting
+│       ├── sqlserver-index-advisor.md # Covering Index Design, Filtered Indexes & DMV Health Scripts
+│       └── sqlserver-plan-inspection.md # Execution Plan Analysis, XML Indicators & Plan Regression Compare
 │
 ├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (7 Workflows)
 │   ├── feature-implementation.md      # End-to-End Feature Development Workflow
@@ -250,7 +257,7 @@ E:\16. AgentOption/
 | **Layer 0: Agents** | `agents/` | Specialized AI personas bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json`. |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs. Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
 | **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain (including ERP). Every standard must link to at least one machine rule in `rules.json`. |
-| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 10 specialized clusters with zero-boilerplate guidelines and executable test logic. |
+| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 11 specialized clusters with zero-boilerplate guidelines and executable test logic. |
 | **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests). |
 | **Layer 5: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools ensuring framework integrity, fast retrieval, and compliance auditing. |
 | **Layer 6: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, and workflows without starting from scratch. |

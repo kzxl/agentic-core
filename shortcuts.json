@@ -778,5 +778,15 @@
     "name": "Semantic Versioning & Release Governance",
     "target": "standards/universal/versioning-and-release-standards.md",
     "desc": "SemVer 2.0.0, 4-part revisions, SSoT version props, git tags, and forward-only rollback protocol"
+  },
+  "SQL_OPT": {
+    "name": "SQL Server 2012+ Optimization Standards",
+    "target": "standards/database/sqlserver-2012-optimization.md",
+    "desc": "SARGability, data type conversion, #temp vs @table, pagination, and parameter sniffing rules"
+  },
+  "SQL_PLAN": {
+    "name": "Execution Plan Diagnosis Standards",
+    "target": "standards/database/execution-plan-diagnosis.md",
+    "desc": "Plan inspection, operator costs, lookups, spills, joins, and scalar UDF penalty rules"
   }
 }

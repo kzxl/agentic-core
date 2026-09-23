@@ -12,12 +12,12 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 | :--- | :---: | :---: | :--- |
 | **Agent Personas & Specialist Roles** | **8** | 100% Validated (3 Divisions) | `agents/` |
 | **Architectural Blueprints** | **21** | 100% Documented | `architecture/` |
-| **Language & Enterprise Standards** | **53** | 100% Rule-Linked | `standards/` (11 Stacks/Domains) |
-| **Actionable Autonomous Skills** | **63** | 100% Frontmatter Validated | `skills/` (10 Clusters) |
+| **Language & Enterprise Standards** | **55** | 100% Rule-Linked | `standards/` (12 Stacks/Domains) |
+| **Actionable Autonomous Skills** | **66** | 100% Frontmatter Validated | `skills/` (11 Clusters) |
 | **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
 | **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
 | **Universal Machine Rules** | **52** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **153** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Agent Quick-Routing Shortcuts** | **158** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -113,8 +113,8 @@ The framework is organized into 8 clean architectural tiers:
 | :--- | :--- | :---: | :--- | :--- |
 | **Layer 0: Agents** | [`agents/`](agents/) | 8 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
 | **Layer 1: Blueprints** | [`architecture/`](architecture/) | 21 | High-level cognitive OS, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-21-blueprints) |
-| **Layer 2: Standards** | [`standards/`](standards/) | 52 | Universal rules, multi-language coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-47-standards) |
-| **Layer 3: Skills** | [`skills/`](skills/) | 63 | Actionable implementation patterns & empirical research skills (10 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-63-skills) |
+| **Layer 2: Standards** | [`standards/`](standards/) | 55 | Universal rules, multi-language coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-55-standards) |
+| **Layer 3: Skills** | [`skills/`](skills/) | 66 | Actionable implementation patterns & empirical research skills (11 clusters) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-66-skills) |
 | **Layer 4: Workflows** | [`workflows/`](workflows/) | 7 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
 | **Layer 5: Tools** | [`tools/`](tools/) | 8 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard & agent exporter | [Toolchain](#-developer--ai-agent-toolchain-cli) |
 | **Layer 6: Templates** | [`templates/`](templates/) | 7 | Rapid bootstrapping templates for agents, projects, standards, skills & scope | [`templates/`](templates/) |
@@ -153,7 +153,7 @@ The framework is organized into 8 clean architectural tiers:
 
 ---
 
-## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (63 Skills)
+## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (66 Skills)
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/` — 13 Skills)
 - **`action-first-cognitive-ux`**: Action-first communication protocol reducing human cognitive load (ADHD-aware, zero pleasantry preamble, micro-actions $< 2$ min, visual progress proofs).
@@ -238,9 +238,14 @@ The framework is organized into 8 clean architectural tiers:
 - **`fuzzing-harness-and-asan-triage`**: In-memory LibFuzzer/AFL++ harnesses, AddressSanitizer compilation, and memory safety crash root-cause triage.
 - **`vulnerability-triaging-and-remediation`**: Standardized CVSS v3.1/v4.0 scoring, CWE taxonomy mapping, non-destructive PoC, and code remediation diffs.
 
+### 11. 🗄️ Database & SQL Server Optimization (`skills/database/` — 3 Skills)
+- **`sqlserver-query-tuning`** (`SQLTUNE`): 5-step query diagnosis, SARGability transformations, parameter sniffing remedies (`RECOMPILE`/local var), CTE to `#Temp` materialization, and Dapper ANSI string alignment.
+- **`sqlserver-index-advisor`** (`SQLIDX`): Equality $\to$ Range $\to$ Sort composite index rules, covering index design (`INCLUDE`), filtered indexes (`IsDeleted = 0`), and DMV diagnostic scripts for missing/unused/fragmented indexes.
+- **`sqlserver-plan-inspection`** (`SQLPLAN`): Graphical & XML execution plan inspection, detecting parameter sniffing via compiled vs runtime values, TempDB spills, and pre/post plan regression comparison.
+
 ---
 
-## 📜 Universal & Language Standards Catalog (48 Standards)
+## 📜 Universal & Language Standards Catalog (55 Standards)
 
 | Domain | Count | Key Standards & Technical Guidelines |
 | :--- | :---: | :--- |
@@ -253,7 +258,8 @@ The framework is organized into 8 clean architectural tiers:
 | **React** | **3** | `component-lifecycle.md` (Hook Cleanup), `performance.md` (useMemo/memo), `state-management.md` (Colocation/Zustand). |
 | **Go (Golang)** | **3** | `concurrency.md` (Worker Pools/errgroup), `error-observability.md` (%w/slog), `memory-allocation.md` (sync.Pool/Zero-Alloc). |
 | **PHP 8.2+** | **3** | `database-transactions.md` (Row Locking), `memory-generators.md` (Streaming Yield), `modern-syntax.md` (strict_types=1). |
-| **Universal SQL** | **3** | `indexing-optimization.md` (Covering/SARGable), `concurrency-deadlocks.md` (RCSI), `bulk-audit.md` (Chunked Audit). |
+| **Database & SQL Server** | **5** | `sqlserver-2012-optimization.md` (SARGability/Types/#Temp), `execution-plan-diagnosis.md` (Lookups/Spills/Joins), `indexing-optimization.md` (Covering/SARGable), `concurrency-deadlocks.md` (RCSI), `bulk-audit.md` (Chunked Audit). |
+| **Enterprise ERP** | **4** | `inventory-invariants.md` (Double-Entry/Row Locks), `production-lot-traceability.md` (Lineage/BOM), `sales-packing-journal.md` (NKDG/Journals), `rbac-permission-matrix.md` (2-Tier/RLS). |
 
 ---
 
