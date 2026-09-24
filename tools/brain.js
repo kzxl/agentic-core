@@ -17,10 +17,11 @@ const { spawnSync } = require('child_process');
 const args = process.argv.slice(2);
 const command = args[0]?.toLowerCase();
 
-const VALID_COMMANDS = ['pre', 'post', 'lookup', 'view', 'curate', 'status'];
+const VALID_COMMANDS = ['pre', 'post', 'lookup', 'view', 'curate', 'status', 'route'];
 
 if (!command || !VALID_COMMANDS.includes(command)) {
   console.log('⚡ AgentOption SemanticBrain Bridge:');
+  console.log('  node brain.js route "<task_description>" [--json]');
   console.log('  node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>] [--full]');
   console.log('  node brain.js post "<question>|<answer>" [--tags=<domain,type>] [--project=<name>] [--pinned] [--force]');
   console.log('  node brain.js view <id>');
@@ -148,6 +149,14 @@ if (command === 'pre') {
   scriptArgs = [idArg];
   if (backendArg) scriptArgs.push(backendArg);
   if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+} else if (command === 'route') {
+  if (!queryText) {
+    console.error('❌ Missing task description: node brain.js route "<task>"');
+    process.exit(1);
+  }
+  scriptName = path.join(brainRoot, 'tools', 'route-decision.js');
+  scriptArgs = [queryText];
+  if (args.includes('--json')) scriptArgs.push('--json');
 } else if (command === 'curate') {
   scriptName = path.join(brainRoot, 'tools', 'curate.js');
   scriptArgs = [];

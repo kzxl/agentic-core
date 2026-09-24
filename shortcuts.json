@@ -788,5 +788,11 @@
     "name": "Execution Plan Diagnosis Standards",
     "target": "standards/database/execution-plan-diagnosis.md",
     "desc": "Plan inspection, operator costs, lookups, spills, joins, and scalar UDF penalty rules"
+  },
+  "SYS1": {
+    "name": "In-Process System 1 Decision Router",
+    "target": "architecture/in-process-decision-router.md",
+    "desc": "Ultra-low-latency reflexive decision primitives, zero-daemon skill dispatch, and pre-execution risk gate"
   }
 }
+
