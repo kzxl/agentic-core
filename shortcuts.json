@@ -689,6 +689,11 @@
     "target": "standards/universal/ui-layout-and-color-mastery.md",
     "desc": "Mathematical color formulas, Living Slate palette, 8pt spatial rhythm, and responsive multi-pane layouts"
   },
+  "UI_ANTISLOP": {
+    "name": "Practical UI & Anti-AI-Slop Standard",
+    "target": "standards/universal/ui-anti-ai-slop-standard.md",
+    "desc": "Visual restraint, eliminating candy neon colors, glow abuse, infinite animations, and AI-slop anti-patterns"
+  },
   "COG_LOOP": {
     "name": "Empirical Cognitive Loop Architecture",
     "target": "architecture/empirical-cognitive-loop.md",
