@@ -221,32 +221,32 @@
   },
   "WF_FEAT": {
     "name": "Feature Implementation Workflow",
-    "target": "workflows/feature-implementation.md",
+    "target": "skills/feature-implementation/SKILL.md",
     "desc": "End-to-end automated feature development workflow"
   },
   "WF_BUG": {
     "name": "Bugfix Investigation Workflow",
-    "target": "workflows/bugfix-investigation.md",
+    "target": "skills/bugfix-investigation/SKILL.md",
     "desc": "5-step scientific bug reproduction and root-cause fix workflow"
   },
   "WF_REF": {
     "name": "Code Refactoring Workflow",
-    "target": "workflows/code-refactoring.md",
+    "target": "skills/code-refactoring/SKILL.md",
     "desc": "Zero-regression 1-to-1 partitioning and refactoring workflow"
   },
   "WF_PUB": {
     "name": ".NET Publish Release Workflow",
-    "target": "workflows/dotnet-publish-release.md",
-    "desc": "Automated .NET dual publish Full (Self-contained) & Lite workflow"
+    "target": "skills/dotnet-publish-release/SKILL.md",
+    "desc": "Automated .NET publish Lite (framework-dependent) workflow adhering to R_PUB"
   },
   "WF_DOC": {
     "name": "Project Bootstrap Doctor Workflow",
-    "target": "workflows/project-bootstrap-doctor.md",
+    "target": "skills/project-bootstrap-doctor/SKILL.md",
     "desc": "Project onboarding, rule binding and compliance check workflow"
   },
   "WF_MEM": {
     "name": "Continuous Learning Harvest Workflow",
-    "target": "workflows/continuous-learning-harvest.md",
+    "target": "skills/continuous-learning-harvest/SKILL.md",
     "desc": "Automated Pre-Fetch and Post-Harvest semantic memory workflow"
   },
   "ROUTE": {
@@ -701,7 +701,7 @@
   },
   "WF_COG": {
     "name": "Empirical Cognitive Experiment Workflow",
-    "target": "workflows/cognitive-experiment-loop.md",
+    "target": "skills/cognitive-experiment-loop/SKILL.md",
     "desc": "Sensory sweep, Socratic inquiry, baseline inscription, pre-mortem, grounded stress, and comparative delta evaluation"
   },
   "REF_GATE": {
@@ -798,6 +798,31 @@
     "name": "In-Process System 1 Decision Router",
     "target": "architecture/in-process-decision-router.md",
     "desc": "Ultra-low-latency reflexive decision primitives, zero-daemon skill dispatch, and pre-execution risk gate"
+  },
+  "ARCH_COG_EXEC": {
+    "name": "Agent Cognitive & Execution Patterns Blueprint",
+    "target": "architecture/agent-cognitive-and-execution-patterns.md",
+    "desc": "Production-grade cyclic state graphs, checkpoint rollback, AST progressive repo mapping, standardized ACI, and tiered memory architecture"
+  },
+  "DOC_AGENT_STUDY": {
+    "name": "Agent Design Repositories Architectural Study",
+    "target": "docs/AGENT_DESIGN_REPOS_STUDY.md",
+    "desc": "Comprehensive comparative research and trade-off analysis of LangGraph, AutoGen 0.4, Anthropic, Aider, OpenHands, SWE-agent, and MemGPT"
+  },
+  "UIDESIGN": {
+    "name": "Enterprise Multi-Platform UI Design System",
+    "target": "skills/ui-design-system/SKILL.md",
+    "desc": "Universal Multi-Platform UI/UX Design System for WinForms (DevExpress), WPF, Web (React/Tailwind) & Mobile"
+  },
+  "WINFORMS_UI": {
+    "name": "WinForms Desktop UI & UX Standards",
+    "target": "standards/csharp/winforms-ui.md",
+    "desc": "WinForms & DevExpress Skinning, High-Density GridControl, Ribbon/BarManager & In-Window Telemetry"
+  },
+  "REACT_UI": {
+    "name": "React & Tailwind Web UI Standards",
+    "target": "standards/react/react-ui.md",
+    "desc": "React & Tailwind Web UI Engineering Standards, High-Density Data Tables, Responsive Layouts & Anti-AI-Slop Restraint"
   }
 }
 

@@ -4,7 +4,7 @@ rules: [R_CORE, R_UI]
 ---
 # 🎨 Universal Software UI/UX Design System
 
-This standard establishes the universal foundation for user interface (UI) and user experience (UX) engineering across all software applications in the AgentOption ecosystem (Desktop WPF/WinForms, Web, and Mobile). Subsystems specialize and map these core tenets to framework-specific controls. For mathematical color formulas, spatial geometry, and layout topologies, see [UI Layout & Color Theory Mastery Guide](file:///E:/16.%20AgentOption/standards/universal/ui-layout-and-color-mastery.md). For practical design restraint, anti-clutter engineering, and eliminating gaudy AI-generated visual patterns, see [Practical UI Engineering & Anti-AI-Slop Standard](file:///E:/16.%20AgentOption/standards/universal/ui-anti-ai-slop-standard.md).
+This standard establishes the universal foundation for user interface (UI) and user experience (UX) engineering across all software applications in the AgentOption ecosystem (Desktop WPF/WinForms, Web, and Mobile). For an autonomous executable toolkit with token lookups, component specifications, and copy-paste platform code snippets, see the [Enterprise UI Design System Skill](file:///E:/16.%20AgentOption/skills/ui-design-system/SKILL.md). Subsystems specialize and map these core tenets to framework-specific controls. For mathematical color formulas, spatial geometry, and layout topologies, see [UI Layout & Color Theory Mastery Guide](file:///E:/16.%20AgentOption/standards/universal/ui-layout-and-color-mastery.md). For practical design restraint, anti-clutter engineering, and eliminating gaudy AI-generated visual patterns, see [Practical UI Engineering & Anti-AI-Slop Standard](file:///E:/16.%20AgentOption/standards/universal/ui-anti-ai-slop-standard.md).
 
 ---
 
@@ -167,7 +167,7 @@ All paddings, margins, gutters, and control heights **MUST** align with the **4p
 
 Framework-specific standards inherit tokens directly from this universal design system:
 
-| Universal Token | WPF (`wpf-ui.md`) | WinForms (`winforms.md`) | Android Compose (`compose-ui-ux.md`) | Web CSS |
+| Universal Token | WPF (`wpf-ui.md`) | WinForms (`winforms-ui.md`) | Android Compose (`compose-ui-ux.md`) | Web (`react-ui.md`) |
 | :--- | :--- | :--- | :--- | :--- |
 | **`BgCanvas`** | `{DynamicResource BrushBgDark}` | `SkinColor.Canvas` | `colorScheme.background` | `var(--bg-canvas)` |
 | **`BgSurface`** | `{DynamicResource BrushBgCard}` | `SkinColor.Surface` | `colorScheme.surface` | `var(--bg-surface)` |
