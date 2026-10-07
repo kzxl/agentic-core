@@ -1,3 +1,7 @@
+---
+desc: Universal Design Tokens Single Source of Truth (SSoT) across Desktop, Web, and Mobile
+rules: [R_CORE, R_UI]
+---
 # 🎨 Universal Design Tokens (Single Source of Truth)
 
 This reference documents the canonical design tokens for the AgentOption multi-platform ecosystem. All framework-specific style sheets, resource dictionaries, and theme configurations must derive directly from these token values.

@@ -1,6 +1,6 @@
 # 🏛️ agentic-core — Framework Directory Hierarchy & File Map
 
-This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every architectural blueprint, engineering standard, actionable skill, automated workflow, developer tool, and configuration registry across all 7 layers of the operating system.
+This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every architectural blueprint (23 blueprints), engineering standard (59 standards), actionable skill (73 skills across 11 clusters + 7 sovereign workflows), automated workflow, developer tool, and configuration registry across all 8 layers of the operating system, encompassing 169 core content files.
 
 ---
 
@@ -9,13 +9,14 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (52 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (158 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (53 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (171 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
 ├── docs/                              # Framework Documentation & System Maps
-│   └── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
+│   ├── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
+│   └── AGENT_DESIGN_REPOS_STUDY.md    # Comprehensive SOTA Agent Architectural Research & Trade-off Study
 │
 ├── agents/                            # Layer 0: Agent Persona & Role Registry (8 Agents across 3 Divisions)
 │   ├── engineering/                   # Technical Implementation Specialists (4 Agents)
@@ -30,7 +31,7 @@ E:\16. AgentOption/
 │       ├── inventory-domain-specialist.md # Warehouse Ledger Immutability & Pessimistic Row Locking
 │       └── production-lot-specialist.md   # Manufacturing Lineage, Bidirectional Lot Traceability
 │
-├── architecture/                      # Layer 1: High-Level System Blueprints (21 Blueprints)
+├── architecture/                      # Layer 1: High-Level System Blueprints (23 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory Tiers
 │   ├── empirical-cognitive-loop.md    # 5-Phase Closed Cognitive Loop, Active Sensing, Pre-Mortem & Epistemic Gate
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
@@ -51,10 +52,17 @@ E:\16. AgentOption/
 │   ├── dead-loop-and-stagnation-detector.md # Dual-Mode Graph Cycle & Semantic Stagnation Detector
 │   ├── multi-dimensional-research-budget.md # 6D Tensor Resource Allocation & Stagnation-Driven Pivots
 │   ├── expected-information-gain-engine.md # Bayesian Optimal Experimental Design & Zero-Gain Trial Pruning
-│   └── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
+│   ├── autonomous-question-generator.md # Socratic Problem Decomposition across 6 Axes & Question DAG
+│   ├── agent-cognitive-and-execution-patterns.md # Sovereign Cognitive & Execution Patterns Blueprint (FSM Rollback, ACI, Tiered Memory)
+│   └── in-process-decision-router.md  # In-Process System 1 Fast Decision Router & Pre-Execution Risk Gate
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (55 Standards)
-│   ├── universal/                     # Universal Engineering Standards (20 Standards)
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (59 Standards)
+│   ├── rust/                          # Rust Systems Standards (3 Standards)
+│   │   ├── memory-performance.md      # Zero-Alloc Hot Loops, 64B Cacheline Alignment, SIMD & FrameBufferPool
+│   │   ├── safety-error-handling.md   # Zero-Panic Invariant, Explicit Result, Safe RAII & C-FFI Guardrails
+│   │   └── toolchain-quality.md       # Micro-Crate Architecture, Clippy -D warnings, rustfmt & Headless Mocks
+│   │
+│   ├── universal/                     # Universal Engineering Standards (22 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
 │   │   ├── naming-conventions.md      # Universal Multi-Language Naming & Symbol Standards
@@ -62,6 +70,7 @@ E:\16. AgentOption/
 │   │   ├── conformance-testing.md     # Module Isolation, Contract Compliance & Conformance Harnesses
 │   │   ├── test-logic.md              # Test Logic & Algorithmic Verification (Invariants, AAA, BVA)
 │   │   ├── git-commit-standards.md    # Conventional Commits, Atomic Scoping & Git Guard Discipline
+│   │   ├── versioning-and-release-standards.md # Semantic Versioning 2.0.0, 4-Part Revisions & Forward-Only Rollback
 │   │   ├── llm-contribution-and-governance.md # Clean-Room LLM Policy, GNU <15-Line IP Safety & MMIO Protection
 │   │   ├── license-governance-and-ip-compliance.md # Software License Matrix, Compatibility & IP Governance
 │   │   ├── benchmark-and-hardware-provenance.md # Empirical Benchmarking, Hardware Telemetry & Variance Isolation
@@ -72,6 +81,7 @@ E:\16. AgentOption/
 │   │   ├── security-standards.md      # Zero-Leakage Credential Protection, Test Isolation & Data Minimization
 │   │   ├── ui-ux-design-system.md     # 5-Tier Design Tokens, 60-30-10 Color Balance, Living Slate & ERP Immutability
 │   │   ├── ui-layout-and-color-mastery.md # Mathematical Color Formulas, 8pt Spatial Rhythm & Responsive Multi-Pane
+│   │   ├── ui-anti-ai-slop-standard.md # Visual Restraint, Neon/Glow/Slop Elimination & High-Density UI
 │   │   ├── multi-objective-refactoring.md # Pareto Refactoring, Zero Performance Regression & Net Engineering Value
 │   │   ├── empirical-verification-and-evidence-hierarchy.md # 5-Level Proof Hierarchy, Adjective Ban & Adversarial Audit
 │   │   └── existing-asset-discovery-and-reuse.md # 4-Tier Discovery Hierarchy, Zero-Redundancy & Grep Patterns
@@ -130,7 +140,7 @@ E:\16. AgentOption/
 │       ├── sales-packing-journal.md   # Price Calculation Engine Decoupling, Packing Log (NKDG) & Journaling
 │       └── rbac-permission-matrix.md  # Two-Tier Permission: Feature-Action Flags & Row-Level Security (RLS)
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Design Patterns (66 Skills across 11 Clusters)
+├── skills/                            # Layer 3: Actionable, Reusable Skills & Workflows (73 Skills: 11 Clusters + 7 Sovereign Workflows)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -214,19 +224,34 @@ E:\16. AgentOption/
 │   ├── embedded/                      # Embedded & Bare-Metal RTOS Skills (1 Skill)
 │   │   └── bare-metal-rtos-hooking.md # Non-Disruptive RTOS Hooking, EDMAC DMA & Dynamic .mo
 │   │
-│   └── database/                      # Database & SQL Server Optimization (3 Skills)
-│       ├── sqlserver-query-tuning.md  # 5-Step Query Diagnosis, SARGability, Parameter Sniffing & Rewriting
-│       ├── sqlserver-index-advisor.md # Covering Index Design, Filtered Indexes & DMV Health Scripts
-│       └── sqlserver-plan-inspection.md # Execution Plan Analysis, XML Indicators & Plan Regression Compare
+│   ├── database/                      # Database & SQL Server Optimization (3 Skills)
+│   │   ├── sqlserver-query-tuning.md  # 5-Step Query Diagnosis, SARGability, Parameter Sniffing & Rewriting
+│   │   ├── sqlserver-index-advisor.md # Covering Index Design, Filtered Indexes & DMV Health Scripts
+│   │   └── sqlserver-plan-inspection.md # Execution Plan Analysis, XML Indicators & Plan Regression Compare
+│   │
+│   ├── feature-implementation/        # Sovereign Feature Development Workflow Package
+│   │   └── SKILL.md                   # End-to-End Feature Development Workflow & TDD Pipeline
+│   ├── bugfix-investigation/          # Sovereign Bugfix Workflow Package
+│   │   └── SKILL.md                   # 5-Step Scientific Bugfix & Regression Workflow
+│   ├── code-refactoring/              # Sovereign Code Refactoring Workflow Package
+│   │   └── SKILL.md                   # Zero-Regression Multi-Objective Refactoring Workflow
+│   ├── cognitive-experiment-loop/     # Sovereign Cognitive Loop Workflow Package
+│   │   └── SKILL.md                   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation
+│   ├── dotnet-publish-release/        # Sovereign .NET Publish & Release Package
+│   │   └── SKILL.md                   # .NET Dual Publish (Full Self-Contained vs Lite)
+│   ├── project-bootstrap-doctor/      # Sovereign Project Doctor Package
+│   │   └── SKILL.md                   # Project Onboarding & Compliance Health-Check Audit
+│   └── continuous-learning-harvest/   # Sovereign Continuous Learning Package
+│       └── SKILL.md                   # Automated Pre-Fetch & Post-Harvest Memory Loop
 │
-├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (7 Workflows)
-│   ├── feature-implementation.md      # End-to-End Feature Development Workflow
-│   ├── bugfix-investigation.md        # 5-Step Scientific Bugfix & Regression Workflow
-│   ├── code-refactoring.md            # Zero-Regression Multi-Objective Refactoring Workflow
-│   ├── cognitive-experiment-loop.md   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation
-│   ├── dotnet-publish-release.md      # .NET Dual Publish (Full Self-Contained vs Lite)
-│   ├── project-bootstrap-doctor.md    # Project Onboarding & Compliance Audit
-│   └── continuous-learning-harvest.md # Automated Pre-Fetch & Post-Harvest Memory Loop
+├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (Backward Compatibility)
+│   ├── feature-implementation.md.bak  # Legacy backup (Active: skills/feature-implementation/SKILL.md)
+│   ├── bugfix-investigation.md.bak    # Legacy backup (Active: skills/bugfix-investigation/SKILL.md)
+│   ├── code-refactoring.md.bak        # Legacy backup (Active: skills/code-refactoring/SKILL.md)
+│   ├── cognitive-experiment-loop.md.bak # Legacy backup (Active: skills/cognitive-experiment-loop/SKILL.md)
+│   ├── dotnet-publish-release.md.bak  # Legacy backup (Active: skills/dotnet-publish-release/SKILL.md)
+│   ├── project-bootstrap-doctor.md.bak # Legacy backup (Active: skills/project-bootstrap-doctor/SKILL.md)
+│   └── continuous-learning-harvest.md.bak # Legacy backup (Active: skills/continuous-learning-harvest/SKILL.md)
 │
 ├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (8 Tools)
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules & shortcuts
@@ -257,8 +282,8 @@ E:\16. AgentOption/
 | **Layer 0: Agents** | `agents/` | Specialized AI personas bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json`. |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs. Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
 | **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain (including ERP). Every standard must link to at least one machine rule in `rules.json`. |
-| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 11 specialized clusters with zero-boilerplate guidelines and executable test logic. |
-| **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests). |
+| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 11 specialized clusters (66 skills) plus 7 sovereign workflow packages (73 total) with zero-boilerplate guidelines and executable test logic. |
+| **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests; hosted as sovereign skills in `skills/*/SKILL.md` with legacy backwards-compatibility in `workflows/`). |
 | **Layer 5: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools ensuring framework integrity, fast retrieval, and compliance auditing. |
 | **Layer 6: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, and workflows without starting from scratch. |
 | **Layer 7: Docs** | `docs/` | Deep-dive structural references, hierarchy maps, and cross-framework integration guides. |

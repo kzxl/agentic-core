@@ -1,3 +1,7 @@
+---
+desc: Cross-Platform Component Specifications & Ergonomics for Enterprise Applications
+rules: [R_CORE, R_UI]
+---
 # 🧩 Cross-Platform Component Specifications & Ergonomics
 
 This reference defines the structural anatomy, behavioral invariants, and visual states for core UI components across desktop, web, and mobile enterprise applications.

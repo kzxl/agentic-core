@@ -823,6 +823,36 @@
     "name": "React & Tailwind Web UI Standards",
     "target": "standards/react/react-ui.md",
     "desc": "React & Tailwind Web UI Engineering Standards, High-Density Data Tables, Responsive Layouts & Anti-AI-Slop Restraint"
+  },
+  "RUST_PERF": {
+    "name": "Rust Memory & Performance",
+    "target": "standards/rust/memory-performance.md",
+    "desc": "Zero-allocation hot loops, cacheline alignment & SIMD"
+  },
+  "RUST_SAFE": {
+    "name": "Rust Safety & FFI",
+    "target": "standards/rust/safety-error-handling.md",
+    "desc": "Zero-panic invariant, unsafe hygiene & safe C-FFI"
+  },
+  "RUST_TOOL": {
+    "name": "Rust Toolchain & Quality",
+    "target": "standards/rust/toolchain-quality.md",
+    "desc": "Clippy zero-warning, rustfmt & headless test contracts"
+  },
+  "UI_TOKENS": {
+    "name": "UI Design System - Token Matrix",
+    "target": "skills/ui-design-system/references/tokens.md",
+    "desc": "Universal design token matrix across Desktop, Web, and Mobile"
+  },
+  "UI_COMPONENTS": {
+    "name": "UI Design System - Component Specs",
+    "target": "skills/ui-design-system/references/components.md",
+    "desc": "Cross-platform component specifications and ergonomics"
+  },
+  "UI_PLATFORM": {
+    "name": "UI Design System - Platform Mapping",
+    "target": "skills/ui-design-system/references/platform-mapping.md",
+    "desc": "Multi-platform implementation mapping guide for WinForms, WPF, Web, and Mobile"
   }
 }
 

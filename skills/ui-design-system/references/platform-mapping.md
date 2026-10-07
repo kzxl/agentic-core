@@ -1,3 +1,7 @@
+---
+desc: Multi-Platform Implementation Mapping Guide for WinForms, WPF, Web, and Mobile
+rules: [R_CORE, R_UI]
+---
 # 💻 Multi-Platform Implementation Mapping Guide
 
 This reference provides production-ready code snippets and direct architectural mappings for translating universal design tokens and component specs into **WinForms (DevExpress)**, **WPF (XAML)**, **Web (React/Tailwind)**, and **Mobile (Jetpack Compose/Flutter)**.
