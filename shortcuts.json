@@ -853,6 +853,86 @@
     "name": "UI Design System - Platform Mapping",
     "target": "skills/ui-design-system/references/platform-mapping.md",
     "desc": "Multi-platform implementation mapping guide for WinForms, WPF, Web, and Mobile"
+  },
+  "PY_AGENT": {
+    "name": "Python AI Agent & Graph Orchestration",
+    "target": "standards/python/ai-agent-orchestration.md",
+    "desc": "Deterministic state graphs, cycle limits, Pydantic tool schemas, and SSE token streaming"
+  },
+  "PY_TYPE": {
+    "name": "Python Code Quality & Strict Typing",
+    "target": "standards/python/code-quality-typing.md",
+    "desc": "Python 3.10+ strict typing, mypy enforcement, Pydantic v2 validation, and Ruff linting"
+  },
+  "PY_FASTAPI": {
+    "name": "FastAPI & Async Web Engineering",
+    "target": "standards/python/fastapi-async-web.md",
+    "desc": "FastAPI lifespan context, non-blocking dependency injection, SSE framing, and ASGI concurrency"
+  },
+  "PY_PERF": {
+    "name": "Python Async & High-Performance Compute",
+    "target": "standards/python/performance-async.md",
+    "desc": "Event-loop non-blocking discipline, TaskGroup concurrency, ProcessPoolExecutor offloading, and memory slots"
+  },
+  "PY_SKILL_ASYNC": {
+    "name": "Python Async TaskGroup & Offloading",
+    "target": "skills/python/async-taskgroup-orchestration.md",
+    "desc": "Structured concurrency with asyncio.TaskGroup, bounded semaphores, and thread/process offloading"
+  },
+  "PY_SKILL_PYDANTIC": {
+    "name": "Pydantic v2 Boundary Validation",
+    "target": "skills/python/pydantic-v2-boundary-validation.md",
+    "desc": "Zero-overhead TypeAdapter parsing, strict mode schemas, discriminated unions, and custom validators"
+  },
+  "PY_SKILL_AGENT": {
+    "name": "Structured LLM Tool-Calling & State Graph",
+    "target": "skills/python/structured-llm-tool-calling.md",
+    "desc": "Deterministic state-machine agent loops, bounded retries, schema-enforced tool dispatch, and SSE streaming"
+  },
+  "RUST_SKILL_ZCOPY": {
+    "name": "Rust Zero-Copy Arena & Lifetimes",
+    "target": "skills/rust/zero-copy-arena-lifetimes.md",
+    "desc": "Bump/arena allocation, zero-copy slice parsing, Cow<str>, and cacheline-aligned ring buffers"
+  },
+  "RUST_SKILL_ERR": {
+    "name": "Rust Typestate & Error Taxonomy",
+    "target": "skills/rust/typestate-error-taxonomy.md",
+    "desc": "Compile-time typestate machines, zero-panic Result<T, E> hierarchies with thiserror, and infallible transitions"
+  },
+  "RUST_SKILL_FFI": {
+    "name": "Rust FFI Panic Boundary & C-ABI Guard",
+    "target": "skills/rust/ffi-panic-boundary-guard.md",
+    "desc": "catch_unwind FFI barriers, #[repr(C)] layout verification, opaque pointer handles, and safety contracts"
+  },
+  "TEAM_ARC": {
+    "name": "Multi-Agent Teamwork & Adversarial Orchestration",
+    "target": "architecture/multi-agent-teamwork-protocol.md",
+    "desc": "Zero-collision file ownership matrix, 4-stage adversarial verification gates, and structured handoff contracts"
+  },
+  "WF_TEAM": {
+    "name": "Multi-Agent Teamwork Workflow Skill",
+    "target": "skills/multi-agent-teamwork/SKILL.md",
+    "desc": "End-to-end multi-agent team dispatch, role partitioning, adversarial review/challenge gates, and synthesis"
+  },
+  "AGT_TEAM_ORC": {
+    "name": "Multi-Agent Orchestrator Agent",
+    "target": "agents/governance/multi-agent-orchestrator.md",
+    "desc": "Lead coordinator partitioning workloads, enforcing zero-collision file locks, and governing adversarial gates"
+  },
+  "AGT_PY_ARC": {
+    "name": "Python & AI Systems Architect Agent",
+    "target": "agents/engineering/python-ai-architect.md",
+    "desc": "Principal Python 3.10+ & AI workflow architect for FastAPI, Pydantic v2, asyncio TaskGroups, and LLM state graphs"
+  },
+  "AGT_RUST_ARC": {
+    "name": "Rust Systems & Low-Latency Architect Agent",
+    "target": "agents/engineering/rust-systems-architect.md",
+    "desc": "Systems authority on zero-allocation Rust, #![no_std], SIMD, safe C-FFI boundaries, and typestate invariants"
+  },
+  "AGT_SQL_TUNE": {
+    "name": "SQL Server Performance Tuner Agent",
+    "target": "agents/engineering/sql-performance-tuner.md",
+    "desc": "Database execution plan diagnostician specializing in SARGability, covering indexes, deadlock elimination, and TVP bulk ops"
   }
 }
 

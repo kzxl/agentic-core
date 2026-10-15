@@ -1,6 +1,6 @@
 # 🏛️ agentic-core — Framework Directory Hierarchy & File Map
 
-This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every architectural blueprint (23 blueprints), engineering standard (59 standards), actionable skill (73 skills across 11 clusters + 7 sovereign workflows), automated workflow, developer tool, and configuration registry across all 8 layers of the operating system, encompassing 169 core content files.
+This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every agent persona (12 agents), architectural blueprint (24 blueprints), engineering standard (65 standards across 13 stacks/domains), actionable skill & sovereign package (84 markdown files: 72 cluster skills across 13 clusters + 9 sovereign `SKILL.md` packages + 3 UI reference specs), developer tool, and configuration registry across all 7 layers of the operating system, encompassing 185 core content files.
 
 ---
 
@@ -9,31 +9,37 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
-├── rules.json                         # Machine-Readable Rule Registry (53 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (171 Shortcuts)
+├── package.json                       # Node.js Package Manifest, Scripts & Test Runner Baseline
+├── rules.json                         # Machine-Readable Rule Registry (55 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (187 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
-├── docs/                              # Framework Documentation & System Maps
+├── docs/                              # Layer 6: Framework Documentation & System Maps (2 Docs)
 │   ├── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
 │   └── AGENT_DESIGN_REPOS_STUDY.md    # Comprehensive SOTA Agent Architectural Research & Trade-off Study
 │
-├── agents/                            # Layer 0: Agent Persona & Role Registry (8 Agents across 3 Divisions)
-│   ├── engineering/                   # Technical Implementation Specialists (4 Agents)
+├── agents/                            # Layer 0: Agent Persona & Role Registry (12 Agents across 3 Divisions)
+│   ├── engineering/                   # Technical Implementation Specialists (7 Agents)
 │   │   ├── csharp-core-architect.md   # Principal C# Architect (Clean Arch, Plugins, High-Perf)
 │   │   ├── winforms-modernizer.md     # Desktop WinForms Modernization (BaseForm, RunAfterShown)
 │   │   ├── webapi-feature-dev.md      # Vertical Slice Folder-per-Feature WebAPI & Localized DTOs
-│   │   └── high-perf-compute-specialist.md # Zero-Alloc, Span<T>, NativeMemory, SIMD Vector256/512
-│   ├── governance/                    # Quality, Security & Audit Authorities (2 Agents)
+│   │   ├── high-perf-compute-specialist.md # Zero-Alloc, Span<T>, NativeMemory, SIMD Vector256/512
+│   │   ├── python-ai-architect.md     # Python 3.10+ & AI Workflow Architect (FastAPI, Pydantic v2, State Graphs)
+│   │   ├── rust-systems-architect.md  # Low-Latency Rust Systems Architect (#![no_std], SIMD, Safe FFI)
+│   │   └── sql-performance-tuner.md   # SQL Server Execution Plan Diagnostician (SARGability, Indexes, TVP)
+│   ├── governance/                    # Quality, Security & Orchestration Authorities (3 Agents)
+│   │   ├── multi-agent-orchestrator.md # Multi-Agent Lead Coordinator (Zero-Collision Locks, Adversarial Gates)
 │   │   ├── adversarial-code-reviewer.md # Independent Auditor (Regression Hunting, NEV Gate)
 │   │   └── security-pentest-auditor.md  # Defensive Security Auditor (CVSS, Scope Contracts, OWASP)
 │   └── erp/                           # Business Domain Functional Authorities (2 Agents)
 │       ├── inventory-domain-specialist.md # Warehouse Ledger Immutability & Pessimistic Row Locking
 │       └── production-lot-specialist.md   # Manufacturing Lineage, Bidirectional Lot Traceability
 │
-├── architecture/                      # Layer 1: High-Level System Blueprints (23 Blueprints)
+├── architecture/                      # Layer 1: High-Level System Blueprints (24 Blueprints)
 │   ├── engineering-operating-system.md # 8-Core Engineering Operating System (Eng-OS) & L0-L4 Memory Tiers
 │   ├── empirical-cognitive-loop.md    # 5-Phase Closed Cognitive Loop, Active Sensing, Pre-Mortem & Epistemic Gate
+│   ├── multi-agent-teamwork-protocol.md # Multi-Agent Teamwork Topology, Zero-Collision Locks & 4-Stage Adversarial Gate
 │   ├── clean-layered-architecture.md  # 4-Tier Clean Architecture (Domain, Application, Infra, Presentation)
 │   ├── folder-per-feature.md          # Vertical Slice Architecture & Feature-Local DTO Isolation
 │   ├── hybrid-dual-scope-execution.md # Desktop WinForms & Stateless WebAPI Dual-Scope Service Engine
@@ -56,17 +62,12 @@ E:\16. AgentOption/
 │   ├── agent-cognitive-and-execution-patterns.md # Sovereign Cognitive & Execution Patterns Blueprint (FSM Rollback, ACI, Tiered Memory)
 │   └── in-process-decision-router.md  # In-Process System 1 Fast Decision Router & Pre-Execution Risk Gate
 │
-├── standards/                         # Layer 2: Modular Language & Engineering Standards (59 Standards)
-│   ├── rust/                          # Rust Systems Standards (3 Standards)
-│   │   ├── memory-performance.md      # Zero-Alloc Hot Loops, 64B Cacheline Alignment, SIMD & FrameBufferPool
-│   │   ├── safety-error-handling.md   # Zero-Panic Invariant, Explicit Result, Safe RAII & C-FFI Guardrails
-│   │   └── toolchain-quality.md       # Micro-Crate Architecture, Clippy -D warnings, rustfmt & Headless Mocks
-│   │
+├── standards/                         # Layer 2: Modular Language & Engineering Standards (65 Standards across 13 Stacks)
 │   ├── universal/                     # Universal Engineering Standards (22 Standards)
 │   │   ├── agent-meta.md              # Meta-Rules, Symbol Decoding & Commit Verification Gate
 │   │   ├── working-memory-state.md    # Working Memory & Execution State Machine Invariants
 │   │   ├── naming-conventions.md      # Universal Multi-Language Naming & Symbol Standards
-│   │   ├── performance-guidelines.md  # Memory Footprint, Anti-N+1 Queries & Async Concurrency
+│   │   ├── performance-guidelines.md  # Complexity Bounds, Batch I/O, Streaming & Latency Budgets
 │   │   ├── conformance-testing.md     # Module Isolation, Contract Compliance & Conformance Harnesses
 │   │   ├── test-logic.md              # Test Logic & Algorithmic Verification (Invariants, AAA, BVA)
 │   │   ├── git-commit-standards.md    # Conventional Commits, Atomic Scoping & Git Guard Discipline
@@ -86,13 +87,25 @@ E:\16. AgentOption/
 │   │   ├── empirical-verification-and-evidence-hierarchy.md # 5-Level Proof Hierarchy, Adjective Ban & Adversarial Audit
 │   │   └── existing-asset-discovery-and-reuse.md # 4-Tier Discovery Hierarchy, Zero-Redundancy & Grep Patterns
 │   │
-│   ├── csharp/                        # C# .NET Standards (6 Standards)
+│   ├── csharp/                        # C# .NET & Godot Standards (7 Standards)
 │   │   ├── high-performance-compute.md # Span<T>, NativeMemory, SIMD Vector256/512 & Zero-Alloc Allocations
 │   │   ├── godot-game-standards.md    # Godot 4 & C# Standards (Zero-Alloc, Signal Hygiene, Node Lifecycle)
 │   │   ├── webapi.md                  # Web API Standards (Clean Architecture, DI, DTO Localization)
 │   │   ├── winforms.md                # WinForms Standards (BaseForm, RunAfterShown, No BindingSource)
+│   │   ├── winforms-ui.md             # WinForms & DevExpress UI Standards (Skinning, High-Density GridControl)
 │   │   ├── wpf-ui.md                  # WPF UI & Fluent Design Tokens (Dark/Light Themes, Compact Density)
-│   │   └── wpf.md                     # WPF Desktop MVVM Standards (Pure XAML, Dispatcher Safety)
+│   │   └── wpf.md                     # WPF Desktop MVVM Standards (Virtualization, WeakEvent, Dispatcher)
+│   │
+│   ├── python/                        # Python 3.10+ & AI Workflow Standards (4 Standards)
+│   │   ├── ai-agent-orchestration.md  # Deterministic State Graphs, Cycle Limits & Safe Tool Calling
+│   │   ├── code-quality-typing.md     # Strict Typing (mypy --strict), Pydantic v2 & Ruff Governance
+│   │   ├── fastapi-async-web.md       # FastAPI Lifespan, Non-Blocking DI & SSE Token Streaming
+│   │   └── performance-async.md       # Asyncio Event-Loop Discipline, TaskGroup & ProcessPool Offloading
+│   │
+│   ├── rust/                          # Rust Systems Standards (3 Standards)
+│   │   ├── memory-performance.md      # Zero-Alloc Hot Loops, 64B Cacheline Alignment, SIMD & FrameBufferPool
+│   │   ├── safety-error-handling.md   # Zero-Panic Invariant, Explicit Result, Safe RAII & C-FFI Guardrails
+│   │   └── toolchain-quality.md       # Micro-Crate Architecture, Clippy -D warnings, rustfmt & Headless Mocks
 │   │
 │   ├── android/                       # Android & Mobile Engineering Standards (5 Standards)
 │   │   ├── state-architecture.md      # Unidirectional Data Flow (UDF) & MVI State Architecture
@@ -108,31 +121,32 @@ E:\16. AgentOption/
 │   │   └── firmware-engineering.md    # Linker Auto-Init, Multi-Tier Memory Hub, Priority Hooks & Stack Canaries
 │   │
 │   ├── nodejs/                        # Node.js Standards (3 Standards)
-│   │   ├── architecture.md            # Controller-Service-Repository Layer Separation
-│   │   ├── event-loop-streams.md      # Non-blocking Event Loop, Backpressure & Stream Pipelines
-│   │   └── security-middleware.md     # Helmet, Rate Limiting & Input Sanitization Guards
+│   │   ├── architecture.md            # Handler-Dispatcher, Clean Layer Separation & Graceful Drain
+│   │   ├── event-loop-streams.md      # Non-Blocking Event Loop, stream.pipeline & Worker Offload
+│   │   └── security-middleware.md     # Rate Limiting, Helmet CSP, SSRF Defense & Input Sanitization
 │   │
-│   ├── react/                         # React Standards (3 Standards)
-│   │   ├── component-lifecycle.md     # Pure Functional Components & Hook Cleanup Lifecycle
-│   │   ├── performance.md             # React.memo, useMemo/useCallback & Code Splitting Optimization
-│   │   └── state-management.md        # State Colocation & Redux/Zustand Unidirectional Data Flow
+│   ├── react/                         # React & Web UI Standards (4 Standards)
+│   │   ├── component-lifecycle.md     # Functional Components, AbortController Cleanup & Error Boundaries
+│   │   ├── performance.md             # Row Virtualization, useTransition & Referential Stability
+│   │   ├── react-ui.md                # React & Tailwind High-Density Tables, Layouts & Anti-Slop Restraint
+│   │   └── state-management.md        # TanStack Query Server Cache, Zustand Selectors & URL State
 │   │
 │   ├── golang/                        # Go Standards (3 Standards)
-│   │   ├── concurrency.md             # Goroutines, Context Cancellation & Worker Pools
-│   │   ├── error-observability.md     # Error Wrapping (%w) & Structured slog Observability
-│   │   └── memory-allocation.md       # Escape Analysis, sync.Pool & Zero-Alloc Slices
+│   │   ├── concurrency.md             # Bounded Worker Pools, errgroup.WithContext & Channel Ownership
+│   │   ├── error-observability.md     # Error Wrapping (%w), Sentinel Taxonomy & Zero-Alloc slog
+│   │   └── memory-allocation.md       # Escape Analysis, sync.Pool Safety & 3-Index Slice Capacity Guard
 │   │
 │   ├── php/                           # PHP 8.2+ Standards (3 Standards)
-│   │   ├── database-transactions.md   # PDO Transactions, Row-Level Locking & Concurrency Safety
-│   │   ├── memory-generators.md       # Streaming Yield Generators for High-Volume Data Processing
-│   │   └── modern-syntax.md           # strict_types=1, Match Expressions & Readonly Classes
+│   │   ├── database-transactions.md   # PDO Explicit Transactions, FOR UPDATE Locks & Deadlock Retry
+│   │   ├── memory-generators.md       # Unbuffered Streaming Yield Generators & Worker GC Hygiene
+│   │   └── modern-syntax.md           # strict_types=1, Readonly Classes, Backed Enums & Value Objects
 │   │
 │   ├── database/                      # Universal & SQL Server Standards (5 Standards)
 │   │   ├── sqlserver-2012-optimization.md # SARGability, Type Alignment, #Temp vs @Table & Parameter Sniffing
 │   │   ├── execution-plan-diagnosis.md # Plan Inspection, Red Flags, Key Lookups, Spills & Join Analysis
-│   │   ├── indexing-optimization.md   # Composite Indexing, Covering Indexes & SARGable Query Discipline
-│   │   ├── concurrency-deadlocks.md   # Deadlock Defense, Consistent Lock Ordering & RCSI Isolation
-│   │   └── bulk-audit.md              # Chunked Bulk Processing & Mandatory Audit Trail Logging
+│   │   ├── indexing-optimization.md   # Composite Key Order, Covering INCLUDE, Filtered Indexes & Fragmentation
+│   │   ├── concurrency-deadlocks.md   # Lock Ordering, UPDLOCK/ROWLOCK, ROWVERSION & RCSI Isolation
+│   │   └── bulk-audit.md              # TVP/SqlBulkCopy Batching, OUTPUT Audit Capture & Outbox Journaling
 │   │
 │   └── erp/                           # Enterprise ERP Domain Standards (4 Standards)
 │       ├── inventory-invariants.md    # Warehouse Ledger Immutability, Row Locking & Zero Negative Stock
@@ -140,7 +154,7 @@ E:\16. AgentOption/
 │       ├── sales-packing-journal.md   # Price Calculation Engine Decoupling, Packing Log (NKDG) & Journaling
 │       └── rbac-permission-matrix.md  # Two-Tier Permission: Feature-Action Flags & Row-Level Security (RLS)
 │
-├── skills/                            # Layer 3: Actionable, Reusable Skills & Workflows (73 Skills: 11 Clusters + 7 Sovereign Workflows)
+├── skills/                            # Layer 3: Actionable Skills & Sovereign Packages (84 Files: 72 Cluster Skills + 9 SKILL.md + 3 UI Refs)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -188,6 +202,16 @@ E:\16. AgentOption/
 │   │   ├── dapper-bulk-data-access.md          # Multi-Mapping & High-Throughput Bulk Operations
 │   │   └── zero-copy-interop.md                # Zero-Copy C# & C++ Pointer Interoperability
 │   │
+│   ├── python/                        # Python 3.10+ & AI Engineering Skills (3 Skills)
+│   │   ├── async-taskgroup-orchestration.md # Structured TaskGroup Concurrency, Semaphores & Executor Offloading
+│   │   ├── pydantic-v2-boundary-validation.md # TypeAdapter Zero-Overhead Validation & Discriminated Unions
+│   │   └── structured-llm-tool-calling.md   # Deterministic State-Machine Agent Loops & SSE Token Streaming
+│   │
+│   ├── rust/                          # Rust Systems & Low-Latency Skills (3 Skills)
+│   │   ├── zero-copy-arena-lifetimes.md     # Bump Arena Allocation, Zero-Copy Slices & Cacheline Ring Buffers
+│   │   ├── typestate-error-taxonomy.md      # Compile-Time Typestate Machines & Zero-Panic Result Taxonomy
+│   │   └── ffi-panic-boundary-guard.md      # catch_unwind C-ABI Barriers & Opaque Pointer Handles
+│   │
 │   ├── nodejs/                        # Node.js Enterprise Skills & Patterns (8 Skills)
 │   │   ├── handler-dispatcher-pattern.md    # canHandle/handle Dispatcher Architecture
 │   │   ├── interceptor-pipeline.md          # Request & Response Interceptors Pipeline
@@ -229,45 +253,50 @@ E:\16. AgentOption/
 │   │   ├── sqlserver-index-advisor.md # Covering Index Design, Filtered Indexes & DMV Health Scripts
 │   │   └── sqlserver-plan-inspection.md # Execution Plan Analysis, XML Indicators & Plan Regression Compare
 │   │
+│   ├── ui-design-system/              # Sovereign Enterprise Multi-Platform UI Design System Package
+│   │   ├── SKILL.md                   # Universal UI Design System Orchestrator (UIDESIGN)
+│   │   └── references/                # Progressive Sub-Reference Specifications (3 Files)
+│   │       ├── tokens.md              # 5-Tier Token Matrix across Desktop, Web, and Mobile (UI_TOKENS)
+│   │       ├── components.md          # Cross-Platform Component Specifications & Ergonomics (UI_COMPONENTS)
+│   │       └── platform-mapping.md    # Implementation Mapping for WinForms, WPF, Web & Mobile (UI_PLATFORM)
+│   │
 │   ├── feature-implementation/        # Sovereign Feature Development Workflow Package
-│   │   └── SKILL.md                   # End-to-End Feature Development Workflow & TDD Pipeline
+│   │   └── SKILL.md                   # End-to-End Feature Development Workflow & TDD Pipeline (WF_FEAT)
 │   ├── bugfix-investigation/          # Sovereign Bugfix Workflow Package
-│   │   └── SKILL.md                   # 5-Step Scientific Bugfix & Regression Workflow
+│   │   └── SKILL.md                   # 5-Step Scientific Bugfix & Regression Workflow (WF_BUG)
 │   ├── code-refactoring/              # Sovereign Code Refactoring Workflow Package
-│   │   └── SKILL.md                   # Zero-Regression Multi-Objective Refactoring Workflow
+│   │   └── SKILL.md                   # Zero-Regression Multi-Objective Refactoring Workflow (WF_REF)
 │   ├── cognitive-experiment-loop/     # Sovereign Cognitive Loop Workflow Package
-│   │   └── SKILL.md                   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation
+│   │   └── SKILL.md                   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation (WF_COG)
 │   ├── dotnet-publish-release/        # Sovereign .NET Publish & Release Package
-│   │   └── SKILL.md                   # .NET Dual Publish (Full Self-Contained vs Lite)
+│   │   └── SKILL.md                   # .NET Lite Single-File Framework-Dependent Publish (WF_PUB)
 │   ├── project-bootstrap-doctor/      # Sovereign Project Doctor Package
-│   │   └── SKILL.md                   # Project Onboarding & Compliance Health-Check Audit
-│   └── continuous-learning-harvest/   # Sovereign Continuous Learning Package
-│       └── SKILL.md                   # Automated Pre-Fetch & Post-Harvest Memory Loop
+│   │   └── SKILL.md                   # Project Onboarding & Compliance Health-Check Audit (WF_DOC)
+│   ├── continuous-learning-harvest/   # Sovereign Continuous Learning Package
+│   │   └── SKILL.md                   # Automated Pre-Fetch & Post-Harvest Memory Loop (WF_MEM)
+│   └── multi-agent-teamwork/          # Sovereign Multi-Agent Teamwork Orchestration Package
+│       └── SKILL.md                   # Zero-Collision Subagent Partitioning & Adversarial Gates (WF_TEAM)
 │
-├── workflows/                         # Layer 4: Automated Agentic & DevOps Workflows (Backward Compatibility)
-│   ├── feature-implementation.md.bak  # Legacy backup (Active: skills/feature-implementation/SKILL.md)
-│   ├── bugfix-investigation.md.bak    # Legacy backup (Active: skills/bugfix-investigation/SKILL.md)
-│   ├── code-refactoring.md.bak        # Legacy backup (Active: skills/code-refactoring/SKILL.md)
-│   ├── cognitive-experiment-loop.md.bak # Legacy backup (Active: skills/cognitive-experiment-loop/SKILL.md)
-│   ├── dotnet-publish-release.md.bak  # Legacy backup (Active: skills/dotnet-publish-release/SKILL.md)
-│   ├── project-bootstrap-doctor.md.bak # Legacy backup (Active: skills/project-bootstrap-doctor/SKILL.md)
-│   └── continuous-learning-harvest.md.bak # Legacy backup (Active: skills/continuous-learning-harvest/SKILL.md)
-│
-├── tools/                             # Layer 5: Automated Verification & Agent CLI Tools (8 Tools)
-│   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules & shortcuts
-│   ├── lookup.js                      # Sub-50ms Fast Query CLI for AI Agents & Personas
-│   ├── doctor.js                      # Project Health-Check validating against .project-rule.md
-│   ├── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch & POST-Harvest)
+├── tools/                             # Layer 4: Automated Verification & Agent CLI Tools (8 Tools + 1 Core Lib)
+│   ├── lib/
+│   │   └── framework-core.js          # Shared SSoT Registry Loader, YAML Frontmatter Parser & Scoped Walker
+│   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules, shortcuts & bindings
+│   ├── lookup.js                      # Sub-50ms Fast Query CLI across Blueprints, Standards, Skills & Agents
+│   ├── doctor.js                      # Project Health-Check verifying .project-rule.md rules, shortcuts & paths
+│   ├── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch, Route & POST-Harvest)
 │   ├── bin-triage.js                  # Binary Static Profiling, Shannon Entropy & Magic Byte Detection
 │   ├── cvss.js                        # Deterministic CVSS v3.1 Calculator & CWE Taxonomy Mapping
-│   ├── scope-guard.js                 # Pre-Flight Scope Authorization Gate & Contract Validator
-│   └── export-agents.js               # Multi-Tool Agent Exporter (Claude Code, Cursor, Antigravity, Prompt)
+│   ├── scope-guard.js                 # Pre-Flight Scope Authorization Gate & Contract Expiration Validator
+│   └── export-agents.js               # Multi-Tool Agent Exporter & Global Antigravity Skill Synchronizer
 │
-└── templates/                         # Layer 6: Rapid Bootstrapping & Extension Templates (7 Templates)
+├── tests/                             # Automated Tooling Verification Suite
+│   └── tools.test.js                  # Node.js Built-in Test Runner Suite for CLI Tools & Security Guards
+│
+└── templates/                         # Layer 5: Rapid Bootstrapping & Extension Templates (7 Templates)
     ├── project-bootstrap-template.md  # Template to bind ANY external project to AgentOption
     ├── standard-template.md           # Template for authoring new Language Standards
     ├── skill-template.md              # Template for authoring new Actionable Skills
-    ├── workflow-template.md           # Template for multi-step automated workflows
+    ├── workflow-template.md           # Template for multi-step Sovereign SKILL.md Workflows
     ├── agent-template.md              # Template for authoring structured Agent Personas
     ├── research-memory-template.json  # Starter JSON Schema for .research-memory.json
     └── scope-contract-template.json   # Template for Pre-Flight Security Scope Authorization Contract
@@ -279,11 +308,11 @@ E:\16. AgentOption/
 
 | Layer | Directory | Invariant & Governance |
 | :--- | :--- | :--- |
-| **Layer 0: Agents** | `agents/` | Specialized AI personas bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json`. |
-| **Layer 1: Blueprints** | `architecture/` | Macro-level system designs. Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
-| **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines per language/domain (including ERP). Every standard must link to at least one machine rule in `rules.json`. |
-| **Layer 3: Skills** | `skills/` | Practical, actionable implementation recipes and patterns. Organized into 11 specialized clusters (66 skills) plus 7 sovereign workflow packages (73 total) with zero-boilerplate guidelines and executable test logic. |
-| **Layer 4: Workflows** | `workflows/` | Deterministic, multi-phase operational procedures for complex agent tasks (features, bugfixes, refactorings, releases, harvests; hosted as sovereign skills in `skills/*/SKILL.md` with legacy backwards-compatibility in `workflows/`). |
-| **Layer 5: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools ensuring framework integrity, fast retrieval, and compliance auditing. |
-| **Layer 6: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, and workflows without starting from scratch. |
-| **Layer 7: Docs** | `docs/` | Deep-dive structural references, hierarchy maps, and cross-framework integration guides. |
+| **Layer 0: Agents** | `agents/` | Specialized AI personas (12 agents) bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json` and 100% valid `rules`/`shortcuts` bindings. |
+| **Layer 1: Blueprints** | `architecture/` | Macro-level system designs (24 blueprints). Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
+| **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines (65 standards across 13 stacks/domains). Every standard must link to at least one machine rule in `rules.json` and a shortcut in `shortcuts.json`. |
+| **Layer 3: Skills & Workflows** | `skills/` | Practical implementation recipes and sovereign packages (72 cluster skills across 13 clusters + 9 sovereign `SKILL.md` packages + 3 UI reference specs = 84 files). Sovereign `SKILL.md` packages sync directly to `.gemini/config/skills/`. |
+| **Layer 4: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools backed by `tools/lib/framework-core.js`, ensuring zero-redundancy parsing, fast retrieval, and compliance auditing. |
+| **Layer 5: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, workflows, and agent personas without starting from scratch. |
+| **Layer 6: Docs** | `docs/` | Deep-dive structural references, hierarchy maps, and cross-framework architectural studies. |
+

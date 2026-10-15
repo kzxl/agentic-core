@@ -5,3 +5,7 @@ Thumbs.db
 .vscode/
 .idea/
 .temp*
+.agents/
+*.bak
+integrations/
+.cache/

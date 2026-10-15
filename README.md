@@ -10,14 +10,14 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
-| **Agent Personas & Specialist Roles** | **8** | 100% Validated (3 Divisions) | `agents/` |
-| **Architectural Blueprints** | **23** | 100% Documented | `architecture/` |
-| **Language & Enterprise Standards** | **56** | 100% Rule-Linked | `standards/` (12 Stacks/Domains) |
-| **Actionable Autonomous Skills** | **73** | 100% Frontmatter Validated | `skills/` (11 Clusters + 7 Workflows) |
-| **Automated Agentic Workflows** | **7** | 100% Step-Verified | `workflows/` |
+| **Agent Personas & Specialist Roles** | **12** | 100% Validated (3 Divisions) | `agents/` |
+| **Architectural Blueprints** | **24** | 100% Documented | `architecture/` |
+| **Language & Enterprise Standards** | **65** | 100% Rule-Linked | `standards/` (13 Stacks/Domains) |
+| **Actionable Autonomous Skills** | **81** | 100% Frontmatter Validated | `skills/` (13 Clusters + 9 Sovereign Packages) |
+| **Sovereign Workflow Packages** | **8** | 100% Step-Verified | `skills/*/SKILL.md` (`WF_*`) |
 | **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **52** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **162** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **55** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **187** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -99,7 +99,7 @@ The crowning capability of **agentic-core** is its **Autonomous Scientific Resea
 │ 6. RESEARCH MEMORY & FAILED APPROACH KNOWLEDGE BASE                                    │
 │    • Dual-Substrate: Git-tracked `.research-memory.json` + Fast In-Memory AME Engine   │
 │    • 8-Entity Cognitive Research Graph (H, E, X, R, F, A, C, D)                        │
-│    • Mandatory "Query-Before-Action" Rule: "Cái này thử rồi, đừng làm lại"             │
+│    • Mandatory "Query-Before-Action" Rule: "Never repeat a verified failed approach"   │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -123,43 +123,43 @@ AgentOption incorporates comprehensive comparative research and production bluep
 
 ## 📁 Framework Structure & Layering
 
-The framework is organized into 8 clean architectural tiers:
+The framework is organized into 7 clean architectural tiers:
 
 | Layer | Directory | Items | Core Purpose | Deep Dive |
 | :--- | :--- | :---: | :--- | :--- |
-| **Layer 0: Agents** | [`agents/`](agents/) | 8 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
-| **Layer 1: Blueprints** | [`architecture/`](architecture/) | 23 | High-level cognitive OS, research engines, execution graphs & distributed systems | [Catalog](#-architectural-blueprints-catalog-23-blueprints) |
-| **Layer 2: Standards** | [`standards/`](standards/) | 59 | Universal rules, multi-language coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-59-standards) |
-| **Layer 3: Skills** | [`skills/`](skills/) | 73 | Actionable implementation patterns & empirical research skills (11 clusters + 7 workflows) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-73-skills-across-12-clusters) |
-| **Layer 4: Workflows** | [`workflows/`](workflows/) | 7 | End-to-end automated agentic & DevOps lifecycle workflows | [`workflows/`](workflows/) |
-| **Layer 5: Tools** | [`tools/`](tools/) | 8 | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard & agent exporter | [Toolchain](#-developer--ai-agent-toolchain-cli) |
-| **Layer 6: Templates** | [`templates/`](templates/) | 7 | Rapid bootstrapping templates for agents, projects, standards, skills & scope | [`templates/`](templates/) |
-| **Layer 7: Docs** | [`docs/`](docs/) | 2 | Exhaustive system maps, hierarchies & architectural comparative research | [Hierarchy](docs/framework-hierarchy.md) & [Agent Study](docs/AGENT_DESIGN_REPOS_STUDY.md) |
+| **Layer 0: Agents** | [`agents/`](agents/) | 12 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
+| **Layer 1: Blueprints** | [`architecture/`](architecture/) | 24 | High-level cognitive OS, multi-agent teamwork, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-24-blueprints) |
+| **Layer 2: Standards** | [`standards/`](standards/) | 65 | Universal rules, 13-stack coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-65-standards) |
+| **Layer 3: Skills & Workflows** | [`skills/`](skills/) | 84 | Actionable implementation patterns & sovereign packages (72 cluster skills + 9 `SKILL.md` + 3 UI refs) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-81-skills-across-15-clusters) |
+| **Layer 4: Tools** | [`tools/`](tools/) | 8 + 1 Lib | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard, agent exporter & shared core | [Toolchain](#-developer--ai-agent-toolchain-cli) |
+| **Layer 5: Templates** | [`templates/`](templates/) | 7 | Rapid bootstrapping templates for agents, projects, standards, skills & scope | [`templates/`](templates/) |
+| **Layer 6: Docs** | [`docs/`](docs/) | 2 | Exhaustive system maps, hierarchies & architectural comparative research | [Hierarchy](docs/framework-hierarchy.md) & [Agent Study](docs/AGENT_DESIGN_REPOS_STUDY.md) |
 
 > [!TIP]
-> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 165+ components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
+> 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 185+ core components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
 
 ---
 
-## 🏛️ Architectural Blueprints Catalog (23 Blueprints)
+## 🏛️ Architectural Blueprints Catalog (24 Blueprints)
 
 | Blueprint | Shortcut | Core Responsibility & Architectural Invariant |
 | :--- | :---: | :--- |
 | **[`engineering-operating-system.md`](architecture/engineering-operating-system.md)** | `ENGOS` | 8-core cognitive OS (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance) governing the LLM as a Reasoning Core. |
 | **[`empirical-cognitive-loop.md`](architecture/empirical-cognitive-loop.md)** | `COG_LOOP` | 5-phase closed cognitive loop, active sensing, pre-mortem simulation, epistemic uncertainty gate, and memory consolidation. |
+| **[`multi-agent-teamwork-protocol.md`](architecture/multi-agent-teamwork-protocol.md)** | `TEAM_ARC` | Zero-collision file ownership matrix, 4-stage adversarial verification gates, and structured multi-agent handoff contracts. |
 | **[`clean-layered-architecture.md`](architecture/clean-layered-architecture.md)** | `CLEAN` | 4-tier separation: Domain (Entities, Invariants) $\to$ Application (Use Cases, DTOs) $\to$ Infrastructure $\to$ Presentation. |
 | **[`folder-per-feature.md`](architecture/folder-per-feature.md)** | `FEAT` | Vertical slice architecture with feature-local DTOs, controllers, and services eliminating cross-module leakage. |
-| **[`hybrid-dual-scope-execution.md`](architecture/hybrid-dual-scope-execution.md)** | `HYBRID` | Bridges Desktop WinForms apps and stateless WebAPI microservices over shared transactional business engines. |
-| **[`universe-plugin.md`](architecture/universe-plugin.md)** | `UNIVERSE` | Plugin micro-kernel v4.0 with data sovereignty, isolated auto-registry, and indirect event communication. |
+| **[`hybrid-dual-scope-execution.md`](architecture/hybrid-dual-scope-execution.md)** | `DUAL` | Bridges Desktop WinForms apps and stateless WebAPI microservices over shared transactional business engines. |
+| **[`universe-plugin.md`](architecture/universe-plugin.md)** | `UNIV` | Plugin micro-kernel v4.0 with data sovereignty, isolated auto-registry, and indirect event communication. |
 | **[`solid-and-separation-of-concerns.md`](architecture/solid-and-separation-of-concerns.md)** | `SOLID` | Pragmatic SOLID compliance matrix, explicit layer boundary guards, and 1-to-1 partial service partitioning. |
 | **[`event-driven-architecture.md`](architecture/event-driven-architecture.md)** | `EVT` | Asynchronous domain events, Transactional Outbox pattern for dual-write safety, and idempotent consumers. |
 | **[`resilience-patterns.md`](architecture/resilience-patterns.md)** | `RES` | Circuit Breaker, Exponential Backoff with Jitter, and Stale-While-Revalidate Fallback Caching. |
 | **[`micro-frontends.md`](architecture/micro-frontends.md)** | `MFE` | Module Federation, isolated sub-app mounting, decentralized routing, and contract-driven shared state. |
-| **[`multi-tenancy.md`](architecture/multi-tenancy.md)** | `TENANT` | Multi-tenant data segregation models: Row-Level Security (RLS), Schema-per-tenant, and DB-per-tenant. |
-| **[`tiled-data-pipeline.md`](architecture/tiled-data-pipeline.md)** | `TILED` | High-throughput tiled pipeline using ring buffers, bounded channels, and tile partitioning for big data. |
-| **[`game-engine-architecture.md`](architecture/game-engine-architecture.md)** | `GAME_ARC` | Server-authoritative simulation, fixed-timestep physics loop decoupled from rendering, and zero-allocation entity pools. |
+| **[`multi-tenancy.md`](architecture/multi-tenancy.md)** | `MT` | Multi-tenant data segregation models: Row-Level Security (RLS), Schema-per-tenant, and DB-per-tenant. |
+| **[`tiled-data-pipeline.md`](architecture/tiled-data-pipeline.md)** | `PIPE` | High-throughput tiled pipeline using ring buffers, bounded channels, and tile partitioning for big data. |
+| **[`game-engine-architecture.md`](architecture/game-engine-architecture.md)** | `GAME` | Server-authoritative simulation, fixed-timestep physics loop decoupled from rendering, and zero-allocation entity pools. |
 | **[`real-time-embedded-architecture.md`](architecture/real-time-embedded-architecture.md)** | `EMBED_ARCH` | Real-time RTOS firmware invariants, linker auto-init, multi-tier memory governance, and priority hooking. |
-| **[`agent-skill-router-architecture.md`](architecture/agent-skill-router-architecture.md)** | `ROUTE_ARC` | Deterministic router-first dispatch, Machine-Local Tool-Index SSoT, and capability auto-bootstrapping. |
+| **[`agent-skill-router-architecture.md`](architecture/agent-skill-router-architecture.md)** | `ROUTEARC` | Deterministic router-first dispatch, Machine-Local Tool-Index SSoT, and capability auto-bootstrapping. |
 | **[`research-manager-orchestration.md`](architecture/research-manager-orchestration.md)** | `RES_ARC` | Triad separation (Explorer, Verifier, Historian), 5-way decision gate, and $K \le 2$ anti-dead-loop rollback. |
 | **[`research-memory-schema.md`](architecture/research-memory-schema.md)** | `RES_SCHEMA` | 8-entity cognitive research knowledge graph (H, E, X, R, F, A, C, D) and Dual-Substrate persistence. |
 | **[`dead-loop-and-stagnation-detector.md`](architecture/dead-loop-and-stagnation-detector.md)** | `LOOP_ARC` | Dual-mode dead-loop detector with sliding-window path hashing and semantic similarity cosine matrix ($\ge 0.82$). |
@@ -171,7 +171,7 @@ The framework is organized into 8 clean architectural tiers:
 
 ---
 
-## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (73 Skills across 12 Clusters)
+## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (81 Skills across 15 Clusters)
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/` — 13 Skills)
 - **`action-first-cognitive-ux`**: Action-first communication protocol reducing human cognitive load (ADHD-aware, zero pleasantry preamble, micro-actions $< 2$ min, visual progress proofs).
@@ -194,10 +194,10 @@ The framework is organized into 8 clean architectural tiers:
 - **`ablation-study-protocol`**: Drop-one-out and add-one-in ablation study harnesses, component contribution scoring ($C_i$), and architectural complexity pruning.
 - **`statistical-benchmark-analysis`**: Robust non-parametric benchmarking, warm-up run exclusion, IQR outlier filtering, p90/p99 tail latency analysis, and Mann-Whitney U / Welch significance tests.
 - **`prior-art-gap-analysis`**: Multi-dimensional competitive matrix, Pareto frontier trade-off evaluation, and explicit architectural niche definition.
-- **`failed-approach-negative-memory`**: Anti-repetition pattern matching, cause-of-death deep causal extraction, prompt-injected negative constraints, and graveyard registry ("Cái này thử rồi, đừng làm lại").
+- **`failed-approach-negative-memory`**: Anti-repetition pattern matching, cause-of-death deep causal extraction, prompt-injected negative constraints, and graveyard registry ("Never repeat a verified failed approach").
 - **`dead-loop-stagnation-detection`**: Structural graph cycle interception ($A \to B \to C \to A$), semantic similarity matrices, epistemic entropy tracking, and research stagnation circuit breakers.
 - **`multi-dimensional-budget-governance`**: Multi-vector budget ledger, token/time burn telemetry, search quota clamps, and 5-experiment zero-gain stagnation forced pivots.
-- **`expected-information-gain-protocol`**: Pre-flight epistemic gate ("Thử nghiệm này giúp tôi biết thêm điều gì mới?"), candidate ranking by eROI, and zero-gain experiment pruning.
+- **`expected-information-gain-protocol`**: Pre-flight epistemic gate ("Will this experiment yield fundamentally new information?"), candidate ranking by eROI, and zero-gain experiment pruning.
 - **`autonomous-question-generation`**: 6-axis Socratic problem decomposition, question dependency DAGs, epistemic priority sorting, and question-to-hypothesis transformation.
 
 ### 3. 🎮 Game Development & ARPG Engine (`skills/game/` — 6 Skills)
@@ -261,7 +261,20 @@ The framework is organized into 8 clean architectural tiers:
 - **`sqlserver-index-advisor`** (`SQLIDX`): Equality $\to$ Range $\to$ Sort composite index rules, covering index design (`INCLUDE`), filtered indexes (`IsDeleted = 0`), and DMV diagnostic scripts for missing/unused/fragmented indexes.
 - **`sqlserver-plan-inspection`** (`SQLPLAN`): Graphical & XML execution plan inspection, detecting parameter sniffing via compiled vs runtime values, TempDB spills, and pre/post plan regression comparison.
 
-### 12. 🔄 Sovereign Agentic Lifecycle Workflows (`skills/*/SKILL.md` — 7 Workflows)
+### 12. 🐍 Python & AI Workflow Engineering (`skills/python/` — 3 Skills)
+- **`async-taskgroup-orchestration`** (`PY_SKILL_ASYNC`): Structured concurrency with `asyncio.TaskGroup`, bounded semaphores, and CPU/blocking I/O offloading via `to_thread` / `ProcessPoolExecutor`.
+- **`pydantic-v2-boundary-validation`** (`PY_SKILL_PYDANTIC`): Zero-overhead `TypeAdapter` validation, strict mode DTO schemas, discriminated unions, and custom boundary validators.
+- **`structured-llm-tool-calling`** (`PY_SKILL_AGENT`): Deterministic state-machine agent loops, bounded retries, schema-enforced tool dispatch, and SSE token streaming.
+
+### 13. 🦀 Rust Systems & Low-Latency Engineering (`skills/rust/` — 3 Skills)
+- **`zero-copy-arena-lifetimes`** (`RUST_SKILL_ZCOPY`): Bump/arena allocation, zero-copy slice parsing, `Cow<str>`, and 64-byte cacheline-aligned ring buffers.
+- **`typestate-error-taxonomy`** (`RUST_SKILL_ERR`): Compile-time typestate machines, zero-panic `Result<T, E>` hierarchies with `thiserror`, and infallible transitions.
+- **`ffi-panic-boundary-guard`** (`RUST_SKILL_FFI`): `catch_unwind` FFI barriers, `#[repr(C)]` layout verification, opaque pointer handles, and safety contracts.
+
+### 14. 🎨 Enterprise Multi-Platform UI Design System (`skills/ui-design-system/` — 1 Sovereign Package + 3 References)
+- **`ui-design-system`** (`UIDESIGN`): Universal Multi-Platform UI/UX Design System for WinForms (DevExpress), WPF, Web (React/Tailwind) & Mobile, backed by progressive sub-references (`UI_TOKENS`, `UI_COMPONENTS`, `UI_PLATFORM`).
+
+### 15. 🔄 Sovereign Agentic Lifecycle Workflows (`skills/*/SKILL.md` — 8 Workflows)
 - **`feature-implementation`** (`WF_FEAT`): End-to-end automated feature development workflow (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
 - **`bugfix-investigation`** (`WF_BUG`): 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
 - **`code-refactoring`** (`WF_REF`): Zero-regression code refactoring and modularization workflow (Blast-Radius, 1-to-1 Partitioning, Conformance, and Net Engineering Value).
@@ -269,25 +282,27 @@ The framework is organized into 8 clean architectural tiers:
 - **`project-bootstrap-doctor`** (`WF_DOC`): Automated project onboarding, rule binding, and architectural compliance health-check workflow.
 - **`continuous-learning-harvest`** (`WF_MEM`): Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 - **`cognitive-experiment-loop`** (`WF_COG`): 5-phase closed cognitive loop (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
+- **`multi-agent-teamwork`** (`WF_TEAM`): Multi-agent subagent team orchestration with zero-collision file ownership locks, parallel partitioning, and 4-stage adversarial verification gates.
 
 ---
 
-## 📜 Universal & Language Standards Catalog (59 Standards)
+## 📜 Universal & Language Standards Catalog (65 Standards across 13 Stacks)
 
 | Domain | Count | Key Standards & Technical Guidelines |
 | :--- | :---: | :--- |
 | **Universal Engineering** | **22** | `agent-meta.md`, `working-memory-state.md`, `naming-conventions.md`, `performance-guidelines.md`, `conformance-testing.md`, `test-logic.md`, `git-commit-standards.md`, `versioning-and-release-standards.md`, `llm-contribution-and-governance.md`, `license-governance-and-ip-compliance.md`, `benchmark-and-hardware-provenance.md`, `scientific-research-methodology.md`, `literature-synthesis-and-prior-art.md`, `research-memory-standard.md`, `package-and-dependency-portability.md`, `security-standards.md`, `ui-ux-design-system.md`, `ui-layout-and-color-mastery.md`, `ui-anti-ai-slop-standard.md`, `multi-objective-refactoring.md`, `empirical-verification-and-evidence-hierarchy.md`, `existing-asset-discovery-and-reuse.md`. |
-| **Rust Systems** | **3** | `memory-performance.md` (Zero-Alloc Hot Loops, 64B Cacheline Alignment, SIMD & Pools), `safety-error-handling.md` (Zero-Panic Invariant, Explicit Result, Safe RAII & C-FFI), `toolchain-quality.md` (Clippy -D warnings, rustfmt, Headless Mocks & <450 LOC). |
-| **Embedded & RTOS** | **1** | `firmware-engineering.md` (Linker Auto-Init, Multi-Tier Memory Hub, Priority Event Hooks, 2D DMA, Stack Canary). |
-| **C# .NET & Godot** | **6** | `high-performance-compute.md` (SIMD/Span), `godot-game-standards.md` (C# 4.x), `webapi.md` (Clean DI), `winforms.md` (No BindingSource), `wpf-ui.md` (Fluent Tokens), `wpf.md` (Pure XAML). |
+| **C# .NET & Godot** | **7** | `high-performance-compute.md` (SIMD/Span), `godot-game-standards.md` (C# 4.x), `webapi.md` (Clean DI), `winforms.md` (BaseForm/No BindingSource), `winforms-ui.md` (DevExpress Skinning/Grid), `wpf-ui.md` (Fluent Tokens), `wpf.md` (MVVM/Virtualization). |
+| **Database & SQL Server** | **5** | `sqlserver-2012-optimization.md` (SARGability/Types/#Temp), `execution-plan-diagnosis.md` (Lookups/Spills/Joins), `indexing-optimization.md` (Covering/Filtered), `concurrency-deadlocks.md` (RCSI/UPDLOCK/ROWVERSION), `bulk-audit.md` (TVP/SqlBulkCopy/Outbox Audit). |
 | **Android & Mobile** | **5** | `state-architecture.md` (UDF/MVI), `compose-ui-ux.md` (Recomposition), `camera-computational.md` (Camera2/X), `ndk-native-bridge.md` (Zero-Copy JNI), `performance-optimization.md` (R8/Baseline). |
-| **C++ Modern** | **1** | `native-interop.md` (C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP). |
-| **Node.js** | **3** | `architecture.md` (Layer Separation), `event-loop-streams.md` (Backpressure), `security-middleware.md` (Sanitization). |
-| **React** | **3** | `component-lifecycle.md` (Hook Cleanup), `performance.md` (useMemo/memo), `state-management.md` (Colocation/Zustand). |
-| **Go (Golang)** | **3** | `concurrency.md` (Worker Pools/errgroup), `error-observability.md` (%w/slog), `memory-allocation.md` (sync.Pool/Zero-Alloc). |
-| **PHP 8.2+** | **3** | `database-transactions.md` (Row Locking), `memory-generators.md` (Streaming Yield), `modern-syntax.md` (strict_types=1). |
-| **Database & SQL Server** | **5** | `sqlserver-2012-optimization.md` (SARGability/Types/#Temp), `execution-plan-diagnosis.md` (Lookups/Spills/Joins), `indexing-optimization.md` (Covering/SARGable), `concurrency-deadlocks.md` (RCSI), `bulk-audit.md` (Chunked Audit). |
+| **Python & AI** | **4** | `ai-agent-orchestration.md` (Cyclic State Graphs/Cycle Limits), `code-quality-typing.md` (Python 3.10+ Strict Typing/Pydantic v2), `fastapi-async-web.md` (Lifespan/SSE Framing), `performance-async.md` (Non-Blocking Event Loop/TaskGroup). |
+| **React & Web UI** | **4** | `component-lifecycle.md` (Hook Cleanup/Error Boundaries), `performance.md` (Virtualization/useTransition), `react-ui.md` (Tailwind High-Density Tables), `state-management.md` (TanStack Query/Zustand). |
 | **Enterprise ERP** | **4** | `inventory-invariants.md` (Double-Entry/Row Locks), `production-lot-traceability.md` (Lineage/BOM), `sales-packing-journal.md` (NKDG/Journals), `rbac-permission-matrix.md` (2-Tier/RLS). |
+| **Rust Systems** | **3** | `memory-performance.md` (Zero-Alloc Hot Loops, 64B Cacheline Alignment, SIMD & Pools), `safety-error-handling.md` (Zero-Panic Invariant, Explicit Result, Safe RAII & C-FFI), `toolchain-quality.md` (Clippy -D warnings, rustfmt, Headless Mocks & <450 LOC). |
+| **Node.js** | **3** | `architecture.md` (Handler-Dispatcher/Clean DI), `event-loop-streams.md` (Stream Pipeline/Worker Offload), `security-middleware.md` (Rate Limiting/CSP/SSRF Guard). |
+| **Go (Golang)** | **3** | `concurrency.md` (Bounded Worker Pools/errgroup), `error-observability.md` (%w/slog/OTel), `memory-allocation.md` (Escape Analysis/sync.Pool/3-Index Slicing). |
+| **PHP 8.2+** | **3** | `database-transactions.md` (PDO FOR UPDATE/Deadlock Retry), `memory-generators.md` (Unbuffered Streaming Yield), `modern-syntax.md` (strict_types=1/Readonly/Enums). |
+| **Embedded & RTOS** | **1** | `firmware-engineering.md` (Linker Auto-Init, Multi-Tier Memory Hub, Priority Event Hooks, 2D DMA, Stack Canary). |
+| **C++ Modern** | **1** | `native-interop.md` (C-ABI DLL Export, Zero-Copy Shared Memory, OpenMP). |
 
 ---
 
@@ -299,12 +314,12 @@ To bind any codebase (new or existing) to the **AgentOption** engineering operat
 ---
 project_name: <project_id>
 domain: <domain_name>
-primary_language: <nodejs | react | csharp | go | php | cpp | android>
+primary_language: <nodejs | react | csharp | go | php | python | rust | cpp | android>
 architecture: <clean_architecture | universe_plugin | winforms_erp | game_engine | research_lab>
 framework_references:
   agent_option_root: "[AgentOption]"      # Resolved automatically by AI Agents
-  rules: ["R_CORE", "R_ENG_OS", "R_ROUTE", "R_GIT", "R_ACT", "R_RESEARCH", "R_BUDGET", "R_COG_LOOP", "R_PROOF", "R_NEV"]
-  shortcuts: ["ENGOS", "ROUTE", "GIT", "ACT", "RES_STD", "RES_MEM", "COG_LOOP", "WF_COG", "REF_GATE", "PROOF_STD"]
+  rules: ["R_CORE", "R_ENG_OS", "R_ROUTE", "R_GIT", "R_ACT", "R_RESEARCH", "R_BUDGET", "R_COG_LOOP", "R_PROOF", "R_NEV", "R_TEAM"]
+  shortcuts: ["ENGOS", "ROUTE", "GIT", "ACT", "RES_STD", "RES_MEM", "COG_LOOP", "WF_COG", "REF_GATE", "PROOF_STD", "TEAM_ARC", "WF_TEAM"]
 ---
 ```
 
@@ -319,12 +334,12 @@ framework_references:
 ## 🛠️ Developer & AI Agent Toolchain CLI
 
 ```bash
-# 1. Fast Lookup across all 162 shortcuts and 160 core documents:
+# 1. Fast Lookup across all 187 shortcuts and 185 core documents:
 node [AgentOption]/tools/lookup.js "circuit breaker"
 node [AgentOption]/tools/lookup.js "cancellation" --lang=csharp
-node [AgentOption]/tools/lookup.js REV_FRIDA
-node [AgentOption]/tools/lookup.js SEC_API
-node [AgentOption]/tools/lookup.js "race condition"
+node [AgentOption]/tools/lookup.js PY_AGENT
+node [AgentOption]/tools/lookup.js TEAM_ARC
+node [AgentOption]/tools/lookup.js "architect" --type=agents
 
 # 2. Check health and compliance of a target repository:
 node [AgentOption]/tools/doctor.js <path-to-target-repo>
@@ -334,6 +349,7 @@ node [AgentOption]/tools/validate-framework.js
 
 # 4. Continuous Learning & Semantic Memory Loop (Bridged to agentic-brain):
 node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval
+node [AgentOption]/tools/brain.js route "task description"      # System 1 fast rule/skill/agent dispatch
 node [AgentOption]/tools/brain.js view 42                       # L1 deep inspection
 node [AgentOption]/tools/brain.js post "problem | cause | fix"  # Quality-guarded harvest
 node [AgentOption]/tools/brain.js curate --dry-run              # Memory lifecycle audit
@@ -346,11 +362,15 @@ node [AgentOption]/tools/bin-triage.js <target_binary> --strings --min-len=8 # E
 # 6. Deterministic CVSS v3.1 Calculator & CWE Taxonomy Lookup:
 node [AgentOption]/tools/cvss.js "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
 node [AgentOption]/tools/cvss.js "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N" --markdown
-node [AgentOption]/tools/cvss.js --lookup IDOR                  # Search CWE & suggested vector
+node [AgentOption]/tools/cvss.js --lookup=IDOR                  # Search CWE & suggested vector
 
 # 7. Pre-Flight Scope Authorization Guard:
 node [AgentOption]/tools/scope-guard.js --init                  # Bootstrap .scope-contract.json
 node [AgentOption]/tools/scope-guard.js check "https://api-staging.example.com"
+
+# 8. Multi-Target Agent Exporter & Global Antigravity Skill Sync:
+node [AgentOption]/tools/export-agents.js --target=all          # Export 12 personas to Claude/Cursor/Antigravity
+node [AgentOption]/tools/export-agents.js --sync-skills         # Sync sovereign SKILL.md packages to .gemini/config/skills
 ```
 
 ---
@@ -358,3 +378,4 @@ node [AgentOption]/tools/scope-guard.js check "https://api-staging.example.com"
 ## 📄 License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
+
