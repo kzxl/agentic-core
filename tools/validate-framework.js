@@ -13,15 +13,28 @@ const {
   loadRules,
   loadShortcuts,
   parseFrontmatter,
-  walkMarkdownFiles
+  walkMarkdownFiles,
+  parseCliArgs
 } = require('./lib/framework-core');
+
+const { flags } = parseCliArgs(process.argv.slice(2));
+const profileMode = Boolean(flags.profile);
 
 console.log('🔍 Validating AgentOption Framework...\n');
 
 let errorCount = 0;
 let fileCount = 0;
+let checkedLinkCount = 0;
 const usedRules = new Set();
 const contentFiles = [];
+
+const MIN_STANDARD_BYTES = 1500;
+const layerStats = {
+  'architecture/': { files: 0, bytes: 0, tokens: 0, minBytes: Infinity, maxBytes: 0 },
+  'standards/': { files: 0, bytes: 0, tokens: 0, minBytes: Infinity, maxBytes: 0 },
+  'skills/': { files: 0, bytes: 0, tokens: 0, minBytes: Infinity, maxBytes: 0 },
+  'agents/': { files: 0, bytes: 0, tokens: 0, minBytes: Infinity, maxBytes: 0 }
+};
 
 // 1. Validate rules.json
 let rulesData = {};
@@ -134,15 +147,87 @@ if (!fs.existsSync(projectRuleFile)) {
   }
 }
 
-// 5. Recursive Markdown Validator
+// 5. Internal Markdown Link Validator
+function verifyMarkdownLinks(filePath, relativePath, content) {
+  if (relativePath.startsWith('templates/')) return;
+
+  // Strip fenced code blocks and inline code spans to avoid matching example links
+  const stripped = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`\r\n]+`/g, '');
+
+  const linkRegex = /!?\[[^\]]*\]\(([^)]+)\)/g;
+  let match;
+  while ((match = linkRegex.exec(stripped)) !== null) {
+    const rawTarget = match[1].trim().replace(/\s+["'][^"']*["']$/, '');
+    if (!rawTarget) continue;
+
+    // Ignore external protocols, anchors, and template placeholders
+    if (
+      /^(?:https?:|mailto:|conversation:|#)/i.test(rawTarget) ||
+      rawTarget.includes('[AgentOption]') ||
+      /[<>{}*]/.test(rawTarget)
+    ) {
+      continue;
+    }
+
+    const withoutAnchor = rawTarget.split('#')[0].trim();
+    if (!withoutAnchor) continue;
+
+    let resolvedPath = null;
+    try {
+      if (/^file:\/\/\//i.test(withoutAnchor)) {
+        const decoded = decodeURIComponent(withoutAnchor.replace(/^file:\/\/\//i, ''));
+        resolvedPath = path.normalize(decoded);
+      } else {
+        const decoded = decodeURIComponent(withoutAnchor);
+        const relToFile = path.resolve(path.dirname(filePath), decoded);
+        if (fs.existsSync(relToFile)) {
+          resolvedPath = relToFile;
+        } else {
+          resolvedPath = path.resolve(ROOT_DIR, decoded);
+        }
+      }
+    } catch {
+      resolvedPath = path.resolve(path.dirname(filePath), withoutAnchor);
+    }
+
+    checkedLinkCount++;
+    if (!resolvedPath || !fs.existsSync(resolvedPath)) {
+      console.error(`❌ [${relativePath}] Broken markdown link target: "${rawTarget}"`);
+      errorCount++;
+    }
+  }
+}
+
+// 6. Recursive Markdown Validator & Depth Profiler
 const CORE_PREFIXES = ['architecture/', 'standards/', 'skills/', 'agents/'];
 
 function isSkillPackageSubResource(relativePath) {
   return /^skills\/[^/]+\/(?:references|examples|resources)\/.+\.md$/.test(relativePath);
 }
 
+function recordLayerProfile(relativePath, byteLength) {
+  for (const prefix of CORE_PREFIXES) {
+    if (relativePath.startsWith(prefix)) {
+      const stat = layerStats[prefix];
+      stat.files++;
+      stat.bytes += byteLength;
+      stat.tokens += Math.ceil(byteLength / 4);
+      if (byteLength < stat.minBytes) stat.minBytes = byteLength;
+      if (byteLength > stat.maxBytes) stat.maxBytes = byteLength;
+      break;
+    }
+  }
+}
+
 function validateFile(filePath) {
   const relativePath = path.relative(ROOT_DIR, filePath).replace(/\\/g, '/');
+  const content = fs.readFileSync(filePath, 'utf8');
+  const byteLength = Buffer.byteLength(content, 'utf8');
+
+  verifyMarkdownLinks(filePath, relativePath, content);
+
   if (
     relativePath === 'README.md' ||
     relativePath.startsWith('templates/') ||
@@ -155,9 +240,17 @@ function validateFile(filePath) {
   const isCoreContent = CORE_PREFIXES.some(prefix => relativePath.startsWith(prefix));
   if (isCoreContent) {
     contentFiles.push(relativePath);
+    recordLayerProfile(relativePath, byteLength);
   }
 
-  const content = fs.readFileSync(filePath, 'utf8');
+  // Enforce baseline minimum depth on standards/
+  if (relativePath.startsWith('standards/') && byteLength < MIN_STANDARD_BYTES) {
+    console.error(
+      `❌ [${relativePath}] Standard file below minimum depth (${byteLength} bytes < ${MIN_STANDARD_BYTES} bytes)`
+    );
+    errorCount++;
+  }
+
   const fm = parseFrontmatter(content);
 
   if (!fm.hasFrontmatter) {
@@ -220,7 +313,47 @@ function validateMarkdownFiles(dir) {
 
 validateMarkdownFiles(ROOT_DIR);
 
-// 6. Shortcut Coverage Check (treating skill sub-resources as covered if parent SKILL.md is covered)
+// 7. SSoT Vital Metrics Sync Verification (README.md vs Disk)
+function verifyReadmeVitalMetrics() {
+  const readmePath = path.join(ROOT_DIR, 'README.md');
+  if (!fs.existsSync(readmePath)) {
+    console.error('❌ Missing README.md at repository root!');
+    errorCount++;
+    return;
+  }
+
+  const readmeContent = fs.readFileSync(readmePath, 'utf8');
+  const expectedMetrics = {
+    'Agent Personas & Specialist Roles': layerStats['agents/'].files,
+    'Architectural Blueprints': layerStats['architecture/'].files,
+    'Language & Enterprise Standards': layerStats['standards/'].files,
+    'Universal Machine Rules': validRuleKeys.size,
+    'Agent Quick-Routing Shortcuts': validShortcutKeys.size
+  };
+
+  const parsedMetrics = {};
+  const rowRegex = /^\|\s*\*\*([^*]+)\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|/gm;
+  let match;
+  while ((match = rowRegex.exec(readmeContent)) !== null) {
+    parsedMetrics[match[1].trim()] = parseInt(match[2], 10);
+  }
+
+  for (const [metricName, actualCount] of Object.entries(expectedMetrics)) {
+    if (!(metricName in parsedMetrics)) {
+      console.error(`❌ [README.md] Missing Vital Metric row in table: "${metricName}"`);
+      errorCount++;
+    } else if (parsedMetrics[metricName] !== actualCount) {
+      console.error(
+        `❌ [README.md] Vital Metric out of sync for "${metricName}": documented ${parsedMetrics[metricName]}, actual ${actualCount}`
+      );
+      errorCount++;
+    }
+  }
+}
+
+verifyReadmeVitalMetrics();
+
+// 8. Shortcut Coverage Check (treating skill sub-resources as covered if parent SKILL.md is covered)
 const uncoveredFiles = contentFiles.filter(f => {
   if (shortcutTargets.has(f)) return false;
   if (isSkillPackageSubResource(f)) {
@@ -238,8 +371,28 @@ const coveragePct = contentFiles.length > 0
 console.log(`\n📊 Framework Audit Summary:`);
 console.log(`   - Total Markdown Files: ${fileCount}`);
 console.log(`   - Core Content Files: ${contentFiles.length}`);
+console.log(`   - Internal Links Verified: ${checkedLinkCount}`);
 console.log(`   - Defined Rules: ${validRuleKeys.size} (Used: ${usedRules.size})`);
 console.log(`   - Shortcuts Coverage: ${coveredCount}/${contentFiles.length} (${coveragePct}%)`);
+
+if (profileMode) {
+  console.log(`\n📐 Layer-by-Layer Token & Depth Profile (--profile):`);
+  let totalCoreBytes = 0;
+  let totalCoreTokens = 0;
+  for (const [layer, stat] of Object.entries(layerStats)) {
+    totalCoreBytes += stat.bytes;
+    totalCoreTokens += stat.tokens;
+    const minKb = stat.files > 0 ? (stat.minBytes / 1024).toFixed(2) : '0.00';
+    const maxKb = stat.files > 0 ? (stat.maxBytes / 1024).toFixed(2) : '0.00';
+    const avgTokens = stat.files > 0 ? Math.round(stat.tokens / stat.files) : 0;
+    console.log(
+      `   - ${layer.padEnd(14)} | Files: ${String(stat.files).padStart(2)} | Bytes: ${String(stat.bytes).padStart(7)} | Est. Tokens: ~${String(stat.tokens).padStart(6)} (avg ~${avgTokens}/file, range ${minKb}KB–${maxKb}KB)`
+    );
+  }
+  console.log(
+    `   - TOTAL CORE     | Files: ${String(contentFiles.length).padStart(2)} | Bytes: ${String(totalCoreBytes).padStart(7)} | Est. Tokens: ~${String(totalCoreTokens).padStart(6)}`
+  );
+}
 
 if (uncoveredFiles.length > 0) {
   console.log(`   ⚠️ Content files without shortcut:`);
@@ -257,4 +410,5 @@ if (errorCount > 0) {
 } else {
   console.log('✨ All AgentOption rules, skills, and shortcuts are 100% valid!');
 }
+
 

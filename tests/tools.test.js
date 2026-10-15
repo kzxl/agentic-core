@@ -394,3 +394,40 @@ test('SemanticBrain project-helper & route-decision: infers all 13 stacks and re
   assert.ok(routeRes.decision.recommended_agents.some(a => a.shortcut === 'AGT_RUST_ARC'));
 });
 
+// ============================================================================
+// 6. validate-framework.js (Links, SSoT Metrics, Depth & --profile) Tests
+// ============================================================================
+test('validate-framework.js: passes with 0 errors, verifies markdown links, and outputs layer token profile with --profile', () => {
+  const validatorScript = path.join(ROOT_DIR, 'tools', 'validate-framework.js');
+  const res = spawnSync(process.execPath, [validatorScript, '--profile'], { encoding: 'utf8' });
+
+  assert.equal(res.status, 0, `Expected validate-framework.js to exit 0, stderr: ${res.stderr}`);
+  assert.ok(res.stdout.includes('Errors found: 0'));
+  assert.ok(res.stdout.includes('Internal Links Verified:'));
+  assert.ok(res.stdout.includes('Layer-by-Layer Token & Depth Profile (--profile):'));
+  assert.ok(res.stdout.includes('Shortcuts Coverage: 185/185 (100.0%)'));
+});
+
+test('Sovereign Workflow SKILL.md files: meet deep upgrade depth threshold (3.8 KB - 5.0 KB) and retain valid frontmatter', () => {
+  const targetSkills = [
+    'skills/dotnet-publish-release/SKILL.md',
+    'skills/project-bootstrap-doctor/SKILL.md',
+    'skills/continuous-learning-harvest/SKILL.md',
+    'skills/bugfix-investigation/SKILL.md',
+    'skills/feature-implementation/SKILL.md'
+  ];
+
+  for (const relPath of targetSkills) {
+    const absPath = path.join(ROOT_DIR, relPath);
+    const content = fs.readFileSync(absPath, 'utf8');
+    const bytes = Buffer.byteLength(content, 'utf8');
+    assert.ok(bytes >= 3800 && bytes <= 5000, `Expected ${relPath} size (${bytes}B) to be between 3800B and 5000B`);
+
+    const fm = parseFrontmatter(content);
+    assert.equal(fm.hasFrontmatter, true, `Expected frontmatter in ${relPath}`);
+    assert.equal(fm.malformed, false, `Expected valid frontmatter in ${relPath}`);
+    assert.ok(fm.rules.length > 0, `Expected non-empty rules in ${relPath}`);
+  }
+});
+
+
