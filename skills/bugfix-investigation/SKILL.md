@@ -1,10 +1,11 @@
 ---
-name: BugfixInvestigationWorkflow
-desc: 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow
-rules: [R_CORE, R_TDD, R_EPISTEMIC]
-category: Workflows
+name: bugfix-investigation
+description: Systematic 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
+desc: Systematic 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
+rules: [R_CORE, R_TDD, R_PROOF, R_RES_MEM]
 ---
-# 🔬 Systematic Bugfix & Root-Cause Investigation Workflow
+
+# Systematic Bugfix & Root-Cause Investigation Workflow
 
 **Goal:** Diagnose and resolve complex production bugs, race conditions, memory leaks, and UI crashes using scientific proof and regression tests rather than speculative guesswork.
 

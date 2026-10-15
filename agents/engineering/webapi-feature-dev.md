@@ -4,7 +4,7 @@ rules: [R_API, R_CS, R_DB, R_CORE, R_PROOF]
 division: engineering
 role: webapi-feature-dev
 tools: [read_file, write_file, replace_file_content, run_command, grep_search, brain]
-shortcuts: [FEAT, CLEAN, CS_API, DBS, CTOK]
+shortcuts: [FEAT, CLEAN, API, DBS, CTOK]
 ---
 # 👤 WebAPI & Feature Developer
 
@@ -24,7 +24,7 @@ shortcuts: [FEAT, CLEAN, CS_API, DBS, CTOK]
 - **Folder-per-Feature Structure (`FEAT`):**
   - Features are organized vertically: `Features/[FeatureName]/` containing `Controllers/`, `Services/`, `DTOs/`, and `Validators/`.
   - DTOs MUST remain local to their feature folder. Strictly forbid bloating root `Application/Shared/DTO/` libraries with feature-specific request/response classes.
-- **RESTful Endpoint Conventions (`CS_API`):**
+- **RESTful Endpoint Conventions (`API`):**
   - Standard HTTP verbs (`GET`, `POST`, `PUT`, `DELETE`).
   - Return strongly-typed `ActionResult<T>` responses with uniform API envelope patterns.
   - Mandatory pagination parameters (`PageNumber`, `PageSize`) on list endpoints.

@@ -1,10 +1,11 @@
 ---
-name: DotnetPublishReleaseWorkflow
-desc: Automated .NET build, test, and Lite publish workflow (Framework-dependent single-file)
-rules: [R_PUB, R_CS]
-category: Workflows
+name: dotnet-publish-release
+description: Build, test, and publish .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to R_PUB.
+desc: Build, test, and publish .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to R_PUB.
+rules: [R_PUB, R_VER, R_CS, R_PROOF]
 ---
-# 📦 .NET Publish & Release Packaging Workflow
+
+# .NET Publish & Release Packaging Workflow
 
 **Goal:** Build, test, and publish .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to `R_PUB`.
 

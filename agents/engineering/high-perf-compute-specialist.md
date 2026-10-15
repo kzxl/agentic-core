@@ -4,7 +4,7 @@ rules: [R_PERF, R_CS, R_CPP, R_PIPE, R_BENCH]
 division: engineering
 role: high-perf-compute-specialist
 tools: [read_file, write_file, replace_file_content, run_command, grep_search]
-shortcuts: [CS_PERF, CS_COMP, TILED, BENCH_STD]
+shortcuts: [HPC, ZCOPY, CPP, PIPE, BENCH, MEM]
 ---
 # 👤 High-Performance Compute Specialist
 
@@ -25,7 +25,7 @@ shortcuts: [CS_PERF, CS_COMP, TILED, BENCH_STD]
   - Hot loops, tick paths, and serialization routines MUST NOT allocate heap objects (`0 B allocated`).
   - Extensively utilize `Span<T>`, `ReadOnlySpan<T>`, `Memory<T>`, and `ref struct` wrappers.
   - Rent pooled memory from `ArrayPool<T>.Shared` or custom ring buffers, ensuring guaranteed disposal in `finally` blocks.
-- **Hardware Vectorization (`CS_PERF`):**
+- **Hardware Vectorization (`HPC`):**
   - Accelerate batch operations (arithmetic, filtering, hashing, string comparison) using hardware intrinsics (`Avx2`, `Avx512F`, `AdvSimd`).
   - Always provide a scalar fallback path for non-supported hardware platforms.
 - **Empirical Benchmarking Invariant (`R_BENCH`):**

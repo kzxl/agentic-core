@@ -4,7 +4,7 @@ rules: [R_WPF, R_CS, R_CORE, R_PROOF]
 division: engineering
 role: winforms-modernizer
 tools: [read_file, write_file, replace_file_content, run_command, grep_search, brain]
-shortcuts: [CS_WIN, BASE_FORM, PART, DBS, CTOK]
+shortcuts: [WINFORMS, BASE, PART, DBS, CTOK]
 ---
 # 👤 WinForms Modernization Specialist
 
@@ -26,7 +26,7 @@ shortcuts: [CS_WIN, BASE_FORM, PART, DBS, CTOK]
   - Enforce explicit, deterministic 1-way manual mapping:
     - `PopulateControls(model)`: Populates UI inputs from strongly-typed DTO.
     - `CollectData()`: Extracts and validates user inputs into a clean DTO.
-- **BaseForm Lifecycle & Non-Blocking UI (`BASE_FORM`):**
+- **BaseForm Lifecycle & Non-Blocking UI (`BASE`):**
   - Forms must inherit from `BaseForm` (or `XtraBaseForm`).
   - Heavy database queries, lookup list population, and remote calls MUST execute inside `RunAfterShown` delegates to prevent blank/frozen window states upon startup.
   - Safe exception handling in `async void` UI event handlers with user-friendly error dialogs.

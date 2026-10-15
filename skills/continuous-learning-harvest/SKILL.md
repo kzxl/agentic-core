@@ -1,10 +1,11 @@
 ---
-name: ContinuousLearningHarvestWorkflow
-desc: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge
-rules: [R_CORE]
-category: Workflows
+name: continuous-learning-harvest
+description: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
+desc: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
+rules: [R_CORE, R_RES_MEM, R_DEAD_LOOP, R_STATE]
 ---
-# 🧠 Continuous Learning & Semantic Memory Workflow
+
+# Continuous Learning & Semantic Memory Workflow
 
 **Goal:** Ensure zero memory loss between agent sessions by enforcing automated pre-task historical retrieval and post-task distilled lesson harvesting.
 

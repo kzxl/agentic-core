@@ -1,10 +1,11 @@
 ---
-name: CognitiveExperimentLoopWorkflow
-desc: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep -> Socratic Inquiry & Baseline -> Pre-Mortem -> Targeted Action -> Grounded Stress -> Comparative Delta -> Dual Memory)
-rules: [R_CORE, R_ENG_OS, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC, R_REUSE]
-category: Workflows
+name: cognitive-experiment-loop
+description: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
+desc: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
+rules: [R_CORE, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC, R_PROOF]
 ---
-# 🔬 Empirical Cognitive Experiment Workflow
+
+# Empirical Cognitive Experiment Workflow
 
 **Goal:** Execute high-complexity, uncertain, or optimization engineering tasks through a strictly verified, 5-phase empirical cognitive loop. Eliminate premature code changes, speculative optimizations, and regression loops.
 

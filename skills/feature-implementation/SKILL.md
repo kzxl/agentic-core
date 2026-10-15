@@ -1,10 +1,11 @@
 ---
-name: FeatureImplementationWorkflow
-desc: End-to-end automated workflow for new feature implementation (Normalization -> Pre-Fetch -> Spec -> TDD -> Blast-Radius -> Commit -> Post-Harvest)
-rules: [R_CORE, R_TDD, R_PRE_MORTEM, R_REUSE]
-category: Workflows
+name: feature-implementation
+description: End-to-end automated workflow for new feature development (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
+desc: End-to-end automated workflow for new feature development (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
+rules: [R_CORE, R_TDD, R_GIT, R_PROOF]
 ---
-# 🚀 End-to-End Feature Implementation Workflow
+
+# End-to-End Feature Implementation Workflow
 
 **Goal:** Execute new feature development autonomously with zero hallucination, strict architectural boundaries, regression safety, and continuous knowledge retention.
 

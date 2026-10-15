@@ -1,10 +1,11 @@
 ---
-name: ProjectBootstrapDoctorWorkflow
-desc: Automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories
-rules: [R_CORE]
-category: Workflows
+name: project-bootstrap-doctor
+description: Automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories.
+desc: Automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories.
+rules: [R_CORE, R_ENG_OS, R_ROUTE, R_PROOF]
 ---
-# 🩺 Project Bootstrap & Compliance Doctor Workflow
+
+# Project Bootstrap & Compliance Doctor Workflow
 
 **Goal:** Bind any target repository to AgentOption standards, initialize `.project-rule.md`, run architectural compliance checks, and index the codebase for AI agents.
 

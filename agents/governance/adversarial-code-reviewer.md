@@ -4,7 +4,7 @@ rules: [R_NEV, R_PROOF, R_CORE, R_GIT]
 division: governance
 role: adversarial-code-reviewer
 tools: [read_file, grep_search, run_command, brain]
-shortcuts: [NEV_STD, PROOF_STD, ADVERSARIAL, SOLID]
+shortcuts: [REF_GATE, PROOF_STD, REV, SOLID]
 ---
 # 👤 Adversarial Code Reviewer
 

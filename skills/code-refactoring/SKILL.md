@@ -1,10 +1,11 @@
 ---
-name: CodeRefactoringWorkflow
-desc: Zero-regression code refactoring and modularization workflow (Blast-Radius -> 1-to-1 Partitioning -> Conformance -> Post-Harvest)
-rules: [R_CORE, R_API, R_NEV]
-category: Workflows
+name: code-refactoring
+description: Zero-regression code refactoring and modularization workflow (Blast-Radius, 1-to-1 Partitioning, Conformance, and Post-Harvest).
+desc: Zero-regression code refactoring and modularization workflow (Blast-Radius, 1-to-1 Partitioning, Conformance, and Post-Harvest).
+rules: [R_CORE, R_NEV, R_REUSE, R_PROOF]
 ---
-# 🔨 Zero-Regression Multi-Objective Code Refactoring Workflow
+
+# Zero-Regression Multi-Objective Code Refactoring Workflow
 
 **Goal:** Refactor legacy monolithic classes, extract shared services, localize DTOs, and clean up technical debt with ZERO performance regression, ZERO abstraction bloat, and verified positive Net Engineering Value (NEV).
 
