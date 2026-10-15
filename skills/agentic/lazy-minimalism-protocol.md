@@ -6,38 +6,85 @@ category: Agentic
 ---
 # 🧘 Agentic Lazy Minimalism Protocol (Ponytail Decision Ladder)
 
-**Goal:** Eliminate over-engineering, prevent code bloat, reduce token consumption, and ship the cleanest, shortest working diff. "The best code is the code you never wrote."
+**Goal:** Eradicate architectural over-engineering, speculative ceremony, and dependency bloat by enforcing the 7-Rung Ponytail Decision Ladder, standard-library reuse (`R_REUSE`), and minimum viable diff size while preserving 100% production safety.
 
 ---
 
-## 1. The 7-Rung Decision Ladder
-
-Climb before writing any code. Stop at the first rung that solves the problem:
-
-1. **Does this need to exist at all? (YAGNI):** Speculative need &rarr; Skip it.
-2. **Already in this codebase?** Check existing helpers, extension methods, constants, and utils. Never re-invent existing utilities.
-3. **Standard Library does it?** Use built-in language/runtime APIs (LINQ, `Array.prototype`, `path`, `sync`).
-4. **Native platform feature covers it?** Use database constraints, native HTML elements, or framework hooks instead of custom logic/third-party libraries.
-5. **Already-installed dependency solves it?** Utilize current packages; never add new dependencies for simple tasks.
-6. **Can it be one line?** Prefer simple, declarative one-liners over multi-class scaffolding.
-7. **Only then:** Write the minimum necessary production code.
+## 1. Quantitative Minimalism & Anti-Bloat Invariants
+| Minimalism Dimension | Mandatory Threshold | Violation Trigger |
+| :--- | :--- | :--- |
+| **Single-Implementation Interfaces** | $0$ speculative interfaces (unless required by DI/test boundary) | `IFooFactory`, `IAbstractHelperProvider` with 1 class |
+| **Pass-Through Wrapper Layers** | $0$ zero-logic delegation classes | Class that only forwards arguments to another service |
+| **External Package Additions** | $0$ new packages for $< 50$ LOC standard-library tasks | Adding `lodash`/`moment` when native `Array`/`Intl` suffices |
+| **Diff Line Budget** | Minimum viable LOC to solve root cause | Unsolicited formatting or rewriting unrelated functions |
+| **Nesting Depth Ceiling** | $\le 3$ indentation levels per method | Guard clauses (`if (!valid) return;`) over arrow anti-pattern |
 
 ---
 
-## 2. Hard Anti-Overengineering Rules
+## 2. The 7-Rung Ponytail Decision Ladder
 
-- **No Unrequested Abstractions:** No interface with only one implementation (except for architectural boundaries `IService`), no factory for a single product, no generic config for constant values.
-- **Root-Cause Fixes:** Fix bugs at the single shared source rather than scattering defensive `if` guards across all callers.
-- **Deletion over Addition:** Refactoring must prioritize reducing line counts.
-- **Lazy != Negligent:** Safety, type validation, error handling, and transaction boundaries are NEVER skipped.
+Climb sequentially from Rung 1 to Rung 7 before writing a single line of code. **Stop at the lowest rung that completely solves the problem:**
+
+```text
+Rung 1: [YAGNI Gate]         ──► Does this feature/config need to exist at all? If speculative -> DELETE/SKIP.
+Rung 2: [Codebase Reuse]     ──► Does a helper, extension, or DTO already exist in `Common/` or `Shared/`? -> REUSE IT.
+Rung 3: [Standard Library]   ──► Does the runtime stdlib solve it (`Span<T>`, `LINQ`, `crypto.randomUUID`, `Intl`)? -> USE STDLIB.
+Rung 4: [Platform Native]    ──► Can a SQL constraint (`UNIQUE`, `CHECK`), CSS rule, or HTML5 attribute enforce it? -> USE NATIVE.
+Rung 5: [Installed Package]  ──► Does an already-installed library (`Dapper`, `Zod`, `CommunityToolkit`) cover it? -> USE EXISTING.
+Rung 6: [Declarative 1-Liner]──► Can a pure expression or pattern match replace a multi-class hierarchy? -> WRITE EXPRESSION.
+Rung 7: [Minimal Custom Code]──► Write the smallest, self-contained, strongly-typed production implementation.
+```
 
 ---
 
-## 3. Output Optimization Format (Review Mode)
+## 3. Code Comparison: Ceremonial Over-Engineering vs Ponytail Minimalism
 
-When performing code reviews or evaluating diffs for complexity:
-- `delete:` Dead code or unused flexibility.
-- `stdlib:` Replace hand-rolled code with standard library calls.
-- `native:` Leverage platform/framework feature.
-- `yagni:` Remove speculative abstractions.
-- `shrink:` Condense logic into fewer, clearer lines.
+```csharp
+// ❌ BAD: 45 lines of speculative Strategy + Factory + Interface ceremony for 3 static tax rates
+public interface IShippingCostCalculationStrategy
+{
+    decimal Calculate(decimal weightKg);
+}
+public class StandardShippingStrategy : IShippingCostCalculationStrategy
+{
+    public decimal Calculate(decimal weightKg) => weightKg * 1.50m;
+}
+public class ExpressShippingStrategy : IShippingCostCalculationStrategy
+{
+    public decimal Calculate(decimal weightKg) => weightKg * 3.25m + 10.00m;
+}
+public static class ShippingStrategyFactory
+{
+    public static IShippingCostCalculationStrategy Create(ShippingTier tier) => tier switch
+    {
+        ShippingTier.Standard => new StandardShippingStrategy(),
+        ShippingTier.Express  => new ExpressShippingStrategy(),
+        _ => throw new NotSupportedException()
+    };
+}
+
+// ✅ GOOD: Rung 6 Declarative Pattern Matching — 0 heap allocations, 10 lines, 100% exhaustive and testable
+public static decimal CalculateShippingCost(ShippingTier tier, decimal weightKg)
+{
+    ArgumentOutOfRangeException.ThrowIfNegative(weightKg);
+    return tier switch
+    {
+        ShippingTier.Pickup   => 0.00m,
+        ShippingTier.Standard => Math.Round(weightKg * 1.50m, 2, MidpointRounding.ToEven),
+        ShippingTier.Express  => Math.Round(weightKg * 3.25m + 10.00m, 2, MidpointRounding.ToEven),
+        _ => throw new ArgumentOutOfRangeException(nameof(tier), tier, "Unsupported shipping tier.")
+    };
+}
+```
+
+---
+
+## 4. "Lazy $\neq$ Negligent" Non-Negotiable Safety Floor
+Minimalism strips **accidental complexity** (ceremony, wrappers, dead flags), NEVER **essential safety**:
+- Never omit parameter validation (`ArgumentNullException.ThrowIfNull`), parameterized SQL, `CancellationToken` forwarding, or `IDisposable` cleanup in the name of brevity.
+- When reviewing code for minimalism, tag actionable reductions using:
+  - `delete:` Remove dead code, unused parameters, or unreferenced feature flags.
+  - `stdlib:` Replace custom string/date/collection helpers with built-in runtime APIs (`R_REUSE`).
+  - `native:` Push validation or uniqueness guarantees down to SQL constraints or Zod schemas.
+  - `shrink:` Collapse nested `if/else` trees into flat guard clauses or switch expressions.
+
