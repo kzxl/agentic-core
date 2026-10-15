@@ -2,29 +2,95 @@
 desc: Modern Jetpack Compose UI/UX standards, Material 3 design tokens, micro-animations, and gestures
 rules: [R_ANDROID, R_CORE]
 ---
-# 🎨 Jetpack Compose UI/UX Standards
+# 🎨 Jetpack Compose UI/UX & Recomposition Standards
 
-This standard specializes the [Universal Software UI/UX Design System](file:///E:/16.%20AgentOption/standards/universal/ui-ux-design-system.md) for Android Jetpack Compose applications. All core ergonomics, 4/8px spatial rules, color theories, and action verb principles apply directly.
+## 1. Architectural Invariants & Quantitative Thresholds
 
-## 1. Material 3 Design System & Theming
-- **Token Centralization:** Define all color palettes, typography scales, shapes, and elevation in a dedicated `ui/theme/` package (`Color.kt`, `Theme.kt`, `Type.kt`).
-- **Dark Mode First:** Implement high-contrast dark schemes (e.g. `0xFF07090E` background, `0xFF0F172A` panel, neon accents for active indicators).
-- **Glassmorphism & Overlays:** Use translucent alpha panels (`color.copy(alpha = 0.85f)`) with subtle 1.dp border strokes (`0xFF334155`) for floating HUDs.
+| Metric / Invariant | Mandatory Threshold | Enforcement Mechanism |
+| :--- | :--- | :--- |
+| **Composable Parameter Stability** | `100%` of UI models marked `@Immutable` / `@Stable` (`ImmutableList<T>`) | Compose Compiler Metrics (`-PcomposeCompilerReports=true`) |
+| **`LazyColumn` / `LazyGrid` Identity** | `100%` of dynamic `items(...)` specify `key = { ... }` & `contentType` | Prevents `O(N)` full-list recomposition on insert/delete |
+| **Continuous State Reads (Scroll/Anim)** | `0` direct reads in Composition phase; defer to Layout/Draw lambdas | `Modifier.offset { IntOffset(...) }` & `drawBehind { ... }` |
+| **Threshold State Coalescing** | Wrap high-frequency boolean predicates in `remember { derivedStateOf {} }` | Reduces recompositions from `120/sec` to `1` per threshold cross |
+| **Stateless Leaf Composables** | `0` `ViewModel` parameters in reusable `components/` functions | Pass state values down and event lambdas `() -> Unit` up |
 
-## 2. Component Architecture (Container vs Presenter)
-- **`screens/` (Stateful Orchestrators):** Collect `StateFlow` from ViewModel via `collectAsStateWithLifecycle()`, handle navigation triggers, and delegate rendering to dumb components.
-- **`components/` (Stateless Presenters):** Pure Composables that accept immutable data models and emit events via lambda callbacks `(T) -> Unit`. Never inject ViewModels into reusable leaf components.
-- **Preview Stability:** Every reusable component in `components/` MUST provide a `@Preview` composable with realistic mock data.
+---
 
-## 3. Micro-Animations & Motion Design
-- **Physics Springs over Durations:** Use `spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow)` for natural, responsive touch feedback instead of rigid linear tweens.
-- **Animated Content Switching:** Use `AnimatedVisibility` (with `fadeIn() + expandVertically()`) and `Crossfade` for loading $\rightarrow$ content $\rightarrow$ error state transitions.
-- **Shared Transitions:** Implement `SharedTransitionLayout` when navigating from thumbnail/card grids to detail/viewer screens.
+## 2. Recomposition Stability (`@Immutable`), `LazyColumn` Keys & `derivedStateOf`
 
-## 4. Interactive Gestures & Viewers
-- **Pinch-to-Zoom / Pan:** Use `detectTransformGestures` with scale clamping (`1.0f..10.0f`) and offset bounding to prevent image clipping.
-- **Before/After Split Wipe:** Use `Canvas` with horizontal drag tracking `detectHorizontalDragGestures` to draw custom divider lines and clip sub-regions.
+Standard Kotlin `List<T>`, `Set<T>`, and `Map<K, V>` interfaces are treated as **unstable** by the Compose compiler unless Strong Skipping is enabled or `kotlinx.collections.immutable.ImmutableList<T>` / `@Immutable` wrapper classes are used. Furthermore, reading `listState.firstVisibleItemScrollOffset > 0` directly inside a Composable body forces the entire screen to recompose on **every single pixel** of scroll (`120 times/sec`).
 
-## 5. Anti-Patterns
-- ❌ **Recomposition Traps:** Never create non-remembered objects (e.g. `val brush = Brush.linearGradient(...)`) inside high-frequency composable bodies.
-- ❌ **Blocking Main Thread:** Never perform image decoding, file I/O, or heavy calculations inside Composable functions or UI callbacks.
+```kotlin
+// ❌ BAD: Unstable List<T>, missing LazyColumn key/contentType, and 120Hz scroll read in Composition phase!
+@Composable
+fun FeedScreenBad(items: List<FeedItem>, listState: LazyListState, onItemClick: (String) -> Unit) {
+    val showFab = listState.firstVisibleItemIndex > 0 // Recomposes entire FeedScreen on every scroll pixel!
+    Box {
+        LazyColumn(state = listState) {
+            items(items) { item -> // Missing key: insertar/deletion recomposes all visible rows!
+                FeedRow(item = item, onClick = { onItemClick(item.id) })
+            }
+        }
+        if (showFab) FloatingActionButton(onClick = {}) { Text("Top") }
+    }
+}
+
+// ✅ GOOD: @Immutable state, derivedStateOf scroll threshold, stable LazyColumn key + contentType
+@Immutable
+data class FeedUiState(val items: ImmutableList<FeedItem> = persistentListOf())
+
+@Composable
+fun FeedScreenGood(
+    state: FeedUiState,
+    listState: LazyListState,
+    onItemClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    // Emits ONLY when boolean flips (true <-> false), eliminating 99% of scroll recompositions
+    val showScrollToTop by remember {
+        derivedStateOf { listState.firstVisibleItemIndex > 2 }
+    }
+
+    Box(modifier = modifier.fillMaxSize()) {
+        LazyColumn(state = listState, contentPadding = PaddingValues(vertical = 8.dp)) {
+            items(
+                items = state.items,
+                key = { item -> item.id },           // Preserves item scroll/focus state across reorders
+                contentType = { item -> item.kind }, // Reuses composition slots across matching item types
+            ) { item ->
+                FeedRow(item = item, onItemClick = onItemClick)
+            }
+        }
+
+        AnimatedVisibility(
+            visible = showScrollToTop,
+            modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp),
+            enter = fadeIn() + scaleIn(),
+            exit = fadeOut() + scaleOut(),
+        ) {
+            FloatingActionButton(onClick = { /* scroll to top */ }) { Text("Top") }
+        }
+    }
+}
+```
+
+---
+
+## 3. Deferred State Reads (Layout & Draw Phases) & Modifier Ordering
+
+Compose executes **Composition &rarr; Layout &rarr; Drawing**. When animating offsets, alpha, or color, use lambda modifiers so state is read in the Layout or Draw phase, bypassing Composition completely:
+
+```kotlin
+// ❌ BAD: Reads scroll/animation state during Composition -> triggers recomposition every frame
+Box(Modifier.offset(y = scrollOffsetDp).alpha(animatedAlpha).background(animatedColor))
+
+// ✅ GOOD: Lambda modifiers defer state reads to Layout & Draw phases (0 recompositions!)
+Box(
+    modifier = Modifier
+        .offset { IntOffset(x = 0, y = scrollState.value / 2) } // Layout phase
+        .graphicsLayer { alpha = animatedAlphaState.value }     // Draw/RenderNode phase
+        .drawBehind { drawRect(color = animatedColorState.value) }
+)
+```
+
+- **Modifier Ordering:** Place `clickable` **after** outer margin `padding` and **before** inner content `padding` (`Modifier.padding(outer).clip(shape).clickable(onClick).padding(inner)`).

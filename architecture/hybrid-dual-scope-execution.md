@@ -6,39 +6,86 @@ category: Architecture
 ---
 # 🔄 Hybrid Dual-Scope Execution Architecture (Desktop & Web API)
 
-**Goal:** Share 100% of the core domain and business logic service layer across both Desktop Client (WinForms/WPF) and Web API (ASP.NET / REST) without connection pool exhaustion on desktop or lifecycle conflicts on web.
+**Goal:** Share 100% of the core domain and application service layer across stateful Desktop Clients (WinForms/WPF) and stateless Web APIs (ASP.NET Core) without exhausting database connection pools on desktop or breaking request-scoped transactions on web (`[R_CORE, R_API, R_CS]`).
 
 ---
 
-## 1. The Dual-Execution Challenge
+## 1. Dual-Runtime Execution Invariants
 
-| Execution Context | Connection Lifecycle Need | Pitfall if Misconfigured |
-| :--- | :--- | :--- |
-| **Desktop Client (WinForms/WPF)** | Short-lived, per-method connection. Opened on demand, closed immediately. | Long-lived DbContext in client DI holds DB connection forever, exhausting database pool. |
-| **Web API (ASP.NET Core / Web API 2)** | Per-request scoped connection. Shared across all services within 1 HTTP request. | Creating new DbContext per method breaks transaction boundaries and causes concurrency collisions. |
+| Execution Metric / Invariant | Desktop Client (WinForms / WPF) | Web API Host (ASP.NET Core) | Shared Service Contract |
+| :--- | :--- | :--- | :--- |
+| **Service DI Lifetime** | `Transient` or Form-bound instance | `Scoped` (Per HTTP Request) | Zero UI-thread or `HttpContext` coupling |
+| **DbContext Lifetime** | Per-method (`10ms - 250ms` max) | Per-request (`Scoped` Unit-of-Work) | Controlled via `DbScope<TContext>` struct |
+| **Connection Pool Lease** | Acquired on `new DbScope()`, closed on `Dispose()` | Acquired once per request, disposed by DI | Max idle lease `< 500ms` |
+| **Nested Service Calls** | Joins ambient `AsyncLocal` scope or opens transient | Shares injected `Scoped` `DbContext` | Deterministic single `SaveChangesAsync` |
+
+### Core Architectural Rules
+1. **Zero Long-Lived Desktop `DbContext`:** Binding an EF Core `DbContext` to a WinForms `Form` or WPF `ViewModel` lifetime bloats change-tracking RAM and leaks TCP sockets. Desktop operations MUST open and dispose `DbContext` per unit of work.
+2. **Ambient Scope Joining:** Nested calls (`OrderService` $\rightarrow$ `InventoryService`) MUST share the same `DbContext` and transaction across both Desktop (`AsyncLocal`) and Web API (`Scoped` DI).
+3. **Ownership-Aware Disposal (`_ownsContext`):** Only the root transient creator disposes the `DbContext`; joined ambient scopes and Web API DI-injected contexts skip disposal inside inner `using` blocks.
 
 ---
 
-## 2. The Solution: Dual-Constructor & `DbScope` Struct
+## 2. Failure Modes & Anti-Patterns
 
+- **Premature Inner Disposal in Web API:** Wrapping an injected `_dbContext` in a raw `using (var db = _injectedDb ?? CreateNew())` disposes the Web API's scoped `DbContext` inside the first helper method (`ObjectDisposedException`).
+- **Torn Desktop Transactions:** Instantiating `new AppDbContext()` per repository method without ambient joining commits partial writes across separate connections.
+
+---
+
+## 3. Production Implementation: Ownership-Aware `DbScope<TContext>`
+
+```csharp
+// ❌ BAD: Disposes WebAPI Scoped DbContext early & breaks nested Desktop transactions!
+public async Task ApproveBadAsync(long orderId, CancellationToken ct)
+{
+    using var db = _injectedDb ?? new AppDbContext();
+    var order = await db.Orders.FindAsync([orderId], ct);
+    order!.Approve();
+    await db.SaveChangesAsync(ct);
+}
+
+// ✅ GOOD: Allocation-free struct joining WebAPI Scoped DI or Desktop AsyncLocal ambient scope
+public readonly struct DbScope<TContext> : IAsyncDisposable, IDisposable where TContext : DbContext
+{
+    private static readonly AsyncLocal<TContext?> Ambient = new();
+    private readonly bool _ownsContext;
+    public TContext Db { get; }
+
+    public DbScope(TContext? injected, Func<TContext> factory)
+    {
+        if (injected is not null) { Db = injected; _ownsContext = false; }
+        else if (Ambient.Value is not null) { Db = Ambient.Value; _ownsContext = false; }
+        else { Db = factory(); Ambient.Value = Db; _ownsContext = true; }
+    }
+
+    public void Dispose()
+    {
+        if (!_ownsContext) return;
+        Ambient.Value = null;
+        Db.Dispose();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        if (!_ownsContext) return ValueTask.CompletedTask;
+        Ambient.Value = null;
+        return Db.DisposeAsync();
+    }
+}
+
+public sealed class OrderApplicationService(InventoryApplicationService inventory, AppDbContext? scopedDb = null)
+{
+    public async Task ApproveOrderAsync(long orderId, CancellationToken ct = default)
+    {
+        await using var scope = new DbScope<AppDbContext>(scopedDb, static () => AppDbContextFactory.Create());
+        var order = await scope.Db.Orders.FirstOrDefaultAsync(x => x.Id == orderId, ct)
+            ?? throw new KeyNotFoundException($"Order {orderId} not found.");
+
+        order.Approve();
+        // Automatically joins scope.Db via Ambient on Desktop or scopedDb on WebAPI
+        await inventory.ReserveOrderLinesAsync(orderId, ct);
+        await scope.Db.SaveChangesAsync(ct);
+    }
+}
 ```
-[Service Call Invocation]
-           |
-           v
-   [using (var scope = new DbScope(_injectedDb))]
-           |
-           +---> If _injectedDb is NULL (Desktop WinForms):
-           |     -> Creates fresh short-lived DbContext: AppDbContext.New()
-           |     -> Disposes and closes connection immediately at the end of using block.
-           |
-           +---> If _injectedDb is NOT NULL (Web API):
-                 -> Reuses existing per-request DbContext.
-                 -> Leaves disposal to the Web API DI Container at HTTP request completion.
-```
-
----
-
-## 3. Benefits
-1. **Single Source of Truth:** Business validation and database workflows are coded ONCE in `Application.Core` and shared by both GUI desktop and REST microservices.
-2. **Zero Desktop Leakage:** Desktop clients never exhaust database connection pools.
-3. **Transactional Integrity on Web:** Web APIs preserve single-transaction unit-of-work per request.

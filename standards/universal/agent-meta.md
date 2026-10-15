@@ -3,42 +3,61 @@ title: Agent Meta Rules
 desc: Strict standard for creating/updating Rules, Skills, Symbol Decoding, and Commit Gates
 rules: [R_CORE, R_GIT, R_LLM_GOV, R_EMBEDDED]
 ---
-# 🤖 Agent Meta Rules & Execution Gates
+# 🤖 Sovereign Agent Meta Rules & Execution Gates
 
-## 1. AI Comprehension & Token Savings
-- Terse YAML/JSON frontmatter, concise bullet points (Zero prose fluff).
-- Replace long explanations with direct keyword directives.
-- DRY: Reference exact Rule IDs (`rules: [R_CS, R_WPF, R_LLM_GOV]`) from `rules.json`.
+## 1. Architectural Invariants & Quantitative Thresholds
 
-## 2. Symbol Decoding Protocol (RAM Attention)
-- `R_*` (e.g. `R_CS`, `R_WPF`, `R_DB`, `R_GIT`, `R_LLM_GOV`) &rarr; Hard constraints in `rules.json`.
-- `ACRONYM` (e.g. `DBS`, `HND`, `TDD`, `PERF`, `PONY`, `CONS`, `BLAST`, `NORM`, `CLEAN`, `IPGOV`, `SQL`, `SOLID`, `GIT`) &rarr; Patterns in `shortcuts.json`.
-- Unknown tags &rarr; Resolve via `node [AgentOption]/tools/lookup.js <TAG>`.
+| Governance Gate | Mandatory Threshold | Enforcement Mechanism |
+| :--- | :--- | :--- |
+| **Symbol & Rule Resolution** | `100%` of `R_*` & acronyms decoded via `rules.json` / `shortcuts.json` | `node tools/lookup.js <TAG>` prior to implementation |
+| **Blast-Radius Caller Scan** | Mandatory `rg "SymbolName"` before modifying any public/shared symbol | Zero broken downstream callers across workspace |
+| **Framework Integrity Check** | `0` broken links, missing frontmatter, or orphan index entries | `node tools/validate-framework.js` (`Exit Code 0`) |
+| **Evidence Proof Hierarchy** | `L1` (Runtime/Test Exit `0`) > `L2` (Compiler `0` Err) > `L3` (Static AST) | Zero unverified completion claims (`R_ENG_OS`) |
+| **Context Window Hygiene** | Targeted line-range `view_file` (`<= 300` lines); offload broad scans | Subagent delegation (`research` / multi-agent team) |
 
-## 3. Pre-Action Input Normalization (NORM)
-- Detect input format: If free-form prose, auto-normalize into canonical Micro-Payload `[Action] @[Feature] | [Intent] | [Tags]` before planning or reasoning.
+---
 
-## 4. Blast-Radius Pre-Check (BLAST)
-- Mandatory `rg "FunctionName\("` caller scan before editing shared/public symbols.
+## 2. Router-First Lookup & Symbol Decoding Protocol
 
-## 5. Invariant Commit Gate (8-Point Pre-Commit Check)
-- 1. Zero forbidden patterns (`BindingSource`, `Form_Load`, sync `.Result` / `.Wait()`)?
-- 2. Zero cross-module direct table queries (`R_UNIVERSE` Data Sovereignty)?
-- 3. Zero unrequested abstractions (`PONY` YAGNI ladder satisfied)?
-- 4. Blast-radius scanned if touching shared code (`BLAST`)?
-- 5. Project built and verified with zero errors (compiler exit code = 0)?
-- 6. Atomic commit invariant satisfied (`R_GIT`: 1 feature/fix per commit, conventional commit syntax, no multi-feature mega-commits)?
-- 7. Zero unverified MMIO/hardware registers (`R_EMBEDDED`, `R_LLM_GOV`: verified against active SSoT headers or ROM dumps)?
-- 8. LLM Governance & Clean-Room IP satisfied (`R_LLM_GOV`: no raw substantial LLM chunks, GNU <15 lines respected, provenance disclosed)?
+Before authoring code, modifying architecture documents, or creating skills, the agent MUST resolve applicable domain constraints through the deterministic routing hierarchy:
+1. **Rule IDs (`R_*`):** Map directly to hard constraints in `rules/rules.json` (e.g., `R_CORE`, `R_CS`, `R_WPF`, `R_API`, `R_DB`, `R_GO`, `R_NODE`, `R_PHP`, `R_PY`, `R_RUST`, `R_CPP`, `R_ANDROID`, `R_PERF`, `R_SEC`, `R_RES`, `R_GIT`, `R_LLM_GOV`).
+2. **Shortcut Acronyms:** Map to canonical execution patterns in `rules/shortcuts.json` (`NORM`, `BLAST`, `DBS`, `HND`, `TDD`, `PONY`, `CONS`, `CLEAN`, `IPGOV`).
+3. **Automated CLI Lookup:** Never guess an unfamiliar rule or tag; query `node E:\16. AgentOption\tools\lookup.js <TAG>` and run `node E:\Tools\SemanticBrain\tools\context-fetch.js "<task>"` for non-trivial engineering tasks.
 
-## 6. Evidence-First Verification Protocol (`R_ENG_OS`)
-- Every completion claim, root-cause diagnosis, or technical assertion MUST be backed by concrete evidence:
-  1. Specific file path and line numbers (`file:///path/to/file#L10-L20`).
-  2. Actual build or test command executed via shell.
-  3. Verified exit code (`Exit Code 0`).
-  4. Raw output snippet confirming behavioral correctness. Zero speculation allowed.
+```bash
+# ❌ BAD: Editing shared infrastructure or creating a skill without checking rules, callers, or templates
+# 1. Skips context-fetch.js and lookup.js
+# 2. Invents non-standard YAML frontmatter keys ("description" instead of "desc", missing "rules: [...]")
+# 3. Uses "git add -A && git commit" sweeping in untracked scratch files
 
-## 7. Language & Authoring Invariant
-- All markdown documentation (`.md`), rules, standards, architectures, and skills MUST be authored in concise, standard, unambiguous Technical English.
-- Localized chat responses may be in user-selected language, but all persistent knowledge artifacts and framework files remain in standard English for deterministic AI reasoning.
+# ✅ GOOD: Deterministic Router-First Lookup -> Blast-Radius Scan -> Framework Validation -> Safe Commit
+node E:\Tools\SemanticBrain\tools\context-fetch.js "Upgrade concurrency standards"
+node E:\16. AgentOption\tools\lookup.js R_RES
+rg "ProcessOrders\(" --type go
+node E:\16. AgentOption\tools\validate-framework.js
+node E:\Tools\SemanticBrain\tools\git-safe-commit.js -m "docs(standards): upgrade golang concurrency spec" standards/golang/concurrency.md
+```
+
+---
+
+## 3. Zero-Trust Proof Hierarchy & Blast-Radius Defense (`BLAST`)
+
+Every technical claim, bug fix, or standard upgrade MUST satisfy the **Zero-Trust Proof Hierarchy**:
+- **Tier 1 (Executable Proof):** Automated unit/integration test pass, benchmark output, or `validate-framework.js` returning `Exit Code 0`.
+- **Tier 2 (Compiler / Static Analyzer Proof):** Clean `dotnet build`, `cargo check`, `go vet`, `phpstan`, or `tsc --noEmit` with `0` errors.
+- **Tier 3 (Structural File Proof):** Exact clickable file URI and line range (`[filename.ext](file:///path/to/file#L10-L25)`) plus verified byte/line counts from `view_file`. Speculative assertions (*"This should fix the issue"*) without Tier 1–3 proof are strictly prohibited.
+
+---
+
+## 4. 8-Point Atomic Commit Gate & Authoring Invariant
+
+Before staging or committing any change, verify all 8 invariants:
+1. **Zero Forbidden Anti-Patterns:** No sync-over-async (`.Result`/`.Wait()`), no raw SQL string concatenation, no machine-local paths (`C:\...`, `E:\...`), no `Overwrite: true` on config/rule files without prior `view_file` and permission.
+2. **Data Sovereignty (`R_UNIVERSE`):** Zero cross-module direct table queries; modules communicate strictly via service interfaces or domain events.
+3. **YAGNI / `PONY` Ladder:** Zero speculative abstractions or unused wrapper layers.
+4. **Blast-Radius Verified (`BLAST`):** All callers of modified signatures updated and verified.
+5. **Compiler & Validator Clean:** Build/test and `validate-framework.js` exit with code `0`.
+6. **Scoped Atomic Commit (`R_GIT`):** Stage only task-scoped files via `git-safe-commit.js` (never `git add -A`).
+7. **Hardware / MMIO SSoT (`R_EMBEDDED`):** All register offsets and bitfields verified against official datasheets or ROM headers.
+8. **Clean-Room IP & Technical English (`R_LLM_GOV`):** All `.md` standards, skills, rules, and code identifiers authored in precise **Standard Technical English**; chat responses localized to the user's preferred language (Vietnamese).
 

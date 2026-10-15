@@ -6,68 +6,109 @@ category: Architecture
 ---
 # ⚡ Universal Event-Driven Architecture Blueprint
 
-**Goal:** Decouple monolithic synchronous dependencies across domains and services through asynchronous domain events, publish/subscribe messaging, and reliable state convergence.
+**Goal:** Decouple synchronous cross-domain dependencies through immutable domain events, atomic Transactional Outbox persistence, idempotent consumer deduplication, and deterministic Saga compensation (`[R_EVT, R_UNIVERSE, R_CORE]`).
 
 ---
 
-## 1. Core Topologies
+## 1. Reliability Invariants & Delivery Guarantees
 
-### A. In-Process Event Bus (Modular Monolith / Desktop)
-Used for decoupling modules within the same runtime process (Node.js EventEmitter, C# MediatR / Prism EventAggregator, Go Channels).
+| Architectural Component | Mandatory Guarantee | Persistence Mechanism | Violation Consequence |
+| :--- | :--- | :--- | :--- |
+| **Event Publication** | **At-Least-Once** atomic capture | Local `sys_outbox_messages` in same ACID transaction | Ghost orders (DB committed, broker event lost on crash) |
+| **Outbox Relay Worker** | Concurrent lock-free batch polling | `SELECT ... FOR UPDATE SKIP LOCKED LIMIT 100` | Duplicate relay contention across horizontally scaled pods |
+| **Event Consumption** | **Effectively-Once** state mutation | `sys_inbox_dedup (event_id, consumer_group)` unique PK | Double inventory deduction or duplicate customer billing |
+| **Poison Message Handling** | Bounded retries (`MaxAttempts = 5`) + DLQ | Exponential backoff (`2^n * 1000ms`) -> `*.dlq` topic | Single malformed payload blocks entire partition consumer |
+| **Ordering Guarantee** | Causal ordering per aggregate root | Broker partition key = `aggregate_id` | `OrderCancelled` processed before `OrderCreated` |
 
-```javascript
-// In-Process Domain Event Example
-export class DomainEventPublisher {
-  constructor() {
-    this.subscribers = new Map();
+### Core Architectural Rules
+1. **Zero Dual-Write to Broker:** Never call `broker.PublishAsync()` directly inside a DB transaction; persist events to `sys_outbox_messages` in the same ACID commit.
+2. **Immutable Versioned Envelopes:** Carry `eventId` (UUIDv7), `eventType` (`v1.order.placed`), `aggregateId`, `correlationId`, and schema-versioned payload.
+3. **Saga Classification:** Separate steps into *Compensatable Transactions* (with undo commands), *Pivot Transaction* (point of no return), and *Retriable Transactions*.
+
+---
+
+## 2. Failure Modes & Anti-Patterns
+
+- **Publish-Before-Commit Ghost Events:** Emitting broker messages before local DB commit leaks rollback-invalidated state to consumers.
+- **Non-Atomic Deduplication:** Checking Redis before DB mutation races under redelivery bursts; insert `sys_inbox_dedup` inside the consumer's DB transaction.
+
+---
+
+## 3. Production Implementation: Atomic Outbox & Idempotent Inbox
+
+```typescript
+// ❌ BAD: Dual-write between PostgreSQL and Broker loses events if process crashes after COMMIT
+export async function placeOrderBad(db: PoolClient, broker: Broker, order: Order) {
+  await db.query('INSERT INTO orders (id, total) VALUES ($1, $2)', [order.id, order.total]);
+  await broker.publish('orders.events', { type: 'OrderPlaced', orderId: order.id });
+}
+
+// ✅ GOOD: Atomic Business Write + Outbox Insert & Idempotent Consumer Deduplication
+import { Pool, PoolClient } from 'pg';
+import { randomUUID } from 'node:crypto';
+
+export interface EventEnvelope<T> {
+  readonly eventId: string;
+  readonly eventType: string;
+  readonly aggregateId: string;
+  readonly correlationId: string;
+  readonly payload: T;
+}
+
+export async function placeOrderWithOutbox(
+  pool: Pool,
+  order: { id: string; totalCents: number },
+  correlationId: string
+): Promise<void> {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query('INSERT INTO orders (id, total_cents) VALUES ($1, $2)', [order.id, order.totalCents]);
+    const evt: EventEnvelope<typeof order> = {
+      eventId: randomUUID(),
+      eventType: 'v1.order.placed',
+      aggregateId: order.id,
+      correlationId,
+      payload: order,
+    };
+    await client.query(
+      `INSERT INTO sys_outbox_messages (event_id, aggregate_id, event_type, payload) VALUES ($1, $2, $3, $4::jsonb)`,
+      [evt.eventId, evt.aggregateId, evt.eventType, JSON.stringify(evt)]
+    );
+    await client.query('COMMIT');
+  } catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } finally {
+    client.release();
   }
+}
 
-  subscribe(eventName, handler) {
-    if (!this.subscribers.has(eventName)) {
-      this.subscribers.set(eventName, []);
+export async function consumeIdempotent<T>(
+  pool: Pool,
+  group: string,
+  evt: EventEnvelope<T>,
+  handler: (client: PoolClient, payload: T) => Promise<void>
+): Promise<'PROCESSED' | 'DUPLICATE'> {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const dedup = await client.query(
+      `INSERT INTO sys_inbox_dedup (event_id, consumer_group) VALUES ($1, $2) ON CONFLICT DO NOTHING`,
+      [evt.eventId, group]
+    );
+    if (dedup.rowCount === 0) {
+      await client.query('ROLLBACK');
+      return 'DUPLICATE';
     }
-    this.subscribers.get(eventName).push(handler);
-  }
-
-  async publish(event) {
-    const handlers = this.subscribers.get(event.name) || [];
-    await Promise.all(handlers.map(fn => fn(event)));
+    await handler(client, evt.payload);
+    await client.query('COMMIT');
+    return 'PROCESSED';
+  } catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } finally {
+    client.release();
   }
 }
 ```
-
-### B. Distributed Message Broker (Microservices / Multi-process)
-Used for cross-service events (RabbitMQ, Apache Kafka, Redis Streams, AWS SQS/SNS).
-
----
-
-## 2. Critical Reliability Patterns
-
-### A. The Transactional Outbox Pattern
-**Problem:** Dual-write hazard (Database write succeeds, but Message Broker publish fails or network drops).
-**Solution:** Persist the event in an `Outbox` table in the SAME database transaction as the business entity. A background worker periodically pulls unpublished outbox records and delivers them to the broker with guaranteed **At-Least-Once** delivery.
-
-```sql
-CREATE TABLE sys_outbox_events (
-  id VARCHAR(36) PRIMARY KEY,
-  aggregate_type VARCHAR(100) NOT NULL,
-  aggregate_id VARCHAR(100) NOT NULL,
-  event_type VARCHAR(100) NOT NULL,
-  payload JSON NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  processed_at TIMESTAMP NULL
-);
-```
-
-### B. Idempotent Consumer Pattern
-Since distributed events may be delivered more than once, consumers MUST be idempotent:
-- Track processed `event_id` in a deduplication store.
-- Use conditional writes / optimistic concurrency (`version` checks).
-
----
-
-## 3. Checklist for Agent Implementation
-- [ ] Events are named in past tense (`OrderPlaced`, `UserActivated`, `StockOutCompleted`).
-- [ ] Events contain immutable, versioned payloads with timestamps and correlation IDs.
-- [ ] Consumers never mutate other services' databases directly; communication is event-only.
-- [ ] Critical business operations implement the Outbox pattern or Saga compensation.
