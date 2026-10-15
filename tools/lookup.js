@@ -3,36 +3,46 @@
 /**
  * AgentOption Fast Skill & Blueprint Lookup CLI
  * Usage: 
- *   node lookup.js "<keyword>" [--lang=<lang>] [--type=<architecture|skills|standards>]
+ *   node lookup.js "<keyword>" [--lang=<lang>] [--type=<architecture|skills|standards|agents>]
  *   node lookup.js <code> (e.g. DBS, HND, TDD, RES, MFE, ABRT)
  *   node lookup.js --list-shortcuts
  */
 
 const fs = require('fs');
 const path = require('path');
+const {
+  ROOT_DIR,
+  loadRules,
+  loadShortcuts,
+  parseFrontmatter,
+  walkMarkdownFiles,
+  parseCliArgs
+} = require('./lib/framework-core');
 
-const ROOT_DIR = path.resolve(__dirname, '..');
-const SHORTCUTS_FILE = path.join(ROOT_DIR, 'shortcuts.json');
-const args = process.argv.slice(2);
+const parsedArgs = parseCliArgs(process.argv.slice(2));
+const flags = parsedArgs.flags;
 
-const showShortcuts = args.includes('--list-shortcuts') || args.includes('--shortcuts');
-const showRules = args.includes('--rules') || args.includes('--list-rules');
-const showAgents = args.includes('--agents') || args.includes('--list-agents');
-const showDense = args.includes('--dense') || args.includes('--compact');
-const query = args.find(a => !a.startsWith('--')) || '';
-const langFilter = args.find(a => a.startsWith('--lang='))?.split('=')[1]?.toLowerCase();
-const typeFilter = args.find(a => a.startsWith('--type='))?.split('=')[1]?.toLowerCase();
+const showShortcuts = Boolean(flags['list-shortcuts'] || flags.shortcuts);
+const showRules = Boolean(flags.rules || flags['list-rules']);
+const showAgents = Boolean(flags.agents || flags['list-agents']);
+const showDense = Boolean(flags.dense || flags.compact);
+const query = parsedArgs.positional[0] || '';
+const langFilter = typeof flags.lang === 'string' ? flags.lang.toLowerCase() : undefined;
+const typeFilter = typeof flags.type === 'string' ? flags.type.toLowerCase() : undefined;
 
 // Load Rules and Shortcuts
-const RULES_FILE = path.join(ROOT_DIR, 'rules.json');
 let rulesMap = {};
-if (fs.existsSync(RULES_FILE)) {
-  rulesMap = JSON.parse(fs.readFileSync(RULES_FILE, 'utf8'));
+try {
+  rulesMap = loadRules(ROOT_DIR);
+} catch {
+  rulesMap = {};
 }
 
 let shortcutsMap = {};
-if (fs.existsSync(SHORTCUTS_FILE)) {
-  shortcutsMap = JSON.parse(fs.readFileSync(SHORTCUTS_FILE, 'utf8'));
+try {
+  shortcutsMap = loadShortcuts(ROOT_DIR);
+} catch {
+  shortcutsMap = {};
 }
 
 if (showDense) {
@@ -116,38 +126,35 @@ const results = [];
 
 function searchDir(dir, typeName) {
   if (!fs.existsSync(dir)) return;
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  if (typeFilter && typeName !== typeFilter) return;
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      searchDir(fullPath, typeName);
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
-      if (typeFilter && typeName !== typeFilter) continue;
-      if (langFilter && !fullPath.toLowerCase().includes(langFilter)) continue;
+  walkMarkdownFiles(dir, {
+    onFile: fullPath => {
+      if (langFilter && !fullPath.toLowerCase().includes(langFilter)) return;
 
       const content = fs.readFileSync(fullPath, 'utf8');
       const lowerContent = content.toLowerCase();
+      const baseName = path.basename(fullPath);
 
-      if (lowerContent.includes(lowerQuery) || entry.name.toLowerCase().includes(lowerQuery)) {
-        const descMatch = content.match(/desc:\s*(.*)/i);
+      if (lowerContent.includes(lowerQuery) || baseName.toLowerCase().includes(lowerQuery)) {
+        const fm = parseFrontmatter(content);
         const titleMatch = content.match(/^#\s*(.*)/m);
 
         results.push({
           file: path.relative(ROOT_DIR, fullPath).replace(/\\/g, '/'),
-          title: titleMatch ? titleMatch[1] : entry.name,
-          desc: descMatch ? descMatch[1] : 'No description',
+          title: titleMatch ? titleMatch[1].trim() : (fm.title || fm.name || baseName),
+          desc: fm.desc || fm.description || 'No description',
           fullPath
         });
       }
     }
-  }
+  });
 }
 
 searchDir(path.join(ROOT_DIR, 'architecture'), 'architecture');
 searchDir(path.join(ROOT_DIR, 'standards'), 'standards');
 searchDir(path.join(ROOT_DIR, 'skills'), 'skills');
-searchDir(path.join(ROOT_DIR, 'workflows'), 'workflows');
+searchDir(path.join(ROOT_DIR, 'agents'), 'agents');
 
 if (results.length === 0) {
   console.log('❌ No matching skills or blueprints found.');
@@ -159,3 +166,4 @@ if (results.length === 0) {
     console.log(`    📝 Summary: ${r.desc}\n`);
   });
 }
+

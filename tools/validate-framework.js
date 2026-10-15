@@ -2,15 +2,19 @@
 
 /**
  * AgentOption Framework Validator
- * Validates YAML frontmatter, rules.json integrity, file references, and shortcut coverage.
+ * Validates YAML frontmatter, rules.json & shortcuts.json integrity,
+ * .project-rule.md compliance, orphaned .bak files, and shortcut coverage.
  */
 
 const fs = require('fs');
 const path = require('path');
-
-const ROOT_DIR = path.resolve(__dirname, '..');
-const RULES_FILE = path.join(ROOT_DIR, 'rules.json');
-const SHORTCUTS_FILE = path.join(ROOT_DIR, 'shortcuts.json');
+const {
+  ROOT_DIR,
+  loadRules,
+  loadShortcuts,
+  parseFrontmatter,
+  walkMarkdownFiles
+} = require('./lib/framework-core');
 
 console.log('🔍 Validating AgentOption Framework...\n');
 
@@ -20,35 +24,41 @@ const usedRules = new Set();
 const contentFiles = [];
 
 // 1. Validate rules.json
-if (!fs.existsSync(RULES_FILE)) {
-  console.error('❌ Missing rules.json at root!');
+let rulesData = {};
+try {
+  rulesData = loadRules(ROOT_DIR);
+} catch (err) {
+  console.error(`❌ ${err.message}`);
   process.exit(1);
 }
 
-const rulesData = JSON.parse(fs.readFileSync(RULES_FILE, 'utf8'));
+if (Array.isArray(rulesData._duplicates) && rulesData._duplicates.length > 0) {
+  for (const dup of rulesData._duplicates) {
+    console.error(`❌ Duplicate rule key detected in rules.json: "${dup}"`);
+    errorCount++;
+  }
+}
+
 const validRuleKeys = new Set(Object.keys(rulesData));
 console.log(`✅ Loaded ${validRuleKeys.size} valid rules from rules.json`);
 
 // 2. Validate shortcuts.json
-if (!fs.existsSync(SHORTCUTS_FILE)) {
-  console.error('❌ Missing shortcuts.json at root!');
+let shortcutsData = {};
+try {
+  shortcutsData = loadShortcuts(ROOT_DIR);
+} catch (err) {
+  console.error(`❌ ${err.message}`);
   process.exit(1);
 }
 
-const shortcutsRaw = fs.readFileSync(SHORTCUTS_FILE, 'utf8');
-const shortcutKeyRegex = /^\s*"([A-Za-z0-9_]+)":\s*\{/gm;
-const seenShortcutKeys = new Set();
-let sm;
-while ((sm = shortcutKeyRegex.exec(shortcutsRaw)) !== null) {
-  const sk = sm[1];
-  if (seenShortcutKeys.has(sk)) {
-    console.error(`❌ Duplicate shortcut key detected in shortcuts.json: "${sk}"`);
+if (Array.isArray(shortcutsData._duplicates) && shortcutsData._duplicates.length > 0) {
+  for (const dup of shortcutsData._duplicates) {
+    console.error(`❌ Duplicate shortcut key detected in shortcuts.json: "${dup}"`);
     errorCount++;
   }
-  seenShortcutKeys.add(sk);
 }
 
-const shortcutsData = JSON.parse(shortcutsRaw);
+const validShortcutKeys = new Set(Object.keys(shortcutsData));
 const shortcutTargets = new Set();
 
 for (const [sKey, sVal] of Object.entries(shortcutsData)) {
@@ -69,43 +79,88 @@ for (const [sKey, sVal] of Object.entries(shortcutsData)) {
     errorCount++;
   }
 }
-console.log(`✅ Validated ${seenShortcutKeys.size} shortcuts with zero broken targets`);
+console.log(`✅ Validated ${validShortcutKeys.size} shortcuts`);
 
-// 3. Recursive Markdown Validator
-function validateMarkdownFiles(dir) {
+// 3. Scan for orphaned .bak files across repository
+function scanOrphanedBakFiles(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name !== 'node_modules' && entry.name !== '.git' && entry.name !== 'integrations') {
-        validateMarkdownFiles(fullPath);
-      }
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
-      fileCount++;
-      validateFile(fullPath);
+      if (entry.name.startsWith('.') || entry.name === 'node_modules') continue;
+      scanOrphanedBakFiles(fullPath);
+    } else if (entry.isFile() && entry.name.endsWith('.bak')) {
+      const rel = path.relative(ROOT_DIR, fullPath).replace(/\\/g, '/');
+      console.error(`❌ Orphaned .bak file detected: "${rel}"`);
+      errorCount++;
     }
   }
 }
 
+scanOrphanedBakFiles(ROOT_DIR);
+
+// 4. Validate .project-rule.md
+const projectRuleFile = path.join(ROOT_DIR, '.project-rule.md');
+if (!fs.existsSync(projectRuleFile)) {
+  console.error('❌ Missing .project-rule.md at repository root!');
+  errorCount++;
+} else {
+  const prContent = fs.readFileSync(projectRuleFile, 'utf8');
+  const prFm = parseFrontmatter(prContent);
+  if (!prFm.hasFrontmatter || prFm.malformed) {
+    console.error('❌ [.project-rule.md] Missing or malformed YAML frontmatter');
+    errorCount++;
+  } else {
+    for (const r of prFm.rules) {
+      usedRules.add(r);
+      if (!validRuleKeys.has(r)) {
+        console.error(`❌ [.project-rule.md] References unknown rule ID: "${r}"`);
+        errorCount++;
+      }
+    }
+    for (const s of prFm.shortcuts) {
+      if (!validShortcutKeys.has(s)) {
+        console.error(`❌ [.project-rule.md] References unknown shortcut ID: "${s}"`);
+        errorCount++;
+      }
+    }
+    for (const [k, relTarget] of Object.entries(prFm.key_paths || {})) {
+      const absKeyPath = path.join(ROOT_DIR, relTarget);
+      if (!fs.existsSync(absKeyPath)) {
+        console.error(`❌ [.project-rule.md] key_paths.${k} points to non-existent path: "${relTarget}"`);
+        errorCount++;
+      }
+    }
+  }
+}
+
+// 5. Recursive Markdown Validator
+const CORE_PREFIXES = ['architecture/', 'standards/', 'skills/', 'agents/'];
+
+function isSkillPackageSubResource(relativePath) {
+  return /^skills\/[^/]+\/(?:references|examples|resources)\/.+\.md$/.test(relativePath);
+}
+
 function validateFile(filePath) {
   const relativePath = path.relative(ROOT_DIR, filePath).replace(/\\/g, '/');
-  if (relativePath === 'README.md' || relativePath.startsWith('templates/') || relativePath === '.project-rule.md' || relativePath.startsWith('docs/')) {
-    return; // Root metadata, README, templates, and docs have distinct formats
+  if (
+    relativePath === 'README.md' ||
+    relativePath.startsWith('templates/') ||
+    relativePath === '.project-rule.md' ||
+    relativePath.startsWith('docs/')
+  ) {
+    return;
   }
 
-  // Files in architecture/, skills/, standards/, workflows/, agents/ are core content
-  const isCoreContent = ['architecture/', 'skills/', 'standards/', 'workflows/', 'agents/'].some(prefix =>
-    relativePath.startsWith(prefix)
-  );
-
+  const isCoreContent = CORE_PREFIXES.some(prefix => relativePath.startsWith(prefix));
   if (isCoreContent) {
     contentFiles.push(relativePath);
   }
 
   const content = fs.readFileSync(filePath, 'utf8');
+  const fm = parseFrontmatter(content);
 
-  // Mandatory frontmatter check for core content
-  if (!content.startsWith('---')) {
+  if (!fm.hasFrontmatter) {
     if (isCoreContent) {
       console.error(`❌ [${relativePath}] Missing mandatory YAML frontmatter (must start with '---')`);
       errorCount++;
@@ -113,36 +168,29 @@ function validateFile(filePath) {
     return;
   }
 
-  const endMatch = content.indexOf('\n---', 3);
-  if (endMatch === -1) {
+  if (fm.malformed) {
     console.error(`❌ [${relativePath}] Malformed frontmatter (missing closing '---')`);
     errorCount++;
     return;
   }
 
-  const frontmatterText = content.substring(3, endMatch);
-
-  // Check description
-  const descMatch = frontmatterText.match(/desc:\s*(.*)/);
-  if (!descMatch || !descMatch[1].trim()) {
-    console.error(`❌ [${relativePath}] Missing or empty 'desc:' in frontmatter`);
+  const descValue = fm.desc || fm.description;
+  if (!descValue || !descValue.trim()) {
+    console.error(`❌ [${relativePath}] Missing or empty 'desc:' (or 'description:') in frontmatter`);
     errorCount++;
   }
 
-  // Check rules defined in frontmatter
-  const rulesMatch = frontmatterText.match(/rules:\s*\[(.*?)\]/);
-  if (!rulesMatch) {
+  if (!fm.hasRules) {
     if (isCoreContent) {
       console.error(`❌ [${relativePath}] Missing 'rules: [...]' array in frontmatter`);
       errorCount++;
     }
   } else {
-    const referencedRules = rulesMatch[1].split(',').map(r => r.replace(/['"]/g, '').trim()).filter(Boolean);
-    if (referencedRules.length === 0 && isCoreContent) {
+    if (fm.rules.length === 0 && isCoreContent) {
       console.error(`❌ [${relativePath}] 'rules: []' is empty; must reference at least one rule`);
       errorCount++;
     }
-    for (const rule of referencedRules) {
+    for (const rule of fm.rules) {
       usedRules.add(rule);
       if (!validRuleKeys.has(rule)) {
         console.error(`❌ [${relativePath}] References unknown rule ID: "${rule}"`);
@@ -150,19 +198,48 @@ function validateFile(filePath) {
       }
     }
   }
+
+  if (fm.hasShortcuts || relativePath.startsWith('agents/')) {
+    for (const sc of fm.shortcuts) {
+      if (!validShortcutKeys.has(sc)) {
+        console.error(`❌ [${relativePath}] References unknown shortcut ID: "${sc}"`);
+        errorCount++;
+      }
+    }
+  }
+}
+
+function validateMarkdownFiles(dir) {
+  walkMarkdownFiles(dir, {
+    onFile: fullPath => {
+      fileCount++;
+      validateFile(fullPath);
+    }
+  });
 }
 
 validateMarkdownFiles(ROOT_DIR);
 
-// 4. Shortcut Coverage Check
-const uncoveredFiles = contentFiles.filter(f => !shortcutTargets.has(f));
-const coveragePct = (((contentFiles.length - uncoveredFiles.length) / contentFiles.length) * 100).toFixed(1);
+// 6. Shortcut Coverage Check (treating skill sub-resources as covered if parent SKILL.md is covered)
+const uncoveredFiles = contentFiles.filter(f => {
+  if (shortcutTargets.has(f)) return false;
+  if (isSkillPackageSubResource(f)) {
+    const parentSkill = f.split('/').slice(0, 2).join('/') + '/SKILL.md';
+    if (shortcutTargets.has(parentSkill)) return false;
+  }
+  return true;
+});
+
+const coveredCount = contentFiles.length - uncoveredFiles.length;
+const coveragePct = contentFiles.length > 0
+  ? ((coveredCount / contentFiles.length) * 100).toFixed(1)
+  : '100.0';
 
 console.log(`\n📊 Framework Audit Summary:`);
 console.log(`   - Total Markdown Files: ${fileCount}`);
 console.log(`   - Core Content Files: ${contentFiles.length}`);
 console.log(`   - Defined Rules: ${validRuleKeys.size} (Used: ${usedRules.size})`);
-console.log(`   - Shortcuts Coverage: ${contentFiles.length - uncoveredFiles.length}/${contentFiles.length} (${coveragePct}%)`);
+console.log(`   - Shortcuts Coverage: ${coveredCount}/${contentFiles.length} (${coveragePct}%)`);
 
 if (uncoveredFiles.length > 0) {
   console.log(`   ⚠️ Content files without shortcut:`);
@@ -180,3 +257,4 @@ if (errorCount > 0) {
 } else {
   console.log('✨ All AgentOption rules, skills, and shortcuts are 100% valid!');
 }
+

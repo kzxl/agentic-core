@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 
 /**
- * AgentOption CVSS v3.1 Calculator & CWE Taxonomy Mapper
- * Computes deterministic CVSS v3.1 scores, sub-scores, and CWE mappings
+ * AgentOption CVSS v3.1 / v3.0 Calculator & CWE Taxonomy Mapper
+ * Computes deterministic CVSS v3.x scores, sub-scores, and CWE mappings
  * adhering strictly to the FIRST.org mathematical standard.
  *
  * Usage:
  *   node tools/cvss.js "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
  *   node tools/cvss.js "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N" --markdown
  *   node tools/cvss.js --lookup "IDOR"
+ *   node tools/cvss.js --lookup=IDOR
  */
 
-const fs = require('fs');
+const { parseCliArgs } = require('./lib/framework-core');
 
 function printUsage() {
   console.log(`
@@ -19,6 +20,7 @@ function printUsage() {
 Usage:
   node tools/cvss.js <vector_string> [options]
   node tools/cvss.js --lookup <vulnerability_name>
+  node tools/cvss.js --lookup=<vulnerability_name>
 
 Options:
   --markdown       Output as formatted markdown for vulnerability reports
@@ -99,48 +101,7 @@ const VULN_CATALOG = [
   }
 ];
 
-const args = process.argv.slice(2);
-if (args.length === 0 || args.includes('--help')) {
-  printUsage();
-  process.exit(args.length === 0 ? 1 : 0);
-}
-
-// 1. Check Lookup Mode
-const lookupIdx = args.indexOf('--lookup');
-if (lookupIdx !== -1 && args[lookupIdx + 1]) {
-  const query = args[lookupIdx + 1].toLowerCase();
-  const matches = VULN_CATALOG.filter(v => 
-    v.name.toLowerCase().includes(query) ||
-    v.aliases.some(a => a.includes(query)) ||
-    v.cwe.toLowerCase().includes(query)
-  );
-
-  if (matches.length === 0) {
-    console.log(`❌ No vulnerability templates found matching "${query}".`);
-    process.exit(0);
-  }
-
-  console.log(`\n🔎 Found ${matches.length} matching vulnerability template(s):\n`);
-  matches.forEach((m, idx) => {
-    console.log(`[${idx + 1}] ${m.name}`);
-    console.log(`    🆔 CWE:       ${m.cwe}: ${m.cweName}`);
-    console.log(`    🛡️ OWASP:     ${m.owasp}`);
-    console.log(`    📊 Vector:    ${m.suggestedVector}`);
-    console.log(`    📝 Overview:  ${m.desc}\n`);
-  });
-  process.exit(0);
-}
-
-const vectorRaw = args.find(a => !a.startsWith('--'));
-if (!vectorRaw) {
-  printUsage();
-  process.exit(1);
-}
-
-const showMarkdown = args.includes('--markdown');
-const showJson = args.includes('--json');
-
-// 2. CVSS v3.1 Metric Weight Constants (FIRST.org SSoT)
+// CVSS v3.x Metric Weight Constants (FIRST.org SSoT)
 const METRICS = {
   AV: { N: 0.85, A: 0.62, L: 0.55, P: 0.20 },
   AC: { L: 0.77, H: 0.44 },
@@ -155,17 +116,20 @@ const METRICS = {
   A:  { N: 0.0, L: 0.22, H: 0.56 }
 };
 
-// 3. Parse Vector String
+// Parse Vector String (preserving CVSS:3.0 vs CVSS:3.1 version label)
 function parseVector(vStr) {
-  let cleanStr = vStr.trim();
-  if (cleanStr.startsWith('CVSS:3.1/')) {
+  let cleanStr = String(vStr || '').trim();
+  let version = '3.1';
+  if (cleanStr.toUpperCase().startsWith('CVSS:3.1/')) {
+    version = '3.1';
     cleanStr = cleanStr.substring(9);
-  } else if (cleanStr.startsWith('CVSS:3.0/')) {
+  } else if (cleanStr.toUpperCase().startsWith('CVSS:3.0/')) {
+    version = '3.0';
     cleanStr = cleanStr.substring(9);
   }
 
   const parts = cleanStr.split('/');
-  const parsed = {};
+  const parsed = { version };
   for (const part of parts) {
     const [k, v] = part.split(':');
     if (k && v) {
@@ -195,8 +159,9 @@ function parseVector(vStr) {
   return parsed;
 }
 
-// 4. Calculate CVSS 3.1 Score
+// Calculate CVSS Score
 function calculateCvss(p) {
+  const version = p.version || '3.1';
   const av = METRICS.AV[p.AV];
   const ac = METRICS.AC[p.AC];
   const pr = METRICS.PR[p.S][p.PR];
@@ -243,9 +208,10 @@ function calculateCvss(p) {
   else if (baseScore >= 4.0) severity = 'Medium';
   else if (baseScore >= 0.1) severity = 'Low';
 
-  const normalizedVector = `CVSS:3.1/AV:${p.AV}/AC:${p.AC}/PR:${p.PR}/UI:${p.UI}/S:${p.S}/C:${p.C}/I:${p.I}/A:${p.A}`;
+  const normalizedVector = `CVSS:${version}/AV:${p.AV}/AC:${p.AC}/PR:${p.PR}/UI:${p.UI}/S:${p.S}/C:${p.C}/I:${p.I}/A:${p.A}`;
 
   return {
+    version,
     vector: normalizedVector,
     baseScore: parseFloat(baseScore.toFixed(1)),
     severity,
@@ -264,54 +230,106 @@ function calculateCvss(p) {
   };
 }
 
-let result;
-try {
-  const parsed = parseVector(vectorRaw);
-  result = calculateCvss(parsed);
-} catch (err) {
-  console.error(`❌ CVSS Error: ${err.message}`);
-  process.exit(1);
-}
+if (require.main === module) {
+  const rawArgs = process.argv.slice(2);
+  if (rawArgs.length === 0 || rawArgs.includes('--help')) {
+    printUsage();
+    process.exit(rawArgs.length === 0 ? 1 : 0);
+  }
 
-if (showJson) {
-  console.log(JSON.stringify(result, null, 2));
-  process.exit(0);
-}
+  const parsedArgs = parseCliArgs(rawArgs, { valueFlags: ['lookup'] });
+  const flags = parsedArgs.flags;
 
-if (showMarkdown) {
-  console.log(`
-### Vulnerability Severity Rating (CVSS v3.1)
+  // 1. Check Lookup Mode (supports both --lookup=TYPE and --lookup TYPE)
+  if (typeof flags.lookup === 'string' && flags.lookup.trim()) {
+    const query = flags.lookup.trim().toLowerCase();
+    const matches = VULN_CATALOG.filter(v =>
+      v.name.toLowerCase().includes(query) ||
+      v.aliases.some(a => a.includes(query)) ||
+      v.cwe.toLowerCase().includes(query)
+    );
+
+    if (matches.length === 0) {
+      console.log(`❌ No vulnerability templates found matching "${query}".`);
+      process.exit(0);
+    }
+
+    console.log(`\n🔎 Found ${matches.length} matching vulnerability template(s):\n`);
+    matches.forEach((m, idx) => {
+      console.log(`[${idx + 1}] ${m.name}`);
+      console.log(`    🆔 CWE:       ${m.cwe}: ${m.cweName}`);
+      console.log(`    🛡️ OWASP:     ${m.owasp}`);
+      console.log(`    📊 Vector:    ${m.suggestedVector}`);
+      console.log(`    📝 Overview:  ${m.desc}\n`);
+    });
+    process.exit(0);
+  }
+
+  const vectorRaw = parsedArgs.positional[0];
+  if (!vectorRaw) {
+    printUsage();
+    process.exit(1);
+  }
+
+  const showMarkdown = Boolean(flags.markdown);
+  const showJson = Boolean(flags.json);
+
+  let result;
+  try {
+    const parsed = parseVector(vectorRaw);
+    result = calculateCvss(parsed);
+  } catch (err) {
+    console.error(`❌ CVSS Error: ${err.message}`);
+    process.exit(1);
+  }
+
+  if (showJson) {
+    console.log(JSON.stringify(result, null, 2));
+    process.exit(0);
+  }
+
+  if (showMarkdown) {
+    console.log(`
+### Vulnerability Severity Rating (CVSS v${result.version})
 
 | Metric | Score / Value | Evaluation |
 | :--- | :---: | :--- |
 | **Base Score** | **${result.baseScore}** | **${result.severity.toUpperCase()}** |
-| **CVSS Vector** | \`${result.vector}\` | Standard FIRST.org v3.1 |
+| **CVSS Vector** | \`${result.vector}\` | Standard FIRST.org v${result.version} |
 | **Impact Sub-score** | ${result.impactSubScore} | Conf: ${result.metrics.confidentiality.label}, Integ: ${result.metrics.integrity.label}, Avail: ${result.metrics.availability.label} |
 | **Exploitability Sub-score** | ${result.exploitabilitySubScore} | Vector: ${result.metrics.attackVector.label}, Compl: ${result.metrics.attackComplexity.label}, Priv: ${result.metrics.privilegesRequired.label}, UI: ${result.metrics.userInteraction.label} |
 | **Scope Impact** | ${result.metrics.scope.label} | ${result.metrics.scope.code === 'C' ? 'Vulnerability breaks component security boundary' : 'Impact contained to vulnerable component'} |
 `);
-  process.exit(0);
+    process.exit(0);
+  }
+
+  // Default CLI Output
+  console.log(`\n================================================================`);
+  console.log(`🧮 CVSS v${result.version} CALCULATION REPORT`);
+  console.log(`================================================================`);
+  console.log(`📊 Vector:         ${result.vector}`);
+  console.log(`🎯 Base Score:      ${result.baseScore} / 10.0`);
+  console.log(`🔥 Severity:        ${result.severity.toUpperCase()}`);
+  console.log(`----------------------------------------------------------------`);
+  console.log(`💥 Sub-scores:`);
+  console.log(`   Impact:         ${result.impactSubScore} / 10.0`);
+  console.log(`   Exploitability: ${result.exploitabilitySubScore} / 10.0`);
+  console.log(`----------------------------------------------------------------`);
+  console.log(`🧩 Metrics Breakdown:`);
+  console.log(`   Attack Vector (AV):        ${result.metrics.attackVector.code} (${result.metrics.attackVector.label})`);
+  console.log(`   Attack Complexity (AC):    ${result.metrics.attackComplexity.code} (${result.metrics.attackComplexity.label})`);
+  console.log(`   Privileges Required (PR):  ${result.metrics.privilegesRequired.code} (${result.metrics.privilegesRequired.label})`);
+  console.log(`   User Interaction (UI):     ${result.metrics.userInteraction.code} (${result.metrics.userInteraction.label})`);
+  console.log(`   Scope (S):                 ${result.metrics.scope.code} (${result.metrics.scope.label})`);
+  console.log(`   Confidentiality (C):       ${result.metrics.confidentiality.code} (${result.metrics.confidentiality.label})`);
+  console.log(`   Integrity (I):             ${result.metrics.integrity.code} (${result.metrics.integrity.label})`);
+  console.log(`   Availability (A):          ${result.metrics.availability.code} (${result.metrics.availability.label})`);
+  console.log(`================================================================\n`);
 }
 
-// Default CLI Output
-console.log(`\n================================================================`);
-console.log(`🧮 CVSS v3.1 CALCULATION REPORT`);
-console.log(`================================================================`);
-console.log(`📊 Vector:         ${result.vector}`);
-console.log(`🎯 Base Score:      ${result.baseScore} / 10.0`);
-console.log(`🔥 Severity:        ${result.severity.toUpperCase()}`);
-console.log(`----------------------------------------------------------------`);
-console.log(`💥 Sub-scores:`);
-console.log(`   Impact:         ${result.impactSubScore} / 10.0`);
-console.log(`   Exploitability: ${result.exploitabilitySubScore} / 10.0`);
-console.log(`----------------------------------------------------------------`);
-console.log(`🧩 Metrics Breakdown:`);
-console.log(`   Attack Vector (AV):        ${result.metrics.attackVector.code} (${result.metrics.attackVector.label})`);
-console.log(`   Attack Complexity (AC):    ${result.metrics.attackComplexity.code} (${result.metrics.attackComplexity.label})`);
-console.log(`   Privileges Required (PR):  ${result.metrics.privilegesRequired.code} (${result.metrics.privilegesRequired.label})`);
-console.log(`   User Interaction (UI):     ${result.metrics.userInteraction.code} (${result.metrics.userInteraction.label})`);
-console.log(`   Scope (S):                 ${result.metrics.scope.code} (${result.metrics.scope.label})`);
-console.log(`   Confidentiality (C):       ${result.metrics.confidentiality.code} (${result.metrics.confidentiality.label})`);
-console.log(`   Integrity (I):             ${result.metrics.integrity.code} (${result.metrics.integrity.label})`);
-console.log(`   Availability (A):          ${result.metrics.availability.code} (${result.metrics.availability.label})`);
-console.log(`================================================================\n`);
+module.exports = {
+  parseVector,
+  calculateCvss,
+  VULN_CATALOG
+};
+

@@ -1,0 +1,15 @@
+{
+  "name": "agentic-core",
+  "version": "4.1.0",
+  "description": "AgentOption Sovereign AI Agentic Engineering Framework, Standards, Skills, and Toolchain",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "validate": "node tools/validate-framework.js",
+    "doctor": "node tools/doctor.js",
+    "lookup": "node tools/lookup.js",
+    "export-agents": "node tools/export-agents.js",
+    "sync-skills": "node tools/export-agents.js --sync-skills",
+    "test": "node --test tests/tools.test.js"
+  }
+}

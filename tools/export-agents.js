@@ -1,140 +1,105 @@
 #!/usr/bin/env node
 
 /**
- * AgentOption Multi-Tool Agent Exporter
+ * AgentOption Multi-Tool Agent Exporter & Skill Synchronizer
  * Exports AgentOption Agent Personas into ready-to-use configurations for:
  *   - Claude Code (.claude/agents/)
  *   - Cursor IDE (.cursor/rules/)
  *   - Antigravity IDE (skills/)
  *   - Standalone Markdown System Prompt
- * 
+ * Also synchronizes AgentOption skill packages (skills/<name>/SKILL.md + subdirectories)
+ * to Antigravity global skills directory via --sync-skills.
+ *
  * Usage:
  *   node tools/export-agents.js --list
  *   node tools/export-agents.js --agent=winforms-modernizer [--target=prompt|claude|cursor|antigravity] [--out=<dir>] [--dry-run]
  *   node tools/export-agents.js --all --target=claude --out=./output
+ *   node tools/export-agents.js --sync-skills [--out=<globalSkillsDir>]
  */
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
+const {
+  ROOT_DIR,
+  loadRules,
+  loadShortcuts,
+  parseFrontmatter,
+  walkMarkdownFiles,
+  parseCliArgs
+} = require('./lib/framework-core');
 
-const ROOT_DIR = path.resolve(__dirname, '..');
 const AGENTS_DIR = path.join(ROOT_DIR, 'agents');
-const RULES_FILE = path.join(ROOT_DIR, 'rules.json');
-const SHORTCUTS_FILE = path.join(ROOT_DIR, 'shortcuts.json');
+const SKILLS_DIR = path.join(ROOT_DIR, 'skills');
+const DEFAULT_GLOBAL_SKILLS_DIR = path.join(os.homedir(), '.gemini', 'config', 'skills');
 
-const args = process.argv.slice(2);
-const isList = args.includes('--list') || args.includes('-l');
-const isAll = args.includes('--all');
-const isDryRun = args.includes('--dry-run');
+let rulesMap = {};
+try {
+  rulesMap = loadRules(ROOT_DIR);
+} catch {
+  rulesMap = {};
+}
 
-const targetArg = args.find(a => a.startsWith('--target='))?.split('=')[1]?.toLowerCase() || 'prompt';
-const agentArg = args.find(a => a.startsWith('--agent='))?.split('=')[1]?.toLowerCase();
-const outArg = args.find(a => a.startsWith('--out='))?.split('=')[1];
-
-// Load rules and shortcuts
-const rulesMap = fs.existsSync(RULES_FILE) ? JSON.parse(fs.readFileSync(RULES_FILE, 'utf8')) : {};
-const shortcutsMap = fs.existsSync(SHORTCUTS_FILE) ? JSON.parse(fs.readFileSync(SHORTCUTS_FILE, 'utf8')) : {};
-
-// Scan all agents
-function scanAgents(dir, list = []) {
-  if (!fs.existsSync(dir)) return list;
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      scanAgents(fullPath, list);
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
-      const content = fs.readFileSync(fullPath, 'utf8');
-      const parsed = parseAgent(fullPath, content);
-      if (parsed) list.push(parsed);
-    }
-  }
-  return list;
+let shortcutsMap = {};
+try {
+  shortcutsMap = loadShortcuts(ROOT_DIR);
+} catch {
+  shortcutsMap = {};
 }
 
 function parseAgent(filePath, content) {
-  if (!content.startsWith('---')) return null;
-  const endMatch = content.indexOf('\n---', 3);
-  if (endMatch === -1) return null;
-
-  const frontmatter = content.substring(3, endMatch);
-  const body = content.substring(endMatch + 4).trim();
-
-  const desc = frontmatter.match(/desc:\s*(.*)/)?.[1]?.trim() || '';
-  const division = frontmatter.match(/division:\s*(.*)/)?.[1]?.trim() || 'general';
-  const role = frontmatter.match(/role:\s*(.*)/)?.[1]?.trim() || path.basename(filePath, '.md');
-  
-  const rulesMatch = frontmatter.match(/rules:\s*\[(.*?)\]/);
-  const rules = rulesMatch ? rulesMatch[1].split(',').map(r => r.replace(/['"]/g, '').trim()).filter(Boolean) : [];
-
-  const shortcutsMatch = frontmatter.match(/shortcuts:\s*\[(.*?)\]/);
-  const shortcuts = shortcutsMatch ? shortcutsMatch[1].split(',').map(s => s.replace(/['"]/g, '').trim()).filter(Boolean) : [];
-
-  const toolsMatch = frontmatter.match(/tools:\s*\[(.*?)\]/);
-  const tools = toolsMatch ? toolsMatch[1].split(',').map(t => t.replace(/['"]/g, '').trim()).filter(Boolean) : [];
+  const fm = parseFrontmatter(content);
+  if (!fm.hasFrontmatter || fm.malformed) return null;
 
   return {
     filePath,
     relativePath: path.relative(ROOT_DIR, filePath).replace(/\\/g, '/'),
-    desc,
-    division,
-    role,
-    rules,
-    shortcuts,
-    tools,
-    body
+    desc: fm.desc || fm.description || '',
+    division: fm.division || 'general',
+    role: fm.role || path.basename(filePath, '.md'),
+    rules: fm.rules || [],
+    shortcuts: fm.shortcuts || [],
+    tools: fm.tools || [],
+    body: fm.body || ''
   };
 }
 
-const agents = scanAgents(AGENTS_DIR);
-
-if (isList) {
-  console.log(`\n🎭 Registered Agent Personas in AgentOption (${agents.length} agents):\n`);
-  console.table(
-    agents.map(a => ({
-      Role: a.role,
-      Division: a.division,
-      Rules: a.rules.join(', '),
-      Shortcuts: a.shortcuts.join(', '),
-      Description: a.desc
-    }))
-  );
-  process.exit(0);
+function scanAgents(dir = AGENTS_DIR) {
+  const list = [];
+  if (!fs.existsSync(dir)) return list;
+  walkMarkdownFiles(dir, {
+    onFile: fullPath => {
+      const content = fs.readFileSync(fullPath, 'utf8');
+      const parsed = parseAgent(fullPath, content);
+      if (parsed) list.push(parsed);
+    }
+  });
+  return list;
 }
 
-if (!agentArg && !isAll) {
-  console.log('Usage:');
-  console.log('  node tools/export-agents.js --list');
-  console.log('  node tools/export-agents.js --agent=<role> [--target=prompt|claude|cursor|antigravity] [--out=<dir>] [--dry-run]');
-  console.log('  node tools/export-agents.js --all --target=<target> [--out=<dir>]\n');
-  process.exit(0);
-}
+function renderAntigravitySkill(agent, boundRules, boundShortcuts, boundTools) {
+  const escapedDesc = (agent.desc || '').replace(/"/g, '\\"');
+  return `---
+name: ${agent.role}
+description: "${escapedDesc}"
+desc: "${escapedDesc}"
+rules: [${agent.rules.join(', ')}]
+tools: [${agent.tools.map(t => `"${t}"`).join(', ')}]
+---
 
-const selectedAgents = isAll ? agents : agents.filter(a => a.role === agentArg || path.basename(a.filePath, '.md') === agentArg);
+# ${agent.role}
 
-if (selectedAgents.length === 0) {
-  console.error(`❌ Agent "${agentArg}" not found! Run with --list to see available agents.`);
-  process.exit(1);
-}
+${agent.body}
 
-console.log(`🚀 Exporting ${selectedAgents.length} agent(s) to target: [${targetArg.toUpperCase()}]...\n`);
+## Permitted Tools
+${boundTools}
 
-for (const agent of selectedAgents) {
-  const rendered = renderAgent(agent, targetArg);
-  const destPath = resolveDestination(agent, targetArg, outArg);
+## Enforced Invariants
+${boundRules}
 
-  console.log(`📦 Agent: ${agent.role} (${agent.division})`);
-  console.log(`   ➡️ Target Path: ${destPath}`);
-
-  if (isDryRun) {
-    console.log(`   [DRY-RUN] Preview (first 10 lines):`);
-    console.log(rendered.split('\n').slice(0, 10).map(l => `      | ${l}`).join('\n'));
-    console.log(`   ... (${rendered.split('\n').length} lines total)\n`);
-  } else {
-    fs.mkdirSync(path.dirname(destPath), { recursive: true });
-    fs.writeFileSync(destPath, rendered, 'utf8');
-    console.log(`   ✅ Successfully exported!\n`);
-  }
+## Reference Standards
+${boundShortcuts}
+`;
 }
 
 function renderAgent(agent, target) {
@@ -143,11 +108,15 @@ function renderAgent(agent, target) {
     const item = shortcutsMap[s];
     return item ? `- **${s}** (${item.name}): ${item.desc} \`[${item.target}]\`` : `- **${s}**`;
   }).join('\n');
+  const boundTools = agent.tools.length > 0
+    ? agent.tools.map(t => `- \`${t}\``).join('\n')
+    : '- Standard read/write/search toolchain';
+  const escapedDesc = (agent.desc || '').replace(/"/g, '\\"');
 
   if (target === 'claude') {
     return `---
 name: ${agent.role}
-description: "${agent.desc}"
+description: "${escapedDesc}"
 tools: [${agent.tools.map(t => `"${t}"`).join(', ')}]
 ---
 
@@ -156,6 +125,9 @@ tools: [${agent.tools.map(t => `"${t}"`).join(', ')}]
 ${agent.body}
 
 ---
+
+## 🛠️ Permitted Tools
+${boundTools}
 
 ## 📜 Invariant Rules Enforced
 ${boundRules}
@@ -170,11 +142,15 @@ ${boundShortcuts}
 description: ${agent.desc}
 globs: ["*"]
 alwaysApply: false
+tools: [${agent.tools.map(t => `"${t}"`).join(', ')}]
 ---
 
 # ${agent.role}
 
 ${agent.body}
+
+### Permitted Tools
+${boundTools}
 
 ### Enforced Rules
 ${boundRules}
@@ -185,29 +161,21 @@ ${boundShortcuts}
   }
 
   if (target === 'antigravity') {
-    return `---
-name: ${agent.role}
-description: "${agent.desc}"
----
-
-# ${agent.role}
-
-${agent.body}
-
-## Enforced Invariants
-${boundRules}
-
-## Reference Standards
-${boundShortcuts}
-`;
+    return renderAntigravitySkill(agent, boundRules, boundShortcuts, boundTools);
   }
 
   // Default: prompt format
   return `# AGENT IDENTITY: ${agent.role.toUpperCase()}
 # DIVISION: ${agent.division.toUpperCase()}
 # DESCRIPTION: ${agent.desc}
+# TOOLS: ${agent.tools.join(', ')}
 
 ${agent.body}
+
+============================================================
+PERMITTED TOOLS:
+============================================================
+${boundTools}
 
 ============================================================
 HARD ARCHITECTURAL CONSTRAINTS & INVARIANTS:
@@ -223,6 +191,9 @@ ${boundShortcuts}
 
 function resolveDestination(agent, target, customOut) {
   if (customOut) {
+    if (target === 'antigravity') {
+      return path.join(path.resolve(customOut), agent.role, 'SKILL.md');
+    }
     const ext = target === 'cursor' ? '.mdc' : '.md';
     return path.resolve(customOut, `${agent.role}${ext}`);
   }
@@ -239,3 +210,119 @@ function resolveDestination(agent, target, customOut) {
 
   return path.join(ROOT_DIR, 'integrations', 'prompts', `${agent.role}.md`);
 }
+
+function syncSkillPackages(destRoot = DEFAULT_GLOBAL_SKILLS_DIR, isDryRun = false) {
+  if (!fs.existsSync(SKILLS_DIR)) {
+    throw new Error(`Skills directory not found: ${SKILLS_DIR}`);
+  }
+
+  const resolvedDestRoot = path.resolve(destRoot);
+  const entries = fs.readdirSync(SKILLS_DIR, { withFileTypes: true });
+  const synced = [];
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const pkgDir = path.join(SKILLS_DIR, entry.name);
+    const skillFile = path.join(pkgDir, 'SKILL.md');
+    if (!fs.existsSync(skillFile)) continue;
+
+    const targetPkgDir = path.join(resolvedDestRoot, entry.name);
+    if (!isDryRun) {
+      fs.mkdirSync(targetPkgDir, { recursive: true });
+      fs.cpSync(pkgDir, targetPkgDir, { recursive: true, force: true });
+    }
+    synced.push({ name: entry.name, source: pkgDir, destination: targetPkgDir });
+  }
+
+  return synced;
+}
+
+if (require.main === module) {
+  const parsedArgs = parseCliArgs(process.argv.slice(2));
+  const flags = parsedArgs.flags;
+
+  const isList = Boolean(flags.list || flags.l);
+  const isAll = Boolean(flags.all);
+  const isDryRun = Boolean(flags['dry-run']);
+  const isSyncSkills = Boolean(flags['sync-skills']);
+
+  const targetArg = typeof flags.target === 'string' ? flags.target.toLowerCase() : 'prompt';
+  const agentArg = typeof flags.agent === 'string' ? flags.agent.toLowerCase() : undefined;
+  const outArg = typeof flags.out === 'string' ? flags.out : undefined;
+
+  if (isSyncSkills) {
+    const destRoot = outArg ? path.resolve(outArg) : DEFAULT_GLOBAL_SKILLS_DIR;
+    console.log(`🔄 Synchronizing SKILL.md packages to: ${destRoot}\n`);
+    const synced = syncSkillPackages(destRoot, isDryRun);
+    for (const item of synced) {
+      console.log(`   📦 ${item.name} -> ${item.destination}${isDryRun ? ' [DRY-RUN]' : ' ✅'}`);
+    }
+    console.log(`\n✨ Synchronized ${synced.length} skill package(s)!`);
+    process.exit(0);
+  }
+
+  const agents = scanAgents(AGENTS_DIR);
+
+  if (isList) {
+    console.log(`\n🎭 Registered Agent Personas in AgentOption (${agents.length} agents):\n`);
+    console.table(
+      agents.map(a => ({
+        Role: a.role,
+        Division: a.division,
+        Rules: a.rules.join(', '),
+        Shortcuts: a.shortcuts.join(', '),
+        Tools: a.tools.join(', '),
+        Description: a.desc
+      }))
+    );
+    process.exit(0);
+  }
+
+  if (!agentArg && !isAll) {
+    console.log('Usage:');
+    console.log('  node tools/export-agents.js --list');
+    console.log('  node tools/export-agents.js --agent=<role> [--target=prompt|claude|cursor|antigravity] [--out=<dir>] [--dry-run]');
+    console.log('  node tools/export-agents.js --all --target=<target> [--out=<dir>]');
+    console.log('  node tools/export-agents.js --sync-skills [--out=<globalSkillsDir>]\n');
+    process.exit(0);
+  }
+
+  const selectedAgents = isAll
+    ? agents
+    : agents.filter(a => a.role.toLowerCase() === agentArg || path.basename(a.filePath, '.md').toLowerCase() === agentArg);
+
+  if (selectedAgents.length === 0) {
+    console.error(`❌ Agent "${agentArg}" not found! Run with --list to see available agents.`);
+    process.exit(1);
+  }
+
+  console.log(`🚀 Exporting ${selectedAgents.length} agent(s) to target: [${targetArg.toUpperCase()}]...\n`);
+
+  for (const agent of selectedAgents) {
+    const rendered = renderAgent(agent, targetArg);
+    const destPath = resolveDestination(agent, targetArg, outArg);
+
+    console.log(`📦 Agent: ${agent.role} (${agent.division})`);
+    console.log(`   ➡️ Target Path: ${destPath}`);
+
+    if (isDryRun) {
+      console.log(`   [DRY-RUN] Preview (first 10 lines):`);
+      console.log(rendered.split('\n').slice(0, 10).map(l => `      | ${l}`).join('\n'));
+      console.log(`   ... (${rendered.split('\n').length} lines total)\n`);
+    } else {
+      fs.mkdirSync(path.dirname(destPath), { recursive: true });
+      fs.writeFileSync(destPath, rendered, 'utf8');
+      console.log(`   ✅ Successfully exported!\n`);
+    }
+  }
+}
+
+module.exports = {
+  parseAgent,
+  scanAgents,
+  renderAgent,
+  renderAntigravitySkill,
+  resolveDestination,
+  syncSkillPackages
+};
+
