@@ -4,7 +4,7 @@ rules: [R_RES_MEM, R_RESEARCH, R_STATE]
 ---
 # 🚫 Failed Approach & Negative Memory Playbook
 
-## 1. Core Principle: "Cái này thử rồi, đừng làm lại"
+## 1. Core Principle: "Never Repeat a Verified Failed Approach"
 
 The primary competitive edge of experienced senior human software engineers over AI agents is **negative intuition**:
 * A junior engineer or an LLM sees a slow loop and thinks: *"Let's try OpenMP multi-threading!"*

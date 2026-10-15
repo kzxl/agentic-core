@@ -31,7 +31,7 @@ category: Agentic
          └───────┬───────┘                     │
                  │                             │
           ┌──────┴──────┐                      │
-    [R1==R2==R3]   [Khác nhau]                 │
+    [R1==R2==R3]   [Divergent]                 │
           │             │                      │
    ✅ 3/3 CONSENSUS    └──────────────┬───────┘
  (Early Stopping)                     ▼

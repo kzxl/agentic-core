@@ -93,21 +93,21 @@ category: Agentic
  • Module Scope   • Executed DB Migrations    • Runtime Logs      • Root Cause Proof
 ```
 
-### 1. Task & Scope State (Phạm vi)
+### 1. Task & Scope State
 - **Active Goal:** Specific feature or bug under investigation.
 - **Current Phase:** e.g., `Phase 1: DTO Localization` | `Phase 2: Service Refactoring`.
 - **Module Boundary:** Exact assemblies and namespaces in scope.
 
-### 2. Workspace Delta State (Biến đổi thực tế)
+### 2. Workspace Delta State
 - **Files Modified:** Exact list of touched files in current session.
 - **Git Status / Diff:** Uncommitted line changes (`git status -s`).
 - **External State:** Executed SQL migrations, running background dev servers.
 
-### 3. Diagnostic & Evidence State (Bằng chứng phản hồi)
+### 3. Diagnostic & Evidence State
 - **Raw Diagnostic Output:** Exact compiler errors, failed assertions, stack traces.
 - **Verification Proof:** Success logs (`Build succeeded. 0 Error(s)`).
 
-### 4. Hypothesis & Attempt History Log (Trí nhớ thử nghiệm)
+### 4. Hypothesis & Attempt History Log
 - **Current Hypothesis:** Explicit, testable statement of root cause.
 - **Attempt History (Anti-Loop):**
   ```markdown

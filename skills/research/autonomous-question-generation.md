@@ -35,7 +35,7 @@ When an AI agent receives a broad, ambitious research problem:
 
 ---
 
-## 3. Case Study: "Làm embedded framework nhanh và safe hơn C"
+## 3. Case Study: "Build an embedded framework faster and safer than C"
 
 ### Step 1: Ingesting Problem
 * **User Directive:** "Build an embedded framework faster and safer than C."

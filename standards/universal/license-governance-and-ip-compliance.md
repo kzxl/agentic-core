@@ -22,7 +22,7 @@ Every software component, dependency, or referenced snippet must be categorized 
 
 ---
 
-## 2. License Recognition Protocol (Nhận diện Bản quyền)
+## 2. License Recognition Protocol
 
 Before consulting, adapting, or importing third-party code, execute the mandatory 4-point scan:
 
@@ -41,7 +41,7 @@ Before consulting, adapting, or importing third-party code, execute the mandator
 
 ---
 
-## 3. License Initialization Standard (Khởi tạo Bản quyền)
+## 3. License Initialization Standard
 
 ### 3.1 Repository Root `LICENSE` File
 All sovereign projects under the **ZeroUniverse** ecosystem default to the **MIT License**:
