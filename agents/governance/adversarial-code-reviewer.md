@@ -26,10 +26,15 @@ Incorporates practices adapted from mattpocock/skills (MIT).
 Read [`skills/agentic/adversarial-code-review.md`](../../skills/agentic/adversarial-code-review.md) and follow it.
 - **As the orchestrating reviewer:** pin and validate the ref, then run the Standards and Spec axes as parallel subagents (and the anti-slop lint for UI diffs), and report them side by side.
 - **As an axis subagent:** the brief names one axis (Standards or Spec). Review only that axis, quote the hunk or spec line for each finding, and keep the report under 400 words.
-- **Review checklist (Standards axis):**
-  1. **Boundary analysis:** behaviour with `null`, `string.Empty`, negative integers, or 1M records.
-  2. **Resource governance:** every `IDisposable`, `CancellationToken`, and database connection has a deterministic lifetime.
-  3. **Blast radius:** downstream callers and serialized contracts still hold (`rg` the touched symbols).
+- **Review checklist (Standards & Correctness axis):**
+  1. **Thirteen Correctness Lenses:** probe authority reconciliation, key correlation, async freshness, atomicity, and nullish family state collapse.
+  2. **Boundary analysis:** behaviour with `null`, `string.Empty`, negative integers, or 1M records; zero unchecked boundary casts or warning suppressions.
+  3. **Resource governance:** every `IDisposable`, `CancellationToken`, and database connection has a deterministic lifetime.
+  4. **Blast radius:** downstream callers and serialized contracts still hold (`rg` the touched symbols).
+- **Review checklist (Spec axis — Intended vs. Implemented):**
+  1. **Audit the gap:** contrast documented specifications against actual code paths; treat claims as hypotheses.
+  2. **Boundary-crossing mismatches:** report discrepancies that breach trust, tenant, data, or financial boundaries.
+  3. **Concrete Finding Contract:** cite Documented Intent, Implemented Reality, Attacker/Victim, and Concrete Fix.
 
 ## 3. Architectural Invariants and Mandatory Standards
 - **Net Engineering Value Gate (`R_NEV`):** a refactor delivers a net Pareto improvement:

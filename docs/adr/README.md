@@ -12,6 +12,7 @@ Decisions about this framework and why they were made. All listed ADRs are accep
 | [0006](0006-positive-first-agent-docs.md) | Positive-first agent docs, negative examples outside agent context | Writing |
 | [0007](0007-merge-practices-into-existing-skills.md) | Merge adopted practices into existing skills | Skills |
 | [0008](0008-governance-docs-under-docs.md) | Governance documents live under docs/ | Repo layout |
+| [0009](0009-baseline-delta-intent-auditing-and-collision-linter.md) | Baseline delta, intent auditing, and skill collision linter | Governance & Skills |
 
 ## Adding an ADR
 

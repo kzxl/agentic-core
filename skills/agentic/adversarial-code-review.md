@@ -1,7 +1,7 @@
 ---
 name: AgenticAdversarialCodeReview
-description: Two-axis adversarial code review (Standards and Spec) run as parallel subagents, plus an anti-slop lint for UI changes. Use before presenting or committing completed work, when the user asks to review a diff, branch, PR, or work-in-progress changes, or asks to "review since <ref>".
-desc: Fail-fast two-axis review (Standards with Fowler smell baseline, Spec fidelity) in parallel subagents, anti-slop lint for UI diffs, reports side by side.
+description: Two-axis adversarial code review (Standards and Spec) run as parallel subagents, incorporating the Intended vs Implemented audit method, 13 Correctness Lenses, and an anti-slop lint for UI changes. Use before presenting or committing completed work, when the user asks to review a diff, branch, PR, or work-in-progress changes, or asks to "review since <ref>".
+desc: Fail-fast two-axis review (Standards with Correctness Lenses, Spec fidelity via Intended vs Implemented audit) in parallel subagents, anti-slop lint for UI diffs.
 rules: [R_CORE, R_NEV, R_PROOF, R_ANTI_SLOP]
 category: Agentic
 ---
@@ -9,7 +9,7 @@ category: Agentic
 
 **Goal:** Audit a candidate diff as a zero-trust reviewer along two independent axes, **Standards** (does the code follow this repo's standards?) and **Spec** (does it implement what was asked?), and trap concurrency races, N+1 queries, leaks, security bypasses, and negative Net Engineering Value (`NEV <= 0`) before completion.
 
-Incorporates practices adapted from mattpocock/skills (MIT).
+Incorporates practices adapted from mattpocock/skills (MIT) and phuryn/pm-skills (MIT).
 
 A change can pass one axis and fail the other (clean code that implements the wrong thing; correct behaviour that breaks conventions). Reporting the axes separately stops one from masking the other.
 
@@ -41,7 +41,7 @@ Issue both subagent calls in the same tool block (read-only `research` subagents
 
 **Standards brief:** "Review the diff against the listed standards and the audit checklist in Section 4. For each finding, quote the hunk and cite the standard. Also flag any smell from the baseline in Section 5, labelled as a judgement call ('possible Feature Envy'). Hard violations of documented standards carry a severity (`P0` security/crash/corruption, `P1` N+1/leak/regression, `P2` nit); smells never do. A documented repo standard overrides the smell baseline. Skip anything tooling enforces. Under 400 words."
 
-**Spec brief:** "Report (a) requirements the spec asked for that are missing or partial, (b) behaviour in the diff that was not asked for (scope creep), (c) requirements that look implemented but wrong. Quote the spec line for each finding. Under 400 words."
+**Spec brief (Intended vs. Implemented Audit):** "Audit the gap between documented intent and code reality using the 5-step Intended vs. Implemented method (§5): (1) Treat spec claims as hypotheses to verify, not proof; (2) Locate cited enforcement lines in the diff; (3) Verify server-side boundaries, distrusting comments like `// internal only`; (4) Filter mismatches that cross trust, tenant, data, or financial boundaries; (5) For each finding, cite Documented Intent, Implemented Reality, Attacker/Victim, and Concrete Fix. Also flag missing requirements and unasked scope creep. Under 400 words."
 
 **Anti-slop check (UI or comment changes):** when the diff touches UI files (`*.css`, `*.scss`, `*.xaml`, `*.tsx`, `*.jsx`, `*.vue`, `*.html`, `*.Designer.cs`) or adds comments, run in parallel with the subagents:
 ```bash
@@ -92,7 +92,43 @@ public async Task<int> ApproveVouchersGoodAsync(IReadOnlyCollection<int> voucher
 }
 ```
 
-## 5. Fowler Smell Baseline (judgement calls)
+## 5. Intended vs. Implemented Audit Protocol
+
+A linter checks internal consistency in a vacuum; it cannot verify whether code fulfills business intent. The highest-severity bugs live in the gap between documented specification and implemented code.
+
+1. **Establish Intent:** Read spec or architecture documents as claims to verify, not trusted facts.
+2. **Gather Implementation Evidence:** Locate the exact lines executing authorization, filtering, and sanitization. Code paths are evidence; developer comments like `// validated elsewhere` are not.
+3. **Compare Claim to Code:** Audit boundaries one at a time. Ensure enforcement lives on the server on every reachable path.
+4. **Filter Meaningful Mismatches:** Discard cosmetic differences. Retain mismatches that allow unauthorized data, financial loss, tenant crossing, or privilege escalation.
+5. **Concrete Finding Contract:** Every finding MUST state:
+   - **Documented Intent:** Quote the spec, doc, or permission requirement.
+   - **Implemented Reality:** Cite the concrete file and line number.
+   - **Attacker & Victim / Impact:** Identify the boundary crossed and who is affected.
+   - **Concrete Fix:** Provide the precise diff or remediation pattern.
+
+## 6. Thirteen Correctness Diagnostic Lenses
+
+Reviewers frequently overlook relationship defects between components that individually appear sensible. Apply these 13 diagnostic lenses during standards and logic audits:
+
+| # | Diagnostic Lens | What to Probe / Tell |
+| :--- | :--- | :--- |
+| **1** | **Authority Reconciliation** | "A requested value is not an applied value." State derived from the request instead of the authority's reply. Probe: construct a case where server response differs from proposed input. |
+| **2** | **Identity & Correlation** | Key uniqueness, stability, and lifetime under concurrency, reordering, or slot reuse. |
+| **3** | **Freshness & Generations** | Captured values across `await`, callbacks, yields, timers, or lock releases used after state has mutated. |
+| **4** | **Lifecycle & Derived State** | Derived or cached state retained across reset/failure paths instead of recomputed. |
+| **5** | **Atomicity & Partial Failure** | Multi-effect operations leaving durable partial state on exception or cancellation. |
+| **6** | **Replay & Effect Cardinality** | Retries or duplicate triggers executing non-idempotent side effects (billing, notifications). |
+| **7** | **Composition & Precedence** | Merges, reductions, and post-merge transformations silently re-ordering priority. |
+| **8** | **Bounds, Units & Accounting** | Empty collections, off-by-one, integer overflow, and mismatched measurement units. |
+| **9** | **Framing & Incremental Processing** | Buffer flushing, stream chunking, early termination, and final-item finalization. |
+| **10** | **Representation & Information Loss** | **Nullish family collapse**: confusing *pending*, *absent*, *empty*, *zero*, *false*, and *failed*. **Projection drift**: dropped DTO fields. **Unresolved values**: persisting unsettled promises. |
+| **11** | **State Machine Invariants** | Unchecked transitions between domain states (e.g. `Cancelled` transitioning to `Approved`). |
+| **12** | **Exception Hygiene** | Swallowed errors, empty catch blocks, or catching `Exception` instead of specific fault types. |
+| **13** | **Concurrency & Reentrancy** | Unsynchronized shared mutable state, lack of atomic Compare-And-Swap or DB `UPDLOCK`. |
+
+> **Tell:** A type cast, an `any`, a non-null assertion (`!`), or a warning suppression (`#pragma warning disable`) at a boundary is where contracts go to die. Treat every boundary suppression as a primary defect candidate.
+
+## 7. Fowler Smell Baseline (judgement calls)
 
 Applies even when a repo documents nothing; a documented repo standard always overrides it.
 
@@ -111,7 +147,7 @@ Applies even when a repo documents nothing; a documented repo standard always ov
 | Middle Man | Class or function that mostly delegates | Cut it; call the real target |
 | Refused Bequest | Subclass ignores most of what it inherits | Replace inheritance with composition |
 
-## 6. Report and Verdict
+## 8. Report and Verdict
 
 Present the reports under `## Standards`, `## Spec`, and (when run) `## Anti-slop`, verbatim or lightly cleaned. Keep the axes separate: no merging or re-ranking across them. End with one summary line: findings per axis and the worst finding **within** each axis.
 

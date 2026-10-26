@@ -26,30 +26,33 @@ Required on every `.md` under `skills/`, `standards/`, `architecture/`, `agents/
 ```yaml
 ---
 name: <folder-name for packages; unique identifier otherwise>
-description: <model-facing pointer, "Use when ..." branches, <= 1024 chars>
+description: <model-facing router pointer, "Use when ..." branches, <= 1024 chars, ends in punctuation>
 desc: <short human summary, used in shortcuts.json and README>
 rules: [R_CORE, ...]   # at least one; existing rules.json keys only
 ---
 ```
 
 - Preserve existing keys (`category`, `shortcuts`) when editing a file.
-- `description` is the context pointer (see `writing-for-agents` §1). `desc` is not loaded by the agent; keep it short.
+- `description` is the context pointer and router. Only `name` and `description` load at discovery time. It MUST include:
+  1. What the skill does concretely with an active verb.
+  2. `Use when...` or `USE FOR:` matching developer-typed keywords and error codes.
+  3. `Do not use for X — use Y.` negative trigger boundary partitioning against sibling skills.
+  4. Terminal punctuation canary (`.!?)"'`).
+  5. Maximum 1024 characters.
 - Look up valid rule IDs in `rules.json` instead of copying a list into prose.
 
-## 3. Validator Contract
+## 3. Validator & Skill-Lint Quality Gates
 
-Run `node tools/validate-framework.js` (alias `npm run validate`) after every edit. It enforces:
+Run `node tools/validate-framework.js` (alias `npm run validate`) and `node tools/skill-lint.js` (alias `npm run lint:skills`) after every edit:
 
-| Check | Fix when it fails |
+| Tool & Check | Enforcement Rule & Fix |
 | :--- | :--- |
-| Frontmatter present and closed | Add `---` block at line 1 |
-| `desc` or `description` non-empty | Fill it |
-| `rules: [...]` non-empty, every ID in `rules.json` | Use an existing key; new rule IDs are an orchestrator change |
-| Internal markdown links resolve | Fix the path; links containing `[AgentOption]` or `<...>` are skipped |
-| README vital metrics match disk | Orchestrator updates `README.md` |
-| Shortcut coverage (warning list) | Add a `shortcuts.json` entry targeting the `SKILL.md`; package sub-resources inherit coverage from their parent |
+| `validate-framework.js` | Frontmatter closed, non-empty `desc`/`rules`, markdown links resolve, 0 errors. |
+| `skill-lint.js` (Punctuation canary) | Ensures description terminates in valid punctuation to catch truncation bugs. |
+| `skill-lint.js` (Length cap) | Enforces $\le 1024$ character budget per description (`desc-max-length`). |
+| `skill-lint.js` (Collision detector) | Computes TF-IDF cosine similarity across all skills; flags collisions $\ge 0.45$. |
 
-Completion criterion: `Errors found: 0`.
+Completion criterion: `Errors found: 0` on both tools.
 
 ## 4. Registry Entries
 

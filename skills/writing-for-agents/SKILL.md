@@ -80,22 +80,42 @@ Keep a prohibition only as a hard guardrail you cannot phrase positively. Pair i
 - **No-op pruning:** delete every sentence the model already obeys by default. Delete the whole sentence, not words. If a word is too weak to beat the default (*thorough*), use a stronger one (*relentless*).
 - **Sediment:** stale layers accumulate because adding feels safe and removing feels risky. Every edit includes a prune pass over the touched section.
 
-## 8. Authoring Protocol
+## 8. Writing for Delta Over the Baseline Model
+
+A skill's value is strictly the **delta** it creates over the foundation model running with no skill loaded:
+$$\text{Skill Value} = \text{Score}_{\text{with skill}} - \text{Score}_{\text{baseline}}$$
+
+Content the unskilled model produces unaided is worth zero. Content that adds verbosity or hedging is worth less than zero. Adhere to these ten rules (adapted from `dotnet/skills`):
+
+1. **Encode decisions, not knowledge:** Write what the model should *do* when it sees a symptom, not what an API *is*. Practical test: delete any sentence the unskilled model would write anyway.
+2. **"When A, do B, never C, verify D" tables:** Route through decision tables so the model picks one deterministic path instead of offering lists of plausible alternatives.
+3. **Mandate concrete output contracts:** Specify the exact artifact shape (command, verdict line, findings table). Ban conversational hedging ("Consider...", "You may want to...").
+4. **Scale structure to input size:** Preserve comprehensive templates for multi-file systems; emit direct, compact answers for small inputs.
+5. **Add explicit stop-conditions:** Clearly define when *not* to act (e.g. unmeasured slowness, already-passing builds) to prevent rewriting working code.
+6. **Discoverable inputs are not required:** Instruct the agent to locate `*.sln`, `*.csproj`, or `package.json` in the workspace before asking the user for them.
+7. **Empirically verify load-bearing claims:** Compile or probe any technical claim before codifying it into a skill.
+8. **Preserve semantics in migrations:** Provide semantic guardrails for API shifts (e.g. timezone behavior), not just mechanical name replacements.
+9. **Truthful validation reporting:** Explicitly differentiate restore, compilation, and test failures. Never report a clean run after a failed step.
+10. **State the no-op condition:** Prove that already-correct code or configuration is left alone.
+
+## 9. Authoring Protocol
 
 1. **Pre-fetch:** `node E:\Tools\SemanticBrain\tools\context-fetch.js "<doc purpose>"`. Done when prior lessons on the topic are read or none exist.
 2. **Reuse check:** `rg -l "<leading word>" skills standards architecture`. Done when you have either chosen an existing file to extend or confirmed no file owns the concept.
-3. **Draft the pointer first** (description or rule line) using §1. Done when every branch has exactly one trigger.
-4. **Draft the body** with steps on top, reference below, long reference disclosed (§3). Done when each step has a checkable criterion (§4).
+3. **Draft the pointer first** (description or rule line) using §1. Include user-typed trigger keywords and negative trigger boundaries. Verify with `node tools/skill-lint.js`.
+4. **Draft the body** with steps on top, reference below, long reference disclosed (§3). Ensure each step has a checkable criterion (§4) and delivers baseline delta (§8).
 5. **Prune** (§6, §7). Done when no sentence is a no-op, restatement, or unpaired prohibition.
-6. **Verify:** `node tools/validate-framework.js`. Done when it reports `Errors found: 0`, or every remaining error is a documented orchestrator-owned item (for example shortcut coverage).
+6. **Verify:** `node tools/validate-framework.js` and `node tools/skill-lint.js`. Done when framework audit reports `Errors found: 0` and zero skill collisions.
 
-## 9. Review Checklist
+## 10. Review Checklist
 
-- [ ] Pointer names material + branches; no synonym duplicates.
+- [ ] Pointer names material + branches; no synonym duplicates; verified by `skill-lint.js`.
 - [ ] Every step ends on a checkable, exhaustive criterion.
+- [ ] Body encodes operative decisions and baseline delta, not textbook reference knowledge.
+- [ ] Uses "When A, do B, never C, verify D" decision tables where multiple options exist.
 - [ ] Each value has one home; other files reference it.
 - [ ] No sentence restates the environment or the model default.
 - [ ] Prohibitions appear only as guardrails with an ID and a paired positive target.
 - [ ] No emoji headings; no em-dash chains.
 
-Adapted from mattpocock/skills (MIT).
+Adapted from mattpocock/skills (MIT) and dotnet/skills (MIT).
