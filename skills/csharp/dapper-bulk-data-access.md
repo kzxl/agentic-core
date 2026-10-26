@@ -1,6 +1,6 @@
 ---
 name: CsharpDapperBulkDataAccess
-desc: High-performance Dapper bulk insert, multi-mapping, and buffered query optimization patterns
+desc: High-performance Dapper bulk insert, multi-mapping, and buffered query optimization patterns.
 rules: [R_CS, R_DB]
 category: CSharp
 ---

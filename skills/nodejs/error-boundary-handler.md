@@ -1,6 +1,6 @@
 ---
 name: NodeJsErrorBoundaryHandler
-desc: Centralized and typed error handling using predicate-based error handlers in Node.js
+desc: Centralized and typed error handling using predicate-based error handlers in Node.js.
 rules: [R_NODE]
 category: NodeJs
 ---

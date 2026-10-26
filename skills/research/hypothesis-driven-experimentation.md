@@ -1,5 +1,5 @@
 ---
-desc: Practical Playbook for Hypothesis-Driven Engineering — Falsification Gates, Counter-Factual Tests & Evidence Logging
+desc: Practical Playbook for Hypothesis-Driven Engineering — Falsification Gates, Counter-Factual Tests & Evidence Logging.
 rules: [R_RESEARCH, R_CORE]
 ---
 # 🧪 Hypothesis-Driven Engineering Playbook

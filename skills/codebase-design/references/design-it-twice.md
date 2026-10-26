@@ -1,7 +1,7 @@
 ---
 name: codebase-design-design-it-twice
 description: Parallel interface exploration (Design It Twice, Ousterhout). Read when an interface is hard to reverse (public API, Universe plugin contract, shared DTO, cross-module service contract) or when two or more plausible interface shapes exist for a deepening candidate.
-desc: Spawn 3+ parallel subagents with different constraints, compare on depth, locality, and seam placement, then recommend
+desc: Spawn 3+ parallel subagents with different constraints, compare on depth, locality, and seam placement, then recommend.
 rules: [R_CORE, R_TEAM, R_UNIVERSE]
 ---
 

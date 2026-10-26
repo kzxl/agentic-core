@@ -1,7 +1,7 @@
 ---
 name: ui-design-tokens
 description: Use when you need a concrete color, radius, elevation, motion, spacing, row-height, or typography value for any UI (WinForms, WPF, Web, Mobile), when mapping tokens into a theme file, or when migrating an old palette. Single source of truth for all hex, px, and ms values referenced by the anti-slop standard.
-desc: Universal Design Tokens Single Source of Truth (SSoT) across Desktop, Web, and Mobile
+desc: Universal Design Tokens Single Source of Truth (SSoT) across Desktop, Web, and Mobile.
 rules: [R_CORE, R_UI, R_ANTI_SLOP]
 ---
 # Universal Design Tokens (Single Source of Truth)

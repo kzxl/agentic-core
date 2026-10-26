@@ -1,7 +1,7 @@
 ---
 name: domain-modeling-adr-format
 description: Architecture Decision Record format and qualification bar. Read when a decision is hard to reverse, surprising without context, and the result of a real trade-off, or when editing, superseding, or numbering an existing ADR under docs/adr/.
-desc: ADR location, numbering, minimal template, optional sections, and what qualifies
+desc: ADR location, numbering, minimal template, optional sections, and what qualifies.
 rules: [R_CORE, R_RES_MEM]
 ---
 

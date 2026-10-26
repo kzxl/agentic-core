@@ -1,6 +1,6 @@
 ---
 name: DynamicInstrumentationAnalysis
-desc: Deep Dynamic Instrumentation & Runtime Tracing Protocol for API Monitoring, SSL Pinning Bypass, JNI Hooking, and Memory Scanning
+desc: Deep Dynamic Instrumentation & Runtime Tracing Protocol for API Monitoring, SSL Pinning Bypass, JNI Hooking, and Memory Scanning.
 rules: [R_CORE, R_SEC, R_REVERSE]
 category: Reversing
 ---

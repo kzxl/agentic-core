@@ -1,5 +1,5 @@
 ---
-desc: Multi-Dimensional Research Budget Governance Protocol — Working Memory Quotas, Burn Telemetry & Stagnation Exhaustion Playbook
+desc: Multi-Dimensional Research Budget Governance Protocol — Working Memory Quotas, Burn Telemetry & Stagnation Exhaustion Playbook.
 rules: [R_BUDGET, R_RESEARCH, R_STATE]
 ---
 # 📊 Multi-Dimensional Research Budget Governance Protocol

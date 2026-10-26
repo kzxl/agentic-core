@@ -1,6 +1,6 @@
 ---
 name: StructuredLlmToolCalling
-desc: Deterministic state-machine agent loops, bounded retries, schema-enforced tool dispatch, and SSE streaming
+desc: Deterministic state-machine agent loops, bounded retries, schema-enforced tool dispatch, and SSE streaming.
 rules: [R_PY, R_ROUTE, R_CORE]
 category: Python
 ---

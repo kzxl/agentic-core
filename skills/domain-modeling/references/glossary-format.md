@@ -1,7 +1,7 @@
 ---
 name: domain-modeling-glossary-format
 description: Format rules for GLOSSARY.md and GLOSSARY-MAP.md. Read before the first glossary edit in a session, or when creating a glossary or splitting a repo into multiple glossary contexts.
-desc: GLOSSARY.md structure, term rules, and multi-context GLOSSARY-MAP.md format
+desc: GLOSSARY.md structure, term rules, and multi-context GLOSSARY-MAP.md format.
 rules: [R_CORE]
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: ProceduralLootAndEconomy
-desc: Procedural ARPG loot generation algorithm with weighted affix rolling and balanced game economy currency sink mechanisms
+desc: Procedural ARPG loot generation algorithm with weighted affix rolling and balanced game economy currency sink mechanisms.
 rules: [R_GAME, R_CORE, R_CS]
 category: Game
 ---

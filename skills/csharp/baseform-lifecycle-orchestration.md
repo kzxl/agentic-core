@@ -1,6 +1,6 @@
 ---
 name: CsharpBaseFormLifecycleOrchestration
-desc: Standardized lifecycle pattern for WinForms BaseForm (Constructor, RunAfterShown, PopulateControls, CollectData) with zero UI thread freeze
+desc: Standardized lifecycle pattern for WinForms BaseForm (Constructor, RunAfterShown, PopulateControls, CollectData) with zero UI thread freeze.
 rules: [R_CS, R_WPF]
 category: CSharp
 ---

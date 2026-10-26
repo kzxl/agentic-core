@@ -1,6 +1,6 @@
 ---
 name: cognitive-experiment-loop
-description: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
+description: Execute the 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory). Use when conducting empirical investigations or stress-testing hypotheses.
 desc: 5-Phase Empirical Cognitive Loop Workflow (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
 rules: [R_CORE, R_COG_LOOP, R_PRE_MORTEM, R_EPISTEMIC, R_PROOF]
 ---

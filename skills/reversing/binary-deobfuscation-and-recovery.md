@@ -1,6 +1,6 @@
 ---
 name: BinaryDeobfuscationAndRecovery
-desc: Symbolic Execution, Control Flow De-flattening, and Opaque Predicate Elimination Protocol for Obfuscated Binaries
+desc: Symbolic Execution, Control Flow De-flattening, and Opaque Predicate Elimination Protocol for Obfuscated Binaries.
 rules: [R_CORE, R_SEC, R_REVERSE]
 category: Reversing
 ---

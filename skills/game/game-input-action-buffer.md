@@ -1,6 +1,6 @@
 ---
 name: GameInputActionBuffer
-desc: Action buffering and input queueing architecture with Coyote Time and 8-direction Virtual Radial Wheel navigation for responsive keyboard and gamepad controls
+desc: Action buffering and input queueing architecture with Coyote Time and 8-direction Virtual Radial Wheel navigation for responsive keyboard and gamepad controls.
 rules: [R_GAME, R_GODOT]
 category: Game
 ---

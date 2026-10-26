@@ -1,5 +1,5 @@
 ---
-desc: Research Manager Operational Protocol — Working Memory State Machine, 5-Way Decision Gate & Dead Hypothesis Graveyard Playbook
+desc: Research Manager Operational Protocol — Working Memory State Machine, 5-Way Decision Gate & Dead Hypothesis Graveyard Playbook.
 rules: [R_RESEARCH, R_STATE, R_CORE]
 ---
 # 🧭 Research Manager Operational Protocol

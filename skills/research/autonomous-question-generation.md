@@ -1,5 +1,5 @@
 ---
-desc: Autonomous Question Generation Protocol — Socratic Inquiry Playbook, Dependency Pruning & Question-to-Hypothesis Mapping
+desc: Autonomous Question Generation Protocol — Socratic Inquiry Playbook, Dependency Pruning & Question-to-Hypothesis Mapping.
 rules: [R_QGEN, R_RESEARCH, R_STATE]
 ---
 # ❓ Autonomous Question Generation Protocol

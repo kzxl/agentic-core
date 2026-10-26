@@ -1,6 +1,6 @@
 ---
 name: continuous-learning-harvest
-description: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
+description: Use for automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 desc: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 rules: [R_CORE, R_RES_MEM, R_DEAD_LOOP, R_STATE]
 ---

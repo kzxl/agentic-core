@@ -35,7 +35,7 @@ const STOPWORDS = new Set([
 const DISAMBIGUATION_RE = /\b(?:do\s+not\s+use|don'?t\s+use|not\s+for\b|avoid\s+(?:this\s+)?(?:skill\s+)?for)\b.*/is;
 
 // Triggers for active routing
-const TRIGGER_RE = /\b(?:use\s+(?:this\s+)?(?:skill\s+)?(?:when|whenever|for|during|after|before|to)|use\s+for:|activates?\s+(?:when|for))\b/i;
+const TRIGGER_RE = /\b(?:use\s+(?:only\s+)?(?:this\s+)?(?:skill\s+)?(?:when|whenever|for|during|after|before|to)|use\s+for:|activates?\s+(?:when|for))\b/i;
 
 /**
  * Tokenize text for TF-IDF calculation, stripping negative triggers and stopwords.

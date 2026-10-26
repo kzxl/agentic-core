@@ -1,6 +1,6 @@
 ---
 name: multi-agent-teamwork
-description: Orchestrate multi-agent subagent teams with zero-collision file ownership contracts, parallel research/execution partitioning, and adversarial review gates.
+description: Use when orchestrating multi-agent subagent teams with zero-collision file ownership contracts, parallel research/execution partitioning, and adversarial review gates.
 desc: End-to-end multi-agent team dispatch, role partitioning, adversarial review/challenge gates, and synthesis
 rules: [R_TEAM, R_CORE, R_COG_LOOP, R_PROOF]
 ---

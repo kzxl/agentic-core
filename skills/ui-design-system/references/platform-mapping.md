@@ -1,7 +1,7 @@
 ---
 name: ui-platform-mapping
 description: Use when translating design tokens or component specs into WinForms (DevExpress GridControl, skins), WPF (XAML resource dictionaries, control templates), Web (CSS custom properties, Tailwind config, React tables), or Mobile (Jetpack Compose color schemes) code.
-desc: Multi-Platform Implementation Mapping Guide for WinForms, WPF, Web, and Mobile
+desc: Multi-Platform Implementation Mapping Guide for WinForms, WPF, Web, and Mobile.
 rules: [R_CORE, R_UI, R_ANTI_SLOP]
 ---
 # Multi-Platform Implementation Mapping Guide

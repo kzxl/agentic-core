@@ -1,6 +1,6 @@
 ---
 name: NodeJsInterceptorPipeline
-desc: Request & Response Interceptors pipeline for global pre/post-processing in Node.js
+desc: Request & Response Interceptors pipeline for global pre/post-processing in Node.js.
 rules: [R_NODE]
 category: NodeJs
 ---

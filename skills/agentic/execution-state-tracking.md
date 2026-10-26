@@ -1,6 +1,6 @@
 ---
 name: AgenticExecutionStateTracking
-desc: 3-tier memory protocol (Knowledge Memory, Episodic Memory, Working Memory) and execution state tracking to eliminate agent amnesia loops
+desc: 3-tier memory protocol (Knowledge Memory, Episodic Memory, Working Memory) and execution state tracking to eliminate agent amnesia loops.
 rules: [R_CORE, R_STATE]
 category: Agentic
 ---

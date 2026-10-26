@@ -1,6 +1,6 @@
 ---
 name: ReactAbortableFetchLifecycle
-desc: AbortController lifecycle integration in React components and router listeners to prevent memory leaks and race conditions
+desc: AbortController lifecycle integration in React components and router listeners to prevent memory leaks and race conditions.
 rules: [R_REACT]
 category: React
 ---

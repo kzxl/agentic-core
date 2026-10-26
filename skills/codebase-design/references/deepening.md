@@ -1,7 +1,7 @@
 ---
 name: codebase-design-deepening
 description: Dependency categories and seam discipline for deepening shallow modules. Read when a deepening candidate touches SQL Server, the file system, HTTP or gRPC services, message queues, OPC UA or COM devices, or third-party SDKs, and you must decide where the port goes and how to test across it.
-desc: Dependency categories mapped to .NET and Node, seam discipline, and replace-don't-layer testing
+desc: Dependency categories mapped to .NET and Node, seam discipline, and replace-don't-layer testing.
 rules: [R_CORE, R_TDD, R_UNIVERSE]
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: ui-components
 description: Use when specifying or reviewing buttons, form inputs, data grids, zebra striping, toasts, InfoBars, modal dialogs, status badges and chips, progress bars, focus states, or segmented controls for desktop, web, or mobile enterprise UI. Component anatomy and states expressed in token names.
-desc: Cross-Platform Component Specifications & Ergonomics for Enterprise Applications
+desc: Cross-Platform Component Specifications & Ergonomics for Enterprise Applications.
 rules: [R_CORE, R_UI, R_ANTI_SLOP]
 ---
 # Cross-Platform Component Specifications & Ergonomics

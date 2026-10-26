@@ -1,6 +1,6 @@
 ---
 name: AsyncTaskGroupOrchestration
-desc: Structured concurrency with asyncio.TaskGroup, bounded semaphores, and thread/process offloading
+desc: Structured concurrency with asyncio.TaskGroup, bounded semaphores, and thread/process offloading.
 rules: [R_PY, R_PERF, R_CORE]
 category: Python
 ---

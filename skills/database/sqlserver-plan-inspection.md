@@ -1,6 +1,6 @@
 ---
 name: SqlServerPlanInspection
-desc: Deep execution plan inspection, XML plan extraction, wait stats diagnosis, and plan regression comparison
+desc: Deep execution plan inspection, XML plan extraction, wait stats diagnosis, and plan regression comparison.
 rules: [R_DB, R_PERF]
 category: Database
 ---

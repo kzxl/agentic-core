@@ -1,5 +1,5 @@
 ---
-desc: Dead-Loop & Stagnation Detection Protocol — Sliding Window Query Tracking, Graph Cycle Interception & Semantic Circuit Breakers
+desc: Dead-Loop & Stagnation Detection Protocol — Sliding Window Query Tracking, Graph Cycle Interception & Semantic Circuit Breakers.
 rules: [R_DEAD_LOOP, R_RESEARCH, R_STATE]
 ---
 # 🛑 Dead-Loop & Stagnation Detection Protocol

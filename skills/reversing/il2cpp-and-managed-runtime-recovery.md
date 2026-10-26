@@ -1,6 +1,6 @@
 ---
 name: Il2cppAndManagedRuntimeRecovery
-desc: Reconstructing Unity IL2CPP Binaries, Global Metadata Dumps, and Generating C# Dummy Assemblies for Analysis
+desc: Reconstructing Unity IL2CPP Binaries, Global Metadata Dumps, and Generating C# Dummy Assemblies for Analysis.
 rules: [R_CORE, R_SEC, R_REVERSE, R_CS]
 category: Reversing
 ---

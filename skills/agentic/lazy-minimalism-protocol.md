@@ -1,6 +1,6 @@
 ---
 name: AgenticLazyMinimalismProtocol
-desc: Ponytail Minimalist Decision Ladder — YAGNI, standard library first, zero unrequested abstractions, and shortest working diff
+desc: Ponytail Minimalist Decision Ladder — YAGNI, standard library first, zero unrequested abstractions, and shortest working diff.
 rules: [R_CORE]
 category: Agentic
 ---

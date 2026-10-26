@@ -1,6 +1,6 @@
 ---
 name: ReactOptimisticUiUpdates
-desc: Pattern for instantaneous UI mutations with automated rollback and user signaling upon server rejection
+desc: Pattern for instantaneous UI mutations with automated rollback and user signaling upon server rejection.
 rules: [R_REACT]
 category: React
 ---

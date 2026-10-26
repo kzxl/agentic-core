@@ -1,6 +1,6 @@
 ---
 name: ReactCompoundComponentsPattern
-desc: Compound components pattern using React Context for highly customizable, clean, and flexible UI component suites
+desc: Compound components pattern using React Context for highly customizable, clean, and flexible UI component suites.
 rules: [R_REACT]
 category: React
 ---

@@ -1,6 +1,6 @@
 ---
 name: SqlServerIndexAdvisor
-desc: Production index architecture, covering index design, filtered indexes, and DMV health audit queries
+desc: Production index architecture, covering index design, filtered indexes, and DMV health audit queries.
 rules: [R_DB, R_PERF]
 category: Database
 ---

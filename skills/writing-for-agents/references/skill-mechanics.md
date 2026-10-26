@@ -1,7 +1,7 @@
 ---
 name: writing-for-agents-skill-mechanics
 description: AgentOption-specific mechanics for skill packages and registry entries. Read when creating or renaming a skill package, editing SKILL.md frontmatter, adding references/, wiring shortcuts.json or rules.json, updating README vital metrics, or syncing skills to the Antigravity global skills directory.
-desc: Frontmatter schema, validator, shortcut coverage, README metrics, sync-skills, references disclosure, and skill-to-skill dependencies in AgentOption
+desc: Frontmatter schema, validator, shortcut coverage, README metrics, sync-skills, references disclosure, and skill-to-skill dependencies in AgentOption.
 rules: [R_LLM_GOV, R_CORE]
 ---
 

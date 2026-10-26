@@ -1,6 +1,6 @@
 ---
 name: NodeJsScopedAttributesManager
-desc: 3-Tier Scoped State Management pattern (Request, Session, Persistent) inspired by ASK SDK v2
+desc: 3-Tier Scoped State Management pattern (Request, Session, Persistent) inspired by ASK SDK v2.
 rules: [R_NODE, R_DB]
 category: NodeJs
 ---

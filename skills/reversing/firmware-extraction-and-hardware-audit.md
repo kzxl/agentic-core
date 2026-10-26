@@ -1,6 +1,6 @@
 ---
 name: FirmwareExtractionAndHardwareAudit
-desc: Extracting Embedded Firmware Dumps, Analyzing Bootloaders, Base Memory Mapping, and Secure Boot Auditing
+desc: Extracting Embedded Firmware Dumps, Analyzing Bootloaders, Base Memory Mapping, and Secure Boot Auditing.
 rules: [R_CORE, R_SEC, R_REVERSE, R_EMBEDDED]
 category: Reversing
 ---

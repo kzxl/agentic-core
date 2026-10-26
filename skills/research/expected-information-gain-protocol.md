@@ -1,5 +1,5 @@
 ---
-desc: Expected Information Gain Protocol — Pre-Flight Epistemic Gate, Candidate Ranking by eROI & Zero-Gain Trial Pruning Playbook
+desc: Expected Information Gain Protocol — Pre-Flight Epistemic Gate, Candidate Ranking by eROI & Zero-Gain Trial Pruning Playbook.
 rules: [R_INFO_GAIN, R_RESEARCH, R_STATE]
 ---
 # 💡 Expected Information Gain Protocol

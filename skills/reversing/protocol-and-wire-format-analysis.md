@@ -1,6 +1,6 @@
 ---
 name: ProtocolAndWireFormatAnalysis
-desc: Reverse Engineering Proprietary Binary Network Protocols, TLV Structures, and Custom Serializers for Interoperability
+desc: Reverse Engineering Proprietary Binary Network Protocols, TLV Structures, and Custom Serializers for Interoperability.
 rules: [R_CORE, R_SEC, R_REVERSE]
 category: Reversing
 ---

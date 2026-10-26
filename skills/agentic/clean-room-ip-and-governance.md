@@ -1,6 +1,6 @@
 ---
 name: AgenticCleanRoomGovernance
-desc: Clean-Room IP protocol, GNU copyright compliance, MMIO hardware verification, and LLM contribution transparency
+desc: Clean-Room IP protocol, GNU copyright compliance, MMIO hardware verification, and LLM contribution transparency.
 rules: [R_CORE, R_LLM_GOV, R_EMBEDDED, R_GIT, R_ENG_OS]
 category: Agentic
 ---

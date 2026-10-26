@@ -1,5 +1,5 @@
 ---
-desc: Ablation Study Execution Protocol — Drop-One-Out Isolation, Component Contribution Scoring & Marginal Delta Analysis
+desc: Ablation Study Execution Protocol — Drop-One-Out Isolation, Component Contribution Scoring & Marginal Delta Analysis.
 rules: [R_RESEARCH, R_BENCH]
 ---
 # 🧩 Ablation Study Execution Protocol

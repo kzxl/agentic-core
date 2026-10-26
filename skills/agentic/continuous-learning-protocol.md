@@ -1,6 +1,6 @@
 ---
 name: AgenticContinuousLearningProtocol
-desc: Adaptive episodic knowledge lifecycle, progressive context retrieval, and guarded post-task harvesting protocol
+desc: Adaptive episodic knowledge lifecycle, progressive context retrieval, and guarded post-task harvesting protocol.
 rules: [R_CORE]
 category: Agentic
 ---
