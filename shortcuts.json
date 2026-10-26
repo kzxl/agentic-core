@@ -87,22 +87,22 @@
   "SPEC": {
     "name": "Brainstorming & Specification",
     "target": "skills/agentic/brainstorming-and-spec.md",
-    "desc": "Pre-coding exploration, ambiguity resolution & spec"
+    "desc": "Grilling protocol (design tree, frontier rounds, recommended answers) and executable spec before coding"
   },
   "TDD": {
     "name": "Test-Driven Development",
     "target": "skills/agentic/test-driven-development.md",
-    "desc": "Red-Green-Refactor agentic coding protocol"
+    "desc": "Red-green loop at pre-agreed seams, vertical tracer-bullet slices, boundary-only mocking"
   },
   "REV": {
     "name": "Adversarial Code Review",
     "target": "skills/agentic/adversarial-code-review.md",
-    "desc": "Self-critique and security/edge-case review"
+    "desc": "Two-axis review (Standards + Fowler smells, Spec) in parallel subagents plus anti-slop lint"
   },
   "DBG": {
     "name": "Systematic Debugging",
     "target": "skills/agentic/systematic-debugging.md",
-    "desc": "5-step scientific hypothesis debugging"
+    "desc": "Feedback-loop construction reference: 10 loop techniques, tightening, raising reproduction rate"
   },
   "ENGOS": {
     "name": "Engineering Operating System",
@@ -933,6 +933,25 @@
     "name": "SQL Server Performance Tuner Agent",
     "target": "agents/engineering/sql-performance-tuner.md",
     "desc": "Database execution plan diagnostician specializing in SARGability, covering indexes, deadlock elimination, and TVP bulk ops"
+  },
+  "WF_WRITING_AGENTS": {
+    "name": "Writing for Agents Skill",
+    "target": "skills/writing-for-agents/SKILL.md",
+    "desc": "Context pointers, information hierarchy, completion criteria, leading words, positive-first steering, and pruning for agent-facing docs"
+  },
+  "WF_CODEBASE_DESIGN": {
+    "name": "Codebase Design Skill",
+    "target": "skills/codebase-design/SKILL.md",
+    "desc": "Deep modules, seams, adapters, deletion test, dependency categories, and design-it-twice for interface decisions"
+  },
+  "WF_DOMAIN_MODEL": {
+    "name": "Domain Modeling Skill",
+    "target": "skills/domain-modeling/SKILL.md",
+    "desc": "Challenge and sharpen domain terms, cross-check code, update GLOSSARY.md inline, and record ADRs only for hard-to-reverse trade-offs"
+  },
+  "WF_RETRO": {
+    "name": "Retro Workflow",
+    "target": "skills/retro/SKILL.md",
+    "desc": "Post-session retrospective ranking improvements to the agent environment (pointers, checks, standards, rules size, tool economy, no-ops, information access)"
   }
 }
-

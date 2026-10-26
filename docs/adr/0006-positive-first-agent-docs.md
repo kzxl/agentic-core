@@ -1,0 +1,3 @@
+# Positive-first agent docs, with negative examples kept out of agent context
+
+Agent-facing files (rules, standards, skills, agents) state the target behaviour first; prohibitions appear only as hard guardrails paired with a positive target and an ID, as described in [writing-for-agents](../../skills/writing-for-agents/SKILL.md). Negative examples, the before/after gallery, and defect rationale live in the human-facing [anti-slop.md](../anti-slop.md) and in the linter fixtures, never in files agents load. A prohibition brings the forbidden pattern into context and makes it more available; the previous standard printed full slop CSS inside a document that every UI task loaded.

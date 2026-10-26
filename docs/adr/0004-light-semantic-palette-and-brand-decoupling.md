@@ -1,0 +1,3 @@
+# Muted light semantic palette and a decoupled brand accent
+
+Light-theme semantic solid fills (success, warning, danger, info) use HSL saturation of 60% or less, each state exposed as `-fg`, `-solid`, `-bg`, and `-border` tokens, because the previous saturated palette read as candy colors and dominated dense screens. The brand accent is decoupled from the framework: standards and checklists reference `var(--brand-primary)`, and its value, including the Mylan/Pluto project default, lives only in [tokens.md](../../skills/ui-design-system/references/tokens.md). This keeps the standard reusable across brands while every value stays in one place.

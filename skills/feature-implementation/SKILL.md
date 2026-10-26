@@ -1,83 +1,66 @@
 ---
 name: feature-implementation
-description: End-to-end automated workflow for new feature development (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
-desc: End-to-end automated workflow for new feature development (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
+description: End-to-end workflow for building a new feature. Use when the user asks to add, implement, build, or extend a feature, endpoint, screen, report, or module, including work that needs requirements clarification, vertical slicing, TDD, blast-radius checks, a safe commit, and post-harvest.
+desc: End-to-end automated workflow for new feature development (Normalization, Pre-Fetch, Grilling, Vertical Slices, TDD, Blast-Radius, Commit, Post-Harvest).
 rules: [R_CORE, R_TDD, R_GIT, R_PROOF]
 ---
 
-# 🏗️ End-to-End Feature Implementation Workflow
+# End-to-End Feature Implementation Workflow
 
-**Goal:** Deliver production-ready features with zero hallucination, strict 4-tier architectural isolation (`CLEAN`, `FEAT`), asset-first reuse (`R_REUSE`), Red-Green-Refactor test-driven development (`R_TDD`), and atomic version control discipline (`R_GIT`).
-
----
-
-## 1. Feature Engineering Lifecycle
+**Goal:** Ship production-ready features with 4-tier isolation (`CLEAN`, `FEAT`), asset reuse (`R_REUSE`), red-before-green TDD in vertical slices (`R_TDD`), and atomic commits (`R_GIT`). Incorporates practices adapted from mattpocock/skills (MIT).
 
 ```text
-[1. NORM + System 1 Route + PRE-Fetch] ──► [2. Asset Survey (`R_REUSE`) & Pre-Mortem Spec]
-                                                                  │
-[5. Adversarial Audit, Commit & Harvest] ◄── [4. TDD (Red-Green)] ◄── [3. Localized DTOs & 1-to-1 Partials]
+[1. NORM + Route + PRE-Fetch + Grilling] -> [2. Asset Survey + Pre-Mortem]
+-> [3. Contracts + Vertical Slices] -> [4. TDD per Slice] -> [5. Audit, Commit, Harvest]
 ```
 
----
-
-## 2. Step-by-Step Implementation Protocol
-
-### Step 1: Input Normalization, System 1 Routing & Context PRE-Fetch
-1. **Normalize Request (`NORM`):** `[NORM] ADD @<Domain>.<Feature> | <Primary Deliverable & Constraints> | [<ActiveRules>]`
-2. **Execute System 1 Decision Router (`R_ROUTE`) & PRE-Fetch (`R_RES_MEM`):**
+## Step 1: Normalize, Route, Pre-Fetch, Grill
+1. `[NORM] ADD @<Domain>.<Feature> | <Primary Deliverable & Constraints> | [<ActiveRules>]`
+2. System 1 router (`R_ROUTE`) and pre-fetch (`R_RES_MEM`):
    // turbo
    ```bash
    node E:\16. AgentOption\tools\brain.js route "<Feature Description>"
    node E:\16. AgentOption\tools\brain.js pre "<Feature Name> <Domain>" --tags=<domain>
    ```
+3. When requirements are underspecified or a design decision is open, read [`skills/agentic/brainstorming-and-spec.md`](../agentic/brainstorming-and-spec.md) and run its grilling protocol.
 
----
+**Done when** NORM is written, route and pre-fetch ran, and (for ambiguous work) the grilling frontier is empty and the user confirmed.
 
-### Step 2: Existing Asset Discovery (`R_REUSE`) & Pre-Mortem Specification (`R_PRE_MORTEM`)
-1. **Mandatory Asset Survey (`R_REUSE`):** Before creating any helper, mapper, validator, or UI control, grep the repository for existing reusable assets:
+## Step 2: Asset Survey (`R_REUSE`) and Pre-Mortem (`R_PRE_MORTEM`)
+1. Before creating any helper, mapper, validator, or UI control:
    // turbo
    ```bash
    rg "(Helper|Extension|Validator|BaseForm|DbScope|ApiClient)" --files
    ```
-2. **Pre-Mortem Simulation (`R_PRE_MORTEM`):** Evaluate 3 failure modes before writing code:
-   - *Concurrency & Lock Contention:* What happens if two operators submit the same document simultaneously?
-   - *Scale & Data Volume:* Does the query remain SARGable and paginated at $10^6$ rows (zero N+1 queries)?
-   - *Operator Ergonomics:* Are UI actions labeled with clear imperative verbs ($\le 20$ chars) and protected against double-click re-entrancy?
+2. Evaluate three failure modes: concurrent submission of the same document, SARGable paginated queries at $10^6$ rows, and double-click re-entrancy on UI actions. Read [references/layers-and-slicing.md](references/layers-and-slicing.md) for the prompts.
 
----
+**Done when** reusable assets are listed (or "none") and each failure mode has a mitigation.
 
-### Step 3: Contract-First DTO & Layer Boundary Design (`CLEAN`, `FEAT`, `PART`)
-Design data contracts and service boundaries adhering to Folder-per-Feature and 1-to-1 Partial Partitioning:
+## Step 3: Contracts and Vertical Slices (`CLEAN`, `FEAT`, `PART`)
+1. Define Domain, localized DTOs, partial Application Service files, and a thin Presentation/API layer per the layer table in [references/layers-and-slicing.md](references/layers-and-slicing.md).
+2. Slice the work into vertical tracer bullets: each crosses every layer, is demoable alone, and fits one context window; prefactor first.
+3. Wide refactors use expand -> migrate in batches -> contract (same reference).
 
-| Architectural Layer | Artifact Responsibility | Mandatory Invariant |
-| :--- | :--- | :--- |
-| **1. Domain / Entities** | Pure business invariants, enums, value objects. | Zero dependency on ORM, HTTP, or UI frameworks. |
-| **2. Localized DTOs** | `<Feature>ActionDTO`, `<Feature>QueryDTO`, `<Feature>LookupDTO`. | Co-located inside the feature folder; never dump into a global `Models/` folder. |
-| **3. Application Service** | `<Feature>Service.Action.cs`, `.Query.cs`, `.Lookup.cs`. | Each partial file $\le 200$ LOC; methods $\le 40$ LOC; propagate `CancellationToken` (`CTOK`). |
-| **4. Presentation / API** | Thin Controller endpoint or `BaseForm`/`XtraForm` view. | Zero business logic or raw SQL in UI/Controllers; use `RunAfterShown` and 1-way mapping. |
+**Done when** contracts are defined and the slice list (deliverable and blockers per slice) is written.
 
----
-
-### Step 4: Red-Green-Refactor TDD Cycle (`R_TDD`)
-1. **Red Phase (Failing Tests First):** Write unit/integration tests covering happy path, boundary values (empty, `null`, max limit), and invalid state transitions:
+## Step 4: Red-Green TDD per Slice (`R_TDD`)
+Follow [`skills/agentic/test-driven-development.md`](../agentic/test-driven-development.md): test only at seams pre-agreed with the user, one slice per cycle.
+1. **Red:** write the next test (happy path, boundary values, or invalid transition) and observe it fail:
    ```bash
    dotnet test --filter "FullyQualifiedName~<FeatureName>"  # or node --test / pytest / cargo test
    ```
-2. **Green Phase (Minimalist Implementation — `PONY`):** Implement the cleanest, shortest production code that satisfies all test assertions using standard library primitives and existing project helpers.
-3. **Refactor Phase (`R_NEV`):** Eliminate duplication, ensure nesting depth $\le 3$, and verify zero compiler warnings.
+2. **Green (`PONY`):** the shortest code that passes, using standard library and existing helpers.
+3. **Review-stage refactor (`R_NEV`):** after all slices are green, remove duplication, nesting $\le 3$, zero warnings.
 
----
+**Done when** every slice's test went red then green and the full suite exits `0`.
 
-### Step 5: Adversarial Self-Review, Blast-Radius Check & Atomic Commit (`R_GIT`, `R_PROOF`)
-1. **Blast-Radius & Security Audit (`REV`, `BLAST`):**
-   - Grep all touched shared symbols to ensure zero breaking changes to existing callers.
-   - Verify parameterized SQL queries (`R_DB`), RBAC permission checks (`R_DOMAIN_AUTH`), and zero hardcoded secrets/paths (`R_SEC_STD`, `R_PKG`).
-2. **Full Build & Test Proof (`R_PROOF`):** Run the complete build and test suite with exit code `0`.
-3. **Atomic Scoped Commit (`R_GIT`) & POST-Harvest (`R_RES_MEM`):**
+## Step 5: Audit, Proof, Commit (`R_GIT`, `R_PROOF`)
+1. **Blast radius (`REV`, `BLAST`):** grep touched shared symbols; verify parameterized SQL (`R_DB`), RBAC checks (`R_DOMAIN_AUTH`), no hardcoded secrets/paths (`R_SEC_STD`, `R_PKG`).
+2. **Proof:** full build and test suite exit `0`.
+3. **Commit and harvest (`R_RES_MEM`):**
    ```bash
    node E:\Tools\SemanticBrain\tools\git-safe-commit.js -m "feat(<domain>): implement <feature_name>" <feature_files...>
    node E:\16. AgentOption\tools\brain.js post "[Feature: <Name>] | [Constraint / Edge Case] | [Pattern & Reusable Asset Applied]" --tags=<domain>,pattern
    ```
 
-
+**Done when** no caller breaks, build and tests exit `0`, the commit exists, and harvest ran.

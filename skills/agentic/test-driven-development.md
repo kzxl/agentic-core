@@ -1,94 +1,149 @@
 ---
 name: AgenticTestDrivenDevelopment
-desc: Rigorous Test-Driven Development (TDD) protocol for autonomous AI coding agents
+description: Test-driven development protocol for behaviour-level tests at agreed seams. Use when building a feature or fixing a bug test-first, when the user mentions TDD, red-green, unit or integration tests, mocking, or test seams, or when reviewing whether existing tests are worth keeping.
+desc: Red-before-green TDD in vertical slices, tests through public interfaces at user-confirmed seams, mocks only at system boundaries.
 rules: [R_TDD, R_CORE]
 category: Agentic
 ---
-# 🧪 Agentic Test-Driven Development (TDD) Protocol
+# Agentic Test-Driven Development (TDD) Protocol
 
-**Goal:** Enforce a strict Red-Green-Refactor cycle with Boundary Value Analysis (BVA), deterministic clock/I/O seams, and zero tautological mock assertions to guarantee 100% behavioral correctness.
+**Goal:** Produce tests that verify behaviour through public interfaces, read like specifications, and survive internal refactors. The loop is red then green, one vertical slice at a time.
+
+Incorporates practices adapted from mattpocock/skills (MIT).
 
 ---
 
-## 1. Quantitative TDD Invariants & Quality Thresholds
-| Metric / Constraint | Mandatory Threshold | Enforcement Mechanism |
+## 1. What a Good Test Is
+
+| Property | Target | Threshold |
 | :--- | :--- | :--- |
-| **Red-Before-Green Verification** | $100\%$ of new tests observed failing first | Run test runner to confirm expected assertion failure before coding |
-| **Boundary Value Coverage (BVA)** | $\ge 5$ boundary points per domain rule | Test `min - 1`, `min`, `nominal`, `max`, `max + 1`, and empty/`null` |
-| **Clock & Randomness Determinism** | $0$ direct calls to `DateTime.Now` / `Random.Shared` | Inject `TimeProvider` (.NET 8+) or deterministic seed clock |
-| **Tautological Mock Tests** | $0$ tests asserting only that a mock called itself | Assert real domain output state, returned value, or in-memory DB delta |
-| **Single-Test Execution Latency** | $\le 50\text{ ms}$ per unit test | Isolate network/disk via fast in-memory fakes at I/O boundaries |
+| **Behavioural** | Exercises the public interface only; the name states WHAT (`Checkout_WithValidCart_IsConfirmed`), not HOW | Survives any refactor that keeps behaviour |
+| **Independent oracle** | Expected values are known-good literals, worked examples, or spec values | One logical assertion per test |
+| **Boundary-aware** | Parameterised across partition edges: `min - 1`, `min`, nominal, `max`, `max + 1`, empty / `null` | $\ge 5$ boundary points per domain rule |
+| **Deterministic** | Time via injected `TimeProvider` / clock function, randomness via seed | $0$ direct `DateTime.Now` / `Date.now()` / `Random.Shared` in domain logic |
+| **Fast** | I/O behind in-memory adapters at boundaries | $\le 50\text{ ms}$ per unit test |
 
----
+Typical boundary sets: collections (0, 1, exact batch size 500, overflow 501); money (`-0.01`, `0.00`, `99.99`, `100.00`, midpoint `2.005` to `2.00` under `ToEven`); time (leap day `2024-02-29`, UTC midnight rollover, exact expiry vs one second after).
 
-## 2. The 4-Step Autonomous TDD Cycle
+## 2. Seams: Where Tests Go
 
-```text
-[1. RED: Author Failing Test] ──► Encode requirement & BVA edge cases; run test runner to prove failure
-                                       │
-[2. GREEN: Minimal Pass Code] ──► Write the simplest production logic that satisfies the test assertions
-                                       │
-[3. REFACTOR: Clean & Optimize]──► Eliminate duplication and enforce SOLID invariants while keeping tests green
-                                       │
-[4. SUITE PROOF: Zero Regression]──► Execute full test suite (`dotnet test` / `pytest` / `vitest`) with exit code 0
-```
+A **seam** is the public boundary where behaviour is observed without reaching inside. Read [`skills/codebase-design/SKILL.md`](../codebase-design/SKILL.md) for the shared vocabulary (module, interface, depth, seam, adapter) when the shape of the interface itself is in question.
 
-### Step 1: Boundary Value Analysis (BVA) Test Matrix
-Never write a single happy-path assertion. Parameterize tests (`[Theory]` / `[InlineData]` or `pytest.mark.parametrize`) across exact partition boundaries:
-- **Collections:** Empty (`0` items), single item (`1`), exact batch size (`500`), batch overflow (`501`).
-- **Financial / Numeric:** Negative (`-0.01`), zero (`0.00`), threshold boundary (`99.99`, `100.00`), midpoint rounding (`2.005` $\to$ `2.00` under `ToEven`).
-- **Temporal:** Leap day (`2024-02-29`), UTC midnight rollover, expired vs exact-expiry timestamp.
+**Test only at pre-agreed seams.** Before writing the first test, list the seams under test with a one-line note on what each catches and misses, and confirm the list with the user:
 
-### Step 2: Deterministic Clock & I/O Seam Injection
-Flaky tests stem from hardcoding wall-clock time (`DateTime.UtcNow`, `Date.now()`) inside domain logic. Inject `TimeProvider` or a clock functor so expiration and retry windows can be tested deterministically at microsecond speed.
+| Seam | Catches | Misses |
+| :--- | :--- | :--- |
+| `IReservationService.ReserveAsync` (in-memory repository) | Allocation rules, partial-stock rejection, idempotency | SQL lock ordering, real transaction rollback |
+| `POST /api/v1/inventory/reserve` (test DB) | Contract shape, auth, transaction rollback | UI double-submit handling |
 
----
+**Done when** the user has confirmed the seam list. No test is written at an unconfirmed seam.
 
-## 3. Code Comparison: Tautological Mock Test vs Deterministic Domain Test
+## 3. Rules of the Loop
+
+1. **Red before green.** Write one failing test, run it, and observe the expected assertion failure (not a compile error or an unrelated exception).
+2. **Green with the minimum.** Write only enough production code to pass that test. Features for imagined future tests are Speculative Generality.
+3. **One vertical slice per cycle.** One seam, one test, one minimal implementation, then repeat. Each test is a **tracer bullet** that responds to what the previous cycle taught you.
+4. **Suite proof.** At the end of each slice, the full suite (`dotnet test` / `node --test` / `pytest`) exits `0`.
+5. **Refactoring belongs to review.** Clean-up happens after the slices are green, during review ([`adversarial-code-review.md`](adversarial-code-review.md)), not inside the red-green loop.
+
+**Done when** (per cycle) the new test was observed red with the expected message, then green, and the full suite exits `0`.
+
+## 4. Anti-Patterns and Their Targets
+
+| Anti-pattern | Tell | Target |
+| :--- | :--- | :--- |
+| **Implementation-coupled** | Mocks internal collaborators, tests private methods, asserts call counts/order, or verifies through a side channel (querying the DB instead of the interface). Breaks on refactor with unchanged behaviour. | Assert returned values and state observable through the interface (`createUser` then `getUser`). |
+| **Tautological** | Expected value is recomputed the way the code computes it, a constant is asserted equal to itself, or the test only checks that a mock returns what it was set up to return. | Independent literal expected values from the spec or a worked example; the real SUT is instantiated. |
+| **Horizontal slicing** | All tests written first, then all implementation. Tests verify imagined shape and go insensitive to real changes. | Vertical slices: one test, one implementation, repeat. |
+
+## 5. Mocking: System Boundaries Only
+
+Mock or fake only at **system boundaries**: external APIs (payment, email, ERP), time, randomness, and sometimes the database or filesystem (prefer a test DB or temp dir). Your own classes, modules, and internal collaborators run for real.
+
+- **Inject boundary dependencies** through constructors or parameters rather than creating them internally.
+- **Prefer SDK-style interfaces over generic fetchers**, so each fake returns one shape and setup has no conditional logic:
 
 ```csharp
-// ❌ BAD: Tautological mock test + hardcoded wall-clock dependency (tests the mock framework, not production code!)
+// GOOD: one method per external operation; each fake returns one shape
+public interface IErpClient
+{
+    Task<Customer> GetCustomerAsync(int customerId, CancellationToken ct);
+    Task<OrderId> CreateOrderAsync(OrderDraft draft, CancellationToken ct);
+}
+
+// BAD: generic fetcher forces endpoint-switching logic into every fake
+public interface IErpGateway
+{
+    Task<string> SendAsync(string endpoint, string method, string? body, CancellationToken ct);
+}
+```
+
+An interface earns its place with at least two adapters (production + in-memory test fake), per `AS-C4`.
+
+## 6. Examples
+
+### C# (xUnit): tautological mock vs real SUT with independent literals
+
+```csharp
+// BAD: the production class is never instantiated; the test verifies the mock framework
 [Fact]
-public async Task ApplyDiscount_CallsService_Bad()
+public void ApplyDiscount_CallsService_Bad()
 {
     var mockCalc = new Mock<IDiscountCalculator>();
     mockCalc.Setup(x => x.Compute(100m)).Returns(90m);
-    var result = mockCalc.Object.Compute(100m);
-    Assert.Equal(90m, result); // Tautology! Production class was never even instantiated!
+    Assert.Equal(90m, mockCalc.Object.Compute(100m));
 }
 
-// ✅ GOOD: Real domain SUT + injected FakeTimeProvider + Boundary Value Analysis ([Theory])
-public sealed class PromotionalPricingEngine
-{
-    private readonly TimeProvider _timeProvider;
-    public PromotionalPricingEngine(TimeProvider timeProvider) => _timeProvider = timeProvider;
-
-    public decimal CalculateNetPrice(decimal listPrice, DateTimeOffset promoExpiresAtUtc)
-    {
-        ArgumentOutOfRangeException.ThrowIfNegative(listPrice);
-        bool isPromoActive = _timeProvider.GetUtcNow() <= promoExpiresAtUtc;
-        return isPromoActive ? Math.Round(listPrice * 0.85m, 2, MidpointRounding.ToEven) : listPrice;
-    }
-}
-
+// GOOD: real SUT, injected FakeTimeProvider, boundary values, literal expectations
 public sealed class PromotionalPricingEngineTests
 {
     [Theory]
-    [InlineData("2026-10-15T11:59:59Z", 100.00, 85.00)] // 1s before expiry -> active
-    [InlineData("2026-10-15T12:00:00Z", 100.00, 85.00)] // Exact boundary   -> active
+    [InlineData("2026-10-15T11:59:59Z", 100.00, 85.00)]  // 1s before expiry -> active
+    [InlineData("2026-10-15T12:00:00Z", 100.00, 85.00)]  // exact boundary   -> active
     [InlineData("2026-10-15T12:00:01Z", 100.00, 100.00)] // 1s after expiry  -> expired
-    [InlineData("2026-10-15T10:00:00Z", 0.00,   0.00)]   // Zero boundary
-    public void CalculateNetPrice_EnforcesExpiryBoundaryDeterministically(
-        string currentUtcIso, double rawPrice, double expectedNet)
+    [InlineData("2026-10-15T10:00:00Z", 0.00,   0.00)]   // zero boundary
+    public void CalculateNetPrice_EnforcesExpiryBoundary(string nowUtc, double listPrice, double expectedNet)
     {
-        var fakeClock = new FakeTimeProvider(DateTimeOffset.Parse(currentUtcIso));
-        var sut = new PromotionalPricingEngine(fakeClock);
-        var expiry = DateTimeOffset.Parse("2026-10-15T12:00:00Z");
+        var sut = new PromotionalPricingEngine(new FakeTimeProvider(DateTimeOffset.Parse(nowUtc)));
 
-        decimal actual = sut.CalculateNetPrice((decimal)rawPrice, expiry);
+        decimal actual = sut.CalculateNetPrice((decimal)listPrice, DateTimeOffset.Parse("2026-10-15T12:00:00Z"));
 
         Assert.Equal((decimal)expectedNet, actual);
     }
 }
 ```
 
+### C# (NUnit): behaviour through the interface, not the database
+
+```csharp
+[TestCase(10, 5, 15)]
+[TestCase(0, 0, 0)]
+public async Task Reserve_ThenQuery_ReturnsReservedQuantity(int first, int second, int expectedTotal)
+{
+    var service = new ReservationService(new InMemoryReservationRepository());
+
+    await service.ReserveAsync(materialId: 7, quantity: first, CancellationToken.None);
+    await service.ReserveAsync(materialId: 7, quantity: second, CancellationToken.None);
+
+    Assert.That(await service.GetReservedAsync(7, CancellationToken.None), Is.EqualTo(expectedTotal));
+}
+```
+
+### JavaScript (`node:test`): tautological vs independent literal
+
+```js
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const { calculateTotal } = require('../src/cart');
+
+// BAD: expected value recomputed the way the code computes it
+test('calculateTotal sums line items (tautological)', () => {
+  const items = [{ price: 10 }, { price: 5 }];
+  assert.equal(calculateTotal(items), items.reduce((sum, i) => sum + i.price, 0));
+});
+
+// GOOD: independent, known literal
+test('calculateTotal sums line items', () => {
+  assert.equal(calculateTotal([{ price: 10 }, { price: 5 }]), 15);
+});
+```

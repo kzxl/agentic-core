@@ -1,0 +1,43 @@
+.summary-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: background-color var(--duration-fast) ease-out;
+}
+
+.summary-card:hover {
+  background: var(--bg-hover);
+}
+
+.progress-fill {
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+  transition: transform var(--duration-data) ease-out;
+}
+
+.user-avatar {
+  border-radius: 9999px;
+}
+
+.loading-spinner {
+  animation: spin 800ms linear infinite;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

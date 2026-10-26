@@ -1,90 +1,72 @@
 ---
 name: AgenticSystematicDebugging
-desc: Scientific 5-step debugging methodology (Reproduce, Isolate, Hypothesize, Verify, Prevent) for complex production issues
-rules: [R_CORE]
+description: Reference for building, tightening, and escalating debugging feedback loops. Use during Phase 1 of skills/bugfix-investigation/SKILL.md when choosing how to reproduce a bug, when a loop is slow or flaky, when a bug is intermittent or non-deterministic, or when no loop can be built.
+desc: Feedback-loop construction reference for bugfix-investigation (ten ordered techniques, tightening, raising reproduction rate, escalation when no loop is possible).
+rules: [R_CORE, R_EPISTEMIC]
 category: Agentic
 ---
-# 🔬 Agentic Systematic Debugging Protocol
+# Feedback-Loop Construction Reference
 
-**Goal:** Resolve complex production bugs, concurrency race conditions, memory leaks, and state corruption through a deterministic 5-step Scientific Method rather than speculative trial-and-error edits.
+**Goal:** Produce the one command that Phase 1 of [`skills/bugfix-investigation/SKILL.md`](../bugfix-investigation/SKILL.md) requires: red-capable on the user's exact symptom, deterministic, fast, and agent-runnable. The phases, hypothesis matrix, fix rules, and cleanup live in that skill; this file covers only how to build the loop.
+
+Incorporates practices adapted from mattpocock/skills (MIT).
 
 ---
 
-## 1. Quantitative Debugging Invariants & Thresholds
-| Metric / Constraint | Mandatory Threshold | Enforcement Mechanism |
+## 1. Ten Ways to Build a Loop (try in this order)
+
+Start at the top and move down only when the earlier technique cannot reach the bug code path.
+
+| # | Technique | Use when | Example |
+| :---: | :--- | :--- | :--- |
+| 1 | **Failing test** at whatever seam reaches the bug (unit, integration, e2e) | The code path is callable from a test project | `dotnet test --filter "FullyQualifiedName~StockReserveRepro"` |
+| 2 | **HTTP script** against a running dev server | The bug surfaces at an API boundary | `curl -s -H "Authorization: Bearer $env:API_TOKEN" http://localhost:5000/api/v1/stock/42` |
+| 3 | **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot | Batch jobs, importers, converters | `node tools/import.js fixtures/bad-lot.csv \| diff - fixtures/bad-lot.expected.txt` |
+| 4 | **Headless browser script** (Playwright / Puppeteer) asserting on DOM, console, or network | The symptom is visible only in the rendered UI | `npx playwright test repro/grid-freeze.spec.ts` |
+| 5 | **Replay a captured trace**: save a real request, payload, or event log to disk and replay it through the code path in isolation | The trigger is a specific production input | Replay a redacted `.har` entry or SQL parameter set into the service method |
+| 6 | **Throwaway harness**: a minimal subset of the system (one service, faked dependencies) driven by a single call | Full startup is slow or needs unavailable infrastructure | Console project that constructs the service with in-memory adapters |
+| 7 | **Property / fuzz loop**: 1000 random inputs, assert the invariant | The bug is "sometimes wrong output" | FsCheck, fast-check, or a seeded `Random(42)` loop |
+| 8 | **Bisection harness**: automate "build at state X, check" | The bug appeared between two known commits, datasets, or versions | `git bisect start <bad> <good>; git bisect run <loop command>` |
+| 9 | **Differential loop**: same input through old vs new version (or two configs), diff outputs | A regression against a known-good build | Run both builds against one fixture and `diff` the results |
+| 10 | **HITL script** (last resort): a script that prompts the human one step at a time and captures their observations to a file | A human must click or observe hardware | PowerShell script with `Read-Host` per step, appending answers and timestamps to `repro-log.txt` |
+
+**Done when** one technique produces a command that you have run and that drives the bug code path.
+
+## 2. Tighten the Loop
+
+Treat the loop as a product. Once a loop exists, improve it on three axes:
+
+| Axis | Question | Levers |
 | :--- | :--- | :--- |
-| **Unverified Code Edits** | $0$ edits before reproduction & hypothesis | Mandatory minimal reproducer or failing test before touching target code |
-| **Max Identical Retry Loops** | $\le 1$ attempt per hypothesis | Log falsified hypotheses in Working Memory (`R_STATE`); never repeat failed edits |
-| **Bisect / Isolation Granularity** | Pinpoint exact file, line, and state transition | Binary-search pipeline stages ($O(\log N)$ isolation) |
-| **Symptom Masking (`catch {}`)** | $0$ silent exception swallowers | Fix root invariant violation; preserve exception causality chain |
-| **Regression Guard** | $\ge 1$ automated test asserting exact failure mode | Test must fail (`RED`) before fix and pass (`GREEN`) after fix |
+| **Faster** | Can it run in seconds? | Cache setup, skip unrelated initialisation, narrow the test filter, `--no-build` on re-runs |
+| **Sharper** | Does it assert the specific symptom? | Assert the exact exception type, message, wrong value, or timing threshold, not "did not crash" |
+| **Deterministic** | Does it give the same verdict every run? | Inject `TimeProvider` / `FakeTimeProvider` or a clock function, seed randomness, isolate the filesystem (temp dir per run), freeze the network (recorded responses) |
 
----
+A 30-second flaky loop is barely better than no loop; a 2-second deterministic loop is tight.
 
-## 2. The 5-Step Scientific Root-Cause Isolation Protocol
+**Done when** the loop runs in seconds and returns the same verdict across 5 consecutive runs (or a pinned reproduction rate, see Section 3).
 
-```text
-[1. SYMPTOM CAPTURE]    ──► Record exact stack trace, HTTP payload, SQL params, and environment state
-                                │
-[2. MINIMAL REPRODUCER] ──► Construct a deterministic failing test or script that triggers the bug 100% of the time
-                                │
-[3. HYPOTHESIS LOG]     ──► State a falsifiable causal claim ("Line 84 throws NullRef when DiscountTier is null")
-                                │
-[4. BISECT & INSTRUMENT]──► Halve the execution pipeline or inspect runtime state to prove/falsify the hypothesis
-                                │
-[5. INVARIANT FIX & TEST]──► Apply minimal root-cause fix, remove temp probes, and lock in regression test
+## 3. Non-Deterministic Bugs: Raise the Reproduction Rate
+
+The target is a higher reproduction rate, not a perfectly clean repro. A 50% reproduction rate is debuggable; 1% is not, so keep raising it.
+- Loop the trigger 100 times and count failures.
+- Parallelise and add load to widen contention.
+- Force collisions with barrier synchronisation (`Task.WhenAll`, `CountdownEvent`, `Barrier`) so racing operations start together.
+- Narrow timing windows or inject delays at the suspected interleaving point.
+
+```powershell
+$fail = 0
+1..100 | ForEach-Object { dotnet test --no-build --filter "FullyQualifiedName~StockReserveRepro" *> $null; if ($LASTEXITCODE -ne 0) { $fail++ } }
+"Reproduction rate: $fail / 100"
 ```
 
-### Step 1: Exact Symptom & Telemetry Capture
-- Capture the verbatim compiler error, unhandled exception stack trace, HTTP status body, or database deadlock graph (`Error 1205`). Never paraphrase error messages.
-- Record boundary inputs (`null`, empty array `[]`, timezone offset, concurrent user count) present at the time of failure.
+**Done when** the measured reproduction rate is recorded and high enough to distinguish a fix (a drop to 0 / 100) from noise.
 
-### Step 2: Minimal Deterministic Reproducer
-- Author a standalone unit/integration test (`xUnit`, `pytest`, `vitest`) or CLI reproduction command that triggers the exact defect on demand.
-- If a bug is intermittent (race condition), use barrier synchronization (`Task.WhenAll`, `CountdownEvent`) to force deterministic collision.
+## 4. When a Loop Cannot Be Built
 
-### Step 3: Falsifiable Hypothesis Log
-- Formulate an explicit hypothesis connecting **Trigger Input $\to$ Faulty Code Path $\to$ Observed Failure**.
-- Maintain an anti-loop log when investigating multi-factor bugs:
-  ```markdown
-  - Hypothesis 1: Redis TTL expiration returns null payload -> Falsified (Payload is present, but `unitPrice` is string `"12.50"` instead of number).
-  - Hypothesis 2: Unvalidated JSON deserialization coerces numeric string into NaN during tax multiply -> Verified at `InvoiceCalculator.ts:47`.
-  ```
+Stop and say so explicitly. List every technique you tried and why it failed, then ask the user for one of:
+1. Access to the environment that reproduces the bug.
+2. A redacted captured artifact: HAR file, log dump, memory dump, deadlock graph, or screen recording with timestamps.
+3. Permission to add temporary production instrumentation tagged with the session prefix (for example `[DEBUG-a4f2]`).
 
-### Step 4: Binary Search / Bisect Instrumentation
-- For multi-stage pipelines (Middleware $\to$ Validator $\to$ Service $\to$ SQLTrigger $\to$ Serializer), bisect the call graph at the midpoint and inspect intermediate state payloads rather than reading files sequentially.
-
-### Step 5: Root-Cause Fix & Regression Lock
-- Fix the underlying invariant violation at the source rather than scattering defensive Band-Aids across downstream consumers.
-
----
-
-## 3. Code Comparison: Symptom Masking vs Root-Cause Invariant Fix
-
-```csharp
-// ❌ BAD: Speculative symptom masking (swallows exception and returns corrupted 0 balance)
-public async Task<decimal> GetAvailableCreditAsync(int customerId, CancellationToken ct)
-{
-    try
-    {
-        var account = await _repo.GetAccountAsync(customerId, ct);
-        return account.CreditLimit - account.CurrentExposure.Value;
-    }
-    catch (Exception)
-    {
-        // Masks NullReferenceException when CurrentExposure is null OR when DB times out!
-        return 0m;
-    }
-}
-
-// ✅ GOOD: Root-cause fix addressing nullable domain state while letting transient DB errors surface
-public async Task<decimal> GetAvailableCreditAsync(int customerId, CancellationToken ct)
-{
-    var account = await _repo.GetAccountAsync(customerId, ct)
-        ?? throw new CustomerNotFoundException(customerId);
-
-    decimal exposure = account.CurrentExposure ?? 0m;
-    return Math.Max(0m, account.CreditLimit - exposure);
-}
-```
-
+Hypothesising resumes only after the user supplies one of these and a loop exists.

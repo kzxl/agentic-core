@@ -36,17 +36,18 @@ Dark Shadow     (L=25%): Shift Hue toward Navy   (215° -> 230°)
 ### ③ Tinted Neutrals vs "Dead Gray"
 * **"Dead Gray" (`#222222`, `#888888`, `#E0E0E0`):** Pure grayscale with zero saturation ($S=0\%$). It looks lifeless, cold, and uninviting.
 * **"Living Slate / Tinted Neutrals":** Introduce **`3% – 8%` of subtle blue, indigo, or warm slate saturation** into gray surfaces:
-  * *Dark Mode Canvas:* Rather than `#121212`, use `#0F111A` ($H=228^\circ, S=26\%, L=8\%$) or `#131722`.
-  * *Light Mode Canvas:* Rather than `#F0F0F0`, use `#F8F9FC` ($H=225^\circ, S=40\%, L=98\%$).
+  * *Dark Mode Canvas:* Rather than pure `#121212`, use the tinted `--bg-canvas` (dark) token.
+  * *Light Mode Canvas:* Rather than pure `#F0F0F0`, use the tinted `--bg-canvas` (light) token.
+  * Concrete values live only in [tokens.md](../../skills/ui-design-system/references/tokens.md).
   * This creates depth, cohesive harmony, and a modern premium atmosphere.
 
 ### ④ The 60-30-10 Spatial Color Balance
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 60% NEUTRAL CANVAS (BgCanvas: #0F111A / #F8F9FC)            │
+│ 60% NEUTRAL CANVAS (--bg-canvas)                            │
 │ ┌─────────────────────────────────────────────────────────┐ │
-│ │ 30% STRUCTURAL SURFACES (BgSurface: #181A26 / #FFFFFF)  │ │
+│ │ 30% STRUCTURAL SURFACES (--bg-surface)                  │ │
 │ │ ┌───────────────────────┐   ┌─────────────────────────┐ │ │
 │ │ │ Primary Data Text     │   │ Secondary Label         │ │ │
 │ │ │ (TextPrimary: 100%)   │   │ (TextSecondary: 70%)    │ │ │
@@ -178,7 +179,7 @@ Related items must be close together:   Containers group information:
 | Anti-Pattern | Why It Fails | The Architectural Fix |
 | :--- | :--- | :--- |
 | **"Rainbow UI"** | Using red, green, purple, yellow, and blue simultaneously on one view. | Stick strictly to the 60-30-10 rule. Keep 90% neutral; reserve color for actionable states. |
-| **"Pure Black / White"** | `#000000` background with `#FFFFFF` text causes blinding contrast & halation. | Use Tinted Slate `#0F111A` and high-contrast light slate `#F1F5F9`. |
+| **"Pure Black / White"** | `#000000` background with `#FFFFFF` text causes blinding contrast & halation. | Use the tinted `--bg-canvas` and `--text-primary` tokens (dark mode). |
 | **"Wall-to-Wall Inputs"** | Stretching a text box to 100% of a 1920px screen width. | Clamp input `MaxWidth` to `320px – 480px` or use a structured 2-to-3 column grid. |
 | **"Bilingual Clutter"** | Concatting translations: `Lưu (Save)`. | Select one active language globally. Move secondary translations to tooltips if necessary. |
 | **"Unlabeled Icon Buttons"** | Showing 15 mystery icons in a toolbar with zero text labels. | Accompany critical buttons with text labels. Obvious utility icons must have tooltips. |

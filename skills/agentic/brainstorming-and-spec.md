@@ -1,32 +1,37 @@
 ---
 name: AgenticBrainstormingAndSpec
-desc: Disciplined requirements exploration, ambiguity resolution, and acceptance criteria specification before coding (inspired by obra/superpowers)
+description: Requirements exploration, grilling interview, and executable specification before coding. Use when a request is ambiguous or underspecified, when a design decision is open, when the user wants a plan stress-tested or types /grill-me, or before writing a spec, acceptance criteria, or non-goals for a feature.
+desc: Codebase archaeology, grilling rounds over a design tree (frontier, recommended answers), trade-off matrix, and Given-When-Then executable spec before coding (inspired by obra/superpowers and mattpocock/skills)
 rules: [R_CORE]
 category: Agentic
 ---
-# 🧠 Agentic Brainstorming & Specification Protocol
+# Agentic Brainstorming, Grilling and Specification Protocol
 
-**Goal:** Eliminate premature "vibe coding" by enforcing Socratic ambiguity resolution, explicit architectural trade-off evaluation (`Option A` vs `Option B`), strict non-goals scoping, and executable Given-When-Then acceptance criteria before modifying any source file.
+**Goal:** Reach a shared understanding with the user before any source file changes: facts gathered from the codebase, every open decision settled through grilling rounds, at least two architectures compared, non-goals declared, and acceptance criteria written as executable Given-When-Then assertions.
+
+Incorporates practices adapted from mattpocock/skills (MIT).
+
+**Entry points:** the user types Antigravity's built-in `/grill-me` slash command, or another workflow (for example Step 1 of [`skills/feature-implementation/SKILL.md`](../feature-implementation/SKILL.md)) sends ambiguous work here.
 
 ---
 
-## 1. Quantitative Pre-Coding Specification Invariants
+## 1. Pre-Coding Specification Gates
 | Specification Gate | Mandatory Requirement | Failure Consequence |
 | :--- | :--- | :--- |
 | **Codebase Recon First** | Trace entrypoint $\to$ service $\to$ persistence before proposing design | Prevents duplicate utilities and broken contracts |
-| **Ambiguity Resolution** | $\le 3$ high-impact Socratic questions if requirements conflict | Blocks speculative assumptions on schema/auth rules |
+| **Grilling Frontier Empty** | Every decision in the design tree settled by the user, nothing silently assumed | Blocks speculative assumptions on schema/auth rules |
 | **Trade-Off Matrix** | Compare $\ge 2$ viable architectures (`Option A` vs `Option B`) | Prevents over-engineering and hidden latency traps |
 | **Explicit Non-Goals** | Define $\ge 2$ out-of-scope boundaries | Prevents scope creep and multi-module diff sprawl |
 | **Executable Acceptance Criteria** | $100\%$ mapped to testable Given-When-Then assertions | Guarantees deterministic verification (`R_PROOF`) |
 
 ---
 
-## 2. The 4-Step Pre-Coding Specification Workflow
+## 2. The 4-Step Pre-Coding Workflow
 
 ```text
-[1. ARCHAEOLOGY]      ──► Grep existing routes, schemas, DTOs, and SemanticBrain lessons
+[1. ARCHAEOLOGY]      ──► Grep existing routes, schemas, DTOs, and SemanticBrain lessons (facts)
                               │
-[2. SOCRATIC INQUIRY] ──► Identify underspecified invariants (concurrency, idempotency, failure recovery)
+[2. GRILLING ROUNDS]  ──► Walk the design tree frontier with the user (decisions)
                               │
 [3. TRADE-OFF MATRIX] ──► Evaluate Option A (Simple/Local) vs Option B (Distributed/Extensible)
                               │
@@ -34,13 +39,30 @@ category: Agentic
 ```
 
 ### Step 1: Codebase Archaeology & Constraint Discovery
-Before drafting any design, inspect the existing repository to answer:
+Before drafting any design, inspect the repository to answer:
 1. Which domain module owns the target table or state? (`R_UNIVERSE`)
 2. Are there existing base classes (`BaseForm`, `DbScope`, `HandlerDispatcher`) that govern this workflow?
 3. What are the concurrency and latency constraints (`p95`, batch size)?
 
-### Step 2: Architectural Trade-Off Decision Matrix
-Every non-trivial design specification MUST evaluate at least two concrete options:
+**Done when** each question has an answer citing a file path (or "not found").
+
+### Step 2: Grilling Rounds over the Design Tree
+Model the plan as a **design tree**: each decision branches into the decisions that depend on it. The **frontier** is every decision whose prerequisites are already settled.
+
+1. **Ask the whole frontier in one round.** Number each question and give your recommended answer, worded so that "yes" accepts it. A question that depends on another question still open in this round waits for a later round.
+2. **Use the right channel.** For a question with discrete options, use the `ask_question` tool (recommended option first, prefixed "(Recommended)"); batch the round's multiple-choice questions into one call. Open-ended questions go in chat in this format:
+   ```text
+   Q1 - <question title>: <question body, options if any>
+   Recommended: <your answer>
+   ```
+3. **Facts are the agent's job; decisions are the user's.** When a frontier question needs a fact from the environment (code, config, schema, tool output), dispatch a `research` subagent to find it instead of asking the user. Keep going: only the questions downstream of that lookup wait for its report; ask the rest of the frontier now.
+4. **Recompute after each answer set.** Settled decisions push the frontier outward; ask the next round.
+5. **Sharpen the language.** When an answer introduces or blurs a domain term, or settles a hard-to-reverse trade-off, read [`skills/domain-modeling/SKILL.md`](../domain-modeling/SKILL.md) and follow it to update the glossary inline or record an ADR.
+
+**Done when** the frontier is empty (every branch visited, nothing silently assumed) and the user confirms shared understanding. Source edits begin only after that confirmation.
+
+### Step 3: Architectural Trade-Off Decision Matrix
+Every non-trivial design specification evaluates at least two concrete options:
 
 | Evaluation Criterion | Option A: In-Database Upsert with `UPDLOCK` (Recommended) | Option B: Distributed Redis Lock + Application Loop |
 | :--- | :--- | :--- |
@@ -49,23 +71,27 @@ Every non-trivial design specification MUST evaluate at least two concrete optio
 | **New Dependencies** | $0$ (Uses existing SQL Server / Dapper) | Requires Redis cluster & Redlock client |
 | **Engineering Cost** | $35$ LOC | $220$ LOC + operational infra overhead |
 
-### Step 3: Explicit Scope & Non-Goals Declaration
-Clearly bound what the implementation will **NOT** touch so coding stays surgical:
+**Done when** the matrix has at least two options and a stated recommendation the user accepted.
+
+### Step 4: Explicit Scope, Non-Goals & Executable Spec
+Bound what the implementation will touch so coding stays surgical:
 - **In Scope:** Idempotent batch stock reservation endpoint (`POST /api/v1/inventory/reserve`) and unit tests.
-- **Explicit Non-Goals:** Do *not* modify legacy warehouse billing reports; do *not* introduce background message brokers.
+- **Explicit Non-Goals:** Legacy warehouse billing reports stay unchanged; no background message brokers are introduced.
+
+**Done when** at least two non-goals are listed and every acceptance criterion is a Given-When-Then assertion that maps to a test.
 
 ---
 
 ## 3. Specification Comparison: Vague Plan vs Executable Engineering Spec
 
 ```markdown
-<!-- ❌ BAD: Vague, untestable "vibe coding" plan -->
+<!-- BAD: Vague, untestable "vibe coding" plan -->
 ## Plan
 - Update the inventory service to handle reservations better.
 - Add error handling and make sure it is fast.
 - Update the frontend to call the new API.
 
-<!-- ✅ GOOD: Concrete, verifiable Engineering Specification -->
+<!-- GOOD: Concrete, verifiable Engineering Specification -->
 ## Executable Specification: Batch Stock Reservation (`Features/Inventory/`)
 1. **Contract (`ReserveStockRequest`):** `WarehouseId (int)`, `IdempotencyKey (Guid)`, `Lines (IReadOnlyList<ReserveLineDTO>)` (max 500 items).
 2. **Invariants:**
@@ -75,4 +101,3 @@ Clearly bound what the implementation will **NOT** touch so coding stays surgica
    - **AC-1 (Atomic Reservation):** *Given* `MaterialId=10` has `AvailableQty=50`, *When* two concurrent requests each reserve `30`, *Then* exactly one succeeds (`200 OK`, remaining `20`) and one fails (`409 Conflict`).
    - **AC-2 (Idempotency):** *Given* a completed `IdempotencyKey`, *When* the identical payload is re-sent within 24h, *Then* return the cached `ReservationId` with `0` duplicate stock deductions.
 ```
-
