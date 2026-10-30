@@ -329,7 +329,7 @@ E:\16. AgentOption/
 
 | Layer | Directory | Invariant & Governance |
 | :--- | :--- | :--- |
-| **Layer 0: Agents** | `agents/` | Specialized AI personas (12 agents) bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json` and 100% valid `rules`/`shortcuts` bindings. |
+| **Layer 0: Agents** | `agents/` | Specialized AI personas (13 agents) bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json` and 100% valid `rules`/`shortcuts` bindings. |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs (24 blueprints). Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
 | **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines (65 standards across 13 stacks/domains). Every standard must link to at least one machine rule in `rules.json` and a shortcut in `shortcuts.json`. |
 | **Layer 3: Skills & Workflows** | `skills/` | Practical implementation recipes and sovereign packages (72 cluster skills across 13 clusters + 13 sovereign `SKILL.md` packages + 11 package reference specs = 96 files). Sovereign `SKILL.md` packages sync directly to `.gemini/config/skills/`. |

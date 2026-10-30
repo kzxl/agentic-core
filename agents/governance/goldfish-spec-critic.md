@@ -101,3 +101,4 @@ The subagent must produce a structured audit report:
 ## 3. Implementation Clearance
 - [ ] Spec is fully cleared for Worker dispatch.
 ```
+

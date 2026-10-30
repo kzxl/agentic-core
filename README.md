@@ -146,7 +146,7 @@ The framework is organized into 7 clean architectural tiers:
 | :--- | :---: | :--- |
 | **[`engineering-operating-system.md`](architecture/engineering-operating-system.md)** | `ENGOS` | 8-core cognitive OS (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance) governing the LLM as a Reasoning Core. |
 | **[`empirical-cognitive-loop.md`](architecture/empirical-cognitive-loop.md)** | `COG_LOOP` | 5-phase closed cognitive loop, active sensing, pre-mortem simulation, epistemic uncertainty gate, and memory consolidation. |
-| **[`multi-agent-teamwork-protocol.md`](architecture/multi-agent-teamwork-protocol.md)** | `TEAM_ARC` | Zero-collision file ownership matrix, 4-stage adversarial verification gates, and structured multi-agent handoff contracts. |
+| **[`multi-agent-teamwork-protocol.md`](architecture/multi-agent-teamwork-protocol.md)** | `TEAM_ARC` | Zero-collision file ownership matrix, Goldfish pre-coding spec gate, design drift invariant, and 4-stage adversarial verification gates. |
 | **[`clean-layered-architecture.md`](architecture/clean-layered-architecture.md)** | `CLEAN` | 4-tier separation: Domain (Entities, Invariants) $\to$ Application (Use Cases, DTOs) $\to$ Infrastructure $\to$ Presentation. |
 | **[`folder-per-feature.md`](architecture/folder-per-feature.md)** | `FEAT` | Vertical slice architecture with feature-local DTOs, controllers, and services eliminating cross-module leakage. |
 | **[`hybrid-dual-scope-execution.md`](architecture/hybrid-dual-scope-execution.md)** | `DUAL` | Bridges Desktop WinForms apps and stateless WebAPI microservices over shared transactional business engines. |
@@ -181,7 +181,7 @@ The framework is organized into 7 clean architectural tiers:
 - **`input-normalization-pipeline`**: Multi-stage noise filtering that converts raw free-form prompts into structured micro-payloads.
 - **`lazy-minimalism-protocol`**: 7-rung Ponytail Decision Ladder enforcing YAGNI, standard library first, zero unrequested abstractions, and shortest working diffs.
 - **`self-consistency-consensus`**: 3-pass reasoning protocol with early stopping on convergence and deep-dive verification on divergence.
-- **`brainstorming-and-spec`**: Grilling protocol (design tree, frontier rounds with recommended answers, facts vs decisions) and executable specification before coding.
+- **`brainstorming-and-spec`**: Grilling protocol (design tree, frontier rounds, facts vs decisions), executable Given-When-Then specification, and Zero-Context Goldfish Spec Review Gate before coding.
 - **`test-driven-development`**: Red-green loop at pre-agreed seams, vertical tracer-bullet slices, tautology-free assertions, and boundary-only mocking.
 - **`adversarial-code-review`**: Two-axis review (Standards with Fowler smell baseline, Spec fidelity) in parallel subagents, plus anti-slop lint for UI diffs.
 - **`systematic-debugging`**: Feedback-loop construction reference (10 loop techniques, tightening, raising reproduction rate) for `bugfix-investigation`.
@@ -379,7 +379,7 @@ node [AgentOption]/tools/scope-guard.js --init                  # Bootstrap .sco
 node [AgentOption]/tools/scope-guard.js check "https://api-staging.example.com"
 
 # 8. Multi-Target Agent Exporter & Global Antigravity Skill Sync:
-node [AgentOption]/tools/export-agents.js --target=all          # Export 12 personas to Claude/Cursor/Antigravity
+node [AgentOption]/tools/export-agents.js --target=all          # Export 13 personas to Claude/Cursor/Antigravity
 node [AgentOption]/tools/export-agents.js --sync-skills         # Sync sovereign SKILL.md packages to .gemini/config/skills
 ```
 
