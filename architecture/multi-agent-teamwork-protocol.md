@@ -27,23 +27,26 @@ Before spawning subagents, the Orchestrator MUST evaluate blast radius, file cou
 
 ```mermaid
 flowchart TD
-    O["1. Orchestrator (Lead Coordinator)"] --> E["2. Explorer (Read-Only Recon)"]
+    O["1. Orchestrator (Lead Coordinator / Elephant)"] --> E["2. Explorer (Read-Only Recon)"]
     E -->|BRIEFING.md| O
+    O -->|Candidate Spec| G["Zero-Context Goldfish Critic"]
+    G -->|SPEC_AUDIT.md| O
     O -->|DISPATCH.md + File Locks| W1["3a. Worker 1 (Partition A)"]
     O -->|DISPATCH.md + File Locks| W2["3b. Worker 2 (Partition B)"]
     W1 -->|handoff.md| R["4. Adversarial Reviewer (Static & NEV Gate)"]
     W2 -->|handoff.md| R
-    R -->|Findings| C["5. Empirical Challenger (Stress & Fault Injection)"]
+    R -->|DRIFT_REPORT.md| C["5. Empirical Challenger (Stress & Fault Injection)"]
     C -->|GATE_STATUS.md| V["6. Victory Auditor (Commit & Post-Harvest Gate)"]
     V -->|Final Verdict| O
 ```
 
-1. **Orchestrator (`multi-agent-orchestrator`):** Owns problem decomposition, maintains the exclusive file-ownership lock matrix, dispatches workers via `invoke_subagent`, resolves cross-partition contract disputes, and executes the final `git commit`.
+1. **Orchestrator (`multi-agent-orchestrator`):** Owns problem decomposition, maintains the deep-context session (Elephant), coordinates design specifications, enforces the exclusive file-ownership lock matrix, dispatches workers via `invoke_subagent`, resolves cross-partition contract disputes, and executes the final `git commit`.
 2. **Explorer (`research` subagent):** Executes parallel read-only recon (`grep_search`, `view_file`), maps call graphs, and synthesizes findings into `BRIEFING.md` without polluting Orchestrator context.
-3. **Worker (`self` / Specialist):** Executes bounded edits strictly within its assigned file lock partition ($P_i$). Prohibited from touching out-of-partition files or running `git commit`.
-4. **Adversarial Reviewer (`adversarial-code-reviewer`):** Audits worker diffs against `R_*` standards, Net Engineering Value (`R_NEV`), abstraction tax limits, and cross-module coupling.
-5. **Empirical Challenger (`cognitive-loop-challenger`):** Designs hostile boundary inputs, concurrency stress tests, fault-injection harnesses, and module-deletion checks to falsify worker claims.
-6. **Victory Auditor:** Performs final pre-commit verification (`0` compiler warnings, `100%` test pass rate, zero secret leakage) before authorizing commit and SemanticBrain post-harvest.
+3. **Goldfish Spec Critic (`goldfish-spec-critic`):** Zero-context architectural gatekeeper evaluating candidate specs across 4 stages (Zoom Out, Comprehension, Critic, Readiness) to eliminate tacit assumptions and self-review bias before any worker edits code.
+4. **Worker (`self` / Specialist):** Executes bounded edits strictly within its assigned file lock partition ($P_i$). Prohibited from touching out-of-partition files or running `git commit`.
+5. **Adversarial Reviewer (`adversarial-code-reviewer`):** Audits worker diffs against `R_*` standards, Net Engineering Value (`R_NEV`), abstraction tax limits, cross-module coupling, and computes design drift against the approved spec (`DRIFT_REPORT.md`).
+6. **Empirical Challenger (`cognitive-loop-challenger`):** Designs hostile boundary inputs, concurrency stress tests, fault-injection harnesses, and module-deletion checks to falsify worker claims.
+7. **Victory Auditor:** Performs final pre-commit verification (`0` compiler warnings, `100%` test pass rate, zero secret leakage, zero unapproved drift) before authorizing commit and SemanticBrain post-harvest.
 
 ---
 
@@ -66,25 +69,28 @@ flowchart TD
 ## 4. Structured Handoff Artifact Contracts
 
 1. **`BRIEFING.md` (Explorer $\to$ Orchestrator):** Exact file paths, line ranges, symbol signatures, architectural invariants, and SemanticBrain historical gotchas.
-2. **`DISPATCH.md` (Orchestrator $\to$ Workers):** Mission scope, explicit file ownership list, quantitative acceptance criteria (byte budgets, latency targets, rule tags), and prohibited actions.
-3. **`handoff.md` (Worker $\to$ Orchestrator & Reviewer):** Completion report listing every created/modified file, line diff summary, and local verification outputs.
-4. **`GATE_STATUS.md` (Reviewer & Challenger $\to$ Victory Auditor):** 4-stage verification scorecard, defect table (`P0 Blocker`, `P1 Major`, `P2 Nit`), and empirical test/build stdout proofs.
+2. **`SPEC_AUDIT.md` (Goldfish Critic $\to$ Orchestrator):** 4-stage spec review scorecard (Zoom Out, Comprehension, Critic, Readiness) ensuring zero-context self-containment before worker dispatch.
+3. **`DISPATCH.md` (Orchestrator $\to$ Workers):** Mission scope, explicit file ownership list, quantitative acceptance criteria (byte budgets, latency targets, rule tags), and prohibited actions.
+4. **`handoff.md` (Worker $\to$ Orchestrator & Reviewer):** Completion report listing every created/modified file, line diff summary, and local verification outputs.
+5. **`DRIFT_REPORT.md` (Reviewer $\to$ Challenger & Victory Auditor):** Design drift analysis ($\text{Drift} = \text{Diff} \setminus \text{Spec}$) identifying unapproved additions or missing invariants.
+6. **`GATE_STATUS.md` (Reviewer & Challenger $\to$ Victory Auditor):** 4-stage verification scorecard, defect table (`P0 Blocker`, `P1 Major`, `P2 Nit`), and empirical test/build stdout proofs.
 
 ---
 
 ## 5. The 4-Stage Adversarial Verification Gate
 
 ```text
-[Stage 1: Partition Lock & Boundary Audit]  ──► 0 out-of-scope file edits; 0 merge collisions
-                    │
-                    ▼
-[Stage 2: Static Conformance & NEV Review]  ──► 100% R_* compliance; NEV > 0; 0 broken refs
-                    │
-                    ▼
-[Stage 3: Empirical Stress & Build Proof]   ──► Compiler exit 0; 100% tests pass; boundary stress
-                    │
-                    ▼
-[Stage 4: Victory Audit & Atomic Commit]    ──► Orchestrator wires root index -> git-safe-commit
+[Stage 1: Partition Lock & Boundary Audit]      ──► 0 out-of-scope file edits; 0 merge collisions
+                        │
+                        ▼
+[Stage 2: Static Conformance, NEV & Drift Audit]──► 100% R_* compliance; NEV > 0; Drift == 0; 0 broken refs
+                        │
+                        ▼
+[Stage 3: Empirical Stress & Build Proof]       ──► Compiler exit 0; 100% tests pass; boundary stress
+                        │
+                        ▼
+[Stage 4: Victory Audit & Atomic Commit]        ──► Orchestrator wires root index -> git-safe-commit
 ```
 
+- **Design Drift Invariant:** Code changes must strictly correspond to the approved specification. Unapproved additions outside the spec without user authorization fail Stage 2 as scope creep.
 - **Remediation Loop:** If Stage 2 or Stage 3 flags a `P0`/`P1` defect, the Orchestrator sends remediation instructions back to the owning Worker's existing `conversationId` via `send_message` and re-runs the gate.

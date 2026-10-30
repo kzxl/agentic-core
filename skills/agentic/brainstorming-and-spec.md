@@ -23,10 +23,11 @@ Incorporates practices adapted from mattpocock/skills (MIT).
 | **Trade-Off Matrix** | Compare $\ge 2$ viable architectures (`Option A` vs `Option B`) | Prevents over-engineering and hidden latency traps |
 | **Explicit Non-Goals** | Define $\ge 2$ out-of-scope boundaries | Prevents scope creep and multi-module diff sprawl |
 | **Executable Acceptance Criteria** | $100\%$ mapped to testable Given-When-Then assertions | Guarantees deterministic verification (`R_PROOF`) |
+| **Zero-Context Spec Audit** | Spawns isolated Goldfish reviewer; passes 4-stage filter (Zoom Out, Comprehension, Critic, Readiness) | Eliminates self-review confirmation bias and tacit unstated assumptions |
 
 ---
 
-## 2. The 4-Step Pre-Coding Workflow
+## 2. The 5-Step Pre-Coding Workflow
 
 ```text
 [1. ARCHAEOLOGY]      ──► Grep existing routes, schemas, DTOs, and SemanticBrain lessons (facts)
@@ -36,6 +37,8 @@ Incorporates practices adapted from mattpocock/skills (MIT).
 [3. TRADE-OFF MATRIX] ──► Evaluate Option A (Simple/Local) vs Option B (Distributed/Extensible)
                               │
 [4. EXECUTABLE SPEC]  ──► Lock Scope, Non-Goals, Data Contracts, and Given-When-Then Acceptance Criteria
+                              │
+[5. GOLDFISH REVIEW]  ──► Zero-context subagent audits spec via 4-stage gate (Zoom Out -> Comprehension -> Critic -> Readiness)
 ```
 
 ### Step 1: Codebase Archaeology & Constraint Discovery
@@ -79,6 +82,18 @@ Bound what the implementation will touch so coding stays surgical:
 - **Explicit Non-Goals:** Legacy warehouse billing reports stay unchanged; no background message brokers are introduced.
 
 **Done when** at least two non-goals are listed and every acceptance criterion is a Given-When-Then assertion that maps to a test.
+
+### Step 5: Zero-Context Goldfish Spec Review Gate
+Before writing any production code or creating implementation files:
+1. **Spawn Zero-Context Reviewer:** Dispatch an isolated subagent (role: `Goldfish Spec Reviewer`, referencing `agents/governance/goldfish-spec-critic.md`). The subagent is passed strictly the candidate spec document path (`docs/designs/<feature>.md` or `task.md`) and referenced codebase contracts — zero conversational history is inherited.
+2. **Execute 4-Stage Spec Review Filter:**
+   - **Zoom Out & YAGNI:** Check problem boundaries, blast radius, and strip speculative abstractions (`AS-C4`).
+   - **Comprehension Test:** Ensure the specification is 100% self-contained. Any missing entity definition, route, or state transition that requires guessing triggers an immediate `P0 Blocker: Tacit Assumption Gap`.
+   - **Critic Review:** Deep structural audit on concurrency races (TOCTOU, row locking), cascading failure modes, tenant isolation, and boundary conditions.
+   - **Implementation-Readiness:** Verify concrete file paths, method/DTO signatures, and testable Given-When-Then criteria.
+3. **Remediation Loop (The Resolve Phase):** If the Goldfish returns `[REQUEST CHANGES]` with `P0`/`P1` defects, the author agent patches the spec addressing all gaps and re-verifies until `[APPROVED]`.
+
+**Done when** `SPEC_AUDIT.md` reports `Verdict: [APPROVED]` with zero blocking findings, clearing the spec for implementation.
 
 ---
 

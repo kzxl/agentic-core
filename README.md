@@ -10,14 +10,14 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
-| **Agent Personas & Specialist Roles** | **12** | 100% Validated (3 Divisions) | `agents/` |
+| **Agent Personas & Specialist Roles** | **13** | 100% Validated (3 Divisions) | `agents/` |
 | **Architectural Blueprints** | **24** | 100% Documented | `architecture/` |
 | **Language & Enterprise Standards** | **65** | 100% Rule-Linked | `standards/` (13 Stacks/Domains) |
 | **Actionable Autonomous Skills** | **85** | 100% Frontmatter Validated | `skills/` (13 Clusters + 13 Sovereign Packages) |
 | **Sovereign Workflow Packages** | **12** | 100% Step-Verified | `skills/*/SKILL.md` (`WF_*`) |
 | **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
 | **Universal Machine Rules** | **56** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **191** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Agent Quick-Routing Shortcuts** | **192** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -127,7 +127,7 @@ The framework is organized into 7 clean architectural tiers:
 
 | Layer | Directory | Items | Core Purpose | Deep Dive |
 | :--- | :--- | :---: | :--- | :--- |
-| **Layer 0: Agents** | [`agents/`](agents/) | 12 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
+| **Layer 0: Agents** | [`agents/`](agents/) | 13 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
 | **Layer 1: Blueprints** | [`architecture/`](architecture/) | 24 | High-level cognitive OS, multi-agent teamwork, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-24-blueprints) |
 | **Layer 2: Standards** | [`standards/`](standards/) | 65 | Universal rules, 13-stack coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-65-standards) |
 | **Layer 3: Skills & Workflows** | [`skills/`](skills/) | 96 | Actionable implementation patterns & sovereign packages (72 cluster skills + 13 `SKILL.md` + 11 package references) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-85-skills-across-15-clusters) |

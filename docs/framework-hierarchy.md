@@ -1,6 +1,6 @@
 # 🏛️ agentic-core — Framework Directory Hierarchy & File Map
 
-This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every agent persona (12 agents), architectural blueprint (24 blueprints), engineering standard (65 standards across 13 stacks/domains), actionable skill & sovereign package (96 markdown files: 72 cluster skills across 13 clusters + 13 sovereign `SKILL.md` packages + 11 package reference specs), developer tool, and configuration registry across all 7 layers of the operating system, encompassing 197 core content files.
+This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every agent persona (13 agents), architectural blueprint (24 blueprints), engineering standard (65 standards across 13 stacks/domains), actionable skill & sovereign package (96 markdown files: 72 cluster skills across 13 clusters + 13 sovereign `SKILL.md` packages + 11 package reference specs), developer tool, and configuration registry across all 7 layers of the operating system, encompassing 198 core content files.
 
 ---
 
@@ -12,7 +12,7 @@ E:\16. AgentOption/
 ├── AGENTS.md                          # Auto-loaded invariants for agents editing this repo (navigation pointers)
 ├── package.json                       # Node.js Package Manifest, Scripts & Test Runner Baseline
 ├── rules.json                         # Machine-Readable Rule Registry (56 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (191 Shortcuts)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (192 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
@@ -23,7 +23,7 @@ E:\16. AgentOption/
 │   ├── adr/                           # Architecture Decision Records (index + 0001-0008)
 │   └── governance/                    # Change bar (SCOPE.md) & out-of-scope records (6 rejected ideas)
 │
-├── agents/                            # Layer 0: Agent Persona & Role Registry (12 Agents across 3 Divisions)
+├── agents/                            # Layer 0: Agent Persona & Role Registry (13 Agents across 3 Divisions)
 │   ├── engineering/                   # Technical Implementation Specialists (7 Agents)
 │   │   ├── csharp-core-architect.md   # Principal C# Architect (Clean Arch, Plugins, High-Perf)
 │   │   ├── winforms-modernizer.md     # Desktop WinForms Modernization (BaseForm, RunAfterShown)
@@ -32,8 +32,9 @@ E:\16. AgentOption/
 │   │   ├── python-ai-architect.md     # Python 3.10+ & AI Workflow Architect (FastAPI, Pydantic v2, State Graphs)
 │   │   ├── rust-systems-architect.md  # Low-Latency Rust Systems Architect (#![no_std], SIMD, Safe FFI)
 │   │   └── sql-performance-tuner.md   # SQL Server Execution Plan Diagnostician (SARGability, Indexes, TVP)
-│   ├── governance/                    # Quality, Security & Orchestration Authorities (3 Agents)
+│   ├── governance/                    # Quality, Security & Orchestration Authorities (4 Agents)
 │   │   ├── multi-agent-orchestrator.md # Multi-Agent Lead Coordinator (Zero-Collision Locks, Adversarial Gates)
+│   │   ├── goldfish-spec-critic.md    # Zero-Context Spec Gatekeeper (Zoom Out, Comprehension, Critic, Readiness)
 │   │   ├── adversarial-code-reviewer.md # Independent Auditor (Regression Hunting, NEV Gate)
 │   │   └── security-pentest-auditor.md  # Defensive Security Auditor (CVSS, Scope Contracts, OWASP)
 │   └── erp/                           # Business Domain Functional Authorities (2 Agents)

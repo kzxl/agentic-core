@@ -764,6 +764,11 @@
     "target": "agents/governance/adversarial-code-reviewer.md",
     "desc": "Independent auditor hunting regressions, calculating Net Engineering Value (NEV), and checking invariants"
   },
+  "AGT_SPEC_GOLDFISH": {
+    "name": "Goldfish Spec Critic Agent",
+    "target": "agents/governance/goldfish-spec-critic.md",
+    "desc": "Zero-context spec review gate (Zoom Out, Comprehension, Critic, Implementation-Readiness) and drift detection"
+  },
   "AGT_SEC_AUD": {
     "name": "Security Pentest Auditor Agent",
     "target": "agents/governance/security-pentest-auditor.md",

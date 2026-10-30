@@ -22,9 +22,9 @@ rules: [R_CORE, R_TDD, R_GIT, R_PROOF]
    node E:\16. AgentOption\tools\brain.js route "<Feature Description>"
    node E:\16. AgentOption\tools\brain.js pre "<Feature Name> <Domain>" --tags=<domain>
    ```
-3. When requirements are underspecified or a design decision is open, read [`skills/agentic/brainstorming-and-spec.md`](../agentic/brainstorming-and-spec.md) and run its grilling protocol.
+3. When requirements are underspecified, design decisions are open, or tackling a non-trivial feature, read [`skills/agentic/brainstorming-and-spec.md`](../agentic/brainstorming-and-spec.md) and run its grilling protocol followed by the Zero-Context Goldfish Spec Review Gate (`SPEC_AUDIT.md`).
 
-**Done when** NORM is written, route and pre-fetch ran, and (for ambiguous work) the grilling frontier is empty and the user confirmed.
+**Done when** NORM is written, route and pre-fetch ran, and (for ambiguous work) the grilling frontier is empty, the spec audit is `[APPROVED]`, and the user confirmed.
 
 ## Step 2: Asset Survey (`R_REUSE`) and Pre-Mortem (`R_PRE_MORTEM`)
 1. Before creating any helper, mapper, validator, or UI control:
@@ -55,7 +55,7 @@ Follow [`skills/agentic/test-driven-development.md`](../agentic/test-driven-deve
 **Done when** every slice's test went red then green and the full suite exits `0`.
 
 ## Step 5: Audit, Proof, Commit (`R_GIT`, `R_PROOF`)
-1. **Blast radius (`REV`, `BLAST`):** grep touched shared symbols; verify parameterized SQL (`R_DB`), RBAC checks (`R_DOMAIN_AUTH`), no hardcoded secrets/paths (`R_SEC_STD`, `R_PKG`).
+1. **Blast radius & Design Drift (`REV`, `BLAST`, `R_NEV`):** grep touched shared symbols; verify zero unapproved scope creep ($\text{Drift} = \text{Git Diff} \setminus \text{Approved Spec} = \emptyset$); verify parameterized SQL (`R_DB`), RBAC checks (`R_DOMAIN_AUTH`), no hardcoded secrets/paths (`R_SEC_STD`, `R_PKG`).
 2. **Proof:** full build and test suite exit `0`.
 3. **Commit and harvest (`R_RES_MEM`):**
    ```bash
