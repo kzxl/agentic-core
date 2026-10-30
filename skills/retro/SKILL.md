@@ -23,7 +23,7 @@ Start only when the user asks for a retro.
 4. **Classify each standards candidate** as mechanical or judgement (§3).
 5. **Rank** by severity: wrong output shipped > user had to correct the agent > wasted tool calls or tokens > style friction. Done when the list is ordered and each item has category, evidence, proposed change, and target file.
 6. **Present** the ranked list to the user. Apply only the items the user selects.
-7. **Harvest** durable lessons the user accepts: `node E:\Tools\SemanticBrain\tools\auto-post-task.js "<lesson>"`.
+7. **Harvest** durable lessons the user accepts: `node E:\16. AgentOption\tools\brain.js post "<problem> | <cause> | <fix>" --tags=<domain>,pattern` (or `brain.js ingest --file=atoms.json` for several lessons).
 
 ## 2. Candidate Categories (severity order)
 

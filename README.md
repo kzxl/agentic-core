@@ -357,10 +357,11 @@ node [AgentOption]/tools/anti-slop-lint.js --tokens <tokens.css>     # WCAG cont
 node [AgentOption]/tools/anti-slop-lint.js --all src --json          # Full audit, machine-readable
 
 # 4. Continuous Learning & Semantic Memory Loop (Bridged to agentic-brain):
-node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval
+node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval (project + global)
 node [AgentOption]/tools/brain.js route "task description"      # System 1 fast rule/skill/agent dispatch
 node [AgentOption]/tools/brain.js view 42                       # L1 deep inspection
-node [AgentOption]/tools/brain.js post "problem | cause | fix"  # Quality-guarded harvest
+node [AgentOption]/tools/brain.js post "problem | cause | fix"  # One structured atom (no LLM re-analysis)
+node [AgentOption]/tools/brain.js ingest --file=atoms.json      # Multiple atomic lessons (recommended)
 node [AgentOption]/tools/brain.js curate --dry-run              # Memory lifecycle audit
 
 # 5. Binary Static Triage & Shannon Entropy Scanner:

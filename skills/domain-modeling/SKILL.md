@@ -66,7 +66,7 @@ When open design questions surface (scope, ownership of data, which context owns
 3. **Run the session moves** (§2) as the conversation proceeds. Done when every domain term used in the agreed design is either in the glossary or explicitly general-purpose.
 4. **Cross-check.** Every business rule the user stated is confirmed in code or recorded as a known contradiction to fix.
 5. **Record.** Glossary entries written; ADRs written only for decisions that pass §2.6.
-6. **Harvest.** `node E:\Tools\SemanticBrain\tools\auto-post-task.js "<resolved term or decision + reason>"` for durable lessons.
+6. **Harvest.** `node E:\16. AgentOption\tools\brain.js post "<term> | <decision> | <reason>" --tags=<domain>,pattern` for a durable lesson; use `brain.js ingest --file=atoms.json` when several terms changed.
 
 ## 5. Completion Checklist
 
