@@ -79,3 +79,17 @@ Before committing any change that touches `*.csproj`, `Directory.Packages.props`
 1. Verify zero absolute drive/home paths: `rg -i "([a-z]:\\\\|/users/|/home/)" NuGet.Config *.csproj package.json Cargo.toml pyproject.toml`.
 2. Run clean locked restore and vulnerability audit (`dotnet list package --vulnerable --include-transitive`).
 
+---
+
+## 5. MSBuild Anti-Patterns Catalog
+
+When authoring or modifying `.csproj`, `.props`, or `.targets` files, eliminate common MSBuild anti-patterns (adapted from `dotnet/skills`):
+
+| Anti-Pattern ID | Anti-Pattern Smell | Why It's Bad | Remediated Standard |
+| :--- | :--- | :--- | :--- |
+| **`AP-01`** | `<Exec Command="mkdir ... / copy ... / del ..." />` | Platform-dependent, breaks incremental build, opaque to MSBuild logger. | Use built-in tasks: `<MakeDir>`, `<Copy>`, `<Delete>`, `<Move>`, `<WriteLinesToFile>`. |
+| **`AP-02`** | Unquoted Condition: `Condition="$(Foo) == Bar"` | Evaluates incorrectly or crashes with XML parse error on spaces/empty values. | Always quote **both** sides with single quotes: `Condition="'$(Foo)' == 'Bar'"`. |
+| **`AP-03`** | Hardcoded workstation path in `<Import Project="C:\..." />` | Breaks on CI runners and other platforms; non-relocatable. | Use `$(MSBuildThisFileDirectory)` or NuGet props/targets auto-imports. |
+| **`AP-04`** | Redundant restore in multi-step build pipelines | Triggers slow $O(N)$ network and disk I/O multiple times. | Restore once in pre-flight, then pass `--no-restore` to `build`, `test`, and `publish`. |
+| **`AP-05`** | Intermediate output collision (`BaseIntermediateOutputPath`) | Parallel builds sharing the same `obj/` clash and corrupt binary outputs. | Keep project `BaseIntermediateOutputPath` and `OutputPath` isolated per project name. |
+

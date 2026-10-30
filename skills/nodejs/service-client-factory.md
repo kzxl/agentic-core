@@ -1,6 +1,6 @@
 ---
 name: NodeJsServiceClientFactory
-desc: Managed API Client Factory with automatic authorization token delegation and retry configuration
+desc: Managed API Client Factory with automatic authorization token delegation and retry configuration.
 rules: [R_NODE]
 category: NodeJs
 ---

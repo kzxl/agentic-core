@@ -1,6 +1,6 @@
 ---
 name: PydanticV2BoundaryValidation
-desc: Zero-overhead TypeAdapter parsing, strict mode schemas, discriminated unions, and custom validators
+desc: Zero-overhead TypeAdapter parsing, strict mode schemas, discriminated unions, and custom validators.
 rules: [R_PY, R_API, R_SEC]
 category: Python
 ---

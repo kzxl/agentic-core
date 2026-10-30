@@ -1,6 +1,6 @@
 ---
 name: RustFfiPanicBoundaryGuard
-desc: catch_unwind FFI barriers, #[repr(C)] layout verification, opaque pointer handles, and safety contracts
+desc: catch_unwind FFI barriers, #[repr(C)] layout verification, opaque pointer handles, and safety contracts.
 rules: [R_RUST, R_CPP, R_SEC]
 category: Rust
 ---

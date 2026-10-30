@@ -1,6 +1,6 @@
 ---
 name: ServerAuthoritativeBridge
-desc: Concrete Host-Client architectural bridge separating game presentation from authoritative simulation logic across singleplayer in-process and multiplayer socket connections
+desc: Concrete Host-Client architectural bridge separating game presentation from authoritative simulation logic across singleplayer in-process and multiplayer socket connections.
 rules: [R_GAME, R_CORE, R_CS]
 category: Game
 ---

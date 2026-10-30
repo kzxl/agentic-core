@@ -1,6 +1,6 @@
 ---
 name: AgenticBlastRadiusAnalysis
-desc: Pre-edit blast-radius grep analysis for shared classes, contracts, and core methods to prevent cascading regressions
+desc: Pre-edit blast-radius grep analysis for shared classes, contracts, and core methods to prevent cascading regressions.
 rules: [R_CORE]
 category: Agentic
 ---

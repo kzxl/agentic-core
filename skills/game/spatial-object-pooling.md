@@ -1,6 +1,6 @@
 ---
 name: SpatialObjectPooling
-desc: High-performance object pooling pattern for Godot and game engines to recycle projectiles, floating combat text, and particle effects without GC allocation spikes
+desc: High-performance object pooling pattern for Godot and game engines to recycle projectiles, floating combat text, and particle effects without GC allocation spikes.
 rules: [R_GAME, R_PERF, R_GODOT]
 category: Game
 ---

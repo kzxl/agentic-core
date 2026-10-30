@@ -1,6 +1,6 @@
 ---
 name: RustTypestateErrorTaxonomy
-desc: Compile-time typestate machines, zero-panic Result<T, E> hierarchies with thiserror, and infallible transitions
+desc: Compile-time typestate machines, zero-panic Result<T, E> hierarchies with thiserror, and infallible transitions.
 rules: [R_RUST, R_CORE, R_SEC]
 category: Rust
 ---

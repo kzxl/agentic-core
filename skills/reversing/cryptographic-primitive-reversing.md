@@ -1,6 +1,6 @@
 ---
 name: CryptographicPrimitiveReversing
-desc: Cryptographic Signature Detection, S-Box Identification, Entropy Analysis, and In-Memory Key Extraction Protocol
+desc: Cryptographic Signature Detection, S-Box Identification, Entropy Analysis, and In-Memory Key Extraction Protocol.
 rules: [R_CORE, R_SEC, R_REVERSE]
 category: Reversing
 ---

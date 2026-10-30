@@ -1,6 +1,6 @@
 # 🏛️ agentic-core — Framework Directory Hierarchy & File Map
 
-This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every agent persona (12 agents), architectural blueprint (24 blueprints), engineering standard (65 standards across 13 stacks/domains), actionable skill & sovereign package (84 markdown files: 72 cluster skills across 13 clusters + 9 sovereign `SKILL.md` packages + 3 UI reference specs), developer tool, and configuration registry across all 7 layers of the operating system, encompassing 185 core content files.
+This document provides the complete, exhaustive, file-by-file structural map of **agentic-core** (**AgentOption**). It details every agent persona (13 agents), architectural blueprint (24 blueprints), engineering standard (65 standards across 13 stacks/domains), actionable skill & sovereign package (96 markdown files: 72 cluster skills across 13 clusters + 13 sovereign `SKILL.md` packages + 11 package reference specs), developer tool, and configuration registry across all 7 layers of the operating system, encompassing 198 core content files.
 
 ---
 
@@ -9,17 +9,21 @@ This document provides the complete, exhaustive, file-by-file structural map of 
 ```text
 E:\16. AgentOption/
 ├── README.md                          # Executive Overview, Pillars & Capability Catalog
+├── AGENTS.md                          # Auto-loaded invariants for agents editing this repo (navigation pointers)
 ├── package.json                       # Node.js Package Manifest, Scripts & Test Runner Baseline
-├── rules.json                         # Machine-Readable Rule Registry (55 Rules: R_*)
-├── shortcuts.json                     # Deterministic Prompt & Agent Routing (187 Shortcuts)
+├── rules.json                         # Machine-Readable Rule Registry (56 Rules: R_*)
+├── shortcuts.json                     # Deterministic Prompt & Agent Routing (192 Shortcuts)
 ├── .project-rule.md                   # Self-Hosting Root Rule & Doctor Compliance Baseline
 ├── LICENSE                            # MIT License Terms
 │
-├── docs/                              # Layer 6: Framework Documentation & System Maps (2 Docs)
+├── docs/                              # Layer 6: Framework Documentation, Decisions & Governance (20 Docs)
 │   ├── framework-hierarchy.md         # Exhaustive Directory Hierarchy & File-by-File SSoT (This File)
-│   └── AGENT_DESIGN_REPOS_STUDY.md    # Comprehensive SOTA Agent Architectural Research & Trade-off Study
+│   ├── AGENT_DESIGN_REPOS_STUDY.md    # Comprehensive SOTA Agent Architectural Research & Trade-off Study
+│   ├── anti-slop.md                   # Human-facing anti-slop rationale, before/after gallery & palette migration
+│   ├── adr/                           # Architecture Decision Records (index + 0001-0008)
+│   └── governance/                    # Change bar (SCOPE.md) & out-of-scope records (6 rejected ideas)
 │
-├── agents/                            # Layer 0: Agent Persona & Role Registry (12 Agents across 3 Divisions)
+├── agents/                            # Layer 0: Agent Persona & Role Registry (13 Agents across 3 Divisions)
 │   ├── engineering/                   # Technical Implementation Specialists (7 Agents)
 │   │   ├── csharp-core-architect.md   # Principal C# Architect (Clean Arch, Plugins, High-Perf)
 │   │   ├── winforms-modernizer.md     # Desktop WinForms Modernization (BaseForm, RunAfterShown)
@@ -28,8 +32,9 @@ E:\16. AgentOption/
 │   │   ├── python-ai-architect.md     # Python 3.10+ & AI Workflow Architect (FastAPI, Pydantic v2, State Graphs)
 │   │   ├── rust-systems-architect.md  # Low-Latency Rust Systems Architect (#![no_std], SIMD, Safe FFI)
 │   │   └── sql-performance-tuner.md   # SQL Server Execution Plan Diagnostician (SARGability, Indexes, TVP)
-│   ├── governance/                    # Quality, Security & Orchestration Authorities (3 Agents)
+│   ├── governance/                    # Quality, Security & Orchestration Authorities (4 Agents)
 │   │   ├── multi-agent-orchestrator.md # Multi-Agent Lead Coordinator (Zero-Collision Locks, Adversarial Gates)
+│   │   ├── goldfish-spec-critic.md    # Zero-Context Spec Gatekeeper (Zoom Out, Comprehension, Critic, Readiness)
 │   │   ├── adversarial-code-reviewer.md # Independent Auditor (Regression Hunting, NEV Gate)
 │   │   └── security-pentest-auditor.md  # Defensive Security Auditor (CVSS, Scope Contracts, OWASP)
 │   └── erp/                           # Business Domain Functional Authorities (2 Agents)
@@ -154,7 +159,7 @@ E:\16. AgentOption/
 │       ├── sales-packing-journal.md   # Price Calculation Engine Decoupling, Packing Log (NKDG) & Journaling
 │       └── rbac-permission-matrix.md  # Two-Tier Permission: Feature-Action Flags & Row-Level Security (RLS)
 │
-├── skills/                            # Layer 3: Actionable Skills & Sovereign Packages (84 Files: 72 Cluster Skills + 9 SKILL.md + 3 UI Refs)
+├── skills/                            # Layer 3: Actionable Skills & Sovereign Packages (96 Files: 72 Cluster Skills + 13 SKILL.md + 11 Package Refs)
 │   ├── agentic/                       # Agentic Methodology & Autonomous Superpowers (13 Skills)
 │   │   ├── action-first-cognitive-ux.md     # Action-First UX Protocol (ADHD-aware, Zero Preamble, Micro-Actions)
 │   │   ├── agent-skill-router-protocol.md   # Deterministic Skill Routing, Tool-Index SSoT & Self-Supervision
@@ -163,10 +168,10 @@ E:\16. AgentOption/
 │   │   ├── input-normalization-pipeline.md  # Ingestion Pipeline & Structured Micro-Payload Normalization
 │   │   ├── lazy-minimalism-protocol.md      # Ponytail Decision Ladder (YAGNI, Shortest Working Diff, Stdlib First)
 │   │   ├── self-consistency-consensus.md    # 3-Pass Consensus with Early Stopping & Divergence Detection
-│   │   ├── brainstorming-and-spec.md        # Pre-coding Exploration, Ambiguity Resolution & Spec Authoring
-│   │   ├── test-driven-development.md       # Red-Green-Refactor Protocol for AI Coding Agents
-│   │   ├── adversarial-code-review.md       # Self-Audit Checklist for Regressions, Security & Boundary Cases
-│   │   ├── systematic-debugging.md          # 5-Step Scientific Hypothesis Root-Cause Isolation
+│   │   ├── brainstorming-and-spec.md        # Grilling Protocol (Design Tree, Frontier Rounds) & Executable Spec
+│   │   ├── test-driven-development.md       # Red-Green at Pre-Agreed Seams, Tracer-Bullet Slices, Boundary Mocks
+│   │   ├── adversarial-code-review.md       # Two-Axis Review (Standards + Fowler Smells, Spec) & Anti-Slop Lint
+│   │   ├── systematic-debugging.md          # Feedback-Loop Construction Reference for bugfix-investigation
 │   │   ├── execution-state-tracking.md      # L0-L4 Working Memory State Machine & Live Progress Telemetry
 │   │   └── continuous-learning-protocol.md  # PRE-Fetch & POST-Harvest Memory Loop with SemanticBrain
 │   │
@@ -261,11 +266,13 @@ E:\16. AgentOption/
 │   │       └── platform-mapping.md    # Implementation Mapping for WinForms, WPF, Web & Mobile (UI_PLATFORM)
 │   │
 │   ├── feature-implementation/        # Sovereign Feature Development Workflow Package
-│   │   └── SKILL.md                   # End-to-End Feature Development Workflow & TDD Pipeline (WF_FEAT)
+│   │   ├── SKILL.md                   # End-to-End Feature Workflow: Grilling, Tracer-Bullet Slices, TDD at Seams (WF_FEAT)
+│   │   └── references/layers-and-slicing.md # Pre-mortem prompts, layer contract, slice rules & expand-contract
 │   ├── bugfix-investigation/          # Sovereign Bugfix Workflow Package
-│   │   └── SKILL.md                   # 5-Step Scientific Bugfix & Regression Workflow (WF_BUG)
+│   │   ├── SKILL.md                   # Gated Diagnosis: Tight Loop, Minimise, Hypotheses, Correct-Seam Fix (WF_BUG)
+│   │   └── references/                # hypothesis-and-instrumentation.md, fix-patterns.md
 │   ├── code-refactoring/              # Sovereign Code Refactoring Workflow Package
-│   │   └── SKILL.md                   # Zero-Regression Multi-Objective Refactoring Workflow (WF_REF)
+│   │   └── SKILL.md                   # Zero-Regression Refactoring, Deletion Test & Expand-Contract (WF_REF)
 │   ├── cognitive-experiment-loop/     # Sovereign Cognitive Loop Workflow Package
 │   │   └── SKILL.md                   # 5-Phase Empirical Cognitive Loop & Comparative Delta Evaluation (WF_COG)
 │   ├── dotnet-publish-release/        # Sovereign .NET Publish & Release Package
@@ -274,13 +281,25 @@ E:\16. AgentOption/
 │   │   └── SKILL.md                   # Project Onboarding & Compliance Health-Check Audit (WF_DOC)
 │   ├── continuous-learning-harvest/   # Sovereign Continuous Learning Package
 │   │   └── SKILL.md                   # Automated Pre-Fetch & Post-Harvest Memory Loop (WF_MEM)
-│   └── multi-agent-teamwork/          # Sovereign Multi-Agent Teamwork Orchestration Package
-│       └── SKILL.md                   # Zero-Collision Subagent Partitioning & Adversarial Gates (WF_TEAM)
+│   ├── multi-agent-teamwork/          # Sovereign Multi-Agent Teamwork Orchestration Package
+│   │   └── SKILL.md                   # Zero-Collision Subagent Partitioning & Adversarial Gates (WF_TEAM)
+│   ├── writing-for-agents/            # Sovereign Agent-Doc Authoring Package
+│   │   ├── SKILL.md                   # Context Pointers, Hierarchy, Completion Criteria, Positive-First (WF_WRITING_AGENTS)
+│   │   └── references/skill-mechanics.md # AgentOption frontmatter, validator, registries & sync-skills mechanics
+│   ├── codebase-design/               # Sovereign Deep-Module Design Package
+│   │   ├── SKILL.md                   # Module/Interface/Seam/Adapter Vocabulary & Deletion Test (WF_CODEBASE_DESIGN)
+│   │   └── references/                # deepening.md, design-it-twice.md
+│   ├── domain-modeling/               # Sovereign Domain Language Package
+│   │   ├── SKILL.md                   # Glossary Challenge, Scenario Stress-Tests & ADR Gate (WF_DOMAIN_MODEL)
+│   │   └── references/                # glossary-format.md, adr-format.md
+│   └── retro/                         # Sovereign Retrospective Package
+│       └── SKILL.md                   # Post-Session Agent Environment Improvement Ranking (WF_RETRO)
 │
-├── tools/                             # Layer 4: Automated Verification & Agent CLI Tools (8 Tools + 1 Core Lib)
+├── tools/                             # Layer 4: Automated Verification & Agent CLI Tools (9 Tools + 1 Core Lib)
 │   ├── lib/
 │   │   └── framework-core.js          # Shared SSoT Registry Loader, YAML Frontmatter Parser & Scoped Walker
 │   ├── validate-framework.js          # Self-Linter validating YAML frontmatter, rules, shortcuts & bindings
+│   ├── anti-slop-lint.js              # Diff-scoped anti-slop linter (AS-xx rules, profiles) & token contrast audit
 │   ├── lookup.js                      # Sub-50ms Fast Query CLI across Blueprints, Standards, Skills & Agents
 │   ├── doctor.js                      # Project Health-Check verifying .project-rule.md rules, shortcuts & paths
 │   ├── brain.js                       # Portable SemanticBrain Bridge CLI (PRE-Fetch, Route & POST-Harvest)
@@ -290,7 +309,9 @@ E:\16. AgentOption/
 │   └── export-agents.js               # Multi-Tool Agent Exporter & Global Antigravity Skill Synchronizer
 │
 ├── tests/                             # Automated Tooling Verification Suite
-│   └── tools.test.js                  # Node.js Built-in Test Runner Suite for CLI Tools & Security Guards
+│   ├── tools.test.js                  # Node.js Built-in Test Runner Suite for CLI Tools & Security Guards
+│   ├── anti-slop-lint.test.js         # Anti-slop linter suite (one fixture per AS rule, profiles, token audit)
+│   └── fixtures/anti-slop/            # slop/ and clean/ fixtures plus valid/invalid token sheets
 │
 └── templates/                         # Layer 5: Rapid Bootstrapping & Extension Templates (7 Templates)
     ├── project-bootstrap-template.md  # Template to bind ANY external project to AgentOption
@@ -308,11 +329,11 @@ E:\16. AgentOption/
 
 | Layer | Directory | Invariant & Governance |
 | :--- | :--- | :--- |
-| **Layer 0: Agents** | `agents/` | Specialized AI personas (12 agents) bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json` and 100% valid `rules`/`shortcuts` bindings. |
+| **Layer 0: Agents** | `agents/` | Specialized AI personas (13 agents) bound to mandatory standards, rules, and toolchains across Engineering, Governance, and ERP domains. Every agent requires a shortcut in `shortcuts.json` and 100% valid `rules`/`shortcuts` bindings. |
 | **Layer 1: Blueprints** | `architecture/` | Macro-level system designs (24 blueprints). Must define domain boundaries, data sovereignty, and anti-corruption layers. Every blueprint requires a registered shortcut in `shortcuts.json`. |
 | **Layer 2: Standards** | `standards/` | Concrete technical rules and code guidelines (65 standards across 13 stacks/domains). Every standard must link to at least one machine rule in `rules.json` and a shortcut in `shortcuts.json`. |
-| **Layer 3: Skills & Workflows** | `skills/` | Practical implementation recipes and sovereign packages (72 cluster skills across 13 clusters + 9 sovereign `SKILL.md` packages + 3 UI reference specs = 84 files). Sovereign `SKILL.md` packages sync directly to `.gemini/config/skills/`. |
+| **Layer 3: Skills & Workflows** | `skills/` | Practical implementation recipes and sovereign packages (72 cluster skills across 13 clusters + 13 sovereign `SKILL.md` packages + 11 package reference specs = 96 files). Sovereign `SKILL.md` packages sync directly to `.gemini/config/skills/`. |
 | **Layer 4: Tools** | `tools/` | Automated verification CLIs and agent accelerator tools backed by `tools/lib/framework-core.js`, ensuring zero-redundancy parsing, fast retrieval, and compliance auditing. |
 | **Layer 5: Templates** | `templates/` | Rapid scaffolding baselines for onboarding new projects or extending standards, skills, workflows, and agent personas without starting from scratch. |
-| **Layer 6: Docs** | `docs/` | Deep-dive structural references, hierarchy maps, and cross-framework architectural studies. |
+| **Layer 6: Docs** | `docs/` | Deep-dive structural references, hierarchy maps, cross-framework studies, human-facing anti-slop rationale, ADRs, and governance records (change bar, out-of-scope). |
 

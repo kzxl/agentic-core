@@ -1,6 +1,6 @@
 ---
 name: NodeJsFluentResponseBuilder
-desc: Fluent API response builder for consistent, type-safe, and standardized REST API payloads
+desc: Fluent API response builder for consistent, type-safe, and standardized REST API payloads.
 rules: [R_NODE]
 category: NodeJs
 ---

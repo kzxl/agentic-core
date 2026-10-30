@@ -1,0 +1,7 @@
+.presence-indicator {
+  border-radius: 9999px; /* anti-slop-ignore AS-04: circular presence dot defined by the brand guide */
+}
+
+.status-chip {
+  border-radius: 9999px; /* anti-slop-ignore AS-04 */
+}

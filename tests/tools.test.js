@@ -405,7 +405,8 @@ test('validate-framework.js: passes with 0 errors, verifies markdown links, and 
   assert.ok(res.stdout.includes('Errors found: 0'));
   assert.ok(res.stdout.includes('Internal Links Verified:'));
   assert.ok(res.stdout.includes('Layer-by-Layer Token & Depth Profile (--profile):'));
-  assert.ok(res.stdout.includes('Shortcuts Coverage: 185/185 (100.0%)'));
+  const coverage = res.stdout.match(/Shortcuts Coverage: (\d+)\/(\d+) \(100\.0%\)/);
+  assert.ok(coverage && coverage[1] === coverage[2], 'Expected 100% shortcut coverage');
 });
 
 test('Sovereign Workflow SKILL.md files: meet deep upgrade depth threshold (3.8 KB - 5.0 KB) and retain valid frontmatter', () => {

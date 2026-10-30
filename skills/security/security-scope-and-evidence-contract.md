@@ -1,6 +1,6 @@
 ---
 name: SecurityScopeAndEvidenceContract
-desc: Ops Gate, Authorization Verification, Target Isolation Profiles, and Cryptographic Evidence Chains
+desc: Ops Gate, Authorization Verification, Target Isolation Profiles, and Cryptographic Evidence Chains.
 rules: [R_CORE, R_SEC, R_STATE]
 category: Security
 ---

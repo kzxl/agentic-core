@@ -1,6 +1,6 @@
 ---
 name: dotnet-publish-release
-description: Build, test, and publish .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to R_PUB.
+description: Use when building, testing, and publishing .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to R_PUB.
 desc: Build, test, and publish .NET desktop and WebAPI applications into lightweight, framework-dependent single-file distributions adhering to R_PUB.
 rules: [R_PUB, R_VER, R_CS, R_PROOF]
 ---

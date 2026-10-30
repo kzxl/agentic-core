@@ -1,6 +1,6 @@
 ---
 name: AgentSkillRouterProtocol
-desc: Deterministic Skill Routing, Tool-Index SSoT, On-Demand Capability Bootstrapping, and Self-Supervision Loop Protocol
+desc: Deterministic Skill Routing, Tool-Index SSoT, On-Demand Capability Bootstrapping, and Self-Supervision Loop Protocol.
 rules: [R_CORE, R_STATE, R_ROUTE]
 category: Agentic
 ---

@@ -10,6 +10,8 @@
     "lookup": "node tools/lookup.js",
     "export-agents": "node tools/export-agents.js",
     "sync-skills": "node tools/export-agents.js --sync-skills",
-    "test": "node --test tests/tools.test.js"
+    "lint:slop": "node tools/anti-slop-lint.js --diff",
+    "lint:skills": "node tools/skill-lint.js",
+    "test": "node --test tests/tools.test.js tests/anti-slop-lint.test.js tests/skill-lint.test.js"
   }
 }

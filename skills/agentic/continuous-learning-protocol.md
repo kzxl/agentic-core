@@ -1,6 +1,6 @@
 ---
 name: AgenticContinuousLearningProtocol
-desc: Adaptive episodic knowledge lifecycle, progressive context retrieval, and guarded post-task harvesting protocol
+desc: Adaptive episodic knowledge lifecycle, progressive context retrieval, and guarded post-task harvesting protocol.
 rules: [R_CORE]
 category: Agentic
 ---
@@ -58,6 +58,14 @@ Once code changes pass build and test verification, distill the engineering less
 ```bash
 node [AgentOption]/tools/brain.js post "[Symptom/Problem] | [Root Cause] | [Concrete Solution & Gotcha]" --tags=<domain>,<type> [--pinned]
 ```
+
+For multiple independent lessons, use atomic JSON:
+
+```bash
+node [AgentOption]/tools/brain.js ingest --file=atoms.json --project=<project_name>
+```
+
+SemanticBrain validates the atoms; it does not run a local LLM over a raw summary.
 
 #### Harvest Quality Guard (Enforced Pre-Save)
 The pipeline automatically rejects noise and false lessons:

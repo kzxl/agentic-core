@@ -1,6 +1,6 @@
 ---
 name: HierarchicalFiniteStateMachine
-desc: High-performance Hierarchical Finite State Machine (HFSM) pattern for game entities, player combat controllers, and AI behaviors with transition guards and action buffering
+desc: High-performance Hierarchical Finite State Machine (HFSM) pattern for game entities, player combat controllers, and AI behaviors with transition guards and action buffering.
 rules: [R_GAME, R_CS]
 category: Game
 ---

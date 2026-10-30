@@ -1,6 +1,6 @@
 ---
 name: project-bootstrap-doctor
-description: Automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories.
+description: Use for automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories.
 desc: Automated onboarding, rule binding, and architectural compliance health-check workflow for new repositories.
 rules: [R_CORE, R_ENG_OS, R_ROUTE, R_PROOF]
 ---

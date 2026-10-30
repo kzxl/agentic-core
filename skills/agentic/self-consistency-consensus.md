@@ -1,6 +1,6 @@
 ---
 name: AgenticSelfConsistencyConsensus
-desc: 3-Pass Consensus with Early Stopping protocol for multi-perspective decision making and divergence detection
+desc: 3-Pass Consensus with Early Stopping protocol for multi-perspective decision making and divergence detection.
 rules: [R_CORE]
 category: Agentic
 ---

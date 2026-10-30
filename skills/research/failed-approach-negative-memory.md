@@ -1,5 +1,5 @@
 ---
-desc: Failed Approach Negative Memory Protocol — Anti-Repetition Pattern Matching, Negative Constraints & Graveyard Registry
+desc: Failed Approach Negative Memory Protocol — Anti-Repetition Pattern Matching, Negative Constraints & Graveyard Registry.
 rules: [R_RES_MEM, R_RESEARCH, R_STATE]
 ---
 # 🚫 Failed Approach & Negative Memory Playbook

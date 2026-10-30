@@ -1,6 +1,6 @@
 ---
 name: RustZeroCopyArenaLifetimes
-desc: Bump/arena allocation, zero-copy slice parsing, Cow<str>, and cacheline-aligned ring buffers
+desc: Bump/arena allocation, zero-copy slice parsing, Cow<str>, and cacheline-aligned ring buffers.
 rules: [R_RUST, R_PERF]
 category: Rust
 ---

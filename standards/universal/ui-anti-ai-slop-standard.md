@@ -1,204 +1,175 @@
 ---
-desc: Practical UI Engineering & Anti-AI-Slop Standard — Visual Restraint, Ergonomics, Contrast Integrity & De-AI-ification Guidelines
-rules: [R_CORE, R_UI]
+name: ui-anti-ai-slop-standard
+description: Use when writing or reviewing UI styles, colors, shadows, radius, icons, motion or animation (CSS, WAAPI, GSAP), data grids, row heights, badges, charts, empty or loading states, or UI copy, and before adding comments, wrappers, or interfaces. Defines the AS-01..AS-12 and AS-C1..AS-C5 laws, motion profiles, and checkable completion criteria.
+desc: Anti-AI-Slop Standard - quiet, dense, flat UI and self-documenting code (AS-01..AS-12, AS-C1..AS-C5)
+rules: [R_CORE, R_UI, R_ANTI_SLOP]
 ---
 
-# 🛡️ Practical UI Engineering & Anti-AI-Slop Standard
+# Anti-AI-Slop Standard
 
-This standard establishes mandatory visual restraint, ergonomic, and anti-clutter engineering guidelines for all software interfaces across the AgentOption ecosystem. Its primary objective is to prevent **"AI Slop"**—the distinct, gaudy, hyper-saturated, and cartoonish aesthetic characteristically produced by generative AI models when left unconstrained.
+Target: quiet, dense, flat interfaces that move once, and self-documenting code. "AI slop" is the gaudy, over-decorated default output of unconstrained generators.
 
----
-
-## 1. The Anatomy of "AI Slop" in User Interfaces
-
-### Why Generative AI Creates Tacky UI by Default
-Language models and code-generation agents default to visual excess because their training corpora are skewed by flashy Dribbble conceptual mockups, marketing landing pages, and consumer mobile toys. When asked to style an interface, AI models exhibit predictable failure modes:
-1. **Compensatory Novelty:** Attempting to make every element look "impressive" by adding glowing box shadows, gradients, and animated keyframes.
-2. **Color Disconnection:** Assigning independent, uncoordinated saturated colors to every category, badge, and button (the "Candy Store" effect).
-3. **Absence of Visual Restraint:** Treating empty space as a defect to be filled with emojis, floating circles, and rainbow pill badges.
-4. **Ignorance of Cognitive Ergonomics:** Forgetting that human operators look at business and gameplay tools for hours, where high-contrast neon and breathing animations induce severe retinal fatigue.
-
-### The Core Philosophy: "Invisible Craftsmanship & Functional Restraint"
-* **The Prime Directive:** Exceptional UI gets out of the way. It prioritizes information hierarchy, data scanability, and deterministic operational feedback over decorative spectacle.
-* **Quiet Competence:** A dignified, professional interface relies on subtle 1px border strokes, desaturated semantic accents, and structured typography rather than glowing gradients and cartoon animations.
+- Values (hex, px, ms) live only in [tokens.md](../../skills/ui-design-system/references/tokens.md). This file references token names.
+- Rationale and before/after examples live in [docs/anti-slop.md](../../docs/anti-slop.md) (human-facing).
+- Severity: `MUST` = blocking (linter exit code 1). `SHOULD` = warning; the reviewer decides.
 
 ---
 
-## 2. The 8 Deadly Sins of AI-ified UI (The Anti-Patterns Matrix)
+## 1. Leading Words
 
-| # | Anti-Pattern ("AI Slop") | The Technical Defect | Mandatory Engineering Law (The Fix) |
-| :- | :--- | :--- | :--- |
-| **1** | **Candy Rainbow & Neon Circus** | Saturating buttons, tags, and tabs with uncoordinated bright green, hot pink, radioactive cyan, and neon yellow. | **The 1-Accent & Desaturation Rule:** 90% of surfaces must be neutral slate. Functional semantic colors (success, danger, warning) must be muted/earthy and desaturated by $\ge 30\%$. |
-| **2** | **Glow & Shadow Abuse** | Putting `box-shadow: 0 0 15px ...` and `text-shadow: 0 0 10px ...` on text, cards, and buttons to look "futuristic" or "magical". | **Zero Decorative Glow Invariant:** `text-shadow` is **STRICTLY PROHIBITED** on all typography. Box-shadow is clamped to structural elevation (`0 1px 3px rgba(0,0,0,0.3)` or `0 8px 24px rgba(0,0,0,0.5)` for floating dialogs). Never apply colored glowing drop-shadows. |
-| **3** | **Hyperactive Keyframe Addiction** | Looping `@keyframes` (`pulse`, `bounce`, `glowBorder`, `fireGlow`) on static buttons, countdowns, and cards. | **Static Canvas Invariant:** Continuous looping animations on idle elements are **PROHIBITED**. Animations are strictly limited to user-triggered state transitions (150–200ms ease) or genuine critical system alerts. |
-| **4** | **Pill Badge Obsession** | Wrapping every single piece of metadata in rounded pill capsules (`border-radius: 9999px` / `20px`) with bright fills. | **Geometric Rectangular Rhythm:** Use structured rectangular chips with $3\text{px} - 6\text{px}$ radius (`var(--radius)`). Never use stadium pills for dense data grids or technical dashboards. |
-| **5** | **Emoji Vomit & Icon Clutter** | Prepending emojis to every button, label, nav item, table cell, and header (`🔥 Sát Thương`, `⚡ Tốc Độ`, `💎 Đá`). | **Typographic First Principle:** Visual hierarchy must be established via font size, weight, and opacity. Reserve icons exclusively for navigational anchors or functional action bars. Never use emojis as decorative bullet points. |
-| **6** | **Gradient Wallpaper** | Diagonal multi-color gradients (`linear-gradient(135deg, ...)`) splashed across panels, card bodies, and footers. | **Flat Tinted Surface Invariant:** Containers must use solid, opaque or high-opacity tinted neutral fills (`BgSurface`, `BgElevated`). Gradients are prohibited on container backgrounds and only allowed in progress meters. |
-| **7** | **Low Density & Mobile Creep** | Bloated 80px-tall cards, oversized buttons, and giant padding that push critical operational data below the fold. | **Desktop Ergonomic Density:** Standard table rows $32\text{px} - 40\text{px}$. Compact cards with high information density. Numeric data must use tabular lining figures (`font-variant-numeric: tabular-nums`). |
-| **8** | **Glassmorphism & Contrast Halation** | Layering heavy translucent blurred panels (`backdrop-filter: blur(20px)`) over dynamic backgrounds, ruining legibility. | **Contrast & Opacity Invariant:** Surface opacity must be $\ge 90\%$. All text must maintain minimum **4.5:1** contrast against its actual background (WCAG 2.1 AA). Never rely on blur for readability. |
+| Word | Region it anchors | Laws |
+| :--- | :--- | :--- |
+| **quiet** | Color, shadow, ornament restraint | AS-01, AS-02, AS-05, AS-10, AS-11 |
+| **dense** | Row height, padding, data per screen | AS-07, AS-12 |
+| **flat** | Surfaces, progress bars | AS-06 |
+| **once** | Motion | AS-03 |
+| **self-documenting** | Names over comments | AS-C1, AS-C3 |
+| *Dead Code*, *Middle Man*, *Speculative Generality* | Code bloat (Fowler) | AS-C2, AS-C4, AS-C5 |
 
 ---
 
-## 3. Concrete Engineering Specifications
+## 2. Laws
 
-### ① The Slate & Muted Accent System (Dark Mode Focus)
+### 2.1 UI
 
-Rather than pure black (`#000`) or saturated colors, professional dark interfaces use **Living Slate** with subtle warm or cool undertones:
+| ID | Law | Severity | Why |
+| :--- | :--- | :---: | :--- |
+| AS-01 | One brand accent: `--brand-primary`. Semantic states use the `--{state}-fg`, `-solid`, `-bg`, `-border` tokens. Solid semantic fills stay at HSL saturation <= 60%. | MUST | Operators read these screens for hours; saturated color competes with data. |
+| AS-02 | Elevation comes from `--elevation-0`, `--elevation-1`, `--elevation-overlay` (neutral black only). Hierarchy comes from size, weight, and the text tokens. Guardrail: no text-shadow, no colored shadow. | MUST | Glow blurs edges and reads as decoration. |
+| AS-03 | Motion runs **once** in response to a user action or active I/O, on compositor-only properties, with motion tokens, reduced-motion gating in CSS and JS, and a cleanup path (full checklist in §4.3). | MUST | Idle motion pulls attention away from data. |
+| AS-04 | Radius from `--radius-xs`, `--radius-sm`, `--radius-md`, `--radius-lg`. `--radius-pill` only on avatars and notification counts. | MUST | Rectangular rhythm aligns with grid columns. |
+| AS-05 | Icons come from the project icon set at 16px, stroke 1.75, on navigation and action bars only. UI chrome uses words; no emoji. | MUST | Icons are anchors, not filler. |
+| AS-06 | Surfaces are **flat**: `--bg-canvas`, `--bg-surface`, `--bg-elevated`. Containers and progress bars use one solid fill; no gradients. | MUST | Flat fills keep contrast predictable. |
+| AS-07 | Rows are **dense** within the platform band (§3). | SHOULD | More rows visible means less scrolling. |
+| AS-08 | Text >= 4.5:1 and non-text UI (form-control boundaries, focus ring, icons) >= 3:1 against the actual background. Form controls whose border is the only identifying cue use `--border-input`; decorative dividers and card borders are exempt. Surface opacity >= 90%. | MUST | WCAG 2.1 AA; blur does not fix contrast. |
+| AS-09 | `:focus-visible` outline 2px `--brand-primary`, offset 2px. Desktop keeps the native focus cue. Removing an outline requires this replacement in the same file. | MUST | Keyboard users need to see focus. |
+| AS-10 | Charts: <= 6 categorical hues in one S/L band (S 35-55%), one highlighted series in `--brand-primary`, others neutral; flat 2D, area opacity <= 20%. | SHOULD | One story per chart. |
+| AS-11 | UI copy: verb-first labels of 1-3 words; errors state cause + action; plain words, no emoji, no marketing filler, no exclamation marks in system messages. | SHOULD | Copy is an instrument, not a pitch. |
+| AS-12 | Empty state = one muted line icon <= 32px + one sentence + optional action. Loading > 300ms = skeleton rows at the real row height. | SHOULD | Layout stays stable while data arrives. |
 
-```css
-/* --- THE SOVEREIGN MINIMALIST PALETTE --- */
-:root {
-  /* Surfaces: Deep Slate Ink */
-  --bg-canvas: #0d0f13;          /* Outermost canvas */
-  --bg-surface: #151822;         /* Primary container card */
-  --bg-elevated: #1a1e2a;        /* Nested panels, inputs */
-  --bg-hover: #222736;           /* Hover highlight */
-  
-  /* Borders: Crisp 1px structure */
-  --border-subtle: #1c212c;      /* Interior dividers */
-  --border-default: #242934;     /* Card boundaries */
-  --border-light: #363c4c;       /* Interactive hover border */
-  
-  /* Typography: High-contrast legible grays */
-  --text-primary: #e6e8ee;       /* 100% luminance */
-  --text-secondary: #9aa1b2;     /* ~70% luminance */
-  --text-dim: #60687a;           /* ~45% luminance */
-  
-  /* Muted Semantic Accents (Desaturated Earth / Daoist Tones) */
-  --accent-gold: #c29f55;        /* Muted Antique Gold (not electric yellow #ffff00) */
-  --accent-cinnabar: #b84a4a;    /* Muted Cinnabar Red (not radioactive crimson #ff0033) */
-  --accent-jade: #4f8c62;        /* Muted Jade Green (not neon lime #00ff66) */
-  --accent-slate-blue: #537bb4;  /* Muted Steel Blue (not hot cyan #00ffff) */
-  --accent-amethyst: #8668aa;    /* Muted Deep Plum (not neon magenta #ff00ff) */
-}
-```
+### 2.2 Code
 
-### ② The 1px Outline Button Paradigm (Ending Solid Candy Buttons)
-
-AI models frequently render every button as a solid, high-contrast, fully-saturated rectangle. This turns screens into a visual shouting match.
-
-* **Incorrect (AI Slop):**
-  ```css
-  /* ❌ GAUDY: High-contrast solid block, glowing shadow */
-  .btn-challenge {
-    background: #ef4444;
-    color: #fff;
-    box-shadow: 0 0 14px rgba(239, 68, 68, 0.6);
-    border-radius: 20px;
-    animation: pulseGlow 1.5s infinite;
-  }
-  ```
-
-* **Correct (Professional Restraint):**
-  ```css
-  /* ✅ CLEAN: Dark slate foundation with subtle 1px semantic stroke */
-  .btn-challenge {
-    background: #221a1d;
-    color: #d67a7a;
-    border: 1px solid #572c30;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 12px;
-    transition: all 0.15s ease;
-  }
-  .btn-challenge:hover {
-    background: #2c2024;
-    border-color: #793c42;
-    color: #f09292;
-  }
-  ```
-
-### ③ Chip & Badge Restraint
-
-Never use full-saturation backgrounds on badges. Use **10%–15% tinted alpha** backgrounds with **30% alpha matching borders**:
-
-```css
-/* ✅ Professional Tag / Badge Pattern */
-.badge-semantic {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
-  line-height: 1.2;
-}
-
-.badge-semantic--success {
-  background: rgba(79, 140, 98, 0.12);
-  color: #7cb387;
-  border: 1px solid rgba(79, 140, 98, 0.25);
-}
-
-.badge-semantic--danger {
-  background: rgba(184, 74, 74, 0.12);
-  color: #d67a7a;
-  border: 1px solid rgba(184, 74, 74, 0.3);
-}
-
-.badge-semantic--gold {
-  background: rgba(194, 159, 85, 0.12);
-  color: #dfcfb2;
-  border: 1px solid rgba(194, 159, 85, 0.3);
-}
-```
-
-### ④ Progress Bars & Meters
-
-* **Prohibited:** Candy gradients (`linear-gradient(90deg, #ff00ff, #00ffff)`), striped animated barbershop poles, or neon glow halos.
-* **Mandated:** Flat, solid, desaturated fills inside dark recessed tracks with clean 1px borders.
-
-```css
-.progress-track {
-  height: 6px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--accent-jade);
-  transition: width 0.3s ease;
-}
-```
+| ID | Law | Severity | Why |
+| :--- | :--- | :---: | :--- |
+| AS-C1 | **Self-documenting** names carry intent. A comment states a non-obvious WHY in one line or belongs to the allowlist (§5.1). Applies to new or modified lines only (§5.2). | MUST | Narrating comments drift from the code. |
+| AS-C2 | *Dead Code*: delete obsolete code. No commented-out code. | MUST | Git keeps every version. |
+| AS-C3 | Provenance lives in git: no agent metadata, author tags, dates, or changelogs in source. | MUST | Source states the present, git states the past. |
+| AS-C4 | *Middle Man* / *Speculative Generality*: every module passes the deletion test; interfaces follow the seam rule (§5.3). | SHOULD | Indirection without variation is cost without value. |
+| AS-C5 | No unused imports, variables, or files. | MUST | Noise hides the live path. |
 
 ---
 
-## 4. Typography-First Information Architecture
+## 3. Platform Row Bands (AS-07)
 
-When an interface looks "boring" or "flat", AI models reflexively add colors, borders, and emojis. **Human design masters solve hierarchy using typography alone.**
+| Platform | Band | Default |
+| :--- | :---: | :---: |
+| Desktop (WinForms / WPF) | 24-28px | 28px |
+| Web data table | 32-40px | 36px (compact 32px) |
+| Mobile list | >= 48dp touch target | 48dp |
 
-### The 3-Tier Contrast Hierarchy
-1. **Primary Data (100% Opacity):** Headings, critical metrics, selected values (`var(--text-primary)`).
-2. **Structural Labels (70% Opacity):** Form field headers, column titles, descriptive metadata (`var(--text-secondary)`).
-3. **Tertiary Context (45% Opacity):** Timestamps, unit labels, inactive hotkeys, secondary hints (`var(--text-dim)`).
-
-```html
-<!-- ✅ Superior Typography Hierarchy without Rainbow Colors -->
-<div class="metric-card">
-  <div class="metric-card__label" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Phòng Ngự Vật Lý</div>
-  <div class="metric-card__value" style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">1,224.3 <span style="font-size: 12px; color: var(--text-dim); font-weight: 400;">PTS</span></div>
-  <div class="metric-card__delta" style="font-size: 11px; color: var(--accent-jade); margin-top: 4px;">+14.2% so với tầng trước</div>
-</div>
-```
+- Numeric columns are right-aligned with tabular figures.
+- Zebra striping is **off by default**: 1px `--border-subtle` row dividers plus `--bg-hover` on hover.
+- Zebra opt-in: read-only grids with >= 8 visible columns may tint alternate rows with `--bg-elevated` only.
 
 ---
 
-## 5. Automated AI Code-Review Checklist (Anti-Slop Linter)
+## 4. Motion (AS-03)
 
-Before committing or approving any UI code, verify this checklist:
+### 4.1 Profiles
 
-- [ ] **No `text-shadow`:** Zero instances of `text-shadow` in CSS or inline styles.
-- [ ] **No Unbounded `box-shadow`:** No colored glowing halos (`rgba(..., 0.5) 0 0 15px`). Shadows are strictly neutral elevation.
-- [ ] **No Infinite Looping Keyframes:** No `@keyframes pulse`, `bounce`, or `glow` running indefinitely on buttons, badges, or cards.
-- [ ] **No Candy Buttons:** Buttons are dark slate with 1px accent borders, not neon blocks.
-- [ ] **No Rainbow Badges:** Status chips use desaturated tones with $\le 15\%$ fill opacity and crisp 1px borders.
-- [ ] **No Emojis as Bullets:** Emojis are stripped from button bodies and list item prefixes.
-- [ ] **No Background Gradients:** Panel bodies use flat tinted neutral surfaces (`#151822`), not multi-color linear gradients.
-- [ ] **No Stadium Pills on Data:** Tables and dense card grids use standard $3\text{px} - 6\text{px}$ corner radius.
-- [ ] **Density Preserved:** Table row heights clamped to $32\text{px} - 40\text{px}$. Essential data visible without excessive scrolling.
-- [ ] **WCAG 2.1 AA Compliant:** Minimum 4.5:1 text-to-background contrast verified across all states.
+Declare once per project in the `.project-rule.md` frontmatter: `ui_profile: enterprise` or `ui_profile: expressive`. When absent, the profile is `enterprise`.
+
+| Profile | Scope | Allowed ladder levels |
+| :--- | :--- | :--- |
+| `enterprise` (default) | ERP, HelpDesk, internal tools, WinForms/WPF, admin dashboards | L0-L2; L3 only from the allowlist (§4.4) |
+| `expressive` | Marketing and landing pages, onboarding, games | L0-L3 with the full toolset; §4.3 items 2-7 and AS-08 stay binding |
+
+### 4.2 Motion Decision Ladder
+
+Choose the lowest sufficient level.
+
+| Level | Mechanism | Use for |
+| :---: | :--- | :--- |
+| L0 | No animation | Data refresh, static content |
+| L1 | CSS transition with `--duration-fast` or `--duration-base` (transform, opacity, color) | Hover, focus, expand, tab switch |
+| L2 | CSS keyframes or WAAPI, <= 200ms, runs once | Overlay enter/exit, toast |
+| L3 | GSAP within the profile allowlist | Reorder, drag, coordinated multi-step, chart transition |
+
+### 4.3 AS-03 Checklist
+
+1. **Once:** a user action or an active I/O state starts the animation, and it stops when done. Spinners exist only while I/O is active.
+2. **Compositor-only:** animate `transform` and `opacity`. Progress fill uses `transform: scaleX(var(--progress))` with `transform-origin: left`.
+3. **Tokens:** durations come from `--duration-fast`, `--duration-base`, `--duration-data`.
+4. **Reduced motion in CSS and JS:** a `prefers-reduced-motion: reduce` media query for CSS, and a JS branch (`matchMedia` or `gsap.matchMedia()`) that sets duration 0 or skips the animation.
+5. **Cleanup:** every JS animation reverts on unmount, route change, or off-screen (`useGSAP`, `ctx.revert()`, `mm.revert()`, `animation.cancel()`).
+6. **Non-interactive when hidden:** an element at opacity 0 also gets `visibility: hidden` (or GSAP `autoAlpha`).
+7. **`will-change`** only on elements while they animate.
+
+### 4.4 GSAP Allowlist
+
+| GSAP feature | `enterprise` | `expressive` |
+| :--- | :---: | :---: |
+| `gsap.to` / `gsap.from` / timeline, one-shot, <= `--duration-data` | allowed | allowed |
+| Flip | allowed | allowed |
+| Draggable + Inertia | allowed | allowed |
+| `gsap.utils`, `quickTo` | allowed | allowed |
+| ScrollTrigger with `toggleActions` (no pin, no scrub) | review; prefer IntersectionObserver + CSS | allowed |
+| ScrollTrigger `pin` / `scrub`, ScrollSmoother | forbidden | allowed |
+| SplitText, ScrambleText | forbidden | allowed |
+| Decorative MorphSVG / DrawSVG | forbidden | allowed |
+| CustomBounce, CustomWiggle, Physics2D | forbidden | allowed |
+| `repeat: -1` on idle elements | forbidden | allowed when paused off-screen |
+
+### 4.5 Precedence over Third-Party Skills
+
+- In the `enterprise` profile, R_ANTI_SLOP overrides third-party skill recommendations (for example a skill that recommends GSAP by default).
+- Install `gsap-skills` per workspace only in `expressive` projects, never globally.
+
+---
+
+## 5. Code Hygiene
+
+### 5.1 Comment Allowlist (AS-C1)
+
+1. Section banners (`// ── Query ──`).
+2. `///` XML docs on public contracts, stating WHAT and WHY.
+3. One line explaining a non-obvious third-party workaround; it may include a ticket ID.
+
+Any other comment: rename until the comment is redundant, then delete it.
+
+### 5.2 Diff Scope (AS-C1)
+
+AS-C1 applies to lines added or modified in the current change. Existing unrelated comments stay. Clean legacy comments only in a dedicated change, audited with `node tools/anti-slop-lint.js --all <path>`.
+
+### 5.3 Seam Rule (AS-C4)
+
+An interface earns its place when something varies across the seam: two adapters exist (a production implementation plus an in-memory test fake counts as two), or plugin contracts load at runtime per [universe-plugin.md](../../architecture/universe-plugin.md). Otherwise apply the deletion test: if deleting the module makes complexity vanish instead of moving to its callers, inline it. This is a judgement call; the reviewer decides.
+
+### 5.4 Suppression
+
+Write `anti-slop-ignore AS-xx: <reason>` on the same line. The reason is mandatory, and the linter summary lists every suppression.
+
+---
+
+## 6. Completion Criteria
+
+A UI or code change is complete when every row holds:
+
+| Criterion | Checked by |
+| :--- | :--- |
+| `node tools/anti-slop-lint.js --diff` reports zero MUST errors | Linter exit code 0 |
+| Every new or changed text/background token pair measures >= 4.5:1 (non-text >= 3:1) | `node tools/anti-slop-lint.js --tokens <file>` output |
+| Every JS animation has a reduced-motion branch and a cleanup path | Linter warnings + reviewer |
+| Every new module or interface passes the deletion test or has two adapters | Reviewer (judgement call) |
+| Every suppression carries a reason | Linter summary |
+
+**It's working if:** a screenshot of any changed screen shows at most one non-neutral accent hue outside semantic states, the linter summary lists no suppressions without reasons, and reviewers stop writing "looks AI-generated".
+
+---
+
+## 7. Related
+
+- Values: [tokens.md](../../skills/ui-design-system/references/tokens.md)
+- Composition workflow: [ui-design-system SKILL.md](../../skills/ui-design-system/SKILL.md)
+- Platform mappings: [winforms-ui.md](../csharp/winforms-ui.md), [wpf-ui.md](../csharp/wpf-ui.md), [react-ui.md](../react/react-ui.md)
+- Human guide: [docs/anti-slop.md](../../docs/anti-slop.md)

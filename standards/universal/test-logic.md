@@ -84,3 +84,24 @@ Format: `[UnitOfWork]_[StateUnderTest]_[ExpectedBehavior]`
 - ❌ **Tautological Assertions**: Do not assert trivial truths like `Assert.True(result != null)` when specific properties or byte values should be checked.
 - ❌ **Shared Mutable State**: Tests must be completely isolated. Never share static collections across tests without thread-safe tear-down and reset logic.
 - ❌ **External I/O Dependency**: Pure algorithm tests must run completely in memory without reading from the network or physical disk (use memory streams or temp test paths).
+
+---
+
+## 6. Quantitative Change Risk Assessment (CRAP Metric)
+
+To identify undertested and excessively complex methods before refactoring, compute the **CRAP (Change Risk Anti-Patterns)** score (adapted from `dotnet/skills`):
+
+$$\text{CRAP}(m) = \text{comp}(m)^2 \times (1 - \text{cov}(m))^3 + \text{comp}(m)$$
+
+Where:
+- $\text{comp}(m)$ = cyclomatic complexity of method $m$
+- $\text{cov}(m)$ = branch/line code coverage ratio ($0.0 \dots 1.0$)
+
+| CRAP Score | Risk Level | Engineering Decision & Action |
+| :--- | :--- | :--- |
+| **$< 5$** | Low | Well-tested, simple method. Safe for maintenance. |
+| **$5 \dots < 15$** | Moderate | Acceptable risk profile for business logic. |
+| **$15 \dots 30$** | High | Undertested complexity. Write regression tests *before* refactoring. |
+| **$> 30$** | Critical | Severe change risk. Mandatory simplification and test suite addition. |
+
+> **Mandatory Invariant:** Never estimate or hallucinate coverage figures. Guessed coverage produces falsified CRAP metrics, which is worse than an unmeasured baseline. If automated coverage reports are unavailable, report raw cyclomatic complexity and flag coverage as unmeasured.

@@ -1,6 +1,6 @@
 ---
 name: AgenticInputNormalizationPipeline
-desc: Pre-action input normalization and micro-payload ingestion pipeline for noise filtering and zero-drift execution
+desc: Pre-action input normalization and micro-payload ingestion pipeline for noise filtering and zero-drift execution.
 rules: [R_CORE]
 category: Agentic
 ---

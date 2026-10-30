@@ -1,6 +1,6 @@
 ---
 name: multi-agent-teamwork
-description: Orchestrate multi-agent subagent teams with zero-collision file ownership contracts, parallel research/execution partitioning, and adversarial review gates.
+description: Use when orchestrating multi-agent subagent teams with zero-collision file ownership contracts, parallel research/execution partitioning, and adversarial review gates.
 desc: End-to-end multi-agent team dispatch, role partitioning, adversarial review/challenge gates, and synthesis
 rules: [R_TEAM, R_CORE, R_COG_LOOP, R_PROOF]
 ---
@@ -80,4 +80,4 @@ When all Workers report completion:
 
 ### Step 5: Root Integration, Final Verification & Post-Harvest
 1. **Shared Registry Wiring:** Update reserved root files (`index.json`, DI containers, route tables) in the Orchestrator context.
-2. **Full-Suite Proof & Commit:** Verify build/test exit code `0`, commit task-scoped files via `git-safe-commit.js`, and harvest lessons via `node [AgentOption]/tools/brain.js post "<summary>"`.
+2. **Full-Suite Proof & Commit:** Verify build/test exit code `0`, commit task-scoped files via `git-safe-commit.js`, and harvest lessons via `node [AgentOption]/tools/brain.js ingest --file=atoms.json` (one atom per independent lesson).

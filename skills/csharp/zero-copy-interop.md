@@ -1,6 +1,6 @@
 ---
 name: ZeroCopyInterop
-desc: Zero-Copy C# and C++ Native Memory Interoperability via P/Invoke and NativeMemory
+desc: Zero-Copy C# and C++ Native Memory Interoperability via P/Invoke and NativeMemory.
 rules: [R_CPP, R_PERF, R_CS]
 category: Skill
 ---

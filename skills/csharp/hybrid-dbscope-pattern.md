@@ -1,6 +1,6 @@
 ---
 name: CsharpHybridDbScopePattern
-desc: Concrete C# implementation of the DbScope struct and Dual-Constructor service pattern for hybrid Desktop & WebAPI applications
+desc: Concrete C# implementation of the DbScope struct and Dual-Constructor service pattern for hybrid Desktop & WebAPI applications.
 rules: [R_CS, R_API, R_DB]
 category: CSharp
 ---

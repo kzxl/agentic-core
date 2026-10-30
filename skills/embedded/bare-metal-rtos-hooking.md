@@ -1,6 +1,6 @@
 ---
 name: BareMetalRtosHooking
-desc: Non-disruptive bare-metal RTOS hooking, EDMAC DMA zero-copy streaming, dynamic module relocation, and macro-gated firmware architecture derived from Magic Lantern
+desc: Non-disruptive bare-metal RTOS hooking, EDMAC DMA zero-copy streaming, dynamic module relocation, and macro-gated firmware architecture derived from Magic Lantern.
 rules: [R_CORE, R_PERF, R_EMBEDDED]
 category: Embedded
 ---

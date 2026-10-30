@@ -5,9 +5,10 @@
  * Provides portable, zero-hardcode wrapper for SemanticBrain PRE-Fetch and POST-Harvest.
  * 
  * Usage:
- *   node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>]
- *   node brain.js post "<question>|<answer>" [--tags=<domain,type>] [--project=<name>]
- *   node brain.js lookup "<query>" [--tags=<domain>] [--project=<name>]
+ *   node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>] [--all-projects]
+ *   node brain.js post "<problem> | <cause> | <fix>" [--tags=<domain,type>] [--project=<name>] [--trust=...]
+ *   node brain.js ingest --file=atoms.json [--project=<name>] [--tags=<domain>]
+ *   node brain.js lookup "<query>" [--tags=<domain>] [--project=<name>] [--all-projects]
  */
 
 const fs = require('fs');
@@ -15,7 +16,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { parseFrontmatter, parseCliArgs } = require('./lib/framework-core');
 
-const VALID_COMMANDS = ['pre', 'post', 'lookup', 'view', 'curate', 'status', 'route'];
+const VALID_COMMANDS = ['pre', 'post', 'ingest', 'lookup', 'view', 'curate', 'status', 'route'];
 
 // 1. Resolve SemanticBrain Root Path
 function resolveSemanticBrain() {
@@ -57,8 +58,8 @@ function resolveProjectName(startDir = process.cwd(), cliFlags = {}, cmd = '') {
     currentDir = parentDir;
   }
 
-  // Fallback for global commands (like curate, view, status, route)
-  if (['view', 'curate', 'status', 'route'].includes(cmd)) {
+  // Fallback for global commands (like curate, view, status, route, ingest)
+  if (['view', 'curate', 'status', 'route', 'ingest'].includes(cmd)) {
     return 'global';
   }
 
@@ -66,6 +67,27 @@ function resolveProjectName(startDir = process.cwd(), cliFlags = {}, cmd = '') {
   console.error('👉 Ensure .project-rule.md exists in project root or pass --project=<project_name>.');
   console.error('👉 Use [AgentOption]/templates/project-bootstrap-template.md to create one.');
   process.exit(1);
+}
+
+function looksLikeAtoms(text) {
+  if (!text || typeof text !== 'string') return false;
+  try {
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed)
+      || (parsed && Array.isArray(parsed.atoms))
+      || (parsed && parsed.question && parsed.answer);
+  } catch {
+    return false;
+  }
+}
+
+function appendProvenance(args, flags) {
+  if (typeof flags.trust === 'string') args.push(`--trust=${flags.trust}`);
+  if (typeof flags.verifier === 'string') args.push(`--verifier=${flags.verifier}`);
+  if (typeof flags.evidence === 'string') args.push(`--evidence=${flags.evidence}`);
+  if (typeof flags.scope === 'string') args.push(`--scope=${flags.scope}`);
+  if (typeof flags['valid-from'] === 'string') args.push(`--valid-from=${flags['valid-from']}`);
+  if (typeof flags['valid-to'] === 'string') args.push(`--valid-to=${flags['valid-to']}`);
 }
 
 if (require.main === module) {
@@ -76,11 +98,12 @@ if (require.main === module) {
   if (!command || !VALID_COMMANDS.includes(command)) {
     console.log('⚡ AgentOption SemanticBrain Bridge:');
     console.log('  node brain.js route "<task_description>" [--json]');
-    console.log('  node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>] [--full]');
-    console.log('  node brain.js post "<question>|<answer>" [--tags=<domain,type>] [--project=<name>] [--pinned] [--force]');
+    console.log('  node brain.js pre "<task_description>" [--tags=<domain>] [--project=<name>] [--all-projects] [--full]');
+    console.log('  node brain.js post "<problem> | <cause> | <fix>" [--tags=<domain>] [--project=<name>] [--trust=<level>] [--pinned]');
+    console.log('  node brain.js ingest --file=atoms.json [--project=<name>] [--tags=<domain>] [--trust=<level>]');
     console.log('  node brain.js view <id>');
     console.log('  node brain.js curate [--project=<name>] [--dry-run] [--mark-stale]');
-    console.log('  node brain.js lookup "<query>" [--tags=<domain>] [--project=<name>]');
+    console.log('  node brain.js lookup "<query>" [--tags=<domain>] [--project=<name>] [--all-projects]');
     console.log('  node brain.js status\n');
     process.exit(0);
   }
@@ -100,10 +123,11 @@ if (require.main === module) {
     console.log(`✅ SemanticBrain Bridge Active`);
     console.log(`📁 Brain Root: ${brainRoot}`);
     console.log(`📦 Resolved Project: ${projectName}`);
+    console.log(`🗄️ Canonical Storage: PostgreSQL/pgvector (BGE-M3 1024-d)`);
     try {
       const ame = require(path.join(brainRoot, 'core', 'storage-ame'));
       ame.isAmeAvailable().then(res => {
-        console.log(`⚡ AME Cognitive Storage: ${res.available ? `ONLINE (${res.mode})` : 'OFFLINE'}\n`);
+        console.log(`⚡ AME optional archive: ${res.available ? `ONLINE (${res.mode})` : 'OFFLINE'}\n`);
         process.exit(0);
       }).catch(() => {
         console.log();
@@ -129,19 +153,52 @@ if (require.main === module) {
     scriptName = path.join(brainRoot, 'tools', 'find-qa-context.js');
     scriptArgs = [queryText, tagsArg];
     if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+    if (flags['all-projects']) scriptArgs.push('--all-projects');
     if (flags.full) scriptArgs.push('--full');
     if (backendArg) scriptArgs.push(backendArg);
   } else if (command === 'post') {
-    if (!queryText) {
-      console.error('❌ Missing content for post-task harvest');
+    const jsonFlag = typeof flags.json === 'string' ? flags.json : null;
+    const fileFlag = typeof flags.file === 'string' ? flags.file : null;
+    const positionalJson = looksLikeAtoms(queryText) ? queryText : null;
+
+    if (fileFlag || jsonFlag !== null || positionalJson) {
+      scriptName = path.join(brainRoot, 'tools', 'ingest-knowledge.js');
+      if (fileFlag) scriptArgs.push(`--file=${fileFlag}`);
+      else if (jsonFlag !== null) scriptArgs.push(`--json=${jsonFlag}`);
+      else scriptArgs.push(`--json=${positionalJson}`);
+      if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+      if (typeof flags.tags === 'string') scriptArgs.push(`--tags=${flags.tags}`);
+      appendProvenance(scriptArgs, flags);
+      if (flags['dry-run']) scriptArgs.push('--dry-run');
+    } else {
+      if (!queryText) {
+        console.error('❌ Missing content for post-task harvest');
+        process.exit(1);
+      }
+      scriptName = path.join(brainRoot, 'tools', 'post-task.js');
+      scriptArgs = [queryText, tagsArg, '--direct'];
+      if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+      if (flags.pinned) scriptArgs.push('--pinned');
+      if (flags.force) scriptArgs.push('--force');
+      appendProvenance(scriptArgs, flags);
+      if (backendArg) scriptArgs.push(backendArg);
+    }
+  } else if (command === 'ingest') {
+    const fileFlag = typeof flags.file === 'string' ? flags.file : null;
+    const jsonFlag = typeof flags.json === 'string' ? flags.json : null;
+    const positionalJson = looksLikeAtoms(queryText) ? queryText : null;
+    if (!fileFlag && jsonFlag === null && !positionalJson) {
+      console.error('❌ Missing atomic payload: use --file=atoms.json or --json=\'{"atoms":[...]}\'');
       process.exit(1);
     }
-    scriptName = path.join(brainRoot, 'tools', 'post-task.js');
-    scriptArgs = [queryText, tagsArg, '--direct'];
+    scriptName = path.join(brainRoot, 'tools', 'ingest-knowledge.js');
+    if (fileFlag) scriptArgs.push(`--file=${fileFlag}`);
+    else if (jsonFlag !== null) scriptArgs.push(`--json=${jsonFlag}`);
+    else scriptArgs.push(`--json=${positionalJson}`);
     if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
-    if (flags.pinned) scriptArgs.push('--pinned');
-    if (flags.force) scriptArgs.push('--force');
-    if (backendArg) scriptArgs.push(backendArg);
+    if (typeof flags.tags === 'string') scriptArgs.push(`--tags=${flags.tags}`);
+    appendProvenance(scriptArgs, flags);
+    if (flags['dry-run']) scriptArgs.push('--dry-run');
   } else if (command === 'lookup') {
     if (!queryText) {
       console.error('❌ Missing query text for lookup');
@@ -150,6 +207,7 @@ if (require.main === module) {
     scriptName = path.join(brainRoot, 'tools', 'find-qa.js');
     scriptArgs = [queryText, tagsArg];
     if (projectName !== 'global') scriptArgs.push(`--project=${projectName}`);
+    if (flags['all-projects']) scriptArgs.push('--all-projects');
     if (backendArg) scriptArgs.push(backendArg);
   } else if (command === 'view') {
     const idArg = parsedArgs.positional[1];

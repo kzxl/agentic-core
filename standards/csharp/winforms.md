@@ -106,3 +106,21 @@ private async void btnSave_Click(object sender, EventArgs e)
 ## 5. Deterministic Resource & GDI+ Handle Disposal
 - **GDI+ & Timer Cleanup:** Custom `Font`, `Pen`, `Brush`, `Bitmap`, and `Timer` instances allocate unmanaged Win32 handles ($10,000$ process limit). Dispose all GDI objects and unhook external event subscriptions in `OnFormClosed` or `Dispose(bool disposing)`.
 
+---
+
+## 6. Non-Negotiable WinForms Designer Contract
+
+To preserve two-way round-trip compatibility with the Visual Studio WinForms Designer, code is strictly divided into two distinct execution contexts:
+
+| Code Context | Owning Files | Invariant Rules |
+| :--- | :--- | :--- |
+| **Designer Serialization** | `*.Designer.cs`, `InitializeComponent` | Declarative, deterministic serialization statements only. Parsed by VS CodeDOM designer parser. |
+| **Application Behavior** | Main partial class (`*.cs`), controllers, view models | Full C# language features, async workflows, dependency injection, and business logic. |
+
+### Invariants for `InitializeComponent` and `*.Designer.cs`:
+1. **Class-Level Control Fields Only:** Every visual control and component container must be declared as a class-level field (e.g. `private DevExpress.XtraGrid.GridControl gcMain;`). Never add a control or column to collections (`Controls.Add()`, `Columns.Add()`) through local variables.
+2. **Named Event Handlers Only:** Event subscriptions inside `InitializeComponent` must reference named methods in the main partial file (`this.btnSave.Click += new System.EventHandler(this.btnSave_Click);`). Never use lambdas, local functions, or anonymous delegates in designer event wiring.
+3. **Zero Runtime Control Flow:** Never introduce conditional branching (`if`, `switch`), loops (`for`, `foreach`), exception handlers (`try/catch`), or asynchronous calls (`await`) inside `InitializeComponent`.
+4. **Balanced Suspension & Initialization:** Always keep `SuspendLayout()` / `ResumeLayout()` and `BeginInit()` / `EndInit()` strictly balanced. Never call layout or calculation methods between `BeginInit` and `EndInit`.
+5. **Parameterless Constructor Preservation:** Any `Form` or `UserControl` intended for visual designer display must preserve a parameterless constructor (or designer-safe default constructor). For DI-injected forms, retain a secondary parameterless constructor (`public MyForm() : this(null!)`) or use design-time guards (`if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;`).
+

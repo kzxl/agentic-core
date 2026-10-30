@@ -1,6 +1,6 @@
 ---
 name: CsharpCancellationTokenPropagation
-desc: End-to-end propagation of CancellationToken through ASP.NET Core Web API, Application Services, and Dapper/EF Core
+desc: End-to-end propagation of CancellationToken through ASP.NET Core Web API, Application Services, and Dapper/EF Core.
 rules: [R_CS, R_API]
 category: CSharp
 ---

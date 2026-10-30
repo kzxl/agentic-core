@@ -36,9 +36,9 @@ This standard establishes the universal foundation for user interface (UI) and u
 A raw color palette is NOT a design system. Enterprise interfaces require a 5-tier abstraction pipeline translating raw colors into functional, stateful, and business-safe workflows:
 
 ```
-[ Tier 1: Primitive Palette ] -> Raw hex values (#2563EB, #16A34A, #DC2626)
+[ Tier 1: Primitive Palette ] -> Raw hex values (defined only in tokens.md)
             ↓
-[ Tier 2: Semantic Tokens   ] -> Purpose-mapped tokens (BgCanvas, PrimaryAccent, Danger)
+[ Tier 2: Semantic Tokens   ] -> Purpose-mapped tokens (--bg-canvas, --brand-primary, --danger-fg)
             ↓
 [ Tier 3: Component Tokens  ] -> Scoped control variables (Button.Primary.Bg, Input.Border)
             ↓
@@ -55,42 +55,33 @@ Without Tiers 4 & 5, visual mockups look modern but break catastrophically in en
 * **10% Intentional Accent (Focal Points):** Reserved exclusively for Primary Call-to-Action (CTA) buttons, active tabs, status pips, and key focus rings.
 
 ### ③ Surface Elevation & Layering (Dark vs Light)
-* **Dark Mode Canvas:** Avoid pure black (`#000000`), which causes eye fatigue and extreme contrast halation against white text. Use layered Obsidian tones with subtle blue/slate undertones:
-  * *Base Canvas:* `#0F111A` (Deep canvas)
-  * *Card / Surface:* `#181A26` (Elevated content container)
-  * *Nested Input / Active:* `#1F2233` (Inset controls and selected items)
-  * *Hover State:* `#2A2E45` (Interactive highlight)
-* **Light Mode Canvas:** Use off-white, cool gray canvases to mitigate glare:
-  * *Base Canvas:* `#F8F9FC`
-  * *Card / Surface:* `#FFFFFF`
-  * *Nested Input:* `#F1F3F9`
-  * *Hover State:* `#E8EDF8`
+* **Dark Mode Canvas:** Avoid pure black, which causes eye fatigue and extreme contrast halation against white text. Use layered slate tones with subtle blue undertones.
+* **Light Mode Canvas:** Use off-white, cool gray canvases to mitigate glare.
+* Both modes layer the same four tokens: `--bg-canvas` (base canvas), `--bg-surface` (cards), `--bg-elevated` (nested inputs, table headers), `--bg-hover` (interactive highlight). Values live in [tokens.md](../../skills/ui-design-system/references/tokens.md).
 
 ### ③ Saturation Management & Eye Fatigue
 * Large surface areas (windows, toolbars, grids) **MUST** remain neutral and desaturated.
-* High-saturation hues are strictly restricted to small visual footprints ($<5\%$ of screen area): status indicators, notification badges, active icons, and primary CTA buttons.
+* Accent hues (`--brand-primary`, semantic `-solid` fills at HSL saturation <= 60% per AS-01) are restricted to small visual footprints ($<5\%$ of screen area): status indicators, notification badges, active icons, and primary CTA buttons.
 
 ### ④ Universal Design Token Matrix
 
-| Token Name | Dark Hex | Light Hex | Semantic Role & Visual Guidance |
-| :--- | :--- | :--- | :--- |
-| **`BgCanvas`** | `#0F111A` | `#F8F9FC` | Outermost application canvas and window background |
-| **`BgSurface`** | `#181A26` | `#FFFFFF` | Grouping containers, cards, tables, top toolbars |
-| **`BgElevated`** | `#1F2233` | `#F1F3F9` | Text boxes, dropdown lists, nested sub-sections |
-| **`BgHover`** | `#262A3D` | `#E8EDF8` | Mouse hover feedback for interactive rows & buttons |
-| **`BgActive`** | `#313752` | `#D9E2F5` | Pressed buttons, actively selected list rows |
-| **`BorderDefault`** | `#2B3046` | `#DCE1EE` | Primary bounding strokes for cards and inputs |
-| **`BorderSubtle`** | `#202436` | `#EAEFF8` | Interior card dividers, table row separator lines |
-| **`PrimaryAccent`** | `#818CF8` | `#4F46E5` | Brand CTA button fill, active tab highlight, focus ring |
-| **`PrimaryAccentDark`** | `#6366F1` | `#4338CA` | Pressed state or gradient end for primary actions |
-| **`SecondaryAccent`**| `#A78BFA` | `#7C3AED` | Informational pips, highlight chips, category badges |
-| **`TextPrimary`** | `#F1F5F9` | `#0F172A` | Primary data, headers, form field values (100% opacity) |
-| **`TextSecondary`** | `#94A3B8` | `#475569` | Helper descriptions, form labels (~70% opacity) |
-| **`TextMuted`** | `#64748B` | `#94A3B8` | Disabled state, hotkey hints, timestamps (~50% opacity) |
-| **`Success`** | `#34D399` | `#10B981` | Positive states, active connection, saved confirmation |
-| **`Danger`** | `#F87171` | `#EF4444` | Destructive action, hardware fault, validation error |
-| **`Warning`** | `#FBBF24` | `#F59E0B` | Cautionary state, pending background sync, retry limit |
-| **`Info`** | `#38BDF8` | `#0284C7` | Informational tips, neutral live telemetry |
+Values for both modes live only in [tokens.md](../../skills/ui-design-system/references/tokens.md). This table lists roles.
+
+| Token Name | Semantic Role & Visual Guidance |
+| :--- | :--- |
+| **`--bg-canvas`** | Outermost application canvas and window background |
+| **`--bg-surface`** | Grouping containers, cards, tables, top toolbars |
+| **`--bg-elevated`** | Text boxes, dropdown lists, nested sub-sections, table headers |
+| **`--bg-hover`** | Mouse hover feedback for interactive rows & buttons |
+| **`--border-default`** | Primary bounding strokes for cards and inputs |
+| **`--border-subtle`** | Interior card dividers, table row separator lines |
+| **`--border-strong`** | Hovered and active boundaries |
+| **`--brand-primary`** | The one brand accent: CTA button fill, active tab highlight, focus ring (AS-01) |
+| **`--text-primary`** | Primary data, headers, form field values |
+| **`--text-secondary`** | Helper descriptions, form labels |
+| **`--text-muted`** | Hotkey hints, timestamps |
+| **`--text-disabled`** | Disabled state only |
+| **`--{state}-fg/-solid/-bg/-border`** | Semantic states `success`, `warning`, `danger`, `info` (text, fill, tint, border) |
 
 ### ⑤ Contrast & Accessibility Compliance
 * **Text Contrast:** Body text (`TextPrimary`) must maintain a minimum contrast ratio of **4.5:1** against its enclosing surface (WCAG 2.1 Level AA).
@@ -109,7 +100,7 @@ Without Tiers 4 & 5, visual mockups look modern but break catastrophically in en
 | **H3 — Sub-Section** | `13 – 13.5px` | SemiBold (`600`) | Sub-groupings, table column headers | Sentence Case |
 | **Body — Primary** | `12.5 – 13px` | Regular (`400`) | Primary form fields, table cell values | Natural |
 | **Caption — Secondary**| `11.5 – 12px` | Regular (`400`) | Helper instructions, secondary metrics | Sentence Case |
-| **Microcopy / Badge** | `10 – 11px` | Bold (`700`) | Status badges, version chips, timestamps | Upper / Sentence |
+| **Microcopy / Badge** | `10 – 11px` | SemiBold (`600`) | Status badges, version chips, timestamps | Upper / Sentence |
 
 ### ② Casing Standards
 * **Sentence Case Default:** All labels, section headers, instructions, and error messages **MUST** use Sentence case (capitalize only the first letter and proper nouns).
@@ -153,13 +144,13 @@ All paddings, margins, gutters, and control heights **MUST** align with the **4p
 * **Target:** Screen real-estate optimization, high information density, desktop mice with sub-pixel precision.
 * **Button Height:** `28 – 32px` | **Padding:** `10,4` to `12,6` | **Font:** `12px`
 * **Input / Dropdown:** `28 – 30px` | **Padding:** `8,4`
-* **Card Padding:** `12 – 16px` | **Corner Radius:** `6px`
+* **Card Padding:** `12 – 16px` | **Corner Radius:** `--radius-md` (controls), `--radius-lg` (cards)
 
 ### ② Standard Density (Consumer Portals, Dashboards, Mobile/Touch)
 * **Target:** Touch-friendly targets (minimum $44 \times 44\text{px}$ touch target), relaxed scannability.
 * **Button Height:** `36 – 40px` | **Padding:** `16,8` to `20,10` | **Font:** `13.5 – 14px`
 * **Input / Dropdown:** `36 – 40px` | **Padding:** `12,8`
-* **Card Padding:** `20 – 24px` | **Corner Radius:** `10 – 12px`
+* **Card Padding:** `20 – 24px` | **Corner Radius:** `--radius-md` (controls), `--radius-lg` (cards)
 
 ---
 
@@ -173,11 +164,11 @@ Framework-specific standards inherit tokens directly from this universal design 
 | **`BgSurface`** | `{DynamicResource BrushBgCard}` | `SkinColor.Surface` | `colorScheme.surface` | `var(--bg-surface)` |
 | **`BgElevated`** | `{DynamicResource BrushBgCardElevated}` | `SkinColor.Control` | `colorScheme.surfaceVariant` | `var(--bg-elevated)` |
 | **`BorderDefault`** | `{DynamicResource BrushBorderDefault}` | `SkinColor.Border` | `colorScheme.outline` | `var(--border-default)` |
-| **`PrimaryAccent`** | `{DynamicResource BrushPrimaryAccent}` | `SkinColor.Primary` | `colorScheme.primary` | `var(--primary-accent)` |
+| **`BrandPrimary`** | `{DynamicResource BrushBrandPrimary}` | `SkinColor.Primary` | `colorScheme.primary` | `var(--brand-primary)` |
 | **`TextPrimary`** | `{DynamicResource BrushTextPrimary}` | `SkinColor.Text` | `colorScheme.onSurface` | `var(--text-primary)` |
 | **`TextSecondary`** | `{DynamicResource BrushTextSecondary}` | `SkinColor.TextMuted` | `colorScheme.onSurfaceVariant` | `var(--text-secondary)`|
-| **`Success`** | `{DynamicResource BrushSuccessAccent}` | `SkinColor.Success` | `CustomGreen` | `var(--success)` |
-| **`Danger`** | `{DynamicResource BrushDangerAccent}` | `SkinColor.Danger` | `colorScheme.error` | `var(--danger)` |
+| **`SuccessFg`** | `{DynamicResource BrushSuccessFg}` | `SkinColor.Success` | `CustomGreen` | `var(--success-fg)` |
+| **`DangerFg`** | `{DynamicResource BrushDangerFg}` | `SkinColor.Danger` | `colorScheme.error` | `var(--danger-fg)` |
 
 ---
 
@@ -189,29 +180,19 @@ When extending this universal design system into specific client platforms, foll
 * **Design Token Implementation:** Map universal tokens to DevExpress SVG Palettes (`SvgPalette`) or a central `ThemeColors` static class.
 * **Layout Structure:**
   * Top Ribbon or ToolBar (`barManager`): Action verbs only (`Lưu`, `Duyệt`, `Xuất Excel`), avoiding redundant labels.
-  * Main Data Grid (`GridControl` / `GridView`): Compact density (`RowHeight = 26–28px`), alternate row background using `BgElevated`, cell typography `12px Segoe UI`.
+  * Main Data Grid (`GridControl` / `GridView`): Compact density (`RowHeight` within the desktop band 24-28px, default 28), 1px `--border-subtle` row dividers with hover highlight and zebra striping off (opt-in only for read-only grids with >= 8 visible columns, tinted `--bg-elevated`; see AS-07), cell typography `12px Segoe UI`.
   * Bottom Status Bar: In-window progress display (`barEditItemProgressBar`, `barStaticItem`) for long-running I/O tasks instead of blocking UI message boxes.
 * **Modal Dialog Policy:** Standard Form save operations must use in-form status alerts; never spawn `XtraMessageBox.Show("Saved successfully")` that steals user focus.
 
 ### ② Web Subsystem (Responsive SPA / PWA / Dashboards)
-* **Design Token Implementation:** Export universal tokens to CSS Custom Properties under `:root` and `[data-theme="dark"]`:
-  ```css
-  :root {
-    --bg-canvas: #0F111A;
-    --bg-surface: #181A26;
-    --bg-elevated: #1F2233;
-    --primary-accent: #818CF8;
-    --text-primary: #F1F5F9;
-    --radius-control: 6px;
-  }
-  ```
+* **Design Token Implementation:** Export every token from [tokens.md](../../skills/ui-design-system/references/tokens.md) to CSS Custom Properties under `:root` (light) and `[data-theme="dark"]`, keeping the token names (`--bg-canvas`, `--brand-primary`, `--radius-md`, `--duration-fast`).
 * **Responsive Breakpoints & Layout Adapters:**
   * **Desktop ($\ge 1024\text{px}$):** Persistent sidebar navigation, multi-column card grids, compact data tables.
   * **Tablet ($768\text{px} - 1023\text{px}$):** Collapsible drawer navigation, flexible 2-column form layouts.
   * **Mobile ($< 768\text{px}$):** Single-column stacked layout, bottom sticky CTA bar, full-bleed cards.
 * **Accessibility (WCAG 2.1 AA):**
   * Semantic HTML landmarks (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`).
-  * Visible focus indicators: `:focus-visible { outline: 2px solid var(--primary-accent); outline-offset: 2px; }`.
+  * Visible focus indicators: `:focus-visible { outline: 2px solid var(--brand-primary); outline-offset: 2px; }` (AS-09).
   * Support system color scheme preference: `@media (prefers-color-scheme: dark)` with manual user override persisted in `localStorage`.
 
 ### ③ Mobile Subsystem (Android Jetpack Compose & iOS / Flutter)
@@ -222,7 +203,7 @@ When extending this universal design system into specific client platforms, foll
   * Minimum touch target size: **$48 \times 48\text{dp}$** (even if visual icon is $24\text{dp}$, add touch padding).
   * Minimum interactive element spacing: **$8\text{dp}$** between adjacent targets to eliminate accidental misclicks.
 * **Gesture & Physics Feedback:**
-  * Integrate spring physics for animated reveals and sheet dismissals (`Spring.DampingRatioMediumBouncy`).
+  * Use critically damped spring physics for reveals and sheet dismissals (`Spring.DampingRatioNoBouncy`), skipped under reduced motion (AS-03).
   * Subtle haptic feedback (`HapticFeedbackType.LongPress` / `HapticFeedbackType.TextHandleMove`) on primary status toggles.
 * **System Edge-to-Edge:** Respect OS navigation bars and camera cutouts using `WindowInsets.safeDrawing`.
 
@@ -264,11 +245,11 @@ Form controls must cleanly reflect 6 distinct states through visual cues without
 
 ```
 [ Normal   ] -> Subtle border, standard placeholder.
-[ Focused  ] -> 2px PrimaryAccent glow/outline, clear cursor indication.
+[ Focused  ] -> 2px --brand-primary outline (AS-09, no glow), clear cursor indication.
 [ Required ] -> Subtle red asterisk (*) adjacent to label + aria-required indicator.
 [ ReadOnly ] -> Crisp readable text, copyable, tab-skipped, neutral surface (NOT dimmed).
 [ Disabled ] -> Dimmed (40% opacity), non-focusable, non-interactive, cursor not-allowed.
-[ Error    ] -> 1.5px Danger border + inline error icon and message positioned directly beneath the input.
+[ Error    ] -> 1.5px --danger-fg border + inline error icon and message positioned directly beneath the input.
 ```
 
 * **ReadOnly vs Disabled Distinction:**

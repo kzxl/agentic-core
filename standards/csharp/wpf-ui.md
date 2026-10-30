@@ -1,33 +1,33 @@
 ---
+name: wpf-ui
+description: Use when building or reviewing WPF desktop UI - XAML resource dictionaries and brushes, dark/light themes, compact density, control templates (buttons, inputs, scrollbars), window chrome, shadows, storyboards, InfoBar/ContentDialog patterns, or DevExpress WPF theme sync.
 desc: Comprehensive C# WPF Desktop UI Standards — Fluent Design, Dark/Light Themes, Compact Density & Modern Controls
-rules: [R_WPF, R_CORE]
+rules: [R_WPF, R_CORE, R_ANTI_SLOP]
 ---
-# 🎨 C# WPF Desktop UI & Theming Standards
+# C# WPF Desktop UI & Theming Standards
 
-This standard specializes the [Universal Software UI/UX Design System](file:///E:/16.%20AgentOption/standards/universal/ui-ux-design-system.md) for C# WPF Desktop applications. All core ergonomics, color theory, density modes, and action verb naming rules apply directly.
+This standard specializes the [Universal Software UI/UX Design System](file:///E:/16.%20AgentOption/standards/universal/ui-ux-design-system.md) for C# WPF Desktop applications. All core ergonomics, color theory, density modes, and action verb naming rules apply directly. Visual laws come from the [Anti-AI-Slop Standard](file:///E:/16.%20AgentOption/standards/universal/ui-anti-ai-slop-standard.md) (cited by AS ID); values come from [tokens.md](file:///E:/16.%20AgentOption/skills/ui-design-system/references/tokens.md).
 
 ## 1. Visual Hierarchy & Color Palette Tokens (Design Tokens)
 
-All colors and brushes must strictly adhere to the layered token hierarchy. Hardcoded ad-hoc hex values and unmapped `SystemColors` are strictly prohibited.
+All colors and brushes are `SolidColorBrush` resources keyed by token name, with values taken from tokens.md. Ad-hoc hex literals in views and unmapped `SystemColors` are prohibited. Reference brushes with `{DynamicResource ...}` so theme switching works.
 
-| Token Name | Dark Value | Light Value | Role & Usage Description |
-| :--- | :--- | :--- | :--- |
-| **`BgDark`** / `BgPrimary` | `#11131F` | `#F8F9FC` | Primary window background canvas |
-| **`BgCard`** / `BgSurface` | `#181A28` | `#FFFFFF` | Container cards, toolbars, grouped panels |
-| **`BgInput`** | `#1D2034` | `#F1F3F9` | Input surfaces: TextBox, ComboBox, ListBox |
-| **`BgHover`** | `#262A44` | `#E8EDF8` | Hover state for buttons, list items, and interactive rows |
-| **`BgActive`** | `#32385C` | `#D9E2F5` | Pressed and selected states |
-| **`BorderDefault`** | `#2E344E` | `#DCE1EE` | Standard boundary stroke separating cards and controls |
-| **`BorderSubtle`** | `#23273C` | `#EAEFF8` | Subtle interior dividers and nested section borders |
-| **`PrimaryAccent`** | `#818CF8` | `#4F46E5` | Brand accent: CTA buttons, active tabs, focus rings |
-| **`PrimaryAccentDark`**| `#6366F1` | `#4338CA` | Gradient end / pressed state for primary action buttons |
-| **`SecondaryAccent`**| `#A78BFA` | `#7C3AED` | Secondary highlight, badges, notification pips |
-| **`TextPrimary`** | `#F1F5F9` | `#0F172A` | Primary labels, headers, data content (100% opacity) |
-| **`TextSecondary`** | `#94A3B8` | `#475569` | Secondary captions, descriptive helper text (~70% opacity) |
-| **`TextMuted`** | `#64748B` | `#94A3B8` | Placeholders, hotkey shortcuts, timestamps (~45% opacity) |
-| **`SuccessAccent`** | `#A6E3A1` | `#16A34A` | Positive state, completed operation, saved status |
-| **`DangerAccent`** | `#F38BA8` | `#DC2626` | Error indicators, critical alerts, destructive actions |
-| **`WarningAccent`** | `#F9E2AF` | `#D97706` | Pending state, caution banner, attention needed |
+| Token (tokens.md) | Brush Key | Role & Usage Description |
+| :--- | :--- | :--- |
+| `--bg-canvas` | `BrushBgCanvas` | Primary window background canvas |
+| `--bg-surface` | `BrushBgSurface` | Container cards, toolbars, grouped panels |
+| `--bg-elevated` | `BrushBgElevated` | Input surfaces: TextBox, ComboBox, ListBox |
+| `--bg-hover` | `BrushBgHover` | Hover state for buttons, list items, and interactive rows |
+| `--border-default` | `BrushBorderDefault` | Standard boundary stroke separating cards and controls |
+| `--border-subtle` | `BrushBorderSubtle` | Subtle interior dividers and nested section borders |
+| `--border-strong` | `BrushBorderStrong` | Hovered and active boundaries |
+| `--border-input` | `BrushBorderInput` | TextBox, ComboBox, CheckBox, and grid-editor boundaries (AS-08, >= 3:1) |
+| `--brand-primary` | `BrushBrandPrimary` | The one brand accent: CTA buttons, active tabs, focus visuals (AS-01) |
+| `--brand-primary-hover` | `BrushBrandPrimaryHover` | Hover state of the brand accent |
+| `--text-primary` | `BrushTextPrimary` | Primary labels, headers, data content |
+| `--text-secondary` | `BrushTextSecondary` | Secondary captions, descriptive helper text |
+| `--text-muted` | `BrushTextMuted` | Placeholders, hotkey shortcuts, timestamps |
+| `--{state}-fg/-solid/-bg/-border` | `BrushSuccessFg`, `BrushDangerSolid`, ... | Semantic states `success`, `warning`, `danger`, `info` |
 
 ---
 
@@ -38,13 +38,14 @@ Select either Compact or Standard density based on application domain:
 ### A. Compact Density (Desktop Utilities, Developer Tools, ERP Data-Heavy Views)
 * **Button Height:** `26 – 28px` (Padding: `8,3` to `10,4`, FontSize: `11.5 – 12px`)
 * **ComboBox / TextBox:** `28 – 30px` (Padding: `8,4`, FontSize: `12 – 12.5px`)
-* **CornerRadius:** `4px` (Child elements), `6 – 8px` (Cards), `10 – 12px` (Popups)
-* **Slim ScrollBar:** Width `5px`, transparent track, rounded subtle thumb.
+* **DataGrid RowHeight:** desktop band 24-28px, default 28 (AS-07). Zebra off by default (`AlternationCount` unset); opt-in only for read-only grids with >= 8 visible columns using `BrushBgElevated`.
+* **CornerRadius (AS-04):** `--radius-md` (controls), `--radius-lg` (cards, popups), `--radius-sm` (chips).
+* **Slim ScrollBar:** Width `5px`, transparent track, subtle thumb with `--radius-xs` corners.
 
 ### B. Standard Density (Admin Portals, Dashboards, Consumer Apps)
 * **Button Height:** `34 – 38px` (Padding: `14,7`, FontSize: `13 – 14px`)
 * **ComboBox / TextBox:** `36 – 40px` (Padding: `12,8`, FontSize: `14px`)
-* **CornerRadius:** `6 – 8px` (Controls), `12 – 14px` (Cards)
+* **CornerRadius (AS-04):** `--radius-md` (controls), `--radius-lg` (cards).
 * **ScrollBar:** Width `8 – 10px`.
 
 ---
@@ -55,28 +56,33 @@ Select either Compact or Standard density based on application domain:
   * Extend window content into the title bar area (`TitleBar.ExtendViewIntoTitleBar`).
   * Merge branding logos, global search/selectors, and quick action buttons into a single unified top toolbar row.
   * Reclaims `40 – 60px` of vertical screen real estate for modern Fluent/WinUI aesthetic.
-* **Elevation & Glassmorphism:**
-  * Apply lightweight `DropShadowEffect`: `BlurRadius="16-24"`, `ShadowDepth="2-4"`, `Opacity="0.3-0.45"`, `Color="#FF0B0D14"`.
-  * Support translucent backdrops (`#F2181A28`) for floating overlays and quick popup widgets.
+* **Elevation (AS-02, AS-08):**
+  * Cards use `--elevation-0` (1px `BrushBorderDefault`, no effect).
+  * Floating overlays (popups, flyouts, dialogs) encode `--elevation-overlay` as a neutral black `DropShadowEffect`; never a colored shadow.
+  * Overlay surfaces stay >= 90% opaque; no blur-based legibility.
 
 ---
 
 ## 4. Modern Control Templates & UX Patterns
 
 ### ① Button Variants
-* **`ModernButton`:** Dark card fill `#1F2236`, thin `BorderDefault` stroke, hover transition to `BgHover`, hand cursor.
-* **`AccentButton`:** Gradient fill `PrimaryAccent` $\rightarrow$ `PrimaryAccentDark`, semi-bold typography for primary call-to-action.
-* **`IconButton`:** Fully transparent background and border by default, revealing subtle hover pill on mouse over.
+* **`ModernButton`:** `BrushBgSurface` fill, 1px `BrushBorderStrong` stroke, hover transition to `BrushBgElevated`, hand cursor.
+* **`AccentButton`:** Flat `BrushBrandPrimary` fill (AS-06), hover `BrushBrandPrimaryHover`, semi-bold typography for the primary call-to-action.
+* **`IconButton`:** Transparent background and border by default; hover reveals `BrushBgHover` with `--radius-md` corners.
 
-### ② In-Window Notification (`InfoBar` Pattern)
+### ② Focus & Motion
+* **Focus (AS-09):** keep the default `FocusVisualStyle` or replace it with a visible 2px `BrushBrandPrimary` outline; never set it to `{x:Null}` alone.
+* **Motion (AS-03):** `Storyboard` durations come from the motion tokens, animate `Opacity` and `RenderTransform` only, run once per state change, and are skipped when `SystemParameters.ClientAreaAnimation` is `false`. Indeterminate `ProgressBar` only while I/O is active.
+
+### ③ In-Window Notification (`InfoBar` Pattern)
 * Avoid blocking modal `MessageBox.Show()` dialogs during normal workflow unless confirming irreversible deletion.
-* Utilize top-pinned in-window **InfoBar Banners** (Severity: `Info`, `Success`, `Warning`, `Error`) with close action or auto-dismiss after 3–5 seconds.
+* Utilize top-pinned in-window **InfoBar Banners** (Severity: `Info`, `Success`, `Warning`, `Error`) with close action or auto-dismiss after 3–5 seconds, colored with the state `-bg/-border/-fg` brushes.
 
-### ③ In-Window Dialog (`ContentDialog` Pattern)
+### ④ In-Window Dialog (`ContentDialog` Pattern)
 * Prefer dimming backdrop overlays with centered modal UserControls over spawning multiple separate OS-level modal windows.
 
 ---
 
 ## 5. DevExpress & Third-Party Theme Synchronization
 * Synchronize palette tokens with DevExpress via SVG Palette Mapping (`DevExpress.Xpf.Core.ApplicationThemeHelper`).
-* Mandate vector icon formats (SVG / Geometry Path / Segoe MDL2 Assets) over static bitmap PNGs to guarantee dynamic theme adaptation.
+* Mandate vector icon formats (SVG / Geometry Path / Segoe MDL2 Assets) over static bitmap PNGs to guarantee dynamic theme adaptation; icons are 16px on navigation and action bars (AS-05).

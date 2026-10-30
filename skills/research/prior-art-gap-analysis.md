@@ -1,5 +1,5 @@
 ---
-desc: Prior-Art Gap Analysis & Pareto Frontier Mapping — Competitive Matrix, Trade-Off Surfaces & Niche Definition
+desc: Prior-Art Gap Analysis & Pareto Frontier Mapping — Competitive Matrix, Trade-Off Surfaces & Niche Definition.
 rules: [R_RESEARCH, R_CORE]
 ---
 # 🧭 Prior-Art Gap Analysis & Pareto Frontier Mapping

@@ -10,14 +10,14 @@ Together with **[agentic-brain](https://github.com/kzxl/agentic-brain)** (the ep
 
 | Metric | Count | Coverage / Status | SSoT Registry |
 | :--- | :---: | :---: | :--- |
-| **Agent Personas & Specialist Roles** | **12** | 100% Validated (3 Divisions) | `agents/` |
+| **Agent Personas & Specialist Roles** | **13** | 100% Validated (3 Divisions) | `agents/` |
 | **Architectural Blueprints** | **24** | 100% Documented | `architecture/` |
 | **Language & Enterprise Standards** | **65** | 100% Rule-Linked | `standards/` (13 Stacks/Domains) |
-| **Actionable Autonomous Skills** | **81** | 100% Frontmatter Validated | `skills/` (13 Clusters + 9 Sovereign Packages) |
-| **Sovereign Workflow Packages** | **8** | 100% Step-Verified | `skills/*/SKILL.md` (`WF_*`) |
+| **Actionable Autonomous Skills** | **85** | 100% Frontmatter Validated | `skills/` (13 Clusters + 13 Sovereign Packages) |
+| **Sovereign Workflow Packages** | **12** | 100% Step-Verified | `skills/*/SKILL.md` (`WF_*`) |
 | **Rapid Extension Templates** | **7** | Reusable Baselines | `templates/` |
-| **Universal Machine Rules** | **55** | 100% Active Enforced | `rules.json` (`R_*`) |
-| **Agent Quick-Routing Shortcuts** | **187** | 100% Zero-Broken Targets | `shortcuts.json` |
+| **Universal Machine Rules** | **56** | 100% Active Enforced | `rules.json` (`R_*`) |
+| **Agent Quick-Routing Shortcuts** | **192** | 100% Zero-Broken Targets | `shortcuts.json` |
 
 ---
 
@@ -127,13 +127,13 @@ The framework is organized into 7 clean architectural tiers:
 
 | Layer | Directory | Items | Core Purpose | Deep Dive |
 | :--- | :--- | :---: | :--- | :--- |
-| **Layer 0: Agents** | [`agents/`](agents/) | 12 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
+| **Layer 0: Agents** | [`agents/`](agents/) | 13 | Specialized AI personas bound to mandatory standards, rules, and toolchains | [Hierarchy](docs/framework-hierarchy.md) |
 | **Layer 1: Blueprints** | [`architecture/`](architecture/) | 24 | High-level cognitive OS, multi-agent teamwork, research engines & distributed systems | [Catalog](#-architectural-blueprints-catalog-24-blueprints) |
 | **Layer 2: Standards** | [`standards/`](standards/) | 65 | Universal rules, 13-stack coding & enterprise ERP standards | [Catalog](#-universal--language-standards-catalog-65-standards) |
-| **Layer 3: Skills & Workflows** | [`skills/`](skills/) | 84 | Actionable implementation patterns & sovereign packages (72 cluster skills + 9 `SKILL.md` + 3 UI refs) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-81-skills-across-15-clusters) |
-| **Layer 4: Tools** | [`tools/`](tools/) | 8 + 1 Lib | Linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard, agent exporter & shared core | [Toolchain](#-developer--ai-agent-toolchain-cli) |
+| **Layer 3: Skills & Workflows** | [`skills/`](skills/) | 96 | Actionable implementation patterns & sovereign packages (72 cluster skills + 13 `SKILL.md` + 11 package references) | [Catalog](#-comprehensive-skill-clusters--capabilities-catalog-85-skills-across-15-clusters) |
+| **Layer 4: Tools** | [`tools/`](tools/) | 9 + 1 Lib | Linter, anti-slop linter, CLI lookup, doctor, brain bridge, bin-triage, CVSS, scope guard, agent exporter & shared core | [Toolchain](#-developer--ai-agent-toolchain-cli) |
 | **Layer 5: Templates** | [`templates/`](templates/) | 7 | Rapid bootstrapping templates for agents, projects, standards, skills & scope | [`templates/`](templates/) |
-| **Layer 6: Docs** | [`docs/`](docs/) | 2 | Exhaustive system maps, hierarchies & architectural comparative research | [Hierarchy](docs/framework-hierarchy.md) & [Agent Study](docs/AGENT_DESIGN_REPOS_STUDY.md) |
+| **Layer 6: Docs** | [`docs/`](docs/) | 20 | System maps, comparative research, anti-slop rationale, ADRs & governance (change bar, out-of-scope records) | [Hierarchy](docs/framework-hierarchy.md), [ADRs](docs/adr/README.md) & [Governance](docs/governance/README.md) |
 
 > [!TIP]
 > 📖 **Complete File-by-File Tree**: For the exhaustive, fully-annotated directory tree of all 185+ core components, see **[`docs/framework-hierarchy.md`](docs/framework-hierarchy.md)**.
@@ -146,7 +146,7 @@ The framework is organized into 7 clean architectural tiers:
 | :--- | :---: | :--- |
 | **[`engineering-operating-system.md`](architecture/engineering-operating-system.md)** | `ENGOS` | 8-core cognitive OS (Knowledge, Memory L0-L4, State, Graph, Runtime, Risk, Evidence, Governance) governing the LLM as a Reasoning Core. |
 | **[`empirical-cognitive-loop.md`](architecture/empirical-cognitive-loop.md)** | `COG_LOOP` | 5-phase closed cognitive loop, active sensing, pre-mortem simulation, epistemic uncertainty gate, and memory consolidation. |
-| **[`multi-agent-teamwork-protocol.md`](architecture/multi-agent-teamwork-protocol.md)** | `TEAM_ARC` | Zero-collision file ownership matrix, 4-stage adversarial verification gates, and structured multi-agent handoff contracts. |
+| **[`multi-agent-teamwork-protocol.md`](architecture/multi-agent-teamwork-protocol.md)** | `TEAM_ARC` | Zero-collision file ownership matrix, Goldfish pre-coding spec gate, design drift invariant, and 4-stage adversarial verification gates. |
 | **[`clean-layered-architecture.md`](architecture/clean-layered-architecture.md)** | `CLEAN` | 4-tier separation: Domain (Entities, Invariants) $\to$ Application (Use Cases, DTOs) $\to$ Infrastructure $\to$ Presentation. |
 | **[`folder-per-feature.md`](architecture/folder-per-feature.md)** | `FEAT` | Vertical slice architecture with feature-local DTOs, controllers, and services eliminating cross-module leakage. |
 | **[`hybrid-dual-scope-execution.md`](architecture/hybrid-dual-scope-execution.md)** | `DUAL` | Bridges Desktop WinForms apps and stateless WebAPI microservices over shared transactional business engines. |
@@ -171,7 +171,7 @@ The framework is organized into 7 clean architectural tiers:
 
 ---
 
-## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (81 Skills across 15 Clusters)
+## 🧩 Comprehensive Skill Clusters & Capabilities Catalog (85 Skills across 15 Clusters)
 
 ### 1. 🤖 Agentic & Cognitive Superpowers (`skills/agentic/` — 13 Skills)
 - **`action-first-cognitive-ux`**: Action-first communication protocol reducing human cognitive load (ADHD-aware, zero pleasantry preamble, micro-actions $< 2$ min, visual progress proofs).
@@ -181,10 +181,10 @@ The framework is organized into 7 clean architectural tiers:
 - **`input-normalization-pipeline`**: Multi-stage noise filtering that converts raw free-form prompts into structured micro-payloads.
 - **`lazy-minimalism-protocol`**: 7-rung Ponytail Decision Ladder enforcing YAGNI, standard library first, zero unrequested abstractions, and shortest working diffs.
 - **`self-consistency-consensus`**: 3-pass reasoning protocol with early stopping on convergence and deep-dive verification on divergence.
-- **`brainstorming-and-spec`**: Socratic discovery, user intent alignment, and unambiguous technical specification authoring before coding.
-- **`test-driven-development`**: Strict Red-Green-Refactor development protocol ensuring 100% executable verification.
-- **`adversarial-code-review`**: Multi-dimensional self-audit covering boundary conditions, security vulnerabilities, and backward compatibility.
-- **`systematic-debugging`**: 5-step scientific hypothesis debugging process that isolates root causes without guesswork.
+- **`brainstorming-and-spec`**: Grilling protocol (design tree, frontier rounds, facts vs decisions), executable Given-When-Then specification, and Zero-Context Goldfish Spec Review Gate before coding.
+- **`test-driven-development`**: Red-green loop at pre-agreed seams, vertical tracer-bullet slices, tautology-free assertions, and boundary-only mocking.
+- **`adversarial-code-review`**: Two-axis review (Standards with Fowler smell baseline, Spec fidelity) in parallel subagents, plus anti-slop lint for UI diffs.
+- **`systematic-debugging`**: Feedback-loop construction reference (10 loop techniques, tightening, raising reproduction rate) for `bugfix-investigation`.
 - **`execution-state-tracking`**: L0–L4 working memory state machine and live task progress tracking.
 - **`continuous-learning-protocol`**: Automated PRE-fetch context retrieval and POST-harvest episodic learning loop bridged to SemanticBrain.
 
@@ -276,13 +276,17 @@ The framework is organized into 7 clean architectural tiers:
 
 ### 15. 🔄 Sovereign Agentic Lifecycle Workflows (`skills/*/SKILL.md` — 8 Workflows)
 - **`feature-implementation`** (`WF_FEAT`): End-to-end automated feature development workflow (Normalization, Pre-Fetch, Spec, TDD, Blast-Radius, Commit, Post-Harvest).
-- **`bugfix-investigation`** (`WF_BUG`): 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
+- **`bugfix-investigation`** (`WF_BUG`): Gated diagnosis workflow: tight red-capable feedback loop, minimise, ranked falsifiable hypotheses, tagged instrumentation, correct-seam regression test, cleanup and harvest.
 - **`code-refactoring`** (`WF_REF`): Zero-regression code refactoring and modularization workflow (Blast-Radius, 1-to-1 Partitioning, Conformance, and Net Engineering Value).
 - **`dotnet-publish-release`** (`WF_PUB`): Lightweight framework-dependent single-file distribution publishing adhering to `R_PUB`.
 - **`project-bootstrap-doctor`** (`WF_DOC`): Automated project onboarding, rule binding, and architectural compliance health-check workflow.
 - **`continuous-learning-harvest`** (`WF_MEM`): Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 - **`cognitive-experiment-loop`** (`WF_COG`): 5-phase closed cognitive loop (Sensory Sweep, Socratic Inquiry, Pre-Mortem, Targeted Action, Grounded Stress, Comparative Delta, Dual Memory).
 - **`multi-agent-teamwork`** (`WF_TEAM`): Multi-agent subagent team orchestration with zero-collision file ownership locks, parallel partitioning, and 4-stage adversarial verification gates.
+- **`writing-for-agents`** (`WF_WRITING_AGENTS`): Authoring discipline for skills, standards, rules, and AGENTS.md: context pointers, information hierarchy, completion criteria, leading words, positive-first steering, pruning.
+- **`codebase-design`** (`WF_CODEBASE_DESIGN`): Deep-module vocabulary (module, interface, seam, adapter), deletion test, two-adapter seam rule, dependency categories, and design-it-twice.
+- **`domain-modeling`** (`WF_DOMAIN_MODEL`): Sharpen domain language against `GLOSSARY.md`, cross-check code, and record ADRs only for hard-to-reverse trade-offs.
+- **`retro`** (`WF_RETRO`): Post-session retrospective ranking improvements to the agent environment (pointers, automated checks, standards, rules size, tool economy, no-ops).
 
 ---
 
@@ -347,11 +351,17 @@ node [AgentOption]/tools/doctor.js <path-to-target-repo>
 # 3. Validate integrity and frontmatter of AgentOption framework itself:
 node [AgentOption]/tools/validate-framework.js
 
+# 3b. Anti-slop gate for UI and comment changes (staged diff by default):
+node [AgentOption]/tools/anti-slop-lint.js --diff
+node [AgentOption]/tools/anti-slop-lint.js --tokens <tokens.css>     # WCAG contrast audit of token pairs
+node [AgentOption]/tools/anti-slop-lint.js --all src --json          # Full audit, machine-readable
+
 # 4. Continuous Learning & Semantic Memory Loop (Bridged to agentic-brain):
-node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval
+node [AgentOption]/tools/brain.js pre "task description"        # Progressive L0 index retrieval (project + global)
 node [AgentOption]/tools/brain.js route "task description"      # System 1 fast rule/skill/agent dispatch
 node [AgentOption]/tools/brain.js view 42                       # L1 deep inspection
-node [AgentOption]/tools/brain.js post "problem | cause | fix"  # Quality-guarded harvest
+node [AgentOption]/tools/brain.js post "problem | cause | fix"  # One structured atom (no LLM re-analysis)
+node [AgentOption]/tools/brain.js ingest --file=atoms.json      # Multiple atomic lessons (recommended)
 node [AgentOption]/tools/brain.js curate --dry-run              # Memory lifecycle audit
 
 # 5. Binary Static Triage & Shannon Entropy Scanner:
@@ -369,7 +379,7 @@ node [AgentOption]/tools/scope-guard.js --init                  # Bootstrap .sco
 node [AgentOption]/tools/scope-guard.js check "https://api-staging.example.com"
 
 # 8. Multi-Target Agent Exporter & Global Antigravity Skill Sync:
-node [AgentOption]/tools/export-agents.js --target=all          # Export 12 personas to Claude/Cursor/Antigravity
+node [AgentOption]/tools/export-agents.js --target=all          # Export 13 personas to Claude/Cursor/Antigravity
 node [AgentOption]/tools/export-agents.js --sync-skills         # Sync sovereign SKILL.md packages to .gemini/config/skills
 ```
 

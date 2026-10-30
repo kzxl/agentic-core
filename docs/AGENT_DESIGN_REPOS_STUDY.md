@@ -719,7 +719,7 @@ Agents succumb to two distinct topological looping pathologies:
 | :--- | :--- | :--- | :--- | :--- |
 | **Primary Memory Model** | Virtual OS memory hierarchy (Core, Recall, Archival) | Dynamic Graph-based Entity & Episodic memory | 5-Phase Cognitive Loop + 8-Entity Schema + SemanticBrain | **4-Tier Hierarchical Cognitive Fabric** (T0–T3) |
 | **In-Context Working Memory** | Bounded blocks (`persona`, `human`) with self-editing tools | Prompt injection of extracted entity summary | Structured ephemeral prompt state + `.project-rule.md` | **Letta-style Bounded Blocks** (Persona, Human, Project Invariants, Scratchpad) |
-| **Long-Term Retrieval Paradigm** | Flat vector archival search + Paginated recall log | Hybrid (Dense Vector + Sparse BM25 + Graph Traversal) | SemanticBrain (AME Named Pipe IPC / 384-d vectors) | **Hybrid Multi-Hop AME** (384-d Dense + BM25 + Graph Traversal + RRF) |
+| **Long-Term Retrieval Paradigm** | Flat vector archival search + Paginated recall log | Hybrid (Dense Vector + Sparse BM25 + Graph Traversal) | SemanticBrain (PostgreSQL/pgvector, BGE-M3 1024-d; AME optional archive) | **Hybrid Multi-Hop AME** (384-d Dense + BM25 + Graph Traversal + RRF) |
 | **Negative Knowledge & Failure Handling** | Implicit (Recorded in recall chat history) | Fact mutation (Soft deletion / Tombstones) | Dedicated `Failed Approach` entity + Historian Graveyard | **First-Class Episodic Failure Graveyard** (`.research-memory.json`) + AST Guard |
 | **Loop & Stagnation Defense** | Token count threshold triggers recursive compaction | Recency decay & conflict resolution NOOP | **Dual-Engine Detector** (Zobrist Graph Cycles + Cosine Matrix $\Delta I$) | **Integrated Circuit Breaker** (Cycle hashing + Semantic Echo + Pre-action Guard) |
 | **Cognitive Overhead & Token Consumption** | High if agent calls memory tools too frequently (~1-2 extra turns) | Low-Medium (Handled largely by middleware extraction) | Low (Zero-turn pre-fetch + post-task harvest) | **Optimal / Tiered** (Zero-turn resident T0; sub-ms IPC T3; on-demand T1/T2) |
@@ -1041,7 +1041,7 @@ Harmonizes memory across four explicit tiers:
 - **Tier 0 (Resident Core Working Memory):** In-system prompt bounded blocks (`persona`, `project_invariants`, `task_scratchpad`) with 2,000–4,000 character quotas and self-editing tool hooks (`core_memory_append`, `core_memory_replace`).
 - **Tier 1 (Ephemeral Session Stream & Stagnation Buffer):** In-process FIFO event log tracking rolling Zobrist path hashes and pairwise query cosine matrices.
 - **Tier 2 (Repository Negative Knowledge):** Git-committed `.research-memory.json` failure graveyard storing 8-entity research schemas (`failed_approaches`), guarded by pre-action AST interceptors.
-- **Tier 3 (Global Long-Term SemanticBrain):** Cross-project 384-dimensional vector embeddings and dynamic entity graphs accessed via Named Pipe IPC (`\\.\pipe\ame_pipe`), governed by pre-task sweeps (`context-fetch.js`) and quality-guarded post-harvesting (`auto-post-task.js`).
+- **Tier 3 (Global Long-Term SemanticBrain):** PostgreSQL/pgvector with BGE-M3 1024-d embeddings and optional AME archive; governed by pre-task sweeps (`context-fetch.js`) and agent-side atomic ingestion (`ingest-knowledge.js` / `brain.js ingest`).
 
 ---
 

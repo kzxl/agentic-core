@@ -1,6 +1,6 @@
 ---
 name: continuous-learning-harvest
-description: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
+description: Use for automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 desc: Automated pre-task context lookup and post-task knowledge harvesting workflow using SemanticBrain bridge.
 rules: [R_CORE, R_RES_MEM, R_DEAD_LOOP, R_STATE]
 ---
@@ -57,18 +57,18 @@ node E:\Tools\SemanticBrain\tools\git-safe-commit.js -m "<type>(<scope>): <subje
 ---
 
 ### Step 4: POST-Harvest Distilled Technical Lesson (Mandatory for Complex Tasks)
-After completing any non-trivial feature, refactoring, or bugfix, harvest the distilled engineering insight:
+SemanticBrain does not re-analyze a raw summary.
 
-1. **Automated Git-Diff Aware Wrapper (Recommended):**
-   // turbo
+1. **One structured lesson:**
    ```bash
-   node E:\Tools\SemanticBrain\tools\auto-post-task.js "[Symptom/Context] | [Root Cause/Constraint] | [Concrete Fix, File/Symbol & Reusable Rule]"
+   node E:\16. AgentOption\tools\brain.js post "[Symptom] | [Cause] | [Fix]" --tags=<domain>,<tech>,<pattern> [--trust=verified_fact --verifier=build --evidence=build:ok]
    ```
-2. **Explicit Portable Bridge Command:**
-   // turbo
+2. **Multiple lessons (atomic JSON):**
    ```bash
-   node E:\16. AgentOption\tools\brain.js post "[Symptom/Context] | [Root Cause/Constraint] | [Concrete Fix & Gotcha]" --tags=<domain>,<tech>,<pattern>
+   node E:\16. AgentOption\tools\brain.js ingest --file=atoms.json --project=<project_name> --tags=<domain>,<tech>,<pattern>
    ```
+   File shape: `{ "atoms": [{ "question": "...", "answer": "...", "scope_hint": "project", "tags": [...], "evidence": [...] }] }`.
+3. Do not pass raw walkthroughs to `auto-harvest`/`post-task`; long clusters are rejected.
 
 ---
 

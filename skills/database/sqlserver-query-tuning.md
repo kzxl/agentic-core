@@ -1,6 +1,6 @@
 ---
 name: SqlServerQueryTuning
-desc: Step-by-step diagnostic and rewriting workflow for high-performance SQL Server 2012+ queries
+desc: Step-by-step diagnostic and rewriting workflow for high-performance SQL Server 2012+ queries.
 rules: [R_DB, R_CS, R_PERF]
 category: Database
 ---

@@ -1,5 +1,5 @@
 ---
-desc: Statistical Benchmark Analysis & Noise Elimination — Non-Parametric Statistics, Quantiles & Outlier Trimming
+desc: Statistical Benchmark Analysis & Noise Elimination — Non-Parametric Statistics, Quantiles & Outlier Trimming.
 rules: [R_RESEARCH, R_BENCH]
 ---
 # 📊 Statistical Benchmark Analysis & Noise Elimination

@@ -1,80 +1,66 @@
 ---
 name: bugfix-investigation
-description: Systematic 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
-desc: Systematic 5-step scientific bug reproduction, isolation, root-cause fix, regression testing, and post-harvest workflow.
-rules: [R_CORE, R_TDD, R_PROOF, R_RES_MEM]
+description: Gated diagnosis workflow for hard bugs and performance regressions. Use when the user reports something broken, throwing, failing, flaky, slow, leaking, freezing, or deadlocking, or asks to debug, diagnose, find the root cause, or fix a bug.
+desc: Six gated phases (feedback loop, reproduce and minimise, hypothesise, instrument, fix with regression test, cleanup) plus incident pre-fetch, safe commit, and post-harvest.
+rules: [R_CORE, R_TDD, R_PROOF, R_RES_MEM, R_DEAD_LOOP, R_EPISTEMIC]
 ---
 
-# 🔬 Systematic Bugfix & Root-Cause Investigation Workflow
+# Systematic Bugfix and Root-Cause Investigation
 
-**Goal:** Diagnose and resolve production defects, race conditions, memory leaks, SQL deadlocks, and UI crashes using the 5-step scientific method (`DBG`), falsifiable hypotheses (`H0`/`H1`), and deterministic reproduction tests (`R_TDD`, `R_PROOF`).
+**Goal:** Fix defects, races, leaks, deadlocks, and regressions at the root cause, driven by a tight red-capable loop. Incorporates practices adapted from mattpocock/skills (MIT).
 
----
+Enter a phase only when the previous "Done when" holds. **Redact** first: show `<REDACTED>` for secrets in commands and output; keep credentials in env vars.
 
-## 1. The 5-Step Scientific Debugging Pipeline
-
-```text
-[1. Symptom & PRE-Fetch] ──► [2. Failing Repro Test (Red)] ──► [3. Hypothesis Probe (H0/H1)]
-                                                                            │
-[5. Full Suite, Commit & Harvest] ◄── [4. Blast-Radius Scan (`rg`) & Root-Cause Fix (Green)]
+## Phase 0: Normalize and Pre-Fetch (`R_RES_MEM`)
+`[NORM] FIX @<Domain>.<Feature> | <Exception / Input State> | [DBG, BLAST, TDD]`, then:
+// turbo
+```bash
+node E:\16. AgentOption\tools\brain.js pre "<Exact Error Message or Exception>" --tags=<domain>,bug
 ```
+**Done when** the NORM line is written and past incidents are listed (or "none").
 
----
+## Phase 1: Tight Feedback Loop (`R_EPISTEMIC`)
+Production logic stays untouched until the loop exists. Read [`skills/agentic/systematic-debugging.md`](../agentic/systematic-debugging.md) when choosing, tightening, or failing to build a loop; read [references/fix-patterns.md](references/fix-patterns.md) for test runner commands.
 
-## 2. Step-by-Step Investigation Protocol
+**Done when** one command, already run (redacted output shown), is:
+- [ ] **Red-capable:** asserts the user's exact symptom on the real code path.
+- [ ] **Deterministic:** same verdict every run (flaky: pinned high rate).
+- [ ] **Fast:** seconds, not minutes.
+- [ ] **Agent-runnable:** unattended, or a structured HITL script.
 
-### Step 1: Symptom Normalization & Past Incident PRE-Fetch (`R_RES_MEM`)
-1. **Normalize Symptom (`NORM`):** `[NORM] FIX @<Domain>.<Feature> | <Exception / Input State> | [DBG, BLAST, TDD]`
-2. **Query Historical Incident Memory:**
-   // turbo
-   ```bash
-   node E:\16. AgentOption\tools\brain.js pre "<Exact Error Message or Exception>" --tags=<domain>,bug
-   ```
+No loop, no hypotheses.
 
-### Step 2: Deterministic Reproduction & Epistemic Gate (`R_EPISTEMIC`, `R_TDD`)
-1. **Epistemic Uncertainty Gate:** When codebase familiarity is low or the defect is intermittent (race condition, GC finalizer, network jitter), **strictly forbid** modifying production logic until diagnostic instrumentation or a reproduction test confirms the failure path.
-2. **Write Reproduction Test (Red Phase):** Feed the exact boundary input (`null`, `DBNull.Value`, empty list, concurrent tasks, expired token) that triggers the defect:
-   ```bash
-   dotnet test --filter "FullyQualifiedName~<BugReproTest>"   # C# .NET
-   node --test tests/<repro>.test.js                          # Node.js
-   pytest -k "<test>" | cargo test <test> | go test -run <T>  # Python / Rust / Go
-   ```
+## Phase 2: Reproduce and Minimise
+Confirm it is the user's failure mode, reproducible, with the verbatim symptom and boundary inputs captured. Cut inputs, callers, config, and steps one at a time, re-running after each cut.
+**Done when** every remaining element is load-bearing.
 
-### Step 3: Formulate Falsifiable Hypotheses (`H0` vs `H1`)
-Log an explicit hypothesis matrix (`R_STATE`) and trace data flow backward from the crash site to the first corrupted state boundary:
+## Phase 3: Hypothesise (`H0` vs `H1`)
+Log 3-5 ranked falsifiable hypotheses in the `H0`/`H1` matrix and show them to the user. Read [references/hypothesis-and-instrumentation.md](references/hypothesis-and-instrumentation.md) for the format and example.
+**Done when** each hypothesis has a prediction and the list was shown.
 
-| ID | Postulated Mechanism | Falsification / Verification Probe | Verdict |
-| :--- | :--- | :--- | :---: |
-| **$H_1$** | `CommitStockAsync` deadlocks because `StockLedger` is locked before `WarehouseBalance` (reverse order vs `ReserveStockAsync`). | Compare SQL lock acquisition order across both methods and inspect deadlock graph. | **CONFIRMED** |
-| **$H_0$** | Timeout is caused by missing index on `StockLedger.LotNumber`. | Execution plan confirms `IX_StockLedger_LotNumber` index seek in $< 1\text{ms}$. | **REFUTED** |
+## Phase 4: Instrument
+One variable at a time; each probe maps to one prediction. Tag debug logs `[DEBUG-xxxx]`. For performance regressions, baseline then bisect (same reference).
+**Done when** one hypothesis is `CONFIRMED` by evidence and the rest are `REFUTED`.
 
-> **2-Strike Pivot Rule (`R_DEAD_LOOP`):** If 2 consecutive fix attempts fail to turn the reproduction test Green, immediately `git checkout -- <file>`, mark the hypothesis `REFUTED`, and re-instrument the call chain. Never stack speculative patches on top of a failed fix.
-
----
-
-### Step 4: Root-Cause Invariant Fix & Blast-Radius Scan (`BLAST`)
-1. **Blast-Radius Caller Scan:** Before changing any method signature, shared query, or DTO property, grep all callers:
+## Phase 5: Fix at a Correct Seam (`BLAST`)
+1. Before changing a signature, shared query, or DTO, scan callers:
    // turbo
    ```bash
    rg "\b<TargetMethodOrProperty>\b"
    ```
-2. **Enforce Root-Cause Fix over Symptom Suppression:**
+2. Write the failing regression test at a correct seam and watch it fail; prove forced mutations landed. No correct seam: record an architectural finding.
+3. Apply the root-cause fix (no symptom masking), watch the test pass, re-run the Phase 1 loop on the original scenario. Read [references/fix-patterns.md](references/fix-patterns.md) when judging a seam or a fix pattern.
 
-| Defect Category | ❌ BAD: Symptom Masking (Forbidden) | ✅ GOOD: Root-Cause Invariant Fix (Mandatory) |
-| :--- | :--- | :--- |
-| **Null / `DBNull` Crash** | Wrapping 200 lines in `try { ... } catch {}` and swallowing exceptions. | Validating boundary input at DTO/Mapper entry (`val == DBNull.Value ? null : ...`). |
-| **UI Freeze / Deadlock** | Adding `Thread.Sleep(500)` or `Application.DoEvents()` to mask races. | Replacing `.Result`/`.Wait()` with `async/await` and `RunAfterShown` lifecycle. |
-| **SQL Concurrency** | Retrying a corrupted non-transactional write 3 times in a loop. | Enforcing canonical lock ordering with `UPDLOCK, ROWLOCK` inside a transaction. |
-| **Memory / Event Leak** | Forcing `GC.Collect()` on form close. | Unsubscribing events (`-=`) and cancelling `CancellationTokenSource` in `Dispose`. |
+> **2-Strike Pivot Rule (`R_DEAD_LOOP`):** If 2 consecutive fix attempts fail to turn the reproduction test Green, immediately `git checkout -- <file>`, mark the hypothesis `REFUTED`, and re-instrument (Phase 4). Never stack speculative patches.
 
----
+**Done when** the test went red then green (or the missing seam is recorded) and the module suite has `0` errors, `0` warnings.
 
-### Step 5: Regression Proof, Atomic Commit & POST-Harvest
-1. **Verify Red $\to$ Green Transition:** Re-run the reproduction test and full module test suite (`0` errors, `0` warnings).
-2. **Atomic Commit (`R_GIT`) & POST-Harvest (`R_RES_MEM`):**
-   ```bash
-   node E:\Tools\SemanticBrain\tools\git-safe-commit.js -m "fix(<domain>): resolve <symptom> by enforcing <invariant>" <files...>
-   node E:\16. AgentOption\tools\brain.js post "[Symptom: <Error>] | [Root Cause: <Broken Invariant>] | [Fix: <Solution & Repro Test>]" --tags=<domain>,bug
-   ```
-
-
+## Phase 6: Cleanup, Commit, Harvest (`R_GIT`)
+- [ ] Phase 1 loop green; regression test passes.
+- [ ] `rg -n "DEBUG-"` finds no session tag; prototypes deleted.
+- [ ] Winning hypothesis is in the commit message.
+```bash
+node E:\Tools\SemanticBrain\tools\git-safe-commit.js -m "fix(<domain>): resolve <symptom> by enforcing <invariant>; root cause: <hypothesis>" <files...>
+node E:\16. AgentOption\tools\brain.js post "[Symptom: <Error>] | [Root Cause: <Broken Invariant>] | [Fix: <Solution & Repro Test>]" --tags=<domain>,bug
+```
+**Done when** all boxes are ticked, the commit exists, and harvest ran.

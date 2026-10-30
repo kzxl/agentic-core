@@ -1,6 +1,6 @@
 ---
 name: ReverseEngineeringPlaybook
-desc: Comprehensive Artifact-Driven Reverse Engineering Playbook for Android APK, Native Binaries, .NET C# Assemblies, and Web JS
+desc: Comprehensive Artifact-Driven Reverse Engineering Playbook for Android APK, Native Binaries, .NET C# Assemblies, and Web JS.
 rules: [R_CORE, R_CPP, R_CS, R_ANDROID, R_SEC]
 category: Security
 ---
