@@ -1,3 +1,19 @@
+# ⚠️ [ARCHIVED] Repository Moved to [kzxl/z-plugin](https://github.com/kzxl/z-plugin)
+
+> [!IMPORTANT]
+> **This repository has been archived and consolidated into the official [`z-plugin`](https://github.com/kzxl/z-plugin) monorepo.**
+> 
+> All active development, updates, and releases for the **Cognitive OS & Engineering Standards** (`z-mind`), **Context Guard** (`z-token`), and **Episodic Memory Engine** (`z-brain`) now live at:
+> 
+> 👉 **[https://github.com/kzxl/z-plugin](https://github.com/kzxl/z-plugin)**
+> - **`z-mind`**: [https://github.com/kzxl/z-plugin/tree/main/plugins/z-mind](https://github.com/kzxl/z-plugin/tree/main/plugins/z-mind) — Cognitive OS, 56 rules, 6 pillars, 4-phase bugfix, NEV refactor gate & multi-agent teamwork.
+> - **`z-token`**: [https://github.com/kzxl/z-plugin/tree/main/plugins/z-token](https://github.com/kzxl/z-plugin/tree/main/plugins/z-token) — Context diet, token firewall, and compact builds/runners.
+> - **`z-brain`**: [https://github.com/kzxl/z-plugin/tree/main/plugins/z-brain](https://github.com/kzxl/z-plugin/tree/main/plugins/z-brain) — Pure local episodic memory engine (SQLite FTS5 BM25).
+> 
+> This repository is kept in **read-only archive mode** to preserve the complete development history, blueprints, and architectural specifications.
+
+---
+
 # 🏛️ agentic-core (AgentOption) — Enterprise Cognitive Operating System for AI Coding Agents
 
 **agentic-core** (internally designated as **AgentOption**) is an enterprise-grade, language-agnostic cognitive operating system and empirical engineering architecture designed to be plugged into **ANY software project** (Web, Cloud Microservices, Desktop WinForms/WPF, Android Mobile, Real-Time Game Engines, Bare-Metal RTOS). It equips autonomous AI coding agents and engineering teams with high-precision architectural blueprints, standardized coding rules, closed-loop empirical reasoning, and reusable production skills.
